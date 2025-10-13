@@ -52,7 +52,7 @@ DJANGO_APP = [
 
 CUSTOM_APP = [
     'activities.apps.ActivitiesConfig',
-    'kenjutsu.apps.KenjutsuConfig',
+    'iai.apps.IaiConfig',
     'member.apps.MemberConfig',
     'shops.apps.ShopsConfig',
     'index.apps.IndexConfig',

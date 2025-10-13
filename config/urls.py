@@ -25,7 +25,7 @@ from debug_toolbar.toolbar import debug_toolbar_urls
 urlpatterns = [
     path('', include('index.urls', namespace='index')),
     path('activities/', include('activities.urls', namespace='activities')),
-    path('kenjutsu/', include('kenjutsu.urls', namespace='kenjutsu')),
+    path('iai/', include('iai.urls', namespace='iai')),
     path('member/', include('member.urls', namespace='member')),
     path('shops/', include('shops.urls', namespace='shops')),
     path('cart/', include('cart.urls', namespace='cart')),

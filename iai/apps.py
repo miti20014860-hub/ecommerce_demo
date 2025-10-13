@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class KenjutsuConfig(AppConfig):
+class IaiConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'kenjutsu'
+    name = 'iai'

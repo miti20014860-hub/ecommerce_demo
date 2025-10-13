@@ -1,0 +1,12 @@
+footer.bg-dark small {
+    font-size: 0.80rem;
+}
+footer.bg-dark .nav-link {
+    font-size: 0.85rem;
+}
+footer.bg-dark .nav-link:hover {
+    text-decoration: underline;
+}
+.navbar-dark .nav-link:hover {
+    text-decoration: underline;
+}
