@@ -1,7 +1,7 @@
 {% load static %}
 <nav class="navbar navbar-expand navbar-dark bg-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand fs-4"
+    <div class="container">
+        <a class="navbar-brand fs-2"
            href="{% url 'index:index' %}"
            {% if request.path == '/index/' %}aria-current="page"{% endif %}>Index</a>
         <button class="navbar-toggler"
@@ -14,7 +14,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-0 mb-lg-0">
+            <ul class="navbar-nav me-auto">
                 <li class="nav-item">
                     <a class="nav-link {% if '/activities/' in request.path %}active{% endif %}"
                        href="{% url 'activities:activities' %}"
@@ -31,16 +31,11 @@
                        {% if '/iai/' in request.path %}aria-current="page"{% endif %}>Iai</a>
                 </li>
             </ul>
-            <ul class="navbar-nav ms-auto mb-0 mb-lg-0">
+            <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
                     <a class="nav-link {% if '/member/' in request.path %}active{% endif %}"
                        href="{% url 'member:member' %}"
                        {% if '/member/' in request.path %}aria-current="page"{% endif %}>Member</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link {% if '/cart/' in request.path %}active{% endif %}"
-                       href="{% url 'cart:cart' %}"
-                       {% if '/cart/' in request.path %}aria-current="page"{% endif %}>Cart</a>
                 </li>
             </ul>
         </div>

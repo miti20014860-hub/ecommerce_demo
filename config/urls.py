@@ -28,6 +28,5 @@ urlpatterns = [
     path('iai/', include('iai.urls', namespace='iai')),
     path('member/', include('member.urls', namespace='member')),
     path('shops/', include('shops.urls', namespace='shops')),
-    path('cart/', include('cart.urls', namespace='cart')),
     path('admin/', admin.site.urls),
 ] + debug_toolbar_urls() + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

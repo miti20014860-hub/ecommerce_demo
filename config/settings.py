@@ -56,7 +56,6 @@ CUSTOM_APP = [
     'member.apps.MemberConfig',
     'shops.apps.ShopsConfig',
     'index.apps.IndexConfig',
-    'cart.apps.CartConfig',
 ]
 
 INSTALLED_APPS = DJANGO_APP + CUSTOM_APP
@@ -146,7 +145,7 @@ USE_TZ = True
 
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'config/staticfiles')]
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 
 
 # Media resources from DATABASE

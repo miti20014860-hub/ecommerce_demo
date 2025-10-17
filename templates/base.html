@@ -1,0 +1,21 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="auto">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="description" content="null" />
+        <meta name="keywords" content="null, null" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <link rel="stylesheet" href="{% static "css/bootstrap.min.css" %}" />
+        <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+        <title>{{ title }}</title>
+    </head>
+    <body>
+        {% include "partials/_navbar.html" %}
+        {% block body %}
+        {% endblock body %}
+        {% include "partials/_footer.html" %}
+        <script src="{% static "js/bootstrap.bundle.min.js" %}"></script>
+    </body>
+</html>
