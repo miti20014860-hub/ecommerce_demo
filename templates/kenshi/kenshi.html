@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static %}
+{% load humanize %}
+{% block body %}
+    <div class="ratio ratio-16x9">
+        <video autoplay muted class="w-100">
+            <source src="{% static 'videos/Kenshi_1.mp4' %}" type="video/mp4">
+        </video>
+    </div>
+    <div class="container">
+        <h1 class="border-bottom border-5 border-black bg-light text-center p-2 g-0">Kanayama Takayuki</h1>
+        <div class="row g-0">
+            <div class="col-6">
+                <img src="{% static 'img/Kenshi.jpg' %}"
+                     class="object-fit-cover"
+                     alt="Poster - click to view more"
+                     width="100%"
+                     height="100%" />
+            </div>
+            <div class="col-6 bg-light px-4">
+                <p class="indent my-1">
+                    Mr. Takayuki Kanayama, a swordsman who is attracting attention from all over the world, such as YouTube's batto technique video that has been played more than 1.8 million times,
+                    Teaching "Reiwa no Bushido" to survive the turmoil deepening without regrets. How do samurai face anxiety and fear? What is the first thing we should let go of in order to live strong and kindly?
+                </p>
+                <p class="indent mb-1">
+                    Mr. Kanayama talks about the thoughts of the samurai, which are exactly needed in this time of deepening confusion at the mercy of the corona virus.
+                    About the author Born in 1975 in Kitakyushu City, Fukuoka Prefecture. Since high school, he has been aiming to become a professional boxer as Katsuya Onizuka's junior, but his encounter with film director Hideo Nakata led him to the path of an actor.
+                </p>
+                <p class="indent my-1">
+                    After performing on stage, he took his first step into the world of swordsmanship in 2009. Since 2010, he has been studying under martial arts researcher Yoshinori Kono. He trained in ``battojutsu'', ``kenjutsu'', ``jojutsu'', and ``taijutsu'', and was appointed as a ``shoseikan technique researcher''.
+                    Currently, he presides over the Kanayama Kenjutsu Training Club and the Gold Castle Sword Fighting & Swordsmanship School. He is disseminating the essence of martial arts that advocates unity of mind and body.
+                </p>
+            </div>
+        </div>
+    </div>
+{% endblock body %}

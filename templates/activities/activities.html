@@ -17,9 +17,7 @@
                                            placeholder="Search something..."
                                            aria-label="Search">
                                     <button class="btn btn-light border" type="submit">
-                                        <svg class="bi" width="16" height="16" aria-hidden="true">
-                                            <use xlink:href="{% static 'icons/bootstrap-icons/search.svg' %}"></use>
-                                        </svg>
+                                        <i class="bi bi-search" aria-hidden="true"></i>
                                     </button>
                                 </div>
                             </form>
@@ -253,7 +251,7 @@
                             </div>
                         </ul>
                     </div>
-                    <!-- Paginator -->
+                    <!-- Paginator-->
                     {% if page_obj.has_other_pages %}
                         <nav aria-label="Product pagination" class="mt-4">
                             <ul class="pagination justify-content-center">
@@ -263,12 +261,12 @@
                                         <a class="page-link"
                                            href="?page={{ page_obj.previous_page_number }}"
                                            aria-label="Previous">
-                                            <span aria-hidden="true">&laquo;</span>
+                                            <i class="bi bi-chevron-left" aria-hidden="true"></i>
                                         </a>
                                     </li>
                                 {% else %}
                                     <li class="page-item disabled">
-                                        <span class="page-link" aria-hidden="true">&laquo;</span>
+                                        <span class="page-link"><i class="bi bi-chevron-left" aria-hidden="true"></i></span>
                                     </li>
                                 {% endif %}
                                 <!-- 頁碼 -->
@@ -289,12 +287,12 @@
                                         <a class="page-link"
                                            href="?page={{ page_obj.next_page_number }}"
                                            aria-label="Next">
-                                            <span aria-hidden="true">&raquo;</span>
+                                            <i class="bi bi-chevron-right" aria-hidden="true"></i>
                                         </a>
                                     </li>
                                 {% else %}
                                     <li class="page-item disabled">
-                                        <span class="page-link" aria-hidden="true">&raquo;</span>
+                                        <span class="page-link"><i class="bi bi-chevron-right" aria-hidden="true"></i></span>
                                     </li>
                                 {% endif %}
                             </ul>
