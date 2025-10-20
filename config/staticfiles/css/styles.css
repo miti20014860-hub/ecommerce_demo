@@ -10,25 +10,3 @@ footer .nav-link:hover {
 .navbar .nav-link:hover {
     text-decoration: underline;
 }
-.navbar-custom {
-    position: relative;
-    background-color: #f8f9fa;
-    width: 100vw;
-    margin-left: calc(-50vw + 50%);
-}
-.border-custom {
-    position: relative;
-}
-.border-custom::before {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    width: 100vw;
-    height: 1px;
-    background-color: #000000;
-    transform: translateX(-50%);
-}
-p.indent {
-    text-indent: 2em;
-}

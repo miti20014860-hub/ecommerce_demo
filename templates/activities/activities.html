@@ -2,304 +2,300 @@
 {% load static %}
 {% load humanize %}
 {% block body %}
-    <body>
-        <main class="container">
-            <div class="container mt-2">
-                <div class="row">
-                    <!-- Filter Bar -->
-                    <div class="col-md-3 g-0 mt-2">
-                        <div class="position-sticky top-0 bg-body-secondary p-3 shadow-sm">
-                            <!-- Search -->
-                            <form class="mb-3">
-                                <div class="input-group">
-                                    <input type="text"
-                                           class="form-control bg-white"
-                                           placeholder="Search something..."
-                                           aria-label="Search">
-                                    <button class="btn btn-light border" type="submit">
-                                        <i class="bi bi-search" aria-hidden="true"></i>
-                                    </button>
-                                </div>
-                            </form>
-                            <!-- Filter -->
-                            <div class="accordion accordion-flush g-0" id="filterAccordion">
-                                <!-- Category 1 -->
-                                <div class="accordion-item border-secondary">
-                                    <div class="accordion-header" id="category1_heading">
-                                        <button class="accordion-button py-2 collapsed"
-                                                type="button"
-                                                data-bs-toggle="collapse"
-                                                data-bs-target="#category1_collapse"
-                                                aria-expanded="false"
-                                                aria-controls="category1_collapse">Category</button>
+    <div class="container">
+        <div class="row">
+            <!-- Filter Bar -->
+            <section class="col-md-3 g-0">
+                <div class="position-sticky top-0 bg-body-secondary p-3 shadow-sm">
+                    <!-- Search -->
+                    <form class="mb-3">
+                        <div class="input-group">
+                            <input type="text"
+                                   class="form-control bg-white"
+                                   placeholder="Search something..."
+                                   aria-label="Search">
+                            <button class="btn btn-light border" type="submit">
+                                <i class="bi bi-search" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                    </form>
+                    <!-- Filter -->
+                    <div class="accordion accordion-flush g-0" id="filterAccordion">
+                        <!-- Category 1 -->
+                        <div class="accordion-item border-secondary">
+                            <div class="accordion-header" id="category1_heading">
+                                <button class="accordion-button py-2 collapsed"
+                                        type="button"
+                                        data-bs-toggle="collapse"
+                                        data-bs-target="#category1_collapse"
+                                        aria-expanded="false"
+                                        aria-controls="category1_collapse">Category</button>
+                            </div>
+                            <div id="category1_collapse" class="accordion-collapse collapse">
+                                <div class="accordion-body py-1">
+                                    <div class="form-check my-1">
+                                        <input class="form-check-input" type="checkbox" id="cat1">
+                                        <label class="form-check-label" for="cat1">category</label>
                                     </div>
-                                    <div id="category1_collapse" class="accordion-collapse collapse">
-                                        <div class="accordion-body py-1">
-                                            <div class="form-check my-1">
-                                                <input class="form-check-input" type="checkbox" id="cat1">
-                                                <label class="form-check-label" for="cat1">category</label>
-                                            </div>
-                                            <div class="form-check mb-1">
-                                                <input class="form-check-input" type="checkbox" id="cat2">
-                                                <label class="form-check-label" for="cat2">category</label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="cat3">
-                                                <label class="form-check-label" for="cat3">category</label>
-                                            </div>
-                                        </div>
+                                    <div class="form-check mb-1">
+                                        <input class="form-check-input" type="checkbox" id="cat2">
+                                        <label class="form-check-label" for="cat2">category</label>
                                     </div>
-                                </div>
-                                <!-- Category 2 -->
-                                <div class="accordion-item border-secondary">
-                                    <div class="accordion-header" id="category2_heading">
-                                        <button class="accordion-button py-2 collapsed"
-                                                type="button"
-                                                data-bs-toggle="collapse"
-                                                data-bs-target="#category2_collapse"
-                                                aria-expanded="false"
-                                                aria-controls="category2_collapse">Category</button>
-                                    </div>
-                                    <div id="category2_collapse" class="accordion-collapse collapse">
-                                        <div class="accordion-body py-1">
-                                            <div class="form-check my-1">
-                                                <input class="form-check-input" type="checkbox" id="cat4">
-                                                <label class="form-check-label" for="cat4">category</label>
-                                            </div>
-                                            <div class="form-check mb-1">
-                                                <input class="form-check-input" type="checkbox" id="cat5">
-                                                <label class="form-check-label" for="cat5">category</label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="cat6">
-                                                <label class="form-check-label" for="cat6">category</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Category 3 -->
-                                <div class="accordion-item border-secondary">
-                                    <div class="accordion-header" id="category3_heading">
-                                        <button class="accordion-button py-2 collapsed"
-                                                type="button"
-                                                data-bs-toggle="collapse"
-                                                data-bs-target="#category3_collapse"
-                                                aria-expanded="false"
-                                                aria-controls="category3_collapse">Category</button>
-                                    </div>
-                                    <div id="category3_collapse" class="accordion-collapse collapse">
-                                        <div class="accordion-body py-1">
-                                            <div class="form-check my-1">
-                                                <input class="form-check-input" type="checkbox" id="cat7">
-                                                <label class="form-check-label" for="cat7">category</label>
-                                            </div>
-                                            <div class="form-check mb-1">
-                                                <input class="form-check-input" type="checkbox" id="cat8">
-                                                <label class="form-check-label" for="cat8">category</label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="cat9">
-                                                <label class="form-check-label" for="cat9">category</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Category 4 -->
-                                <div class="accordion-item border-secondary">
-                                    <div class="accordion-header" id="category4_heading">
-                                        <button class="accordion-button py-2 collapsed"
-                                                type="button"
-                                                data-bs-toggle="collapse"
-                                                data-bs-target="#category4_collapse"
-                                                aria-expanded="false"
-                                                aria-controls="category4_collapse">Category</button>
-                                    </div>
-                                    <div id="category4_collapse" class="accordion-collapse collapse">
-                                        <div class="accordion-body py-1">
-                                            <div class="form-check my-1">
-                                                <input class="form-check-input" type="checkbox" id="cat10">
-                                                <label class="form-check-label" for="cat10">category</label>
-                                            </div>
-                                            <div class="form-check mb-1">
-                                                <input class="form-check-input" type="checkbox" id="cat11">
-                                                <label class="form-check-label" for="cat11">category</label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="cat12">
-                                                <label class="form-check-label" for="cat12">category</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Category 5 -->
-                                <div class="accordion-item border-secondary">
-                                    <div class="accordion-header" id="category5_heading">
-                                        <button class="accordion-button py-2 collapsed"
-                                                type="button"
-                                                data-bs-toggle="collapse"
-                                                data-bs-target="#category5_collapse"
-                                                aria-expanded="false"
-                                                aria-controls="category5_collapse">Category</button>
-                                    </div>
-                                    <div id="category5_collapse" class="accordion-collapse collapse">
-                                        <div class="accordion-body py-1">
-                                            <div class="form-check my-1">
-                                                <input class="form-check-input" type="checkbox" id="cat13">
-                                                <label class="form-check-label" for="cat13">category</label>
-                                            </div>
-                                            <div class="form-check mb-1">
-                                                <input class="form-check-input" type="checkbox" id="cat14">
-                                                <label class="form-check-label" for="cat14">category</label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="cat15">
-                                                <label class="form-check-label" for="cat15">category</label>
-                                            </div>
-                                        </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="cat3">
+                                        <label class="form-check-label" for="cat3">category</label>
                                     </div>
                                 </div>
                             </div>
-                            <!-- Apply -->
-                            <button class="btn btn-light w-100 mt-3">Apply</button>
+                        </div>
+                        <!-- Category 2 -->
+                        <div class="accordion-item border-secondary">
+                            <div class="accordion-header" id="category2_heading">
+                                <button class="accordion-button py-2 collapsed"
+                                        type="button"
+                                        data-bs-toggle="collapse"
+                                        data-bs-target="#category2_collapse"
+                                        aria-expanded="false"
+                                        aria-controls="category2_collapse">Category</button>
+                            </div>
+                            <div id="category2_collapse" class="accordion-collapse collapse">
+                                <div class="accordion-body py-1">
+                                    <div class="form-check my-1">
+                                        <input class="form-check-input" type="checkbox" id="cat4">
+                                        <label class="form-check-label" for="cat4">category</label>
+                                    </div>
+                                    <div class="form-check mb-1">
+                                        <input class="form-check-input" type="checkbox" id="cat5">
+                                        <label class="form-check-label" for="cat5">category</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="cat6">
+                                        <label class="form-check-label" for="cat6">category</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Category 3 -->
+                        <div class="accordion-item border-secondary">
+                            <div class="accordion-header" id="category3_heading">
+                                <button class="accordion-button py-2 collapsed"
+                                        type="button"
+                                        data-bs-toggle="collapse"
+                                        data-bs-target="#category3_collapse"
+                                        aria-expanded="false"
+                                        aria-controls="category3_collapse">Category</button>
+                            </div>
+                            <div id="category3_collapse" class="accordion-collapse collapse">
+                                <div class="accordion-body py-1">
+                                    <div class="form-check my-1">
+                                        <input class="form-check-input" type="checkbox" id="cat7">
+                                        <label class="form-check-label" for="cat7">category</label>
+                                    </div>
+                                    <div class="form-check mb-1">
+                                        <input class="form-check-input" type="checkbox" id="cat8">
+                                        <label class="form-check-label" for="cat8">category</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="cat9">
+                                        <label class="form-check-label" for="cat9">category</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Category 4 -->
+                        <div class="accordion-item border-secondary">
+                            <div class="accordion-header" id="category4_heading">
+                                <button class="accordion-button py-2 collapsed"
+                                        type="button"
+                                        data-bs-toggle="collapse"
+                                        data-bs-target="#category4_collapse"
+                                        aria-expanded="false"
+                                        aria-controls="category4_collapse">Category</button>
+                            </div>
+                            <div id="category4_collapse" class="accordion-collapse collapse">
+                                <div class="accordion-body py-1">
+                                    <div class="form-check my-1">
+                                        <input class="form-check-input" type="checkbox" id="cat10">
+                                        <label class="form-check-label" for="cat10">category</label>
+                                    </div>
+                                    <div class="form-check mb-1">
+                                        <input class="form-check-input" type="checkbox" id="cat11">
+                                        <label class="form-check-label" for="cat11">category</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="cat12">
+                                        <label class="form-check-label" for="cat12">category</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Category 5 -->
+                        <div class="accordion-item border-secondary">
+                            <div class="accordion-header" id="category5_heading">
+                                <button class="accordion-button py-2 collapsed"
+                                        type="button"
+                                        data-bs-toggle="collapse"
+                                        data-bs-target="#category5_collapse"
+                                        aria-expanded="false"
+                                        aria-controls="category5_collapse">Category</button>
+                            </div>
+                            <div id="category5_collapse" class="accordion-collapse collapse">
+                                <div class="accordion-body py-1">
+                                    <div class="form-check my-1">
+                                        <input class="form-check-input" type="checkbox" id="cat13">
+                                        <label class="form-check-label" for="cat13">category</label>
+                                    </div>
+                                    <div class="form-check mb-1">
+                                        <input class="form-check-input" type="checkbox" id="cat14">
+                                        <label class="form-check-label" for="cat14">category</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="cat15">
+                                        <label class="form-check-label" for="cat15">category</label>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <!-- Aicivities List -->
-                    <div class="col-md-9">
-                        <ul class="list-unstyled mt-2">
-                            <div class="row border">
-                                <a href="#"
-                                   class="link-body-emphasis text-decoration-none text-black border-top border-4">
-                                    <h3 class="border-bottom border-2 py-3">Featured postFeatured postFeatured postFeatured postFeatured post</h3>
-                                </a>
-                                <a href="#" class="col-auto ms-1 mb-3 py-2">
-                                    <img src="{% static 'img/about.jpg' %}"
-                                         class="object-fit-cover"
-                                         alt="Thumbnail"
-                                         width="240"
-                                         height="220" />
-                                </a>
-                                <div class="col p-1 mb-1 d-flex flex-column">
-                                    <div class="d-flex flex-row mt-1 gap-1">
-                                        <div class="bg-info d-inline">Nov 12</div>
-                                        <div class="bg-warning d-inline">Nov 12</div>
-                                    </div>
-                                    <p class="mt-1 mb-auto">
-                                        This is a wider card with supporting text below as a natural
-                                        lead-in to additional content.This is a wider card with supporting text below as a natural
-                                        lead-in to additional content.This is a wider card with supporting text below as a natural
-                                        lead-in to additional content.This is a wider card with supporting text below as a natural
-                                        lead-in to additional content.This is a wider card with supporting text below as a natural
-                                        lead-in to additional content.
-                                    </p>
-                                    <a href="#" class="btn btn-danger mb-3">1,102 円～</a>
-                                </div>
-                            </div>
-                            <div class="row border">
-                                <a href="#"
-                                   class="link-body-emphasis text-decoration-none text-black border-top border-4">
-                                    <h3 class="border-bottom border-2 py-3">Featured postFeatured postFeatured postFeatured postFeatured post</h3>
-                                </a>
-                                <a href="#" class="col-auto ms-1 mb-3 py-2">
-                                    <img src="{% static 'img/about.jpg' %}"
-                                         class="object-fit-cover"
-                                         alt="Thumbnail"
-                                         width="240"
-                                         height="220" />
-                                </a>
-                                <div class="col p-1 mb-1 d-flex flex-column">
-                                    <div class="d-flex flex-row mt-1 gap-1">
-                                        <div class="bg-info d-inline">Nov 12</div>
-                                        <div class="bg-warning d-inline">Nov 12</div>
-                                    </div>
-                                    <p class="mt-1 mb-auto">
-                                        This is a wider card with supporting text below as a natural
-                                        lead-in to additional content.This is a wider card with supporting text below as a natural
-                                        lead-in to additional content.This is a wider card with supporting text below as a natural
-                                        lead-in to additional content.This is a wider card with supporting text below as a natural
-                                        lead-in to additional content.This is a wider card with supporting text below as a natural
-                                        lead-in to additional content.
-                                    </p>
-                                    <a href="#" class="btn btn-secondary mb-3">1,102 円～</a>
-                                </div>
-                            </div>
-                            <div class="row border">
-                                <a href="#"
-                                   class="link-body-emphasis text-decoration-none text-black border-top border-4">
-                                    <h3 class="border-bottom border-2 py-3">Featured postFeatured postFeatured postFeatured postFeatured post</h3>
-                                </a>
-                                <a href="#" class="col-auto ms-1 mb-3 py-2">
-                                    <img src="{% static 'img/about.jpg' %}"
-                                         class="object-fit-cover"
-                                         alt="Thumbnail"
-                                         width="240"
-                                         height="220" />
-                                </a>
-                                <div class="col p-1 mb-1 d-flex flex-column">
-                                    <div class="d-flex flex-row mt-1 gap-1">
-                                        <div class="bg-info d-inline">Nov 12</div>
-                                        <div class="bg-warning d-inline">Nov 12</div>
-                                    </div>
-                                    <p class="mt-1 mb-auto">
-                                        This is a wider card with supporting text below as a natural
-                                        lead-in to additional content.This is a wider card with supporting text below as a natural
-                                        lead-in to additional content.This is a wider card with supporting text below as a natural
-                                        lead-in to additional content.This is a wider card with supporting text below as a natural
-                                        lead-in to additional content.
-                                    </p>
-                                    <a href="#" class="btn btn-secondary mb-3">1,102 円～</a>
-                                </div>
-                            </div>
-                        </ul>
-                    </div>
-                    <!-- Paginator-->
-                    {% if page_obj.has_other_pages %}
-                        <nav aria-label="Product pagination" class="mt-4">
-                            <ul class="pagination justify-content-center">
-                                <!-- 上一頁 -->
-                                {% if page_obj.has_previous %}
-                                    <li class="page-item">
-                                        <a class="page-link"
-                                           href="?page={{ page_obj.previous_page_number }}"
-                                           aria-label="Previous">
-                                            <i class="bi bi-chevron-left" aria-hidden="true"></i>
-                                        </a>
-                                    </li>
-                                {% else %}
-                                    <li class="page-item disabled">
-                                        <span class="page-link"><i class="bi bi-chevron-left" aria-hidden="true"></i></span>
-                                    </li>
-                                {% endif %}
-                                <!-- 頁碼 -->
-                                {% for num in page_obj.paginator.page_range %}
-                                    {% if page_obj.number == num %}
-                                        <li class="page-item active" aria-current="page">
-                                            <span class="page-link">{{ num }}</span>
-                                        </li>
-                                    {% else %}
-                                        <li class="page-item">
-                                            <a class="page-link" href="?page={{ num }}">{{ num }}</a>
-                                        </li>
-                                    {% endif %}
-                                {% endfor %}
-                                <!-- 下一頁 -->
-                                {% if page_obj.has_next %}
-                                    <li class="page-item">
-                                        <a class="page-link"
-                                           href="?page={{ page_obj.next_page_number }}"
-                                           aria-label="Next">
-                                            <i class="bi bi-chevron-right" aria-hidden="true"></i>
-                                        </a>
-                                    </li>
-                                {% else %}
-                                    <li class="page-item disabled">
-                                        <span class="page-link"><i class="bi bi-chevron-right" aria-hidden="true"></i></span>
-                                    </li>
-                                {% endif %}
-                            </ul>
-                        </nav>
-                    {% endif %}
+                    <!-- Apply -->
+                    <button class="btn btn-light w-100 mt-3">Apply</button>
                 </div>
-            </div>
-        </main>
-    </body>
+            </section>
+            <!-- Aicivities List -->
+            <main class="col-md-9">
+                <ul class="list-unstyled">
+                    <div class="row border">
+                        <a href="#"
+                           class="link-body-emphasis text-decoration-none text-black border-top border-4">
+                            <h3 class="border-bottom border-2 py-3">Featured postFeatured postFeatured postFeatured postFeatured post</h3>
+                        </a>
+                        <a href="#" class="col-auto ms-1 mb-3 py-2">
+                            <img src="{% static 'img/about.jpg' %}"
+                                 class="object-fit-cover"
+                                 alt="Thumbnail"
+                                 width="240"
+                                 height="220" />
+                        </a>
+                        <div class="col p-1 mb-1 d-flex flex-column">
+                            <div class="d-flex flex-row mt-1 gap-1">
+                                <div class="bg-info d-inline">Nov 12</div>
+                                <div class="bg-warning d-inline">Nov 12</div>
+                            </div>
+                            <p class="mt-1 mb-auto">
+                                This is a wider card with supporting text below as a natural
+                                lead-in to additional content.This is a wider card with supporting text below as a natural
+                                lead-in to additional content.This is a wider card with supporting text below as a natural
+                                lead-in to additional content.This is a wider card with supporting text below as a natural
+                                lead-in to additional content.This is a wider card with supporting text below as a natural
+                                lead-in to additional content.
+                            </p>
+                            <a href="#" class="btn btn-danger mb-3">1,102 円～</a>
+                        </div>
+                    </div>
+                    <div class="row border">
+                        <a href="#"
+                           class="link-body-emphasis text-decoration-none text-black border-top border-4">
+                            <h3 class="border-bottom border-2 py-3">Featured postFeatured postFeatured postFeatured postFeatured post</h3>
+                        </a>
+                        <a href="#" class="col-auto ms-1 mb-3 py-2">
+                            <img src="{% static 'img/about.jpg' %}"
+                                 class="object-fit-cover"
+                                 alt="Thumbnail"
+                                 width="240"
+                                 height="220" />
+                        </a>
+                        <div class="col p-1 mb-1 d-flex flex-column">
+                            <div class="d-flex flex-row mt-1 gap-1">
+                                <div class="bg-info d-inline">Nov 12</div>
+                                <div class="bg-warning d-inline">Nov 12</div>
+                            </div>
+                            <p class="mt-1 mb-auto">
+                                This is a wider card with supporting text below as a natural
+                                lead-in to additional content.This is a wider card with supporting text below as a natural
+                                lead-in to additional content.This is a wider card with supporting text below as a natural
+                                lead-in to additional content.This is a wider card with supporting text below as a natural
+                                lead-in to additional content.This is a wider card with supporting text below as a natural
+                                lead-in to additional content.
+                            </p>
+                            <a href="#" class="btn btn-secondary mb-3">1,102 円～</a>
+                        </div>
+                    </div>
+                    <div class="row border">
+                        <a href="#"
+                           class="link-body-emphasis text-decoration-none text-black border-top border-4">
+                            <h3 class="border-bottom border-2 py-3">Featured postFeatured postFeatured postFeatured postFeatured post</h3>
+                        </a>
+                        <a href="#" class="col-auto ms-1 mb-3 py-2">
+                            <img src="{% static 'img/about.jpg' %}"
+                                 class="object-fit-cover"
+                                 alt="Thumbnail"
+                                 width="240"
+                                 height="220" />
+                        </a>
+                        <div class="col p-1 mb-1 d-flex flex-column">
+                            <div class="d-flex flex-row mt-1 gap-1">
+                                <div class="bg-info d-inline">Nov 12</div>
+                                <div class="bg-warning d-inline">Nov 12</div>
+                            </div>
+                            <p class="mt-1 mb-auto">
+                                This is a wider card with supporting text below as a natural
+                                lead-in to additional content.This is a wider card with supporting text below as a natural
+                                lead-in to additional content.This is a wider card with supporting text below as a natural
+                                lead-in to additional content.This is a wider card with supporting text below as a natural
+                                lead-in to additional content.
+                            </p>
+                            <a href="#" class="btn btn-secondary mb-3">1,102 円～</a>
+                        </div>
+                    </div>
+                </ul>
+            </main>
+            <!-- Paginator-->
+            {% if page_obj.has_other_pages %}
+                <section aria-label="Product pagination" class="mt-4">
+                    <ul class="pagination justify-content-center">
+                        <!-- 上一頁 -->
+                        {% if page_obj.has_previous %}
+                            <li class="page-item">
+                                <a class="page-link"
+                                   href="?page={{ page_obj.previous_page_number }}"
+                                   aria-label="Previous">
+                                    <i class="bi bi-chevron-left" aria-hidden="true"></i>
+                                </a>
+                            </li>
+                        {% else %}
+                            <li class="page-item disabled">
+                                <span class="page-link"><i class="bi bi-chevron-left" aria-hidden="true"></i></span>
+                            </li>
+                        {% endif %}
+                        <!-- 頁碼 -->
+                        {% for num in page_obj.paginator.page_range %}
+                            {% if page_obj.number == num %}
+                                <li class="page-item active" aria-current="page">
+                                    <span class="page-link">{{ num }}</span>
+                                </li>
+                            {% else %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                        <!-- 下一頁 -->
+                        {% if page_obj.has_next %}
+                            <li class="page-item">
+                                <a class="page-link"
+                                   href="?page={{ page_obj.next_page_number }}"
+                                   aria-label="Next">
+                                    <i class="bi bi-chevron-right" aria-hidden="true"></i>
+                                </a>
+                            </li>
+                        {% else %}
+                            <li class="page-item disabled">
+                                <span class="page-link"><i class="bi bi-chevron-right" aria-hidden="true"></i></span>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </section>
+            {% endif %}
+        </div>
+    </div>
 {% endblock body %}

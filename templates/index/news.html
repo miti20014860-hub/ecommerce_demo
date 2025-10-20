@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% load static %}
+{% load humanize %}
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-2"></div>
+            <div class="col-lg-8">
+                <section>
+                    <h2 class="text-center mt-2 p-2">Italy's smaller, smarter alternative to Venicesmarter alternative to Venice</h2>
+                    <div class="mb-3">
+                        <small class="bg-body-secondary">25 minutes ago</small>
+                    </div>
+                    <p>
+                        As Venice struggles with crowds and pollution, nearby Treviso is quietly proving that sustainability and good taste can go hand in hand.
+                    </p>
+                    <p>
+                        The air is thick with salt and butter as a bowl of tagliatelle tangled with melted anchovies and shaved cod's roe arrives at my table beside the canal. The sharp pop of a cork breaks the hum of restaurant chatter and waitress pours a glass of local white wine. Lunch has arrived.
+                    </p>
+                    <p>
+                        "This is the king of butters," I'm told by my waitress, who says the Alpine butter – Primiero Botìro – coating my pasta is a regional speciality. Made in mountain dairies during July and September from raw milk, she says, "it tastes best now".
+                    </p>
+                    <p>
+                        It's September and I'm in Treviso, one of northern Italy's most quietly delicious destinations and a place many travellers only pass through, landing here on low-cost carriers and then heading straight to nearby Venice. However, Treviso is worth a stop: a historic walled city laced with canals, where tiramisù first appeared on menus and radicchio and prosecco shape everyday life.
+                    </p>
+                    <p>
+                        Most recently, it's a destination turning heads by becoming the first Italian city to win the European Green Leaf Award, an EU initiative that recognises the environmental efforts of smaller towns and cities (20,000-100,000 residents).
+                    </p>
+                    <p>
+                        With a population of nearly 94,000, Treviso impressed judges by transforming an abandoned landfill into a solar park, overhauling its canal system to improve water quality and launching biodiversity projects to clean its air. The green drive is also expanding beyond the city, into the Unesco-listed Prosecco Hills, where wine producers are adopting sustainable practices to combat climate change.
+                    </p>
+                </section>
+                <section class="mb-4">
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#lightbox-1">
+                        <img src="{% static 'img/ERA_Poster 2480_3508.png' %}"
+                             class="object-fit-cover"
+                             alt="News1"
+                             width="100%"
+                             height="100%" />
+                    </a>
+                    <div class="modal fade" id="lightbox-1">
+                        <div class="modal-dialog modal-xl modal-dialog-centered">
+                            <div class="modal-content bg-dark">
+                                <div class="modal-body p-0">
+                                    <img src="{% static 'img/ERA_Poster 2480_3508.png' %}"
+                                         alt="News1"
+                                         width="100%"
+                                         height="100%" />
+                                    <button class="btn-close btn-close-white position-absolute top-0 end-0 m-3"
+                                            data-bs-dismiss="modal"></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <div class="col-lg-2"></div>
+        </div>
+    </div>
+{% endblock body %}
