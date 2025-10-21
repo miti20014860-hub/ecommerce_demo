@@ -5,28 +5,25 @@
     <div class="container">
         <section>
             <a href="{% url "kenshi:kenshi" %}"
-               class="custom-image-button ratio ratio-21x9"
+               class="custom-image-button"
                role="button"
                aria-label="View more about us">
-                <img src="{% static 'img/cover1.jpg' %}"
+                <img src="{% static 'img/cover21_9.jpg' %}"
                      class="object-fit-cover"
                      alt="Poster - click to view more"
-                     width="1920"
-                     height="960" />
+                     width="100%"
+                     height="100%" />
             </a>
         </section>
         <section class="row mt-2 mb-2">
             <article class="col-lg-6 mt-2">
                 <div class="row g-0 border rounded shadow-sm">
                     <div class="col p-4 d-flex flex-column">
-                        <h3 class="mb-0">Featured post</h3>
-                        <div class="mb-1 text-body-secondary">Nov 12</div>
-                        <p class="card-text mb-auto">
-                            This is a wider card with supporting text below as a natural
-                            lead-in to additional content.
-                        </p>
+                        <h3 class="mb-0">ERA : 3D Epic of Feudal Japan</h3>
+                        <div class="mb-1 text-body-secondary">1 hour ago</div>
+                        <p class="card-text mb-auto">Kenji Sato training actors in authentic draw techniques.</p>
                         <a href="{% url 'index:news' %}"
-                           class="link-body-emphasis text-secondary">続きを読む »</a>
+                           class="link-body-emphasis text-secondary">Continue reading »</a>
                     </div>
                     <a href="{% url 'index:news' %}" class="col-5">
                         <img src="{% static 'img/ERA_Poster 2480_3508.png' %}"
@@ -60,17 +57,14 @@
         </section>
         <div class="row g-0">
             <section class="col-lg-8 g-4">
-                <article class="blog-post">
-                    <h2 class="mb-1">Sample blog post</h2>
-                    <p class="blog-post-meta">January 1, 2021</p>
-                    <p>
-                        This is some additional paragraph placeholder content. It has been
-                        written to fill the available space and show how a longer snippet
-                        of text affects the surrounding content. We'll repeat it often to
-                        keep the demonstration flowing, so be on the lookout for this
-                        exact same string of text.
-                    </p>
-                    <a href="#" class="link-body-emphasis text-secondary">続きを読む »</a>
+                <article>
+                    <h2 class="mb-1">Announcement of the 19th Tokyo Tournament</h2>
+                    <p>October 12, 2025</p>
+                    <div class="g-0">
+                        <p>The 19th Tokyo Games will be held from October 12th to 13th.</p>
+                    </div>
+                    <a href="{% url 'index:notice' %}"
+                       class="link-body-emphasis text-secondary">Continue reading »</a>
                     <hr />
                 </article>
                 <article class="blog-post">

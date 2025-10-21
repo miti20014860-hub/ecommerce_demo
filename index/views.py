@@ -9,6 +9,10 @@ def news(request):
     return render(request, 'index/news.html')
 
 
+def notice(request):
+    return render(request, 'index/notice.html')
+
+
 def about(request):
     return render(request, 'index/about.html')
 
