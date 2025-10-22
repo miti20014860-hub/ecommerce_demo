@@ -1,0 +1,194 @@
+{% extends "base.html" %}
+{% load static %}
+{% load humanize %}
+{% block body %}
+  <div class="container">
+    <div class="row">
+      <div class="col-md-11 ol-xl-10 col-xxl-9 mx-auto">
+        <!-- Carousel -->
+        <div id="carouselExample" class="carousel slide">
+          <div class="carousel-inner ratio ratio-21x9">
+            <div class="carousel-item active">
+              <a href="#" data-bs-toggle="modal" data-bs-target="#lightbox-1">
+                <img src="{% static 'img/cover21_9.jpg' %}"
+                     class="object-fit-cover"
+                     alt="News1"
+                     width="100%"
+                     height="100%" />
+              </a>
+              <div class="modal fade" id="lightbox-1">
+                <div class="modal-dialog modal-xl modal-dialog-centered">
+                  <div class="modal-content bg-dark">
+                    <div class="modal-body p-0">
+                      <img src="{% static 'img/cover21_9.jpg' %}"
+                           alt="News1"
+                           width="100%"
+                           height="100%" />
+                      <button class="btn-close btn-close-white position-absolute top-0 end-0 m-3"
+                              data-bs-dismiss="modal"></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <a href="#" data-bs-toggle="modal" data-bs-target="#lightbox-2">
+                <img src="{% static 'img/ERA_Poster 2480_3508.png' %}"
+                     class="object-fit-cover"
+                     alt="News1"
+                     width="100%"
+                     height="100%" />
+              </a>
+              <div class="modal fade" id="lightbox-2">
+                <div class="modal-dialog modal-xl modal-dialog-centered">
+                  <div class="modal-content bg-dark">
+                    <div class="modal-body p-0">
+                      <img src="{% static 'img/ERA_Poster 2480_3508.png' %}"
+                           alt="News1"
+                           width="100%"
+                           height="100%" />
+                      <button class="btn-close btn-close-white position-absolute top-0 end-0 m-3"
+                              data-bs-dismiss="modal"></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <svg aria-hidden="true"
+                   class="bd-placeholder-img"
+                   height="100%"
+                   preserveAspectRatio="xMidYMid slice"
+                   width="100%"
+                   xmlns="http://www.w3.org/2000/svg">
+                <rect width="100%" height="100%" fill="var(--bs-secondary-color)"></rect>
+              </svg>
+            </div>
+          </div>
+          <button class="carousel-control-prev"
+                  type="button"
+                  data-bs-target="#carouselExample"
+                  data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">prev</span>
+          </button>
+          <button class="carousel-control-next"
+                  type="button"
+                  data-bs-target="#carouselExample"
+                  data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">next</span>
+          </button>
+        </div>
+        <div class="row p-1 mt-2">
+          <!-- Details -->
+          <section class="col-md-8">
+            <h5 class="mt-1 mb-0">
+              [Kyoto Higashiyama Kiyomizu] Perfect for school trips! Archery experience, quarter-bow, half-bow dojo, 20 shots for 2,000 yen, and more. SAMURAI NINJA martial arts experience.
+            </h5>
+            <div class="my-2">
+              <small class="text-decoration-underline mx-1">Provider</small>
+              <small class="mx-1">/</small>
+              <small class="text-decoration-underline mx-1">Location</small>
+            </div>
+            <section class="row p-1">
+              <div class="col-4 border rounded d-flex flex-column mt-1">
+                <small>Possible number:</small>
+                <div class="mt-auto">
+                  <h6>1~6</h6>
+                </div>
+              </div>
+              <div class="col-4 border rounded d-flex flex-column mt-1">
+                <small>Participating age:</small>
+                <div class="mt-auto">
+                  <h6>10~80</h6>
+                </div>
+              </div>
+              <div class="col-4 border rounded d-flex flex-column mt-1">
+                <small>Duration:</small>
+                <div class="mt-auto">
+                  <h6>Within 1 hour</h6>
+                </div>
+              </div>
+            </section>
+            <div class="mt-4">
+              <h5>Plan Description</h5>
+              <section class="text-muted">
+                <small class="d-block my-1">
+                  Higashiyama Archery Training Hall is an indoor dojo where you can experience traditional Japanese martial arts such as archery, shihan-yumi (four-quarter bow), samurai, and ninja.
+                </small>
+                <small class="d-block mb-1">
+                  Utilizing a shihan-yumi (four-quarter bow), which is about two-thirds the size of the large bow used in Kyudo, this is an archery technique based on the fundamental principle of "the target is the enemy," and focuses solely on accuracy in hitting the target.
+                </small>
+                <small class="d-block mb-1">
+                Our archery experience is open to everyone, from children to seniors, regardless of age or nationality.</small>
+                <small class="d-block mb-1">It is also recommended for school trips, and is enjoyed by many students.</small>
+                <small class="d-block mb-1">Please feel free to stop by if you are visiting Higashiyama, Kyoto.</small>
+              </section>
+              <div class="mt-3">
+                <h6 class="d-inline">20 Shots</h6>
+                <h6 class="d-inline mx-1"></h6>
+                <h6 class="d-inline">2,000 JPY</h6>
+                <small class="d-block text-muted">Recommend this course to help you hit the target.</small>
+              </div>
+              <div class="mt-3">
+                <h6 class="d-inline">10 Shots</h6>
+                <h6 class="d-inline mx-1"></h6>
+                <h6 class="d-inline">1,500 JPY</h6>
+                <small class="d-block text-muted">It's a trial experience.</small>
+              </div>
+              <div class="mt-3">
+                <h6 class="d-inline">Kyudo dressing and unlimited shooting for 1 hour</h6>
+                <h6 class="d-inline mx-1"></h6>
+                <h6 class="d-inline">10,000 JPY</h6>
+                <small class="d-block text-muted">This course includes the rental fee for Kyudo uniform.</small>
+              </div>
+            </div>
+            <hr />
+            <section>
+              <h5 class="border-start border-secondary border-4 bg-light p-2">More Information</h5>
+              <p class="ms-1 my-2">Reservation Instructions</p>
+              <div class="row">
+                <div class="col-4">
+                  <small class="d-block bg-light p-1 mb-1">Min. participants</small>
+                  <small class="d-block bg-light p-1 mb-1">Bookings</small>
+                  <small class="d-block bg-light p-1 mb-1">Period</small>
+                  <small class="d-block bg-light p-1 mb-1">Deadline</small>
+                </div>
+                <div class="col-8">
+                  <small class="d-block p-1 mb-1">1</small>
+                  <small class="d-block p-1 mb-1">1~6</small>
+                  <small class="d-block p-1 mb-1">Year-round (closed summer/New Year)</small>
+                  <small class="d-block p-1 mb-1">22:59 day before</small>
+                </div>
+                <p class="ms-1 my-2">Access Map</p>
+                <section class="mb-3">
+                  <img src="{% static 'img/19th_Tokyo.png' %}"
+                       class="object-fit-cover"
+                       alt="map"
+                       width="100%"
+                       height="100%" />
+                </section>
+              </div>
+            </section>
+          </section>
+          <!-- Book -->
+          <section class="col-md-4">
+            <div class="position-sticky top-0 rounded border shadow-sm p-3 mt-1">
+              <small class="text-muted">5-shooting participants (ages 10-80)1Adult (single rider preferred)</small>
+              <div>
+                <h4 class="d-inline">1,000</h4>
+                <h6 class="d-inline text-right mx-auto">JPY ～ (with tax)</h6>
+              </div>
+              <div class="bg-light rounded text-muted p-1">
+                <small class="small-s d-block">Included in price:</small>
+                <small class="small-s">Experience fee, bow and arrow fee (Kyudo uniform for Kyudo uniform dressing course), consumption tax</small>
+              </div>
+              <button class="btn btn-danger w-100 mt-3">Book</button>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock body %}

@@ -10,3 +10,6 @@ footer .nav-link:hover {
 .navbar .nav-link:hover {
     text-decoration: underline;
 }
+.small-s {
+    font-size: 0.7em;
+}

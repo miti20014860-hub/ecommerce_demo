@@ -3,17 +3,18 @@
 {% load humanize %}
 {% block body %}
     <div class="container">
-        <section>
-            <a href="{% url "kenshi:kenshi" %}"
-               class="custom-image-button"
-               role="button"
-               aria-label="View more about us">
-                <img src="{% static 'img/cover21_9.jpg' %}"
-                     class="object-fit-cover"
-                     alt="Poster - click to view more"
-                     width="100%"
-                     height="100%" />
-            </a>
+        <section class="row">
+            <div class="col g-0">
+                <a href="{% url "kenshi:kenshi" %}"
+                   role="button"
+                   aria-label="Poster - click to view more">
+                    <img src="{% static 'img/cover21_9.jpg' %}"
+                         class="object-fit-cover"
+                         alt="Poster - click to view more"
+                         width="100%"
+                         height="100%" />
+                </a>
+            </div>
         </section>
         <section class="row mt-2 mb-2">
             <article class="col-lg-6 mt-2">
@@ -58,7 +59,7 @@
         <div class="row g-0">
             <section class="col-lg-8 g-4">
                 <article>
-                    <h2 class="mb-1">Announcement of the 19th Tokyo Tournament</h2>
+                    <h3 class="mb-1">Announcement of the 19th Tokyo Tournament</h3>
                     <p>October 12, 2025</p>
                     <div class="g-0">
                         <p>The 19th Tokyo Games will be held from October 12th to 13th.</p>
@@ -68,7 +69,7 @@
                     <hr />
                 </article>
                 <article class="blog-post">
-                    <h2 class="mb-1">Another blog post</h2>
+                    <h3 class="mb-1">Another blog post</h3>
                     <p class="blog-post-meta">December 23, 2020</p>
                     <p>
                         This is some additional paragraph placeholder content. It has been
@@ -81,7 +82,7 @@
                     <hr />
                 </article>
                 <article class="blog-post">
-                    <h2 class="mb-1">Another blog post</h2>
+                    <h3 class="mb-1">Another blog post</h3>
                     <p class="blog-post-meta">December 23, 2020</p>
                     <p>
                         This is some additional paragraph placeholder content. It has been

@@ -162,21 +162,21 @@
                 </div>
             </section>
             <!-- Aicivities List -->
-            <main class="col-md-8">
+            <section class="col-md-8">
                 <ul class="list-unstyled">
                     <div class="row border">
                         <a href="#"
                            class="link-body-emphasis text-decoration-none text-black border-top border-4">
                             <h3 class="border-bottom border-2 py-3">Featured postFeatured postFeatured postFeatured postFeatured post</h3>
                         </a>
-                        <a href="#" class="col-lg-5 ms-1 mb-2 py-2">
+                        <a href="#" class="col-lg-5 py-2">
                             <img src="{% static 'img/about.jpg' %}"
                                  class="object-fit-cover"
                                  alt="Thumbnail"
                                  width="100%"
                                  height="240" />
                         </a>
-                        <div class="col p-1 mb-1 d-flex flex-column">
+                        <div class="col py-1 d-flex flex-column">
                             <div class="d-flex flex-row mt-1 gap-1">
                                 <div class="bg-info d-inline">Nov 12</div>
                                 <div class="bg-warning d-inline">Nov 12</div>
@@ -188,7 +188,7 @@
                                 lead-in to additional content.This is a wider card with supporting text below as a natural
                                 lead-in to additional content.
                             </p>
-                            <a href="#" class="btn btn-danger mt-1 mb-2">1,102 円～</a>
+                            <a href="{% url 'activities:plan' %}" class="btn btn-danger mt-1 mb-2">1,102 円～</a>
                         </div>
                     </div>
                     <div class="row border">
@@ -196,14 +196,14 @@
                            class="link-body-emphasis text-decoration-none text-black border-top border-4">
                             <h3 class="border-bottom border-2 py-3">Featured postFeatured postFeatured postFeatured postFeatured post</h3>
                         </a>
-                        <a href="#" class="col-lg-5 ms-1 mb-2 py-2">
+                        <a href="#" class="col-lg-5 py-2">
                             <img src="{% static 'img/about.jpg' %}"
                                  class="object-fit-cover"
                                  alt="Thumbnail"
                                  width="100%"
                                  height="240" />
                         </a>
-                        <div class="col p-1 mb-1 d-flex flex-column">
+                        <div class="col py-1 d-flex flex-column">
                             <div class="d-flex flex-row mt-1 gap-1">
                                 <div class="bg-info d-inline">Nov 12</div>
                                 <div class="bg-warning d-inline">Nov 12</div>
@@ -215,22 +215,23 @@
                                 lead-in to additional content.This is a wider card with supporting text below as a natural
                                 lead-in to additional content.
                             </p>
-                            <a href="#" class="btn btn-danger mt-1 mb-2">1,102 円～</a>
+                            <a href="{% url 'activities:plan' %}" class="btn btn-danger mt-1 mb-2">1,102 円～</a>
                         </div>
                     </div>
+                    
                     <div class="row border">
                         <a href="#"
                            class="link-body-emphasis text-decoration-none text-black border-top border-4">
                             <h3 class="border-bottom border-2 py-3">Featured postFeatured postFeatured postFeatured postFeatured post</h3>
                         </a>
-                        <a href="#" class="col-lg-5 ms-1 mb-2 py-2">
-                            <img src="{% static 'img/ERA_Poster 2480_3508.png' %}"
+                        <a href="#" class="col-lg-5 py-2">
+                            <img src="{% static 'img/about.jpg' %}"
                                  class="object-fit-cover"
                                  alt="Thumbnail"
                                  width="100%"
                                  height="240" />
                         </a>
-                        <div class="col p-1 mb-1 d-flex flex-column">
+                        <div class="col py-1 d-flex flex-column">
                             <div class="d-flex flex-row mt-1 gap-1">
                                 <div class="bg-info d-inline">Nov 12</div>
                                 <div class="bg-warning d-inline">Nov 12</div>
@@ -242,11 +243,11 @@
                                 lead-in to additional content.This is a wider card with supporting text below as a natural
                                 lead-in to additional content.
                             </p>
-                            <a href="#" class="btn btn-danger mt-1 mb-2">1,102 円～</a>
+                            <a href="{% url 'activities:plan' %}" class="btn btn-danger mt-1 mb-2">1,102 円～</a>
                         </div>
                     </div>
                 </ul>
-            </main>
+            </section>
             <!-- Paginator-->
             {% if page_obj.has_other_pages %}
                 <section aria-label="Product pagination" class="mt-4">
