@@ -11,28 +11,69 @@
                     <div class="form-floating mb-3">
                         <input type="email"
                                class="form-control"
-                               id="floatingInput"
+                               id="email_address"
                                placeholder="name@example.com" />
-                        <label for="floatingInput">Email address</label>
+                        <label for="email_address">Email Address</label>
                     </div>
                     <div class="form-floating mb-3">
                         <input type="password"
                                class="form-control"
-                               id="floatingPassword"
+                               id="acc_password"
                                placeholder="Password" />
-                        <label for="floatingPassword">Password</label>
+                        <label for="acc_password">Password</label>
                     </div>
                     <a href="{% url 'member:account' %}"
                        class="w-100 btn btn-lg btn-secondary"
                        type="submit">Sign in</a>
                     <div class="mt-5">
                         <h2>Not a member?</h2>
-                        <button href="{% url 'member:account' %}"
-                                class="w-100 mb-2 border-black btn btn-lg btn-light text-black mt-3"
-                                type="submit">Sign up</button>
+                        <button id="sing_upBtn"
+                                class="w-100 mb-2 border-black btn btn-lg btn-dark text-light mt-3"
+                                type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#sing_up"
+                                aria-expanded="false"
+                                aria-controls="sing_up">Sign up</button>
+                        <div class="collapse mt-3" id="sing_up">
+                            <h3 class="mb-4 text-danger-emphasis">Required fields</h3>
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="user_name" placeholder="name" />
+                                <label for="user_name">Name</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="email"
+                                       class="form-control"
+                                       id="user_email"
+                                       placeholder="name@example.com" />
+                                <label for="user_email">Email Address</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="password"
+                                       class="form-control"
+                                       id="user_password"
+                                       placeholder="Password" />
+                                <label for="user_password">Create a Password</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="password"
+                                       class="form-control"
+                                       id="user_password_re"
+                                       placeholder="Password" />
+                                <label for="user_password_re">Re-enter Password</label>
+                            </div>
+                            <a href="{% url 'member:account' %}"
+                               class="w-100 btn btn-lg btn-danger"
+                               type="submit">Submit</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <script>
+  const btn = document.getElementById('sing_upBtn');
+  const collapse = document.getElementById('sing_up');
+  collapse.addEventListener('show.bs.collapse', () => btn.classList.replace('btn-dark', 'btn-light'));
+  collapse.addEventListener('hide.bs.collapse', () => btn.classList.replace('btn-light', 'btn-dark'));
+    </script>
 {% endblock body %}

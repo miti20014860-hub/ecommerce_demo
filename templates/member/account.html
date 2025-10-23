@@ -1,5 +1,121 @@
 {% extends "base.html" %}
+{% load static %}
 {% load humanize %}
 {% block body %}
-    <h1>account</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-11 col-xl-10 col-xxl-9 mx-auto">
+                <div class="d-flex btn-group" role="group">
+                    <button type="button"
+                            class="flex-fill btn btn-lg btn-light rounded-0 active"
+                            data-target="#profile"
+                            aria-controls="profile">Profile</button>
+                    <button class="flex-fill btn btn-lg btn-light rounded-0"
+                            type="button"
+                            data-target="#orders"
+                            aria-controls="orders">Orders</button>
+                    <button class="flex-fill btn btn-lg btn-light rounded-0"
+                            type="button"
+                            data-target="#messages"
+                            aria-controls="messages">Messages</button>
+                </div>
+                <div class="collapse show p-0" id="profile">
+                    <div class="bg-light p-3">
+                        <table class="table table-md table-transparent border-white fw-normal mb-0">
+                            <tr>
+                                <th class="align-middle text-nowrap">Name</th>
+                                <td class="p-1">
+                                    <div class="input-group input-group-md">
+                                        <input type="text"
+                                               class="form-control form-control-md"
+                                               id="user_name"
+                                               placeholder="やまださん">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="align-middle text-nowrap">Email</th>
+                                <td class="p-1">
+                                    <div class="input-group input-group-md">
+                                        <input type="email"
+                                               class="form-control form-control-md"
+                                               id="user_email"
+                                               placeholder="yamada777@gmail.com">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="align-middle text-nowrap">Phone</th>
+                                <td class="p-1">
+                                    <div class="input-group input-group-md">
+                                        <input type="tel"
+                                               class="form-control form-control-md"
+                                               id="user_phone"
+                                               placeholder="002-1-816-860-8969">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="align-middle text-nowrap">Addresses</th>
+                                <td class="p-1">
+                                    <div class="input-group input-group-md">
+                                        <input type="text"
+                                               class="form-control form-control-md"
+                                               id="user_addresses"
+                                               placeholder="Delivery Addresses">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="align-middle text-nowrap">Payment Info</th>
+                                <td class="p-1">
+                                    <div class="input-group input-group-md">
+                                        <input type="text"
+                                               class="form-control form-control-md"
+                                               id="user_payment"
+                                               placeholder="Credit Card">
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="collapse p-0" id="orders">
+                    <button class="w-100 btn btn-md btn-dark rounded-0"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#"
+                            aria-controls="order1">Order1</button>
+                </div>
+                <div class="collapse p-0" id="messages">
+                    <button class="w-100 btn btn-md btn-dark rounded-0"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#"
+                            aria-controls="messages1">Messages1</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+document.querySelectorAll('.btn-group button').forEach(button => {
+  button.addEventListener('click', function () {
+    const targetId = this.getAttribute('data-target').substring(1);
+
+    document.querySelectorAll('.btn-group button').forEach(btn => {
+      btn.classList.remove('active');
+    });
+    this.classList.add('active');
+
+    document.querySelectorAll('.collapse').forEach(el => {
+      const collapse = bootstrap.Collapse.getInstance(el) || new bootstrap.Collapse(el, {toggle: false});
+      if (el.id === targetId) {
+        collapse.show();
+      } else {
+        collapse.hide();
+      }
+    });
+  });
+});
+    </script>
 {% endblock body %}
