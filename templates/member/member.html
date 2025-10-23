@@ -22,10 +22,13 @@
                                placeholder="Password" />
                         <label for="floatingPassword">Password</label>
                     </div>
-                    <button class="w-100 btn btn-lg btn-secondary" type="submit">Sign in</button>
+                    <a href="{% url 'member:account' %}"
+                       class="w-100 btn btn-lg btn-secondary"
+                       type="submit">Sign in</a>
                     <div class="mt-5">
                         <h2>Not a member?</h2>
-                        <button class="w-100 mb-2 border-black btn btn-lg btn-light text-black mt-3"
+                        <button href="{% url 'member:account' %}"
+                                class="w-100 mb-2 border-black btn btn-lg btn-light text-black mt-3"
                                 type="submit">Sign up</button>
                     </div>
                 </div>

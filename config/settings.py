@@ -54,7 +54,7 @@ CUSTOM_APP = [
     'activities.apps.ActivitiesConfig',
     'kenshi.apps.KenshiConfig',
     'member.apps.MemberConfig',
-    'shops.apps.ShopsConfig',
+    'collection.apps.CollectionConfig',
     'index.apps.IndexConfig',
 ]
 

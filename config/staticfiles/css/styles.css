@@ -13,3 +13,8 @@ footer .nav-link:hover {
 .small-s {
     font-size: 0.7em;
 }
+.table-transparent,
+.table-transparent td,
+.table-transparent th {
+    background-color: transparent !important;
+}

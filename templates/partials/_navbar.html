@@ -12,9 +12,9 @@
             <a class="nav-item nav-link link-body-emphasis {% if '/activities/' in request.path %}active{% endif %}"
                href="{% url 'activities:activities' %}"
                {% if '/activities/' in request.path %}aria-current="page"{% endif %}>Activities</a>
-            <a class="nav-item nav-link link-body-emphasis {% if '/shops/' in request.path %}active{% endif %}"
-               href="{% url 'shops:shops' %}"
-               {% if '/shops/' in request.path %}aria-current="page"{% endif %}>Shops</a>
+            <a class="nav-item nav-link link-body-emphasis {% if '/collection/' in request.path %}active{% endif %}"
+               href="{% url 'collection:collection' %}"
+               {% if '/collection/' in request.path %}aria-current="page"{% endif %}>Collection</a>
             <a class="nav-item nav-link link-body-emphasis {% if '/kenshi/' in request.path %}active{% endif %}"
                href="{% url 'kenshi:kenshi' %}"
                {% if '/kenshi/' in request.path %}aria-current="page"{% endif %}>Kenshi</a>
