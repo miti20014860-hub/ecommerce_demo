@@ -1,0 +1,21 @@
+<div id="map-{{ map_id }}"
+     class="leaflet-map-container"
+     style="height: {{ height|default:'400px' }}"></div>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        setTimeout(function () {
+            if (typeof L === 'undefined') return;
+
+            const map = L.map('map-{{ map_id }}').setView([{{ lat }}, {{ lng }}], {{ zoom }});
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; OpenStreetMap contributors'
+            }).addTo(map);
+
+            L.marker([{{ lat }}, {{ lng }}])
+                .addTo(map)
+                .bindPopup('<b>{{ address }}</b>')
+                .openPopup();
+        }, 100);
+    });
+</script>

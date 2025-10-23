@@ -5,7 +5,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-11 col-md-10 col-lg-9 col-xl-8 col-xxl-7 mx-auto">
-                <section>
+                <section class="p-1">
                     <h2 class="text-center mt-2 p-2">Announcement of the 19th Tokyo Convention</h2>
                     <div class="mb-3">
                         <small class="bg-light">October 12, 2025</small>
@@ -27,13 +27,7 @@
                     <div>〒136-0081  Yumenoshima, Koto-ku, Tokyo</div>
                     <div>TEL: 03-3521-7321 (Main)</div>
                 </section>
-                <section class="my-3">
-                    <img src="{% static 'img/19th_Tokyo.png' %}"
-                         class="object-fit-cover"
-                         alt="map"
-                         width="100%"
-                         height="100%" />
-                </section>
+                {% include "partials/_map.html" with lat=35.649209383109714 lng=139.830004167513 address="BumB 東京スポーツ文化館" zoom=15 map_id="Tokyo Sports Culture Center" height="400px" %}
             </div>
         </div>
     </div>

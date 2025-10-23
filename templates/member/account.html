@@ -8,6 +8,10 @@
                 <div class="d-flex btn-group" role="group">
                     <button type="button"
                             class="flex-fill btn btn-lg btn-light rounded-0 active"
+                            data-target="#home"
+                            aria-controls="home">Home</button>
+                    <button type="button"
+                            class="flex-fill btn btn-lg btn-light rounded-0"
                             data-target="#profile"
                             aria-controls="profile">Profile</button>
                     <button class="flex-fill btn btn-lg btn-light rounded-0"
@@ -19,7 +23,16 @@
                             data-target="#messages"
                             aria-controls="messages">Messages</button>
                 </div>
-                <div class="collapse show p-0" id="profile">
+                <div class="collapse show p-0" id="home">
+                    <div class="h-50vh d-flex align-items-center justify-content-center bg-body-secondary hight-100px">
+                        <h3>Welcome Back</h3>
+                        <h3>やまださん</h3>
+                    </div>
+                    <button class="w-100 btn btn-lg btn-dark rounded-0"
+                            type="button"
+                            aria-controls="sing_out">Sing out</button>
+                </div>
+                <div class="collapse p-0" id="profile">
                     <div class="bg-light p-3">
                         <table class="table table-md table-transparent border-white fw-normal mb-0">
                             <tr>
@@ -92,7 +105,7 @@
                             type="button"
                             data-bs-toggle="collapse"
                             data-bs-target="#"
-                            aria-controls="messages1">Messages1</button>
+                            aria-controls="message1">Messages1</button>
                 </div>
             </div>
         </div>
