@@ -184,9 +184,89 @@
                 <small class="d-block">Included in price:</small>
                 <small>Experience fee, bow and arrow fee (Kyudo uniform for Kyudo uniform dressing course), consumption tax</small>
               </div>
-              <button class="btn btn-danger w-100 mt-3">Book</button>
+              <button class="btn btn-danger w-100 mt-3"
+                      data-bs-toggle="modal"
+                      data-bs-target="#bookingModal">Book</button>
             </div>
           </section>
+          <!-- Bootstrap Modal -->
+          <div class="modal fade"
+               id="bookingModal"
+               tabindex="-1"
+               aria-labelledby="bookingModalLabel"
+               aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title ms-1" id="bookingModalLabel">Schedule an Appointment</h5>
+                  <button type="button"
+                          class="btn-close"
+                          data-bs-dismiss="modal"
+                          aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <form id="booking-form"
+                        action="{% url 'activities:booking' %}"
+                        method="post">
+                    {% csrf_token %}
+                    <div class="mb-3 ms-1">
+                      <label for="activity" class="form-label">Activity</label>
+                      <input type="text"
+                             class="form-control"
+                             id="activity"
+                             name="activity"
+                             value="Activity"
+                             required>
+                    </div>
+                    <div class="mb-3 ms-1">
+                      <label for="full_name" class="form-label">Full Name</label>
+                      <input type="text"
+                             class="form-control"
+                             id="full_name"
+                             name="full_name"
+                             value="Full Name"
+                             required>
+                    </div>
+                    <div class="mb-3 ms-1">
+                      <label for="email_address" class="form-label">Email Address</label>
+                      <input type="email"
+                             class="form-control"
+                             id="email_address"
+                             name="email_address"
+                             value="Email Address"
+                             required>
+                    </div>
+                    <div class="mb-3 ms-1">
+                      <label for="prefer_date" class="form-label">Preferred Date</label>
+                      <input type="date"
+                             class="form-control"
+                             id="prefer_date"
+                             name="prefer_date"
+                             required>
+                    </div>
+                    <div class="mb-3 ms-1">
+                      <label for="phone_number" class="form-label">Phone Number</label>
+                      <input type="text"
+                             class="form-control"
+                             id="phone_number"
+                             name="phone_number"
+                             value="Phone Number"
+                             placeholder="Optional">
+                    </div>
+                    <div class="mb-3 ms-1">
+                      <label for="comment" class="form-label">Comment</label>
+                      <textarea class="form-control"
+                                id="comment"
+                                name="comment"
+                                placeholder="Optional"
+                                rows="5"></textarea>
+                    </div>
+                    <button type="submit" class="w-100 btn btn-dark">Submit</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

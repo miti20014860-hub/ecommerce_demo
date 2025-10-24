@@ -1,9 +1,9 @@
 {% load static %}
 <nav class="container">
    <div class="row">
-      <a class="navbar-brand border-bottom border-black text-center fs-2 "
+      <a class="navbar-brand border-bottom border-black text-center fs-2 mt-1"
          href="{% url 'index:index' %}"
-         {% if request.path == '/' %}aria-current="page"{% endif %}>Index</a>
+         {% if request.path == '/' %}aria-current="page"{% endif %}>Habaki</a>
       <div class="nav-scroller py-1 border-bottom border-black mb-1">
          <div class="nav nav-underline justify-content-between px-1">
             <a class="nav-item nav-link link-body-emphasis {% if request.path == '/' %}active{% endif %}"

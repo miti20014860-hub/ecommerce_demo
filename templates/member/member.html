@@ -3,32 +3,40 @@
 {% block body %}
     <div class="modal position-static d-block">
         <div class="modal-dialog">
-            <div class="modal-content p-4 border-secondary my-5">
+            <div class="modal-content p-4 border-secondary my-5 rounded-0">
                 <div class="modal-header pb-4 border-bottom-0">
                     <h2>Sign in</h2>
                 </div>
                 <div class="modal-body pt-0">
-                    <div class="form-floating mb-3">
-                        <input type="email"
-                               class="form-control"
-                               id="email_address"
-                               placeholder="name@example.com" />
-                        <label for="email_address">Email Address</label>
-                    </div>
-                    <div class="form-floating mb-3">
-                        <input type="password"
-                               class="form-control"
-                               id="acc_password"
-                               placeholder="Password" />
-                        <label for="acc_password">Password</label>
-                    </div>
-                    <a href="{% url 'member:account' %}"
-                       class="w-100 btn btn-lg btn-secondary"
-                       type="submit">Sign in</a>
+                    <form id="sing_in" action="{% url 'member:sing_in' %}" method="post">
+                        {% csrf_token %}
+                        <div class="form-floating mb-3">
+                            <input type="email"
+                                   class="form-control"
+                                   id="email_address"
+                                   name="email_address"
+                                   placeholder="name@example.com"
+                                   required>
+                            <label for="email_address">Email Address</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="password"
+                                   class="form-control"
+                                   id="acc_password"
+                                   name="acc_password"
+                                   placeholder="Password"
+                                   required>
+                            <label for="acc_password">Password</label>
+                        </div>
+                    </form>
+                    <a type="submit"
+                       href="{% url 'member:account' %}"
+                       class="w-100 btn btn-lg btn-dark rounded-0"
+                       aria-controls="sing_in">Sign in</a>
                     <div class="mt-5">
                         <h2>Not a member?</h2>
                         <button id="sing_upBtn"
-                                class="w-100 mb-2 border-black btn btn-lg btn-dark text-light mt-3"
+                                class="w-100 mb-2 border-black btn btn-lg btn-secondary text-light mt-3 rounded-0"
                                 type="button"
                                 data-bs-toggle="collapse"
                                 data-bs-target="#sing_up"
@@ -36,33 +44,47 @@
                                 aria-controls="sing_up">Sign up</button>
                         <div class="collapse mt-3" id="sing_up">
                             <h3 class="mb-4 text-danger-emphasis">Required fields</h3>
-                            <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="user_name" placeholder="name" />
-                                <label for="user_name">Name</label>
-                            </div>
-                            <div class="form-floating mb-3">
-                                <input type="email"
-                                       class="form-control"
-                                       id="user_email"
-                                       placeholder="name@example.com" />
-                                <label for="user_email">Email Address</label>
-                            </div>
-                            <div class="form-floating mb-3">
-                                <input type="password"
-                                       class="form-control"
-                                       id="user_password"
-                                       placeholder="Password" />
-                                <label for="user_password">Create a Password</label>
-                            </div>
-                            <div class="form-floating mb-3">
-                                <input type="password"
-                                       class="form-control"
-                                       id="user_password_re"
-                                       placeholder="Password" />
-                                <label for="user_password_re">Re-enter Password</label>
-                            </div>
+                            <form id="sing_up" action="{% url 'member:sing_up' %}" method="post">
+                                {% csrf_token %}
+                                <div class="form-floating mb-3">
+                                    <input type="text"
+                                           class="form-control"
+                                           id="user_name"
+                                           name="user_name"
+                                           placeholder="name"
+                                           required>
+                                    <label for="user_name">Full Name</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="email"
+                                           class="form-control"
+                                           id="user_email"
+                                           name="user_email"
+                                           placeholder="name@example.com"
+                                           required>
+                                    <label for="user_email">Email Address</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="password"
+                                           class="form-control"
+                                           id="user_password"
+                                           name="user_password"
+                                           placeholder="create_password"
+                                           required>
+                                    <label for="user_password">Create a Password</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="password"
+                                           class="form-control"
+                                           id="user_password_re"
+                                           name="user_password_re"
+                                           placeholder="re-enter_password"
+                                           required>
+                                    <label for="user_password_re">Re-enter Password</label>
+                                </div>
+                            </form>
                             <a href="{% url 'member:account' %}"
-                               class="w-100 btn btn-lg btn-danger"
+                               class="w-100 btn btn-lg btn-danger rounded-0"
                                type="submit">Submit</a>
                         </div>
                     </div>
@@ -73,7 +95,7 @@
     <script>
   const btn = document.getElementById('sing_upBtn');
   const collapse = document.getElementById('sing_up');
-  collapse.addEventListener('show.bs.collapse', () => btn.classList.replace('btn-dark', 'btn-light'));
-  collapse.addEventListener('hide.bs.collapse', () => btn.classList.replace('btn-light', 'btn-dark'));
+  collapse.addEventListener('show.bs.collapse', () => btn.classList.replace('btn-secondary', 'btn-light'));
+  collapse.addEventListener('hide.bs.collapse', () => btn.classList.replace('btn-light', 'btn-secondary'));
     </script>
 {% endblock body %}

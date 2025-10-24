@@ -1,14 +1,233 @@
 {% extends "base.html" %}
-{% load static %}
 {% load humanize %}
 {% block body %}
-    <div class="container">
+    <div class="container mt-5">
         <div class="row">
-            <div class="col-lg-4"></div>
-            <div class="col-lg-6">
-                <h1>login</h1>
+            <!-- FAQ -->
+            <h2 class="bg-body-secondary p-2 ms-1">FAQ</h2>
+            <!-- Q1 -->
+            <div class="row mb-4"></div>
+            <table class="table">
+                <tr>
+                    <td onmouseover="changeCellColor(this, true)"
+                        onmouseout="changeCellColor(this, false)">
+                        <b class="ms-1">Question 1</b>
+                    </td>
+                </tr>
+            </table>
+            <button class="btn btn-white d-block text-start"
+                    data-toggle="collapse"
+                    data-target="#hiddenParagraph1">
+                <b>What makes a katana different from other swords?</b>
+            </button>
+            <div id="hiddenParagraph1" class="collapse mt-3">
+                <p class="bg-body-secondary p-2">
+                    A katana is distinguished by its curved, slender, single-edged blade, crafted using specialized folding and differential hardening techniques. This process creates a unique grain pattern (hada) and temper line (hamon), resulting in a blade that is both sharp and resilient.
+                </p>
             </div>
-            <div class="col-lg-4"></div>
+            <!-- Q2 -->
+            <div class="row mb-4"></div>
+            <table class="table">
+                <tr>
+                    <td onmouseover="changeCellColor(this, true)"
+                        onmouseout="changeCellColor(this, false)">
+                        <b class="ms-1">Question 2</b>
+                    </td>
+                </tr>
+            </table>
+            <p class="ms-2"></p>
+            <button class="btn btn-white d-block text-start"
+                    data-toggle="collapse"
+                    data-target="#hiddenParagraph2">
+                <b>What materials are used to make a katana?</b>
+            </button>
+            <div id="hiddenParagraph2" class="collapse mt-3">
+                <p class="bg-body-secondary p-2">
+                    We use high-quality tamahagane steel, produced through traditional smelting methods. The steel is folded multiple times to remove impurities and create the distinctive layered structure essential for strength and flexibility.
+                </p>
+            </div>
+            <!-- Q3 -->
+            <div class="row mb-4"></div>
+            <table class="table">
+                <tr>
+                    <td onmouseover="changeCellColor(this, true)"
+                        onmouseout="changeCellColor(this, false)">
+                        <b class="ms-1">Question 3</b>
+                    </td>
+                </tr>
+            </table>
+            <p class="ms-2"></p>
+            <button class="btn btn-white d-block text-start"
+                    data-toggle="collapse"
+                    data-target="#hiddenParagraph3">
+                <b>Can I customize the design of my katana?</b>
+            </button>
+            <div id="hiddenParagraph3" class="collapse mt-3">
+                <p class="bg-body-secondary p-2">
+                    Absolutely! We offer fully custom-made katanas where you can choose blade length, hamon style, fittings (tsuka, tsuba, saya), and decorative motifs to create a personalized sword that reflects your vision and style.
+                </p>
+            </div>
+            <!-- Q4 -->
+            <div class="row mb-4"></div>
+            <table class="table">
+                <tr>
+                    <td onmouseover="changeCellColor(this, true)"
+                        onmouseout="changeCellColor(this, false)">
+                        <b class="ms-1">Question 4</b>
+                    </td>
+                </tr>
+            </table>
+            <p class="ms-2"></p>
+            <button class="btn btn-white d-block text-start"
+                    data-toggle="collapse"
+                    data-target="#hiddenParagraph4">
+                <b>How long does it take to make a custom katana?</b>
+            </button>
+            <div id="hiddenParagraph4" class="collapse mt-3">
+                <p class="bg-body-secondary p-2">
+                    Crafting a custom katana typically takes several months, depending on the complexity of the design and the materials chosen. Each blade requires meticulous forging, tempering, polishing, and assembly to ensure the highest quality.
+                </p>
+            </div>
+            <!-- Q5 -->
+            <div class="row mb-4"></div>
+            <table class="table">
+                <tr>
+                    <td onmouseover="changeCellColor(this, true)"
+                        onmouseout="changeCellColor(this, false)">
+                        <b class="ms-1">Question 5</b>
+                    </td>
+                </tr>
+            </table>
+            <p class="ms-2"></p>
+            <button class="btn btn-white d-block text-start"
+                    data-toggle="collapse"
+                    data-target="#hiddenParagraph5">
+                <b>What is the significance of the hamon?</b>
+            </button>
+            <div id="hiddenParagraph5" class="collapse mt-3">
+                <p class="bg-body-secondary p-2">
+                    The hamon is the visible temper line created during differential hardening. It indicates the blade’s hardness and cutting edge quality and is also a unique artistic signature of each swordsmith’s skill.
+                </p>
+            </div>
+            <!-- Q6 -->
+            <div class="row mb-4"></div>
+            <table class="table">
+                <tr>
+                    <td onmouseover="changeCellColor(this, true)"
+                        onmouseout="changeCellColor(this, false)">
+                        <b class="ms-1">Question 6</b>
+                    </td>
+                </tr>
+            </table>
+            <p class="ms-2"></p>
+            <button class="btn btn-white d-block text-start"
+                    data-toggle="collapse"
+                    data-target="#hiddenParagraph6">
+                <b>Can I request historical or symbolic designs?</b>
+            </button>
+            <div id="hiddenParagraph6" class="collapse mt-3">
+                <p class="bg-body-secondary p-2">
+                    Yes, we specialize in incorporating traditional and symbolic motifs that honor samurai culture, family crests, or personal meanings into the sword’s fittings and decorations.
+                </p>
+            </div>
+            <!-- Q7 -->
+            <div class="row mb-4"></div>
+            <table class="table">
+                <tr>
+                    <td onmouseover="changeCellColor(this, true)"
+                        onmouseout="changeCellColor(this, false)">
+                        <b class="ms-1">Question 7</b>
+                    </td>
+                </tr>
+            </table>
+            <p class="ms-2"></p>
+            <button class="btn btn-white d-block text-start"
+                    data-toggle="collapse"
+                    data-target="#hiddenParagraph7">
+                <b>Are your katanas functional or purely decorative?</b>
+            </button>
+            <div id="hiddenParagraph7" class="collapse mt-3">
+                <p class="bg-body-secondary p-2">
+                    Our katanas are fully functional swords, crafted for martial arts, cutting practice, or collection. They balance aesthetics with performance and durability.
+                </p>
+            </div>
+            <!-- Q8 -->
+            <div class="row mb-4"></div>
+            <table class="table">
+                <tr>
+                    <td onmouseover="changeCellColor(this, true)"
+                        onmouseout="changeCellColor(this, false)">
+                        <b class="ms-1">Question 8</b>
+                    </td>
+                </tr>
+            </table>
+            <p class="ms-2"></p>
+            <button class="btn btn-white d-block text-start"
+                    data-toggle="collapse"
+                    data-target="#hiddenParagraph8">
+                <b>Do you provide authentication or certification with your swords?</b>
+            </button>
+            <div id="hiddenParagraph8" class="collapse mt-3">
+                <p class="bg-body-secondary p-2">
+                    Every katana we produce comes with a certificate of authenticity detailing the materials, techniques, and craftsmanship involved, ensuring provenance and value for collectors.
+                </p>
+            </div>
+            <!-- Q9 -->
+            <div class="row mb-4"></div>
+            <table class="table">
+                <tr>
+                    <td onmouseover="changeCellColor(this, true)"
+                        onmouseout="changeCellColor(this, false)">
+                        <b class="ms-1">Question 9</b>
+                    </td>
+                </tr>
+            </table>
+            <p class="ms-2"></p>
+            <button class="btn btn-white d-block text-start"
+                    data-toggle="collapse"
+                    data-target="#hiddenParagraph9">
+                <b>How should I care for and maintain my katana?</b>
+            </button>
+            <div id="hiddenParagraph9" class="collapse mt-3">
+                <p class="bg-body-secondary p-2">
+                    Proper care includes regular cleaning, oiling the blade to prevent rust, and storing it in a dry environment. We provide detailed maintenance instructions with every sword to help preserve its condition for generations.
+                </p>
+            </div>
+            <!-- 10 -->
+            <div class="row mb-4"></div>
+            <table class="table">
+                <tr>
+                    <td onmouseover="changeCellColor(this, true)"
+                        onmouseout="changeCellColor(this, false)">
+                        <b class="ms-1">Question 10</b>
+                    </td>
+                </tr>
+            </table>
+            <p class="ms-2"></p>
+            <button class="btn btn-white d-block text-start"
+                    data-toggle="collapse"
+                    data-target="#hiddenParagraph10">
+                <b>Can I commission a replica of a historical katana?</b>
+            </button>
+            <div id="hiddenParagraph10" class="collapse mt-3">
+                <p class="bg-body-secondary p-2">
+                    Yes, we can create replicas based on historical references, respecting the original design while applying our expert craftsmanship to produce a faithful and high-quality sword.
+                </p>
+            </div>
+            <!-- Q11 for spare -->
+            <div class="row mb-4"></div>
         </div>
     </div>
+    <script>
+        function changeCellColor(cell, add) {
+            if (add) {
+                cell.classList.add('bg-secondary', 'text-white');
+            } else {
+                cell.classList.remove('bg-secondary', 'text-white');
+            }
+        }
+    </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 {% endblock body %}

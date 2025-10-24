@@ -24,88 +24,184 @@
                             aria-controls="messages">Messages</button>
                 </div>
                 <div class="collapse show p-0" id="home">
-                    <div class="h-50vh d-flex align-items-center justify-content-center bg-body-secondary hight-100px">
-                        <h3>Welcome Back</h3>
-                        <h3>やまださん</h3>
+                    <div class="h-50vh d-flex align-items-center justify-content-center bg-body-secondary">
+                        <div class="text-center">
+                            <h3 class="my-4">やまださん</h3>
+                            <h3 class="my-4">Welcome Back</h3>
+                        </div>
                     </div>
-                    <button class="w-100 btn btn-lg btn-dark rounded-0"
-                            type="button"
-                            aria-controls="sing_out">Sing out</button>
+                    <a type="button"
+                       href="{% url 'index:index' %}"
+                       class="w-100 btn btn-lg btn-dark rounded-0"
+                       aria-controls="sing_out">Sing out</a>
                 </div>
                 <div class="collapse p-0" id="profile">
-                    <div class="bg-light p-3">
+                    <div class="h-50vh bg-light p-3">
                         <table class="table table-md table-transparent border-white fw-normal mb-0">
-                            <tr>
-                                <th class="align-middle text-nowrap">Name</th>
-                                <td class="p-1">
-                                    <div class="input-group input-group-md">
-                                        <input type="text"
-                                               class="form-control form-control-md"
-                                               id="user_name"
-                                               placeholder="やまださん">
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th class="align-middle text-nowrap">Email</th>
-                                <td class="p-1">
-                                    <div class="input-group input-group-md">
-                                        <input type="email"
-                                               class="form-control form-control-md"
-                                               id="user_email"
-                                               placeholder="yamada777@gmail.com">
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th class="align-middle text-nowrap">Phone</th>
-                                <td class="p-1">
-                                    <div class="input-group input-group-md">
-                                        <input type="tel"
-                                               class="form-control form-control-md"
-                                               id="user_phone"
-                                               placeholder="002-1-816-860-8969">
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th class="align-middle text-nowrap">Addresses</th>
-                                <td class="p-1">
-                                    <div class="input-group input-group-md">
-                                        <input type="text"
-                                               class="form-control form-control-md"
-                                               id="user_addresses"
-                                               placeholder="Delivery Addresses">
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th class="align-middle text-nowrap">Payment Info</th>
-                                <td class="p-1">
-                                    <div class="input-group input-group-md">
-                                        <input type="text"
-                                               class="form-control form-control-md"
-                                               id="user_payment"
-                                               placeholder="Credit Card">
-                                    </div>
-                                </td>
-                            </tr>
+                            <form id="profile" action="{% url 'member:profile' %}" method="post">
+                                {% csrf_token %}
+                                <tr>
+                                    <th class="align-middle text-nowrap">
+                                        <label for="user_name">Full Name</label>
+                                    </th>
+                                    <td class="p-1">
+                                        <div class="input-group input-group-md">
+                                            <input type="text"
+                                                   id="user_name"
+                                                   name="user_name"
+                                                   class="form-control form-control-md"
+                                                   placeholder="やまださん">
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th class="align-middle text-nowrap">
+                                        <label for="user_email">Email Addresses</label>
+                                    </th>
+                                    <td class="p-1">
+                                        <div class="input-group input-group-md">
+                                            <input type="email"
+                                                   id="user_email"
+                                                   name="user_email"
+                                                   class="form-control form-control-md"
+                                                   placeholder="yamada777@gmail.com">
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th class="align-middle text-nowrap">
+                                        <label for="user_phone">Phone Number</label>
+                                    </th>
+                                    <td class="p-1">
+                                        <div class="input-group input-group-md">
+                                            <input type="tel"
+                                                   id="user_phone"
+                                                   name="user_phone"
+                                                   class="form-control form-control-md"
+                                                   placeholder="002-1-816-860-8969">
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th class="align-middle text-nowrap">
+                                        <label for="user_addresses">Delivery Addresses</label>
+                                    </th>
+                                    <td class="p-1">
+                                        <div class="input-group input-group-md">
+                                            <input type="text"
+                                                   id="user_addresses"
+                                                   name="user_addresses"
+                                                   class="form-control form-control-md"
+                                                   placeholder="Delivery Addresses">
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th class="align-middle text-nowrap">
+                                        <label for="user_payment">Payment Info</label>
+                                    </th>
+                                    <td class="p-1">
+                                        <div class="input-group input-group-md">
+                                            <input type="text"
+                                                   id="user_payment"
+                                                   name="user_payment"
+                                                   class="form-control form-control-md"
+                                                   placeholder="Credit Card">
+                                        </div>
+                                    </td>
+                                </tr>
+                            </form>
                         </table>
+                    </div>
+                    <div class="col d-flex btn-group justify-content-between align-items-end"
+                         role="group">
+                        <button class="btn btn-md btn-info rounded-0 w-100"
+                                type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#update_profile"
+                                aria-controls="update_profile">Update Profile</button>
+                        <button class="btn btn-md btn-danger rounded-0 w-100"
+                                type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#change_password"
+                                aria-controls="change_password">Change Password</button>
+                    </div>
+                    <div class="collapse show p-0" id="update_profile">
+                        <form id="update_profile"
+                              action="{% url 'member:update_profile' %}"
+                              method="post">
+                            {% csrf_token %}
+                            <div class="form-floating my-3">
+                                <input type="password"
+                                       class="form-control"
+                                       id="acc_password"
+                                       name="acc_password"
+                                       placeholder="Password"
+                                       required>
+                                <label for="acc_password">Password</label>
+                            </div>
+                        </form>
+                        <button class="w-100 btn btn-md btn-dark rounded-0"
+                                type="submit"
+                                data-bs-target="#"
+                                aria-controls="confirm">Confirm</button>
+                    </div>
+                    <div class="collapse show p-0" id="change_password">
+                        <form id="change_password"
+                              action="{% url 'member:change_password' %}"
+                              method="post">
+                            {% csrf_token %}
+                            <div class="form-floating my-3">
+                                <input type="password"
+                                       class="form-control"
+                                       id="acc_password"
+                                       name="acc_password"
+                                       placeholder="Password"
+                                       required>
+                                <label for="acc_password">Current Password</label>
+                            </div>
+                            <div class="form-floating my-3">
+                                <input type="password"
+                                       class="form-control"
+                                       id="new_password"
+                                       name="new_password"
+                                       placeholder="Password"
+                                       required>
+                                <label for="new_password">New Password</label>
+                            </div>
+                            <div class="form-floating my-3">
+                                <input type="password"
+                                       class="form-control"
+                                       id="re_enter_new_password"
+                                       name="re_enter_new_password"
+                                       placeholder="Password"
+                                       required>
+                                <label for="re_enter_new_password">Re-enter New Password</label>
+                            </div>
+                        </form>
+                        <button class="w-100 btn btn-md btn-dark rounded-0"
+                                type="submit"
+                                data-bs-target="#"
+                                aria-controls="confirm">Confirm</button>
                     </div>
                 </div>
                 <div class="collapse p-0" id="orders">
-                    <button class="w-100 btn btn-md btn-dark rounded-0"
-                            type="button"
-                            data-bs-toggle="collapse"
-                            data-bs-target="#"
-                            aria-controls="order1">Order1</button>
+                    <div class="h-50vh">
+                        <button class="w-100 btn btn-md btn-dark rounded-0"
+                                type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#"
+                                aria-controls="order1">Order1</button>
+                    </div>
                 </div>
                 <div class="collapse p-0" id="messages">
-                    <button class="w-100 btn btn-md btn-dark rounded-0"
-                            type="button"
-                            data-bs-toggle="collapse"
-                            data-bs-target="#"
-                            aria-controls="message1">Messages1</button>
+                    <div class="h-50vh">
+                        <button class="w-100 btn btn-md btn-dark rounded-0"
+                                type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#"
+                                aria-controls="message1">Messages1</button>
+                    </div>
                 </div>
             </div>
         </div>
