@@ -12,6 +12,8 @@ def account(request):
     return render(request, 'member/account.html')
 
 
+@require_POST
+@csrf_protect
 def sing_in(request):
     if request.method == 'POST':
         email_address = request.POST.get('email_address')
@@ -24,10 +26,10 @@ def sing_in(request):
 @csrf_protect
 def sing_up(request):
     if request.method == 'POST':
-        user_name = request.POST.get('user_name')
-        user_email = request.POST.get('user_email')
-        user_password = request.POST.get('user_password')
-        user_password_re = request.POST.get('user_password_re')
+        name = request.POST.get('user_name')
+        email = request.POST.get('user_email')
+        password = request.POST.get('user_password')
+        password_re = request.POST.get('user_password_re')
         messages.success(request, f"Registered")
     return render(request, 'member/account.html')
 
