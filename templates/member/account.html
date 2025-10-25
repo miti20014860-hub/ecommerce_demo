@@ -5,6 +5,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-11 col-xl-10 col-xxl-9 mx-auto">
+                {% include "partials/_alert.html" %}
                 <div class="d-flex btn-group" role="group">
                     <button type="button"
                             class="flex-fill btn btn-lg btn-light rounded-0 active"
@@ -26,14 +27,14 @@
                 <div class="collapse show p-0" id="home">
                     <div class="h-50vh d-flex align-items-center justify-content-center bg-body-secondary">
                         <div class="text-center">
-                            <h3 class="my-4">やまださん</h3>
+                            <h3 class="my-4">{{ user.username }}</h3>
                             <h3 class="my-4">Welcome Back</h3>
                         </div>
                     </div>
-                    <a type="button"
-                       href="{% url 'index:index' %}"
-                       class="w-100 btn btn-lg btn-dark rounded-0"
-                       aria-controls="sing_out">Sing out</a>
+                    <form method="post" action="{% url 'member:sign_out' %}">
+                        {% csrf_token %}
+                        <button type="submit" class="w-100 btn btn-lg btn-dark rounded-0">Sing out</button>
+                    </form>
                 </div>
                 <div class="collapse p-0" id="profile">
                     <div class="h-50vh bg-light p-3">
@@ -64,7 +65,7 @@
                                                    id="user_email"
                                                    name="user_email"
                                                    class="form-control form-control-md"
-                                                   placeholder="yamada777@gmail.com">
+                                                   placeholder="{{ user.email }}">
                                         </div>
                                     </td>
                                 </tr>

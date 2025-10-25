@@ -1,0 +1,26 @@
+{% if messages %}
+  {% for message in messages %}
+    <div class="container">
+      <div class="alert alert-{{ message.tags }} alert-dismissible text-center bg-warning"
+           id="alert_message"
+           role="alert">
+        {{ message }}
+        <button type="button"
+                class="btn-close"
+                data-bs-dismiss="alert"
+                aria-label="Close"></button>
+      </div>
+    </div>
+  {% endfor %}
+{% endif %}
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const alert = document.getElementById('alert_message');
+    if (alert) {
+      setTimeout(function () {
+        const bsAlert = new bootstrap.Alert(alert);
+        bsAlert.close();
+      }, 10000);
+    }
+  });
+</script>

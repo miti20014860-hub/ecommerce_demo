@@ -19,6 +19,7 @@
                href="{% url 'kenshi:kenshi' %}"
                {% if '/kenshi/' in request.path %}aria-current="page"{% endif %}>Kenshi</a>
             <a class="nav-item nav-link link-body-emphasis {% if '/member/' in request.path %}active{% endif %}"
+               {% if user.is_authenticated %}  href="{% url 'member:account' %}" {% endif %}
                href="{% url 'member:member' %}"
                {% if '/member/' in request.path %}aria-current="page"{% endif %}>Member</a>
          </div>

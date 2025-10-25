@@ -3,21 +3,22 @@
 {% block body %}
     <div class="modal position-static d-block">
         <div class="modal-dialog">
+            {% include "partials/_alert.html" %}
             <div class="modal-content p-4 border-secondary my-5 rounded-0">
                 <div class="modal-header pb-4 border-bottom-0">
                     <h2>Sign in</h2>
                 </div>
                 <div class="modal-body pt-0">
-                    <form id="sing_in" action="{% url 'member:sing_in' %}" method="post">
+                    <form id="sign_in" action="{% url 'member:sign_in' %}" method="post">
                         {% csrf_token %}
                         <div class="form-floating mb-3">
-                            <input type="email"
+                            <input type="text"
                                    class="form-control"
-                                   id="email_address"
-                                   name="email_address"
-                                   placeholder="name@example.com"
+                                   id="acc_name"
+                                   name="acc_name"
+                                   placeholder="Username"
                                    required>
-                            <label for="email_address">Email Address</label>
+                            <label for="acc_name">Username</label>
                         </div>
                         <div class="form-floating mb-3">
                             <input type="password"
@@ -28,32 +29,31 @@
                                    required>
                             <label for="acc_password">Password</label>
                         </div>
+                        <input type="submit"
+                               value="Sign in"
+                               class="w-100 btn btn-lg btn-dark rounded-0" />
                     </form>
-                    <a type="submit"
-                       href="{% url 'member:account' %}"
-                       class="w-100 btn btn-lg btn-dark rounded-0"
-                       aria-controls="sing_in">Sign in</a>
                     <div class="mt-5">
                         <h2>Not a member?</h2>
-                        <button id="sing_upBtn"
+                        <button id="sign_upBtn"
                                 class="w-100 mb-2 border-black btn btn-lg btn-secondary text-light mt-3 rounded-0"
                                 type="button"
                                 data-bs-toggle="collapse"
-                                data-bs-target="#sing_up"
+                                data-bs-target="#sign_up"
                                 aria-expanded="false"
-                                aria-controls="sing_up">Sign up</button>
-                        <div class="collapse mt-3" id="sing_up">
+                                aria-controls="sign_up">Sign up</button>
+                        <div class="collapse mt-3" id="sign_up">
                             <h3 class="mb-4 text-danger-emphasis">Required fields</h3>
-                            <form id="sing_up" action="{% url 'member:sing_up' %}" method="post">
+                            <form id="sign_up" action="{% url 'member:sign_up' %}" method="post">
                                 {% csrf_token %}
                                 <div class="form-floating mb-3">
                                     <input type="text"
                                            class="form-control"
                                            id="user_name"
                                            name="user_name"
-                                           placeholder="name"
+                                           placeholder="Username"
                                            required>
-                                    <label for="user_name">Full Name</label>
+                                    <label for="user_name">Username</label>
                                 </div>
                                 <div class="form-floating mb-3">
                                     <input type="email"
@@ -82,10 +82,10 @@
                                            required>
                                     <label for="user_password_re">Re-enter Password</label>
                                 </div>
+                                <input type="submit"
+                                       value="Submit"
+                                       class="w-100 btn btn-lg btn-danger rounded-0" />
                             </form>
-                            <a href="{% url 'member:account' %}"
-                               class="w-100 btn btn-lg btn-danger rounded-0"
-                               type="submit">Submit</a>
                         </div>
                     </div>
                 </div>
@@ -93,8 +93,8 @@
         </div>
     </div>
     <script>
-  const btn = document.getElementById('sing_upBtn');
-  const collapse = document.getElementById('sing_up');
+  const btn = document.getElementById('sign_upBtn');
+  const collapse = document.getElementById('sign_up');
   collapse.addEventListener('show.bs.collapse', () => btn.classList.replace('btn-secondary', 'btn-light'));
   collapse.addEventListener('hide.bs.collapse', () => btn.classList.replace('btn-light', 'btn-secondary'));
     </script>
