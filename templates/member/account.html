@@ -39,78 +39,88 @@
                 <div class="collapse p-0" id="profile">
                     <div class="h-50vh bg-light p-3">
                         <table class="table table-md table-transparent border-white fw-normal mb-0">
-                            <form id="profile" action="{% url 'member:profile' %}" method="post">
+                            <form method="post" id="profile" action="{% url 'member:account' %}">
                                 {% csrf_token %}
                                 <tr>
                                     <th class="align-middle text-nowrap">
-                                        <label for="user_name">Full Name</label>
+                                        <label for="{{ profile_form.first_name.id_for_label }}  ">First name</label>
                                     </th>
                                     <td class="p-1">
-                                        <div class="input-group input-group-md">
-                                            <input type="text"
-                                                   id="user_name"
-                                                   name="user_name"
-                                                   class="form-control form-control-md"
-                                                   placeholder="やまださん">
-                                        </div>
+                                        <div class="input-group input-group-md">{{ profile_form.first_name }}</div>
+                                        {% if profile_form.first_name.errors %}
+                                            <div class="text-danger small mt-1">{{ profile_form.first_name.errors|join:", " }}</div>
+                                        {% endif %}
                                     </td>
                                 </tr>
                                 <tr>
                                     <th class="align-middle text-nowrap">
-                                        <label for="user_email">Email Addresses</label>
+                                        <label for="{{ profile_form.last_name.id_for_label }}  ">Last name</label>
                                     </th>
                                     <td class="p-1">
-                                        <div class="input-group input-group-md">
-                                            <input type="email"
-                                                   id="user_email"
-                                                   name="user_email"
-                                                   class="form-control form-control-md"
-                                                   placeholder="{{ user.email }}">
-                                        </div>
+                                        <div class="input-group input-group-md">{{ profile_form.last_name }}</div>
+                                        {% if profile_form.last_name.errors %}
+                                            <div class="text-danger small mt-1">{{ profile_form.last_name.errors|join:", " }}</div>
+                                        {% endif %}
                                     </td>
                                 </tr>
                                 <tr>
                                     <th class="align-middle text-nowrap">
-                                        <label for="user_phone">Phone Number</label>
+                                        <label for="{{ profile_form.email.id_for_label }}">Email Addresses</label>
                                     </th>
                                     <td class="p-1">
-                                        <div class="input-group input-group-md">
-                                            <input type="tel"
-                                                   id="user_phone"
-                                                   name="user_phone"
-                                                   class="form-control form-control-md"
-                                                   placeholder="002-1-816-860-8969">
-                                        </div>
+                                        <div class="input-group input-group-md">{{ profile_form.email }}</div>
+                                        {% if profile_form.email.errors %}
+                                            <div class="text-danger small mt-1">{{ profile_form.email.errors|join:", " }}</div>
+                                        {% endif %}
                                     </td>
                                 </tr>
                                 <tr>
                                     <th class="align-middle text-nowrap">
-                                        <label for="user_addresses">Delivery Addresses</label>
+                                        <label for="{{ profile_form.phone.id_for_label }}">Phone Number</label>
                                     </th>
                                     <td class="p-1">
-                                        <div class="input-group input-group-md">
-                                            <input type="text"
-                                                   id="user_addresses"
-                                                   name="user_addresses"
-                                                   class="form-control form-control-md"
-                                                   placeholder="Delivery Addresses">
-                                        </div>
+                                        <div class="input-group input-group-md">{{ profile_form.phone }}</div>
+                                        {% if profile_form.phone.errors %}
+                                            <div class="text-danger small mt-1">{{ profile_form.phone.errors|join:", " }}</div>
+                                        {% endif %}
                                     </td>
                                 </tr>
                                 <tr>
                                     <th class="align-middle text-nowrap">
-                                        <label for="user_payment">Payment Info</label>
+                                        <label for="{{ profile_form.address.id_for_label }}  ">Delivery Addresses</label>
                                     </th>
                                     <td class="p-1">
-                                        <div class="input-group input-group-md">
-                                            <input type="text"
-                                                   id="user_payment"
-                                                   name="user_payment"
-                                                   class="form-control form-control-md"
-                                                   placeholder="Credit Card">
-                                        </div>
+                                        <div class="input-group input-group-md">{{ profile_form.address }}</div>
+                                        {% if profile_form.address.errors %}
+                                            <div class="text-danger small mt-1">{{ profile_form.address.errors|join:", " }}</div>
+                                        {% endif %}
                                     </td>
                                 </tr>
+                                <tr>
+                                    <th class="align-middle text-nowrap">
+                                        <label for="{{ profile_form.payment.id_for_label }}  ">Payment Info</label>
+                                    </th>
+                                    <td class="p-1">
+                                        <div class="input-group input-group-md">{{ profile_form.payment }}</div>
+                                        {% if profile_form.payment.errors %}
+                                            <div class="text-danger small mt-1">{{ profile_form.payment.errors|join:", " }}</div>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                <div class="collapse show p-0" id="update_profile">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="profile_submit" value="1">
+                                    <div class="form-floating my-3">
+                                        {{ profile_form.current_password }}
+                                        <label for="{{ profile_form.current_password.id_for_label }}">Password</label>
+                                    </div>
+                                    {% if profile_form.current_password.errors %}
+                                        <div class="text-danger small mb-3">{{ profile_form.current_password.errors|join:", " }}</div>
+                                    {% endif %}
+                                    <input type="submit"
+                                           value="Enter password to confirm profile changes."
+                                           class="w-100 btn btn-md btn-dark rounded-0 mb-3" />
+                                </div>
                             </form>
                         </table>
                     </div>
@@ -127,29 +137,9 @@
                                 data-bs-target="#change_password"
                                 aria-controls="change_password">Change Password</button>
                     </div>
-                    <div class="collapse show p-0" id="update_profile">
-                        <form id="update_profile"
-                              action="{% url 'member:update_profile' %}"
-                              method="post">
-                            {% csrf_token %}
-                            <div class="form-floating my-3">
-                                <input type="password"
-                                       class="form-control"
-                                       id="acc_password"
-                                       name="acc_password"
-                                       placeholder="Password"
-                                       required>
-                                <label for="acc_password">Password</label>
-                            </div>
-                        </form>
-                        <button class="w-100 btn btn-md btn-dark rounded-0"
-                                type="submit"
-                                data-bs-target="#"
-                                aria-controls="confirm">Confirm</button>
-                    </div>
                     <div class="collapse show p-0" id="change_password">
                         <form id="change_password"
-                              action="{% url 'member:change_password' %}"
+                              action="{% url 'member:account' %}"
                               method="post">
                             {% csrf_token %}
                             <div class="form-floating my-3">

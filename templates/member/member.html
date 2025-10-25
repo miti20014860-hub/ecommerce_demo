@@ -43,7 +43,7 @@
                                 aria-expanded="false"
                                 aria-controls="sign_up">Sign up</button>
                         <div class="collapse mt-3" id="sign_up">
-                            <h3 class="mb-4 text-danger-emphasis">Required fields</h3>
+                            <h3 class="mb-4 text-danger-emphasis">Required Fields</h3>
                             <form id="sign_up" action="{% url 'member:sign_up' %}" method="post">
                                 {% csrf_token %}
                                 <div class="form-floating mb-3">
