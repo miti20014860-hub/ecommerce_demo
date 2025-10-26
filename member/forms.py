@@ -77,6 +77,7 @@ class PasswordChangeForm(BasePasswordChangeForm):
 
         for field_name in ['old_password', 'new_password1', 'new_password2']:
             self.fields[field_name].widget.attrs.update({
+                'title': 'Password must at least 8 characters and cannot be entirely numeric',
                 'class': 'form-control',
                 'placeholder': ''
             })

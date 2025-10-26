@@ -20,16 +20,20 @@ def account(request):
             profile_form = ProfileEditForm(request.user, request.POST, instance=request.user)
             if profile_form.is_valid():
                 profile_form.save()
-                messages.success(request, 'Profile updated successfully.')
+                messages.success(request, 'Profile updated successfully')
                 return redirect('member:account')
+            else:
+                messages.error(request, 'Profile update failed')
 
         elif 'password_submit' in request.POST:
             password_form = PasswordChangeForm(user=request.user, data=request.POST)
             if password_form.is_valid():
                 user = password_form.save()
                 update_session_auth_hash(request, user)
-                messages.success(request, 'Password updated successfully.')
+                messages.success(request, 'Password updated successfully')
                 return redirect('member:account')
+            else:
+                messages.error(request, 'Password update failed')
 
     context = {
         'profile_form': profile_form,
