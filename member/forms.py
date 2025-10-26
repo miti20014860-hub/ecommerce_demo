@@ -1,9 +1,8 @@
-from django.contrib.auth.forms import PasswordChangeForm
-from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.forms import PasswordChangeForm as BasePasswordChangeForm
 from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User
-from .models import Profile
 from django import forms
+from .models import Profile
 
 
 class ProfileEditForm(forms.ModelForm):
@@ -70,3 +69,18 @@ class ProfileEditForm(forms.ModelForm):
             profile.save()
 
         return user
+
+
+class PasswordChangeForm(BasePasswordChangeForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        for field_name in ['old_password', 'new_password1', 'new_password2']:
+            self.fields[field_name].widget.attrs.update({
+                'class': 'form-control',
+                'placeholder': ''
+            })
+
+        self.fields['old_password'].label = "Current Password"
+        self.fields['new_password1'].label = "Enter New Password"
+        self.fields['new_password2'].label = "Re-enter New Password"

@@ -1,10 +1,9 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import update_session_auth_hash
-from django.contrib.auth.forms import PasswordChangeForm
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib import messages, auth
-from .forms import ProfileEditForm
+from .forms import ProfileEditForm, PasswordChangeForm
 
 
 def member(request):
@@ -25,7 +24,7 @@ def account(request):
                 return redirect('member:account')
 
         elif 'password_submit' in request.POST:
-            password_form = PasswordChangeForm(request.user, request.POST)
+            password_form = PasswordChangeForm(user=request.user, data=request.POST)
             if password_form.is_valid():
                 user = password_form.save()
                 update_session_auth_hash(request, user)
