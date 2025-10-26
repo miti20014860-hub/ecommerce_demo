@@ -31,7 +31,7 @@
                             <h3 class="my-4">Welcome Back</h3>
                         </div>
                     </div>
-                    <form method="post" action="{% url 'member:sign_out' %}">
+                    <form method="post" action="{% url 'member:account_sign_out' %}">
                         {% csrf_token %}
                         <button type="submit" class="w-100 btn btn-lg btn-dark rounded-0">Sing out</button>
                     </form>
@@ -43,7 +43,7 @@
                                 {% csrf_token %}
                                 <tr>
                                     <th class="align-middle text-nowrap">
-                                        <label for="{{ profile_form.first_name.id_for_label }}  ">First name</label>
+                                        <label for="{{ profile_form.first_name.id_for_label }} ">First name</label>
                                     </th>
                                     <td class="p-1">
                                         <div class="input-group input-group-md">{{ profile_form.first_name }}</div>

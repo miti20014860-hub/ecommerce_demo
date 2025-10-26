@@ -5,8 +5,8 @@ app_name = 'member'
 
 urlpatterns = [
     path('', views.member, name='member'),
-    path('account', views.account, name='account'),
-    path('sign_in', views.sign_in, name='sign_in'),
-    path('sign_up', views.sign_up, name='sign_up'),
-    path('sign_out', views.sign_out, name='sign_out'),
+    path('account/', views.account, name='account'),
+    path('account/sign_in/', views.account_sign_in, name='account_sign_in'),
+    path('account/sign_up/', views.account_sign_up, name='account_sign_up'),
+    path('account/sign_out/', views.account_sign_out, name='account_sign_out'),
 ]

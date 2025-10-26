@@ -163,3 +163,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # https://django-taggit.readthedocs.io/en/latest/
 
 TAGGIT_CASE_INSENSITVE = True
+
+
+# CustomUser
+AUTH_USER_MODEL = 'member.CustomUser'

@@ -9,30 +9,25 @@
                     <h2>Sign in</h2>
                 </div>
                 <div class="modal-body pt-0">
-                    <form id="sign_in" action="{% url 'member:sign_in' %}" method="post">
+                    <!-- 登入表單 -->
+                    <form id="sign_in"
+                          action="{% url 'member:account_sign_in' %}"
+                          method="post">
                         {% csrf_token %}
                         <div class="form-floating mb-3">
-                            <input type="text"
-                                   class="form-control"
-                                   id="acc_name"
-                                   name="acc_name"
-                                   placeholder="Username"
-                                   required>
-                            <label for="acc_name">Username</label>
+                            {{ form.username }}
+                            <label for="{{ form.username.id_for_label }}">Username</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="password"
-                                   class="form-control"
-                                   id="acc_password"
-                                   name="acc_password"
-                                   placeholder="Password"
-                                   required>
-                            <label for="acc_password">Password</label>
+                            {{ form.password }}
+                            <label for="{{ form.password.id_for_label }}">Password</label>
                         </div>
                         <input type="submit"
+                               name="sign_in_submit"
                                value="Sign in"
                                class="w-100 btn btn-lg btn-dark rounded-0" />
                     </form>
+                    <!-- 註冊切換區 -->
                     <div class="mt-5">
                         <h2>Not a member?</h2>
                         <button id="sign_upBtn"
@@ -44,43 +39,26 @@
                                 aria-controls="sign_up">Sign up</button>
                         <div class="collapse mt-3" id="sign_up">
                             <h3 class="mb-4 text-danger-emphasis">Required Fields</h3>
-                            <form id="sign_up" action="{% url 'member:sign_up' %}" method="post">
+                            <!-- 註冊表單 -->
+                            <form id="sign_up"
+                                  action="{% url 'member:account_sign_up' %}"
+                                  method="post">
                                 {% csrf_token %}
                                 <div class="form-floating mb-3">
-                                    <input type="text"
-                                           class="form-control"
-                                           id="user_name"
-                                           name="user_name"
-                                           placeholder="Username"
-                                           required>
-                                    <label for="user_name">Username</label>
+                                    {{ register_form.username }}
+                                    <label for="{{ register_form.username.id_for_label }}">Username</label>
                                 </div>
                                 <div class="form-floating mb-3">
-                                    <input type="email"
-                                           class="form-control"
-                                           id="user_email"
-                                           name="user_email"
-                                           placeholder="name@example.com"
-                                           required>
-                                    <label for="user_email">Email Address</label>
+                                    {{ register_form.email }}
+                                    <label for="{{ register_form.email.id_for_label }}">Email Address</label>
                                 </div>
                                 <div class="form-floating mb-3">
-                                    <input type="password"
-                                           class="form-control"
-                                           id="user_password"
-                                           name="user_password"
-                                           placeholder="create_password"
-                                           required>
-                                    <label for="user_password">Create a Password</label>
+                                    {{ register_form.password1 }}
+                                    <label for="{{ register_form.password1.id_for_label }}">Create a Password</label>
                                 </div>
                                 <div class="form-floating mb-3">
-                                    <input type="password"
-                                           class="form-control"
-                                           id="user_password_re"
-                                           name="user_password_re"
-                                           placeholder="re-enter_password"
-                                           required>
-                                    <label for="user_password_re">Re-enter Password</label>
+                                    {{ register_form.password2 }}
+                                    <label for="{{ register_form.password2.id_for_label }}">Confirm Password</label>
                                 </div>
                                 <input type="submit"
                                        value="Submit"
@@ -93,9 +71,9 @@
         </div>
     </div>
     <script>
-  const btn = document.getElementById('sign_upBtn');
-  const collapse = document.getElementById('sign_up');
-  collapse.addEventListener('show.bs.collapse', () => btn.classList.replace('btn-secondary', 'btn-light'));
-  collapse.addEventListener('hide.bs.collapse', () => btn.classList.replace('btn-light', 'btn-secondary'));
+        const btn = document.getElementById('sign_upBtn');
+        const collapse = document.getElementById('sign_up');
+        collapse.addEventListener('show.bs.collapse', () => btn.classList.replace('btn-secondary', 'btn-light'));
+        collapse.addEventListener('hide.bs.collapse', () => btn.classList.replace('btn-light', 'btn-secondary'));
     </script>
 {% endblock body %}
