@@ -4,29 +4,32 @@
 {% block body %}
     <div class="container">
         <div class="row">
-            <div class="col-lg-11 col-xl-10 col-xxl-9 mx-auto">
-                <div class="row border border-secondary">
+            <div class="col-lg-113 col-xl-10 col-xxl-9 mx-auto">
+                <div class="row border border-secondary g-0">
+                    <!-- 標題 -->
                     <div class="bg-secondary text-black p-2">
-                        <h4 class="mt-1 text-center">日本刀　刀　政常（新々刀） （尾張徳川家伝来）</h4>
-                        <h4 class="mb-0 text-center">Katana [masatsune] (sinsintou) (Handed down by the Owari Tokugawa family)</h4>
+                        <h4 class="mt-1 text-center">{{ collection.name_jp }}</h4>
+                        <h4 class="mb-0 text-center">{{ collection.name_en }}</h4>
                     </div>
+                    <!-- Provider + Signature + Type -->
                     <div class="row g-0">
                         <div class="col-8 bg-light">
                             <table class="table table-transparent border-white fw-normal mb-0">
                                 <tr>
                                     <td>Provider</td>
-                                    <td>「刀の蔵」</td>
+                                    <td>{{ collection.provider|default:"－" }}</td>
                                 </tr>
                                 <tr>
                                     <td>Signature</td>
-                                    <td class="border-bottom">出羽守源光平造</td>
+                                    <td class="border-bottom">{{ collection.signature|default:"－" }}</td>
                                 </tr>
                             </table>
                         </div>
                         <div class="col-4 d-flex align-items-center justify-content-center bg-body-secondary">
-                            <h3 class="border-bottom m-0">刀</h3>
+                            <h3 class="border-bottom m-0">{{ collection.get_type_display }}</h3>
                         </div>
                     </div>
+                    <!-- 尺寸規格 -->
                     <div class="row g-0">
                         <div class="col-3 bg-body-secondary">
                             <table class="table table-transparent border-white fw-normal mb-0">
@@ -47,16 +50,16 @@
                         <div class="col-3 bg-body-secondary">
                             <table class="table table-transparent border-white fw-normal mb-0">
                                 <tr>
-                                    <td>68.1ｃｍ</td>
+                                    <td>{{ collection.blade_length|floatformat:1|default:"－" }} cm</td>
                                 </tr>
                                 <tr>
-                                    <td>1.0ｃｍ</td>
+                                    <td>{{ collection.curvature|floatformat:1|default:"－" }} cm</td>
                                 </tr>
                                 <tr>
-                                    <td>612ｇ</td>
+                                    <td>{{ collection.sword_weight|intcomma|default:"－" }} g</td>
                                 </tr>
                                 <tr>
-                                    <td class="border-bottom">Early Edo</td>
+                                    <td class="border-bottom">{{ collection.period|default:"－" }}</td>
                                 </tr>
                             </table>
                         </div>
@@ -79,20 +82,21 @@
                         <div class="col-3 bg-light">
                             <table class="table table-transparent border-white fw-normal mb-0">
                                 <tr>
-                                    <td>0.81ｃｍ</td>
+                                    <td>{{ collection.motohaba|floatformat:2|default:"－" }} cm</td>
                                 </tr>
                                 <tr>
-                                    <td>0.54ｃｍ</td>
+                                    <td>{{ collection.sakihaba|floatformat:2|default:"－" }} cm</td>
                                 </tr>
                                 <tr>
-                                    <td>3.25ｃｍ</td>
+                                    <td>{{ collection.motogasane|floatformat:2|default:"－" }} cm</td>
                                 </tr>
                                 <tr>
-                                    <td class="border-bottom">2.38ｃｍ</td>
+                                    <td class="border-bottom">{{ collection.sakigasane|floatformat:2|default:"－" }} cm</td>
                                 </tr>
                             </table>
                         </div>
                     </div>
+                    <!-- Koshirae + Registration + Certificate -->
                     <div class="row g-0">
                         <div class="col-3 bg-body-secondary">
                             <table class="table table-transparent border-white fw-normal mb-0">
@@ -110,17 +114,18 @@
                         <div class="col-9 bg-light">
                             <table class="table table-transparent border-white fw-normal mb-0">
                                 <tr>
-                                    <td>Shirasaya</td>
+                                    <td>{{ collection.koshirae|default:"－" }}</td>
                                 </tr>
                                 <tr>
-                                    <td>広島　昭和37年11月20日</td>
+                                    <td>{{ collection.registration|default:"－" }}</td>
                                 </tr>
                                 <tr>
-                                    <td class="border-bottom">－</td>
+                                    <td class="border-bottom">{{ collection.certificate|default:"－" }}</td>
                                 </tr>
                             </table>
                         </div>
                     </div>
+                    <!-- Remarks + Price -->
                     <div class="row g-0">
                         <div class="col-8 bg-light">
                             <table class="table table-transparent fw-normal mb-0">
@@ -128,50 +133,35 @@
                                     <td>Remarks</td>
                                 </tr>
                                 <tr>
-                                    <td>
-                                        靖国刀匠の素晴らしい刀の出現です、因幡鳥取の名工一徳斉邦彦刀匠と壮龍子寿光刀匠の夢の様な合作の名刀です。邦彦刀匠は幕末の名工因幡寿幸の門です。壮龍子寿光刀匠は靖国刀匠で有名な金崎助寿刀匠の前銘です。金崎助寿刀匠は本名金崎義一氏、池田靖光、堀井俊秀門。昭和13年東京靖国神社日本刀鍛錬会入会、昭和18年鳥取にて鍛刀場開設。数々の賞を総なめにして受賞。本刀は鳥取の有名な砂鉄の因賀鉄を自家製鉄して鍛錬した刀です。姿は元身幅広く先身幅の差の有る切っ先のやや延びた豪壮な姿を現し、地金は小板目肌良く詰み力強い地金を鍛え、刃紋は匂い出来の元から先までむらのない覇気有る互の目丁子刃を焼き見事です。邦彦、寿光刀匠の夢の合作の素晴らしい名刀です。この度古い御数寄者様から後進の方にお安くお譲り下さいとお預かりした為に特別に格安にて御提供いたします是非お楽しみ下さいませ。
-                                    </td>
+                                    <td>{{ collection.remarks|default:"－"|linebreaksbr }}</td>
                                 </tr>
                             </table>
                         </div>
                         <div class="col-4 d-flex align-items-center justify-content-center bg-body-secondary">
                             <div class="text-center">
-                                <h3 class="m-0">333,300,000</h3>
-                                <h4 class="m-0">円(JPY)</h4>
+                                <h3 class="m-0">{{ collection.formatted_price |default:"－" }}</h3>
                             </div>
                         </div>
                     </div>
+                    <!-- 訂購按鈕 -->
                     <div class="col-auto mx-auto my-2">
                         <a href="{% url 'collection:form' %}"
                            class="fw-medium text-warning-emphasis">[Open Order Form]</a>
                     </div>
                 </div>
-                <div class="row">
-                    <img src="{% static 'img/K-mitsuhira-01_01.jpg' %}"
-                         class="object-fit-cover g-0"
-                         alt="Poster"
-                         width="100%"
-                         height="100%" />
-                    <img src="{% static 'img/K-mitsuhira-01_04.jpg' %}"
-                         class="object-fit-cover g-0"
-                         alt="Poster"
-                         width="100%"
-                         height="100%" />
-                    <img src="{% static 'img/K-mitsuhira-01_07.jpg' %}"
-                         class="object-fit-cover g-0"
-                         alt="Poster"
-                         width="100%"
-                         height="100%" />
-                    <img src="{% static 'img/K-mitsuhira-01_06.jpg' %}"
-                         class="object-fit-cover g-0"
-                         alt="Poster"
-                         width="100%"
-                         height="100%" />
-                    <img src="{% static 'img/K-mitsuhira-01_09.jpg' %}"
-                         class="object-fit-cover g-0"
-                         alt="Poster"
-                         width="100%"
-                         height="100%" />
+                <!-- 圖片區（從 DB 動態讀取） -->
+                <div class="row g-0">
+                    {% for img in collection.images.all %}
+                        <div class="col-12 p-0">
+                            <img src="{{ img.image.url }}"
+                                 class="object-fit-cover w-100"
+                                 alt="{{ img.caption|default:'Collection Image' }}"
+                                 width="100%"
+                                 height="100%">
+                        </div>
+                    {% empty %}
+                        <p class="text-center text-muted">ERROE</p>
+                    {% endfor %}
                     <div class="col-auto mx-auto my-2">
                         <a href="#" class="fw-medium text-black">[Back to Top]</a>
                     </div>

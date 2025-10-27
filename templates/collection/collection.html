@@ -164,22 +164,27 @@
             <!-- Collection List -->
             <main class="col-md-8">
                 <ul class="list-unstyled">
-                    <div class="row border">
-                        <a href="#"
-                           class="link-body-emphasis text-decoration-none border-top border-4">
-                            <h3 class="border-bottom border-black text-center text-warning-emphasis mt-4">【刀】 出羽守源光平造</h3>
-                        </a>
-                        <a href="{% url 'collection:item' %}" class="col-auto mt-2 mx-auto  ">
-                            <img src="{% static 'img/K-mitsuhira-01_90.jpg' %}"
-                                 class="object-fit-cover"
-                                 alt="Thumbnail"
-                                 width="100%"
-                                 height="100%" />
-                        </a>
-                        <div class="mb-4">
-                            <h4 class="text-center border-bottom border-black p-1">1,850,000円</h4>
+                    {% for collection in collections %}
+                        <div class="row border">
+                            <a href="{% url 'collection:item' %}?id={{ collection.pk }}"
+                               class="link-body-emphasis text-decoration-none border-top border-4">
+                                <h3 class="border-bottom border-black text-center text-warning-emphasis mt-4">{{ collection.name_jp }}</h3>
+                            </a>
+                            <a href="{% url 'collection:item' %}?id={{ collection.pk }}"
+                               class="col-auto mt-2 mx-auto">
+                                <img src="{% if collection.main_image_url %}{{ collection.main_image_url }}{% else %}{% static 'img/default-sword.jpg' %}{% endif %}"
+                                     class="object-fit-cover"
+                                     width="100%"
+                                     height="100%"
+                                     alt="Thumbnail" />
+                            </a>
+                            <div class="mb-4">
+                                <h4 class="text-center border-bottom border-black p-1">{{ collection.formatted_price }}</h4>
+                            </div>
                         </div>
-                    </div>
+                    {% empty %}
+                        <p>ERROR</p>
+                    {% endfor %}
                     <div class="row border">
                         <a href="#"
                            class="link-body-emphasis text-decoration-none border-top border-4">
