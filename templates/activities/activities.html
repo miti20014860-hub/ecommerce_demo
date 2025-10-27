@@ -164,87 +164,40 @@
             <!-- Aicivities List -->
             <section class="col-md-8">
                 <ul class="list-unstyled">
-                    <div class="row border">
-                        <a href="#"
-                           class="link-body-emphasis text-decoration-none text-black border-top border-4">
-                            <h4 class="border-bottom border-2 py-3">Featured postFeatured postFeatured postFeatured postFeatured post</h4>
-                        </a>
-                        <a href="#" class="col-lg-5 py-2">
-                            <img src="{% static 'img/about.jpg' %}"
-                                 class="object-fit-cover"
-                                 alt="Thumbnail"
-                                 width="100%"
-                                 height="240" />
-                        </a>
-                        <div class="col py-1 d-flex flex-column">
-                            <div class="d-flex flex-row mt-1 gap-1">
-                                <div class="bg-info d-inline">Nov 12</div>
-                                <div class="bg-warning d-inline">Nov 12</div>
+                    {% for activity in activities %}
+                        <div class="row border mb-3">
+                            <!-- 標題 -->
+                            <a href="{% url 'activities:plan' activity.pk %}"
+                               class="link-body-emphasis text-decoration-none text-black border-top border-4">
+                                <h4 class="border-bottom border-2 py-3">{{ activity.title }}</h4>
+                            </a>
+                            <!-- 圖片 -->
+                            <a href="{% url 'activities:plan' activity.pk %}" class="col-lg-5 py-2">
+                                <img src="{% if activity.main_image_url %}{{ activity.main_image_url }}{% else %}{% static 'img/default-activity.jpg' %}{% endif %}"
+                                     class="object-fit-cover w-100"
+                                     alt="{{ activity.title }} Thumbnail"
+                                     width="100%"
+                                     height="240" />
+                            </a>
+                            <!-- 內容 -->
+                            <div class="col py-1 d-flex flex-column">
+                                <!-- 供應商 + 地點 -->
+                                <div class="d-flex flex-row mt-1 gap-1">
+                                    <div class="bg-info text-white px-2 py-1 rounded small">{{ activity.provider|default:"－" }}</div>
+                                    <div class="bg-warning text-dark px-2 py-1 rounded small">{{ activity.location|default:"－" }}</div>
+                                </div>
+                                <!-- 描述（截斷 350 字） -->
+                                <p class="mt-1 mb-auto small text-muted">{{ activity.description|striptags|truncatechars:400 }}</p>
+                                <!-- 價格按鈕 -->
+                                <a href="{% url 'activities:plan' activity.pk %}"
+                                   class="btn btn-danger mt-1 mb-2 w-100">
+                                    {{ activity.minimum_charge|floatformat:0|intcomma|default:"－" }} {{ activity.get_currency_display }}～
+                                </a>
                             </div>
-                            <p class="mt-1 mb-auto">
-                                This is a wider card with supporting text below as a natural
-                                lead-in to additional content.This is a wider card with supporting text below as a natural
-                                lead-in to additional content.This is a wider card with supporting text below as a natural
-                                lead-in to additional content.This is a wider card with supporting text below as a natural
-                                lead-in to additional content.
-                            </p>
-                            <a href="{% url 'activities:plan' %}" class="btn btn-danger mt-1 mb-2">1,102 円～</a>
                         </div>
-                    </div>
-                    <div class="row border">
-                        <a href="#"
-                           class="link-body-emphasis text-decoration-none text-black border-top border-4">
-                            <h4 class="border-bottom border-2 py-3">Featured postFeatured postFeatured postFeatured postFeatured post</h4>
-                        </a>
-                        <a href="#" class="col-lg-5 py-2">
-                            <img src="{% static 'img/about.jpg' %}"
-                                 class="object-fit-cover"
-                                 alt="Thumbnail"
-                                 width="100%"
-                                 height="240" />
-                        </a>
-                        <div class="col py-1 d-flex flex-column">
-                            <div class="d-flex flex-row mt-1 gap-1">
-                                <div class="bg-info d-inline">Nov 12</div>
-                                <div class="bg-warning d-inline">Nov 12</div>
-                            </div>
-                            <p class="mt-1 mb-auto">
-                                This is a wider card with supporting text below as a natural
-                                lead-in to additional content.This is a wider card with supporting text below as a natural
-                                lead-in to additional content.This is a wider card with supporting text below as a natural
-                                lead-in to additional content.This is a wider card with supporting text below as a natural
-                                lead-in to additional content.
-                            </p>
-                            <a href="{% url 'activities:plan' %}" class="btn btn-danger mt-1 mb-2">1,102 円～</a>
-                        </div>
-                    </div>
-                    <div class="row border">
-                        <a href="#"
-                           class="link-body-emphasis text-decoration-none text-black border-top border-4">
-                            <h4 class="border-bottom border-2 py-3">Featured postFeatured postFeatured postFeatured postFeatured post</h4>
-                        </a>
-                        <a href="#" class="col-lg-5 py-2">
-                            <img src="{% static 'img/about.jpg' %}"
-                                 class="object-fit-cover"
-                                 alt="Thumbnail"
-                                 width="100%"
-                                 height="240" />
-                        </a>
-                        <div class="col py-1 d-flex flex-column">
-                            <div class="d-flex flex-row mt-1 gap-1">
-                                <div class="bg-info d-inline">Nov 12</div>
-                                <div class="bg-warning d-inline">Nov 12</div>
-                            </div>
-                            <p class="mt-1 mb-auto">
-                                This is a wider card with supporting text below as a natural
-                                lead-in to additional content.This is a wider card with supporting text below as a natural
-                                lead-in to additional content.This is a wider card with supporting text below as a natural
-                                lead-in to additional content.This is a wider card with supporting text below as a natural
-                                lead-in to additional content.
-                            </p>
-                            <a href="{% url 'activities:plan' %}" class="btn btn-danger mt-1 mb-2">1,102 円～</a>
-                        </div>
-                    </div>
+                    {% empty %}
+                        <div class="text-center py-5 text-muted">ERROR</div>
+                    {% endfor %}
                 </ul>
             </section>
             <!-- Paginator-->

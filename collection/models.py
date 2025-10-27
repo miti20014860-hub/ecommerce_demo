@@ -3,13 +3,13 @@ from django.db import models
 
 class Collection(models.Model):
     TYPE_CHOICES = [
-        ('刀', '刀 (Katana)'),
-        ('脇差', '脇差 (Wakizashi)'),
-        ('短刀', '短刀 (Tanto)'),
-        ('太刀', '太刀 (Tachi)'),
-        ('薙刀', '薙刀 (Naginata)'),
-        ('槍', '槍 (Yari)'),
-        ('他の', '他の (Other)'),
+        ('katana', 'Katana'),
+        ('wakizashi', 'Wakizashi'),
+        ('tanto', 'Tanto'),
+        ('tachi', 'Tachi'),
+        ('naginata', 'Naginata'),
+        ('yari', 'Yari'),
+        ('other', 'Other'),
     ]
 
     CURRENCY_CHOICES = [('JPY', '¥ JPY'), ('USD', '$ USD'), ('EUR', '€ EUR')]
@@ -20,7 +20,7 @@ class Collection(models.Model):
     provider = models.CharField(max_length=100, blank=True, verbose_name="Provider")
     signature = models.CharField(max_length=100, blank=True, verbose_name="Signature (Mei)")
 
-    type = models.CharField(max_length=20, choices=TYPE_CHOICES, default='刀', verbose_name="Type")
+    type = models.CharField(max_length=20, choices=TYPE_CHOICES, default='katana', verbose_name="Type")
     blade_length = models.DecimalField(max_digits=6, decimal_places=2, blank=True, null=True, verbose_name="Blade Length (cm)")
     curvature = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True, verbose_name="Curvature (cm)")
     sword_weight = models.DecimalField(max_digits=6, decimal_places=2, blank=True, null=True, verbose_name="Sword Weight (g)")

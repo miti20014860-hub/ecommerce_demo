@@ -5,190 +5,169 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-11 col-xl-10 col-xxl-9 mx-auto">
+        {% load static %}
         <!-- Carousel -->
         <div id="carouselExample" class="carousel slide">
           <div class="carousel-inner ratio ratio-21x9">
-            <div class="carousel-item active">
-              <a href="#" data-bs-toggle="modal" data-bs-target="#lightbox-1">
-                <img src="{% static 'img/cover21_9.jpg' %}"
-                     class="object-fit-cover"
-                     alt="News1"
-                     width="100%"
-                     height="100%" />
-              </a>
-              <div class="modal fade" id="lightbox-1">
-                <div class="modal-dialog modal-xl modal-dialog-centered">
-                  <div class="modal-content bg-dark">
-                    <div class="modal-body p-0">
-                      <img src="{% static 'img/cover21_9.jpg' %}"
-                           alt="News1"
-                           width="100%"
-                           height="100%" />
-                      <button class="btn-close btn-close-white position-absolute top-0 end-0 m-3"
-                              data-bs-dismiss="modal"></button>
+            {% for img in activity.images.all %}
+              {% if forloop.first %}
+                <div class="carousel-item active">
+                {% else %}
+                  <div class="carousel-item">
+                  {% endif %}
+                  <a href="#"
+                     data-bs-toggle="modal"
+                     data-bs-target="#lightbox-{{ forloop.counter }}">
+                    <img src="{{ img.image.url }}"
+                         class="object-fit-cover"
+                         alt="{{ activity.title }} Image {{ forloop.counter }}"
+                         width="100%"
+                         height="100%" />
+                  </a>
+                  <!-- Lightbox Modal -->
+                  <div class="modal fade" id="lightbox-{{ forloop.counter }}">
+                    <div class="modal-dialog modal-xl modal-dialog-centered">
+                      <div class="modal-content bg-dark">
+                        <div class="modal-body p-0">
+                          <img src="{{ img.image.url }}"
+                               alt="{{ activity.title }} Image {{ forloop.counter }}"
+                               width="100%"
+                               height="100%" />
+                          <button class="btn-close btn-close-white position-absolute top-0 end-0 m-3"
+                                  data-bs-dismiss="modal"></button>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
-            <div class="carousel-item">
-              <a href="#" data-bs-toggle="modal" data-bs-target="#lightbox-2">
-                <img src="{% static 'img/ERA_Poster 2480_3508.png' %}"
-                     class="object-fit-cover"
-                     alt="News1"
-                     width="100%"
-                     height="100%" />
-              </a>
-              <div class="modal fade" id="lightbox-2">
-                <div class="modal-dialog modal-xl modal-dialog-centered">
-                  <div class="modal-content bg-dark">
-                    <div class="modal-body p-0">
-                      <img src="{% static 'img/ERA_Poster 2480_3508.png' %}"
-                           alt="News1"
-                           width="100%"
-                           height="100%" />
-                      <button class="btn-close btn-close-white position-absolute top-0 end-0 m-3"
-                              data-bs-dismiss="modal"></button>
+              {% empty %}
+                <!-- 預設圖片 -->
+                <div class="carousel-item active">
+                  <a href="#" data-bs-toggle="modal" data-bs-target="#lightbox-default">
+                    <img src="{% static 'img/cover21_9.jpg' %}"
+                         class="object-fit-cover"
+                         alt="Default Cover"
+                         width="100%"
+                         height="100%" />
+                  </a>
+                  <div class="modal fade" id="lightbox-default">
+                    <div class="modal-dialog modal-xl modal-dialog-centered">
+                      <div class="modal-content bg-dark">
+                        <div class="modal-body p-0">
+                          <img src="{% static 'img/cover21_9.jpg' %}" width="100%" height="100%" />
+                          <button class="btn-close btn-close-white position-absolute top-0 end-0 m-3"
+                                  data-bs-dismiss="modal"></button>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
+              {% endfor %}
             </div>
-            <div class="carousel-item">
-              <svg aria-hidden="true"
-                   class="bd-placeholder-img"
-                   height="100%"
-                   preserveAspectRatio="xMidYMid slice"
-                   width="100%"
-                   xmlns="http://www.w3.org/2000/svg">
-                <rect width="100%" height="100%" fill="var(--bs-secondary-color)"></rect>
-              </svg>
-            </div>
+            <!-- 控制按鈕 -->
+            <button class="carousel-control-prev"
+                    type="button"
+                    data-bs-target="#carouselExample"
+                    data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">prev</span>
+            </button>
+            <button class="carousel-control-next"
+                    type="button"
+                    data-bs-target="#carouselExample"
+                    data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">next</span>
+            </button>
           </div>
-          <button class="carousel-control-prev"
-                  type="button"
-                  data-bs-target="#carouselExample"
-                  data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">prev</span>
-          </button>
-          <button class="carousel-control-next"
-                  type="button"
-                  data-bs-target="#carouselExample"
-                  data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">next</span>
-          </button>
-        </div>
-        <div class="row p-1 mt-2">
-          <!-- Details -->
-          <section class="col-md-8">
-            <h4 class="mt-1 mb-0">
-              [Kyoto Higashiyama Kiyomizu] Perfect for school trips! Archery experience, quarter-bow, half-bow dojo, 20 shots for 2,000 yen, and more. SAMURAI NINJA martial arts experience.
-            </h4>
-            <div class="my-2">
-              <p class="text-decoration-underline d-inline mx-1">Provider</p>
-              <p class="d-inline mx-1">/</p>
-              <p class="text-decoration-underline d-inline mx-1">Location</p>
-            </div>
-            <section class="row p-1">
-              <div class="col-4 border rounded d-flex flex-column mt-1">
-                <small class="mt-1">Participants:</small>
-                <div class="mt-auto">
-                  <h6>1~6</h6>
-                </div>
+          <div class="row p-1 mt-2">
+            <!-- Details -->
+            <section class="col-md-8">
+              <h4 class="mt-1 mb-0">{{ activity.title }}</h4>
+              <div class="my-2">
+                <p class="text-decoration-underline d-inline mx-1">{{ activity.provider|default:"－" }}</p>
+                <p class="d-inline mx-1">/</p>
+                <p class="text-decoration-underline d-inline mx-1">{{ activity.location|default:"－" }}</p>
               </div>
-              <div class="col-4 border rounded d-flex flex-column mt-1">
-                <small class="mt-1">Participating age:</small>
-                <div class="mt-auto">
-                  <h6>10~80</h6>
+              <section class="row p-1">
+                <div class="col-4 border rounded d-flex flex-column mt-1">
+                  <small class="mt-1">Participants:</small>
+                  <div class="mt-auto">
+                    <h6>{{ activity.participants|default:"－" }}</h6>
+                  </div>
                 </div>
-              </div>
-              <div class="col-4 border rounded d-flex flex-column mt-1">
-                <small class="mt-1">Duration:</small>
-                <div class="mt-auto">
-                  <h6>Within 1 hour</h6>
+                <div class="col-4 border rounded d-flex flex-column mt-1">
+                  <small class="mt-1">Participating age:</small>
+                  <div class="mt-auto">
+                    <h6>{{ activity.participating_age|default:"－" }}</h6>
+                  </div>
                 </div>
-              </div>
-            </section>
-            <div class="mt-4">
-              <h4>Plan Description</h4>
-              <section class="text-muted">
-                <p class="d-block my-1">
-                  Higashiyama Archery Training Hall is an indoor dojo where you can experience traditional Japanese martial arts such as archery, shihan-yumi (four-quarter bow), samurai, and ninja.
-                </p>
-                <p class="d-block mb-1">
-                  Utilizing a shihan-yumi (four-quarter bow), which is about two-thirds the size of the large bow used in Kyudo, this is an archery technique based on the fundamental principle of "the target is the enemy," and focuses solely on accuracy in hitting the target.
-                </p>
-                <p class="d-block mb-1">
-                  Our archery experience is open to everyone, from children to seniors, regardless of age or nationality.
-                </p>
-                <p class="d-block mb-1">It is also recommended for school trips, and is enjoyed by many students.</p>
-                <p class="d-block mb-1">Please feel free to stop by if you are visiting Higashiyama, Kyoto.</p>
+                <div class="col-4 border rounded d-flex flex-column mt-1">
+                  <small class="mt-1">Duration:</small>
+                  <div class="mt-auto">
+                    <h6>{{ activity.duration|default:"－" }}</h6>
+                  </div>
+                </div>
               </section>
-              <div class="mt-3">
-                <h5 class="d-inline">20 Shots</h5>
-                <h5 class="d-inline mx-1"></h5>
-                <h5 class="d-inline">2,000</h5>
-                <h6 class="d-inline">JPY</h6>
-                <p class="d-block text-muted">Recommend this course to help you hit the target.</p>
+              <div class="mt-4">
+                <h4>Plan Description</h4>
+                <section class="text-muted">
+                  <p class="d-block my-1">{{ activity.description|default:"－" }}</p>
+                </section>
+                <!-- 假設你有 plan_1, price_1, summary_1 等欄位，或用 JSONField -->
+                <!-- 若無，可用以下方式模擬（或你可新增 Plan 子模型） -->
+                {% if activity.plan and activity.price %}
+                  <div class="mt-3">
+                    <h5 class="d-inline">{{ activity.plan }}</h5>
+                    <h5 class="d-inline mx-1"></h5>
+                    <h5 class="d-inline">{{ activity.price }}</h5>
+                    <h6 class="d-inline">JPY</h6>
+                    <p class="d-block text-muted">{{ activity.summary|default:"－" }}</p>
+                  </div>
+                {% endif %}
               </div>
-              <div class="mt-3">
-                <h5 class="d-inline">10 Shots</h5>
-                <h5 class="d-inline mx-1"></h5>
-                <h5 class="d-inline">1,500</h5>
-                <h6 class="d-inline">JPY</h6>
-                <p class="d-block text-muted">It's a trial experience.</p>
-              </div>
-              <div class="mt-3">
-                <h5 class="d-inline">Kyudo dressing and unlimited shooting for 1 hour</h5>
-                <h5 class="d-inline mx-1"></h5>
-                <h5 class="d-inline">10,000</h5>
-                <h6 class="d-inline">JPY</h6>
-                <p class="d-block text-muted">This course includes the rental fee for Kyudo uniform.</p>
-              </div>
-            </div>
-            <hr />
-            <section>
-              <h4 class="border-start border-secondary border-4 bg-light p-2">More Information</h4>
-              <h6 class="ms-1 my-3">Reservation Instructions</h6>
-              <div class="row">
-                <div class="col-4">
-                  <p class="d-block bg-light p-1 mb-1">Min. participants</p>
-                  <p class="d-block bg-light p-1 mb-1">Bookings</p>
-                  <p class="d-block bg-light p-1 mb-1">Period</p>
-                  <p class="d-block bg-light p-1 mb-1">Deadline</p>
-                </div>
-                <div class="col-8">
-                  <p class="d-block p-1 mb-1">1</p>
-                  <p class="d-block p-1 mb-1">1~6</p>
-                  <p class="d-block p-1 mb-1">Year-round (closed summer/New Year)</p>
-                  <p class="d-block p-1 mb-1">22:59 day before</p>
+              <hr />
+              <section>
+                <h4 class="border-start border-secondary border-4 bg-light p-2">More Information</h4>
+                <h6 class="ms-1 my-3">Reservation Instructions</h6>
+                <div class="row">
+                  <div class="col-4">
+                    <p class="d-block bg-light p-1 mb-1">Min. participants</p>
+                    <p class="d-block bg-light p-1 mb-1">Participants</p>
+                    <p class="d-block bg-light p-1 mb-1">Period</p>
+                    <p class="d-block bg-light p-1 mb-1">Deadline</p>
+                  </div>
+                  <div class="col-8">
+                    <p class="d-block p-1 mb-1">{{ activity.min_p|default:"－" }}</p>
+                    <p class="d-block p-1 mb-1">{{ activity.participants|default:"－" }}</p>
+                    <p class="d-block p-1 mb-1">{{ activity.period|default:"－" }}</p>
+                    <p class="d-block p-1 mb-1">{{ activity.deadline|default:"－" }}</p>
+                  </div>
                 </div>
                 <h6 class="ms-1 mt-2 mb-0">Access Map</h6>
                 <div class="mt-0">
-                  {% include "partials/_map.html" with lat=35.649209383109714 lng=139.830004167513 address="BumB 東京スポーツ文化館" zoom=15 map_id="Tokyo Sports Culture Center" height="400px" %}
+                  {% include "partials/_map.html" with lat=activity.lat lng=activity.lng address=activity.address zoom=15 map_id=activity.map_id height="400px" %}
                 </div>
+              </section>
+            </section>
+            <!-- Book -->
+            <section class="col-md-4">
+              <div class="position-sticky top-0 rounded border shadow-sm p-3 mt-1">
+                <p class="text-muted mb-0">{{ activity.help_text|default:"－" }}</p>
+                <div>
+                  <h3 class="d-inline">{{ activity.minimum_charge|floatformat:0|intcomma|default:"－" }}</h3>
+                  <h6 class="d-inline text-right mx-auto my-1">{{ activity.get_currency_display }} ～ (with tax)</h6>
+                </div>
+                <div class="bg-light rounded text-muted p-1">
+                  <small class="d-block">Included in price:</small>
+                  <small>{{ activity.price_included|default:"－" }}</small>
+                </div>
+                <button class="btn btn-danger w-100 mt-3"
+                        data-bs-toggle="modal"
+                        data-bs-target="#bookingModal">Book</button>
               </div>
             </section>
-          </section>
-          <!-- Book -->
-          <section class="col-md-4">
-            <div class="position-sticky top-0 rounded border shadow-sm p-3 mt-1">
-              <p class="text-muted mb-0">5-shooting participants (ages 10-80)1Adult (single rider preferred)</p>
-              <div>
-                <h3 class="d-inline">1,500</h3>
-                <h6 class="d-inline text-right mx-auto">JPY ～ (with tax)</h6>
-              </div>
-              <div class="bg-light rounded text-muted p-1">
-                <small class="d-block">Included in price:</small>
-                <small>Experience fee, bow and arrow fee (Kyudo uniform for Kyudo uniform dressing course), consumption tax</small>
-              </div>
-              <button class="btn btn-danger w-100 mt-3"
-                      data-bs-toggle="modal"
-                      data-bs-target="#bookingModal">Book</button>
-            </div>
-          </section>
+          </div>
           <!-- Modal -->
           <div class="modal fade"
                id="bookingModal"

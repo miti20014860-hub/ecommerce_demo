@@ -1,15 +1,20 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.views.decorators.http import require_POST
 from django.views.decorators.csrf import csrf_protect
+from .models import Activity
 
 
 def activities(request):
-    return render(request, 'activities/activities.html')
+    activities = Activity.objects.all().order_by('-created_at')
+    return render(request, 'activities/activities.html', {
+        'activities': activities
+    })
 
 
-def plan(request):
-    return render(request, 'activities/plan.html')
+def plan(request, pk):
+    activity = get_object_or_404(Activity, pk=pk)
+    return render(request, 'activities/plan.html', {'activity': activity})
 
 
 @require_POST
