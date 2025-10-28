@@ -5,29 +5,33 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-11 col-md-10 col-lg-9 col-xl-8 col-xxl-7 mx-auto">
-                <section class="p-1">
-                    <h2 class="text-center mt-2 p-2">Announcement of the 19th Tokyo Convention</h2>
+                <section class="p-1 mb-0">
+                    <!-- 標題 -->
+                    <h2 class="text-center mt-2 p-2">{{ notice.title }}</h2>
+                    <!-- 日期 -->
                     <div class="mb-3">
-                        <small class="bg-light">October 12, 2025</small>
+                        <small class="bg-light p-1">{{ notice.date|date:"F j, Y" }}</small>
                     </div>
-                    <h2 class="bg-body-secondary">Date</h2>
-                    <p>October 12th (Sun) - 13th (Mon, National Holiday), 2025</p>
-                    <div class="bg-light">Day 1: October 12th (Sun)</div>
-                    <div>12:30～13:00 Opening Ceremony</div>
-                    <p>13:00～15:30 Individual Tournament (4th - 7th Dan)</p>
-                    <div class="bg-light">Day 2: November 13th (Mon, National Holiday)</div>
-                    <div>9:40 - 10:10 Opening Ceremony</div>
-                    <div>10:10 - 12:30 Individual Tournament (Non-Dan - Sandan)</div>
-                    <div>13:00～15:00 Team Tournament (Preliminaries & Finals)</div>
-                    <div>15:00～16:00 Finals (Individual & Team)</div>
-                    <div>16:00～16:30 High-Dan Demonstration</div>
-                    <div>16:30～17:00 Closing Ceremony</div>
-                    <h2 class="bg-body-secondary my-3">Date</h2>
-                    <div>BumB  Tokyo Sports and Culture Center</div>
-                    <div>〒136-0081  Yumenoshima, Koto-ku, Tokyo</div>
-                    <div>TEL: 03-3521-7321 (Main)</div>
+                    <!-- 內容區塊 1 -->
+                    {% if notice.subtitle_1 or notice.contents_1 %}
+                        <h2 class="bg-body-secondary">{{ notice.subtitle_1|default:"" }}</h2>
+                        <p>{{ notice.contents_1|linebreaks|default:"" }}</p>
+                    {% endif %}
+                    <!-- 內容區塊 2 -->
+                    {% if notice.subtitle_2 or notice.contents_2 %}
+                        <h2 class="bg-body-secondary my-3">{{ notice.subtitle_2|default:"" }}</h2>
+                        <div>{{ notice.contents_2|linebreaks|default:"" }}</div>
+                    {% endif %}
+                    <!-- 內容區塊 3 -->
+                    {% if notice.subtitle_3 or notice.contents_3 %}
+                        <h2 class="bg-body-secondary my-3">{{ notice.subtitle_3|default:"" }}</h2>
+                        <div>{{ notice.contents_3|linebreaks|default:"" }}</div>
+                    {% endif %}
                 </section>
-                {% include "partials/_map.html" with lat=35.649209383109714 lng=139.830004167513 address="BumB 東京スポーツ文化館" zoom=15 map_id="Tokyo Sports Culture Center" height="400px" %}
+                <!-- 地圖（動態輸出） -->
+                {% if notice.lat and notice.lng %}
+                    {% include "partials/_map.html" with lat=notice.lat lng=notice.lng address=notice.address zoom=15 map_id=notice.map_id height="400px" %}
+                {% endif %}
             </div>
         </div>
     </div>

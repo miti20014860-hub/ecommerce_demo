@@ -1,6 +1,7 @@
 # admin.py
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
+from django.utils.translation import gettext_lazy as _
 from .models import CustomUser
 
 
@@ -10,16 +11,21 @@ class CustomUserAdmin(UserAdmin):
     search_fields = ('username', 'email', 'phone')
     ordering = ('-date_joined',)
 
-    # 編輯頁面：分組欄位
-    fieldsets = UserAdmin.fieldsets + (
-        ('Custom Fields', {
-            'fields': ('phone', 'address'),
-        }),
+    # 編輯頁面：重新定義 fieldsets
+    fieldsets = (
+        (None, {'fields': ('username', 'password')}),
+        (_('Personal info'), {'fields': ('first_name', 'last_name', 'email')}),
+        (_('Custom Fields'), {'fields': ('phone', 'address')}),  # 插入這裡
+        (_('Permissions'), {'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')}),
+        (_('Important dates'), {'fields': ('last_login', 'date_joined')}),
     )
 
     # 新增使用者時的欄位
-    add_fieldsets = UserAdmin.add_fieldsets + (
-        ('Custom Fields', {
-            'fields': ('phone', 'address'),
+    add_fieldsets = (
+        (None, {
+            'classes': ('wide',),
+            'fields': ('username', 'password1', 'password2'),
         }),
+        (_('Personal info'), {'fields': ('first_name', 'last_name', 'email')}),
+        (_('Custom Fields'), {'fields': ('phone', 'address')}),  # 插入這裡
     )

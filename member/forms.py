@@ -75,7 +75,7 @@ class ProfileEditForm(forms.ModelForm):
         help_text="Confirm Profile Changes",
         widget=forms.PasswordInput(attrs={
             'class': 'form-control',
-            'placeholder': 'Enter password to confirm profile changes.'
+            'placeholder': 'Confirm Profile Changes.'
         }),
     )
 

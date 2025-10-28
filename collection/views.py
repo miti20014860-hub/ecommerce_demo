@@ -15,7 +15,6 @@ def collection(request):
 def item(request):
     pk = request.GET.get('id')
     if not pk:
-        # 修正：Rcrender → render
         return render(request, 'collection/item.html')
     collection = get_object_or_404(Collection, pk=pk)
     return render(request, 'collection/item.html', {

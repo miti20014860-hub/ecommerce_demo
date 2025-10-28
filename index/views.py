@@ -1,16 +1,29 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
+from .models import Notice
+from .models import News
 
 
 def index(request):
-    return render(request, 'index/index.html')
+    newses = News.objects.all().order_by('-date', '-created_at')
+    notices = Notice.objects.all().order_by('-date', '-created_at')
+    return render(request, 'index/index.html', {
+        'newses': newses,
+        'notices': notices
+    })
 
 
-def news(request):
-    return render(request, 'index/news.html')
+def news(request, pk):
+    news = get_object_or_404(Notice, pk=pk)
+    return render(request, 'index/news.html', {
+        'news': news
+    })
 
 
-def notice(request):
-    return render(request, 'index/notice.html')
+def notice(request, pk):
+    notice = get_object_or_404(Notice, pk=pk)
+    return render(request, 'index/notice.html', {
+        'notice': notice
+    })
 
 
 def about(request):

@@ -4,5 +4,5 @@ from . import views
 app_name = 'kenshi'
 
 urlpatterns = [
-    path('', views.kenshi, name='kenshi'),
+    path('', views.kenjutsuka, name='kenshi'),
 ]

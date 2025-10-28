@@ -17,24 +17,30 @@
             </div>
         </section>
         <section class="row mt-2 mb-2">
-            <article class="col-lg-6 mt-2">
-                <div class="row g-0 border rounded shadow-sm">
-                    <div class="col p-4 d-flex flex-column">
-                        <h4 class="mb-0">ERA : 3D Epic of Feudal Japan</h4>
-                        <div class="mb-1 text-body-secondary">1 hour ago</div>
-                        <p class="card-text mb-auto">Kenji Sato training actors in authentic draw techniques.</p>
-                        <a href="{% url 'index:news' %}"
-                           class="link-body-emphasis text-secondary">Continue reading »</a>
+            {% for news in newses %}
+                <article class="col-lg-6 mt-2{% if not forloop.first %}blog-post{% endif %}">
+                    <div class="row g-0 border rounded shadow-sm">
+                        <div class="col p-4 d-flex flex-column">
+                            <h4 class="mb-0">{{ news.title }}</h4>
+                            <div class="mb-1 text-body-secondary">{{ news.date|date:"F j, Y" }}</div>
+                            <p class="card-text mb-auto">{{ news.contents_main|striptags|truncatewords:12 }}</p>
+                            <a href="{% url 'index:news' news.pk %}"
+                               class="link-body-emphasis text-secondary">Continue reading »</a>
+                        </div>
+                        <a href="{% url 'index:news' news.pk %}" class="col-5">
+                            <img src="{% if news.main_image_url %}{{ news.main_image_url }}{% else %}{% static 'img/default-news.jpg' %}{% endif %}"
+                                 class="object-fit-cover"
+                                 alt="Thumbnail"
+                                 width="100%"
+                                 height="240" />
+                        </a>
                     </div>
-                    <a href="{% url 'index:news' %}" class="col-5">
-                        <img src="{% static 'img/ERA_Poster 2480_3508.png' %}"
-                             class="object-fit-cover"
-                             alt="Thumbnail"
-                             width="100%"
-                             height="240" />
-                    </a>
-                </div>
-            </article>
+                </article>
+            {% empty %}
+                <article>
+                    <p class="text-muted">No news available.</p>
+                </article>
+            {% endfor %}
             <article class="col-lg-6 mt-2">
                 <div class="row g-0 border rounded shadow-sm">
                     <div class="col p-4 d-flex flex-column">
@@ -58,42 +64,32 @@
         </section>
         <div class="row g-0">
             <section class="col-lg-8 g-4">
-                <article>
-                    <h4 class="mb-1">Announcement of the 19th Tokyo Tournament</h4>
-                    <p>October 12, 2025</p>
-                    <div class="g-0">
-                        <p>The 19th Tokyo Games will be held from October 12th to 13th.</p>
-                    </div>
-                    <a href="{% url 'index:notice' %}"
-                       class="link-body-emphasis text-secondary">Continue reading »</a>
-                    <hr />
-                </article>
-                <article class="blog-post">
-                    <h4 class="mb-1">Another blog post</h4>
-                    <p class="blog-post-meta">December 23, 2020</p>
-                    <p>
-                        This is some additional paragraph placeholder content. It has been
-                        written to fill the available space and show how a longer snippet
-                        of text affects the surrounding content. We'll repeat it often to
-                        keep the demonstration flowing, so be on the lookout for this
-                        exact same string of text.
-                    </p>
-                    <a href="#" class="link-body-emphasis text-secondary">続きを読む »</a>
-                    <hr />
-                </article>
-                <article class="blog-post">
-                    <h4 class="mb-1">Another blog post</h4>
-                    <p class="blog-post-meta">December 23, 2020</p>
-                    <p>
-                        This is some additional paragraph placeholder content. It has been
-                        written to fill the available space and show how a longer snippet
-                        of text affects the surrounding content. We'll repeat it often to
-                        keep the demonstration flowing, so be on the lookout for this
-                        exact same string of text.
-                    </p>
-                    <a href="#" class="link-body-emphasis text-secondary">続きを読む »</a>
-                    <hr />
-                </article>
+                {% for notice in notices %}
+                    <article class="{% if not forloop.first %}blog-post{% endif %}">
+                        <h4 class="mb-1">{{ notice.title }}</h4>
+                        <p>{{ notice.date|date:"F j, Y" }}</p>
+                        <div class="g-0">
+                            <p>
+                                {% if notice.contents_1 %}
+                                    {{ notice.contents_1|striptags|truncatewords:30 }}
+                                {% elif notice.contents_2 %}
+                                    {{ notice.contents_2|striptags|truncatewords:30 }}
+                                {% elif notice.contents_3 %}
+                                    {{ notice.contents_3|striptags|truncatewords:30 }}
+                                {% else %}
+                                    No content available.
+                                {% endif %}
+                            </p>
+                        </div>
+                        <a href="{% url 'index:notice' notice.pk %}"
+                           class="link-body-emphasis text-secondary">Continue reading</a>
+                        <hr />
+                    </article>
+                {% empty %}
+                    <article>
+                        <p class="text-muted">No notices available.</p>
+                    </article>
+                {% endfor %}
             </section>
             <section class="col-lg-4 mt-3">
                 <div class="top-5">
