@@ -3,6 +3,7 @@ from django.utils.translation import gettext_lazy as _
 
 
 class Banner(models.Model):
+    # === Banner ===
     image = models.ImageField(
         upload_to='banners/',
         verbose_name=_("banner image")
@@ -31,21 +32,20 @@ class Banner(models.Model):
 
 
 class News(models.Model):
-    # === 基本資訊 ===
+    # === News ===
     title = models.CharField(
         max_length=100,
         verbose_name=_("title")
     )
+    is_featured = models.BooleanField(default=False, verbose_name="Featured")
     date = models.DateField(
         verbose_name=_("date")
     )
-
     contents_main = models.TextField(
         blank=True,
         verbose_name=_("contents main")
     )
-
-    # === 內容區塊 1 ===
+    # === Contents 1 ===
     subtitle_1 = models.CharField(
         max_length=100,
         blank=True,
@@ -55,8 +55,7 @@ class News(models.Model):
         blank=True,
         verbose_name=_("contents 1")
     )
-
-    # === 內容區塊 2 ===
+    # === Contents 2 ===
     subtitle_2 = models.CharField(
         max_length=100,
         blank=True,
@@ -66,8 +65,7 @@ class News(models.Model):
         blank=True,
         verbose_name=_("contents 2")
     )
-
-    # === 地圖資訊 ===
+    # === Map Info ===
     lat = models.CharField(
         max_length=100,
         null=True, blank=True,
@@ -89,15 +87,14 @@ class News(models.Model):
         verbose_name=_("map id"),
         help_text=_("Google Maps Place ID or custom ID")
     )
-
-    # === 時間戳記 ===
+    # === Time ===
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
         verbose_name = _("news")
         verbose_name_plural = _("newses")
-        ordering = ['-date', '-created_at']
+        ordering = ['-created_at']
 
     def __str__(self):
         return f"{self.title} - {self.date}"
@@ -112,7 +109,7 @@ class News(models.Model):
         return img.image.url if img and img.image else None
 
 
-# === 圖片模型（多圖管理）===
+# === Image (Multiple)===
 class NewsImage(models.Model):
     news = models.ForeignKey(
         News, on_delete=models.CASCADE,
@@ -144,7 +141,7 @@ class NewsImage(models.Model):
 
 
 class Notice(models.Model):
-    # === 基本資訊 ===
+    # === Notice ===
     title = models.CharField(
         max_length=100,
         verbose_name=_("title")
@@ -153,7 +150,7 @@ class Notice(models.Model):
         verbose_name=_("date")
     )
 
-    # === 內容區塊 1 ===
+    # === Contents 1 ===
     subtitle_1 = models.CharField(
         max_length=100,
         blank=True,
@@ -164,7 +161,7 @@ class Notice(models.Model):
         verbose_name=_("contents 1")
     )
 
-    # === 內容區塊 2 ===
+    # === Contents 2 ===
     subtitle_2 = models.CharField(
         max_length=100,
         blank=True,
@@ -175,7 +172,7 @@ class Notice(models.Model):
         verbose_name=_("contents 2")
     )
 
-    # === 內容區塊 3 ===
+    # === Contents 3 ===
     subtitle_3 = models.CharField(
         max_length=100,
         blank=True,
@@ -186,7 +183,7 @@ class Notice(models.Model):
         verbose_name=_("contents 3")
     )
 
-    # === 地圖資訊 ===
+    # === Map Info ===
     lat = models.CharField(
         max_length=100,
         null=True, blank=True,
@@ -209,7 +206,7 @@ class Notice(models.Model):
         help_text=_("Google Maps Place ID or custom ID")
     )
 
-    # === 時間戳記 ===
+    # === Time ===
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -231,7 +228,7 @@ class Notice(models.Model):
         return img.image.url if img and img.image else None
 
 
-# === 圖片模型（多圖管理）===
+# === Image (Multiple)===
 class NoticeImage(models.Model):
     notice = models.ForeignKey(
         Notice, on_delete=models.CASCADE,

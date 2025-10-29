@@ -22,8 +22,9 @@
                                 </button>
                             </div>
                         </div>
-                        <!-- Accordion -->
+                        <!-- Accordion Filters-->
                         <div class="accordion accordion-flush" id="filterAccordion">
+                            <!-- 2. Type -->
                             <div class="accordion-item border-secondary">
                                 <div class="accordion-header" id="type_heading">
                                     <button class="accordion-button py-2 collapsed"
@@ -47,62 +48,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- 3. 時期 (Period) -->
-                            <div class="accordion-item border-secondary">
-                                <div class="accordion-header" id="period_heading">
-                                    <button class="accordion-button py-2 collapsed"
-                                            type="button"
-                                            data-bs-toggle="collapse"
-                                            data-bs-target="#period_collapse">Period</button>
-                                </div>
-                                <div id="period_collapse" class="accordion-collapse collapse">
-                                    <div class="accordion-body py-1">
-                                        {% for value, label in period_choices %}
-                                            <div class="form-check form-check-large my-1">
-                                                <input class="form-check-input"
-                                                       type="checkbox"
-                                                       name="period_type"
-                                                       value="{{ value }}"
-                                                       id="period_{{ value }}"
-                                                       {% if value in period_filters %}checked{% endif %}>
-                                                <label class="form-check-label" for="period_{{ value }}">{{ label }}</label>
-                                            </div>
-                                        {% endfor %}
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- 4. 刃長範圍 -->
-                            <div class="accordion-item border-secondary">
-                                <div class="accordion-header" id="blade_heading">
-                                    <button class="accordion-button py-2 collapsed"
-                                            type="button"
-                                            data-bs-toggle="collapse"
-                                            data-bs-target="#blade_collapse">Length</button>
-                                </div>
-                                <div id="blade_collapse" class="accordion-collapse collapse">
-                                    <div class="accordion-body py-1">
-                                        <div class="row g-2">
-                                            <div class="col-6">
-                                                <input type="number"
-                                                       step="0.1"
-                                                       name="blade_length_min"
-                                                       class="form-control form-control-md my-1"
-                                                       placeholder="Min"
-                                                       value="{{ request.GET.blade_length_min|default:'' }}">
-                                            </div>
-                                            <div class="col-6">
-                                                <input type="number"
-                                                       step="0.1"
-                                                       name="blade_length_max"
-                                                       class="form-control form-control-md my-1"
-                                                       placeholder="Max"
-                                                       value="{{ request.GET.blade_length_max|default:'' }}">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- 5. 價格範圍 -->
+                            <!-- 3. Price -->
                             <div class="accordion-item border-secondary">
                                 <div class="accordion-header" id="price_heading">
                                     <button class="accordion-button py-2 collapsed"
@@ -128,6 +74,61 @@
                                                        class="form-control form-control-md my-1"
                                                        placeholder="Max"
                                                        value="{{ request.GET.price_max|default:'' }}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- 4. Period -->
+                            <div class="accordion-item border-secondary">
+                                <div class="accordion-header" id="period_heading">
+                                    <button class="accordion-button py-2 collapsed"
+                                            type="button"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#period_collapse">Period</button>
+                                </div>
+                                <div id="period_collapse" class="accordion-collapse collapse">
+                                    <div class="accordion-body py-1">
+                                        {% for value, label in period_choices %}
+                                            <div class="form-check form-check-large my-1">
+                                                <input class="form-check-input"
+                                                       type="checkbox"
+                                                       name="period_type"
+                                                       value="{{ value }}"
+                                                       id="period_{{ value }}"
+                                                       {% if value in period_filters %}checked{% endif %}>
+                                                <label class="form-check-label" for="period_{{ value }}">{{ label }}</label>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- 4. Length -->
+                            <div class="accordion-item border-secondary">
+                                <div class="accordion-header" id="blade_heading">
+                                    <button class="accordion-button py-2 collapsed"
+                                            type="button"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#blade_collapse">Length</button>
+                                </div>
+                                <div id="blade_collapse" class="accordion-collapse collapse">
+                                    <div class="accordion-body py-1">
+                                        <div class="row g-2">
+                                            <div class="col-6">
+                                                <input type="number"
+                                                       step="0.1"
+                                                       name="blade_length_min"
+                                                       class="form-control form-control-md my-1"
+                                                       placeholder="Min"
+                                                       value="{{ request.GET.blade_length_min|default:'' }}">
+                                            </div>
+                                            <div class="col-6">
+                                                <input type="number"
+                                                       step="0.1"
+                                                       name="blade_length_max"
+                                                       class="form-control form-control-md my-1"
+                                                       placeholder="Max"
+                                                       value="{{ request.GET.blade_length_max|default:'' }}">
                                             </div>
                                         </div>
                                     </div>

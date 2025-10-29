@@ -1,26 +1,126 @@
 {% if messages %}
-  {% for message in messages %}
-    <div class="container">
-      <div class="alert {% if message.tags == 'success' %}alert-success {% elif message.tags == 'error' %}alert-danger {% elif message.tags == 'warning' %}alert-warning {% elif message.tags == 'info' %}alert-info {% elif message.tags == 'debug' %}alert-secondary {% else %}alert-light{% endif %} alert-dismissible text-center"
-           id="alert_message"
+  <div class="alert-container">
+    {% for message in messages %}
+      <div class="custom-alert alert-dismissible fade show {% if message.tags == 'success' %}alert-success {% elif message.tags == 'error' %}alert-danger {% elif message.tags == 'warning' %}alert-warning {% elif message.tags == 'info' %}alert-info {% elif message.tags == 'debug' %}alert-secondary {% else %}alert-light{% endif %}"
            role="alert">
-        {{ message }}
+        <span class="alert-text">{{ message }}</span>
         <button type="button"
-                class="btn-close"
+                class="btn-close btn-close-white"
                 data-bs-dismiss="alert"
                 aria-label="Close"></button>
       </div>
-    </div>
-  {% endfor %}
+    {% endfor %}
+  </div>
 {% endif %}
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    const alert = document.getElementById('alert_message');
-    if (alert) {
-      setTimeout(function () {
-        const bsAlert = new bootstrap.Alert(alert);
-        bsAlert.close();
-      }, 10000);
+<style>
+/* 浮動容器 */
+.alert-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1080; /* 高於 Bootstrap modal */
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    pointer-events: none; /* 容器不擋滑鼠 */
+}
+
+/* 單一 Alert */
+.custom-alert {
+    min-width: 300px;
+    max-width: 400px;
+    padding: 12px 16px;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    animation: slideIn 0.3s ease-out;
+    pointer-events: auto; /* 允許關閉 */
+    opacity: 0;
+    transform: translateX(100%);
+}
+
+.custom-alert.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* 關閉按鈕 */
+.custom-alert .btn-close {
+    opacity: 0.8;
+    filter: brightness(1.5);
+}
+
+.custom-alert .btn-close:hover {
+    opacity: 1;
+}
+
+/* 文字 */
+.alert-text {
+    font-size: 0.95rem;
+    font-weight: 500;
+    flex: 1;
+}
+
+/* 動畫 */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(100%);
     }
-  });
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideOut {
+    to {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+}
+
+/* 手機優化 */
+@media (max-width: 576px) {
+    .alert-container {
+        left: 20px;
+        right: 20px;
+    }
+    .custom-alert {
+        min-width: auto;
+    }
+}
+</style>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const alerts = document.querySelectorAll('.custom-alert');
+    
+    alerts.forEach((alert, index) => {
+        // 延遲顯示，避免同時閃現
+        setTimeout(() => {
+            alert.classList.add('show');
+        }, index * 100);
+
+        // 5 秒後自動關閉
+        setTimeout(() => {
+            alert.classList.remove('show');
+            alert.addEventListener('transitionend', () => alert.remove());
+        }, 5000 + index * 100);
+    });
+
+    // 支援 Bootstrap 關閉按鈕
+    alerts.forEach(alert => {
+        const closeBtn = alert.querySelector('[data-bs-dismiss="alert"]');
+        if (closeBtn) {
+            closeBtn.addEventListener('click', () => {
+                alert.classList.remove('show');
+                alert.addEventListener('transitionend', () => alert.remove());
+            });
+        }
+    });
+});
 </script>

@@ -10,7 +10,7 @@
                     <h2 class="text-center mt-2 p-2">{{ notice.title }}</h2>
                     <!-- 日期 -->
                     <div class="mb-3">
-                        <small class="bg-light p-1">{{ notice.date|date:"F j, Y" }}</small>
+                        <small class="bg-light p-1">{{ notice.updated_at|date:"F j, Y" }}</small>
                     </div>
                     <!-- 內容區塊 1 -->
                     {% if notice.subtitle_1 or notice.contents_1 %}

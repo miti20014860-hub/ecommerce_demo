@@ -25,8 +25,8 @@ class ActivityImageInline(admin.TabularInline):
 @admin.register(Activity)
 class ActivityAdmin(admin.ModelAdmin):
     list_display = (
-        'type',
         'title',
+        'type',
         'min_price',
         'prefecture',
         'provider',

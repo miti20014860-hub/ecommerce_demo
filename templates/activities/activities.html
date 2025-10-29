@@ -14,7 +14,7 @@
                                 <input type="text"
                                        name="q"
                                        class="form-control bg-white"
-                                       placeholder="Search title, provider..."
+                                       placeholder="Search..."
                                        value="{{ query|default:'' }}"
                                        aria-label="Search">
                                 <button class="btn btn-light border" type="submit">
@@ -26,16 +26,16 @@
                         <div class="accordion accordion-flush" id="filterAccordion">
                             <!-- 2. Activity Type -->
                             <div class="accordion-item border-secondary">
-                                <h2 class="accordion-header">
-                                    <button class="accordion-button py-2 collapsed fw-medium"
+                                <div class="accordion-header">
+                                    <button class="accordion-button py-2 collapsed"
                                             type="button"
                                             data-bs-toggle="collapse"
-                                            data-bs-target="#type_collapse">Activity Type</button>
-                                </h2>
+                                            data-bs-target="#type_collapse">Type</button>
+                                </div>
                                 <div id="type_collapse" class="accordion-collapse collapse">
                                     <div class="accordion-body py-1">
                                         {% for value, label in type_choices %}
-                                            <div class="form-check form-check-large my-2">
+                                            <div class="form-check form-check-large my-1">
                                                 <input class="form-check-input"
                                                        type="checkbox"
                                                        name="type"
@@ -48,65 +48,21 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- 3. Region (8 大區) -->
+                            <!-- 3. Price  -->
                             <div class="accordion-item border-secondary">
-                                <h2 class="accordion-header">
-                                    <button class="accordion-button py-2 collapsed fw-medium"
+                                <div class="accordion-header">
+                                    <button class="accordion-button py-2 collapsed"
                                             type="button"
                                             data-bs-toggle="collapse"
-                                            data-bs-target="#region_collapse">Region</button>
-                                </h2>
-                                <div id="region_collapse" class="accordion-collapse collapse">
-                                    <div class="accordion-body py-1">
-                                        <div class="d-flex flex-wrap gap-2">
-                                            {% for value, label in regions %}
-                                                <div>
-                                                    <input class="btn-check"
-                                                           type="checkbox"
-                                                           name="region"
-                                                           value="{{ value }}"
-                                                           id="region_{{ value }}"
-                                                           {% if value in region_filters %}checked{% endif %}>
-                                                    <label class="btn btn-outline-secondary btn-sm px-3 py-1"
-                                                           for="region_{{ value }}">{{ label }}</label>
-                                                </div>
-                                            {% endfor %}
-                                        </div>
-                                    </div>
+                                            data-bs-target="#charge_collapse">Price</button>
                                 </div>
-                            </div>
-                            <!-- 4. Event Ends -->
-                            <div class="accordion-item border-secondary">
-                                <h2 class="accordion-header">
-                                    <button class="accordion-button py-2 collapsed fw-medium"
-                                            type="button"
-                                            data-bs-toggle="collapse"
-                                            data-bs-target="#ends_collapse">Event Ends After</button>
-                                </h2>
-                                <div id="ends_collapse" class="accordion-collapse collapse">
-                                    <div class="accordion-body py-1">
-                                        <input type="date"
-                                               name="event_ends"
-                                               class="form-control form-control-sm"
-                                               value="{{ event_ends|default:'' }}">
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- 5. Minimum Charge -->
-                            <div class="accordion-item border-secondary">
-                                <h2 class="accordion-header">
-                                    <button class="accordion-button py-2 collapsed fw-medium"
-                                            type="button"
-                                            data-bs-toggle="collapse"
-                                            data-bs-target="#charge_collapse">Minimum Charge</button>
-                                </h2>
                                 <div id="charge_collapse" class="accordion-collapse collapse">
-                                    <div class="accordion-body py-1">
+                                    <div class="accordion-body py-2">
                                         <div class="row g-2">
                                             <div class="col-6">
                                                 <input type="number"
                                                        name="charge_min"
-                                                       class="form-control form-control-sm"
+                                                       class="form-control form-control-md"
                                                        placeholder="Min"
                                                        value="{{ charge_min|default:'' }}">
                                             </div>
@@ -121,12 +77,62 @@
                                     </div>
                                 </div>
                             </div>
+                            <!-- 4. Event Ends -->
+                            <div class="accordion-item border-secondary">
+                                <div class="accordion-header">
+                                    <button class="accordion-button py-2 collapsed"
+                                            type="button"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#ends_collapse">Until</button>
+                                </div>
+                                <div id="ends_collapse" class="accordion-collapse collapse my-1">
+                                    <div class="accordion-body py-1">
+                                        <input type="date"
+                                               name="event_ends"
+                                               class="form-control form-control-md"
+                                               value="{{ event_ends|default:'' }}">
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- 5. Region (8 大區展開 + 縣市多選) -->
+                            <div class="accordion-item border-secondary">
+                                <div class="accordion-header">
+                                    <button class="accordion-button py-2 collapsed"
+                                            type="button"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#region_collapse">Region</button>
+                                </div>
+                                <div id="region_collapse" class="accordion-collapse collapse">
+                                    <div class="accordion-body py-1">
+                                        <!-- 每個大區的縣市 -->
+                                        {% for group in region_groups %}
+                                            <div class="prefecture-group my-2" id="group_{{ group.value }}">
+                                                <small class="text-muted d-block mb-1">{{ group.label }} Prefectures</small>
+                                                <div class="d-flex flex-wrap gap-1">
+                                                    {% for pref_value, pref_label in group.prefectures %}
+                                                        <div>
+                                                            <input class="btn-check"
+                                                                   type="checkbox"
+                                                                   name="prefecture"
+                                                                   value="{{ pref_value }}"
+                                                                   id="pref_{{ pref_value }}"
+                                                                   {% if pref_value in selected_prefectures %}checked{% endif %}>
+                                                            <label class="btn btn-outline-secondary btn-xs px-2 py-0"
+                                                                   for="pref_{{ pref_value }}">{{ pref_label }}</label>
+                                                        </div>
+                                                    {% endfor %}
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <!-- Apply & Clear -->
                         <div class="d-grid gap-2 mt-3">
-                            <button type="submit" class="btn btn-primary rounded-0">Apply Filters</button>
+                            <button type="submit" class="btn btn-light rounded-0">Apply</button>
                             <a href="{% url 'activities:activities' %}"
-                               class="btn btn-outline-secondary rounded-0">Clear All</a>
+                               class="btn btn-light rounded-0">Clear</a>
                         </div>
                     </form>
                 </div>

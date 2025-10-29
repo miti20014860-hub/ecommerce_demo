@@ -26,25 +26,13 @@ def activities(request):
     if type_filters:
         activities = activities.filter(type__in=type_filters)
 
-    # === 3. Prefecture (8 大區多選) ===
-    region_filters = request.GET.getlist('region')  # 接收 8 大區
-    if region_filters:
-        # 定義 8 大區對應的 prefectures
-        REGION_MAP = {
-            'hokkaido': [p[0] for p in Activity.HOKKAIDO],
-            'tohoku': [p[0] for p in Activity.TOHOKU],
-            'kanto': [p[0] for p in Activity.KANTO],
-            'chubu': [p[0] for p in Activity.CHUBU],
-            'kansai': [p[0] for p in Activity.KANSAI],
-            'chugoku': [p[0] for p in Activity.CHUGOKU],
-            'shikoku': [p[0] for p in Activity.SHIKOKU],
-            'kyushu_okinawa': [p[0] for p in Activity.KYUSHU_OKINAWA],
-        }
-        selected_prefectures = []
-        for region in region_filters:
-            selected_prefectures.extend(REGION_MAP.get(region, []))
-        if selected_prefectures:
-            activities = activities.filter(prefecture__in=selected_prefectures)
+    # === 3. Prefecture (只有縣市多選) ===
+    prefecture_filters = request.GET.getlist('prefecture')  # 只有縣市
+
+    selected_prefectures = prefecture_filters  # 直接使用
+
+    if selected_prefectures:
+        activities = activities.filter(prefecture__in=selected_prefectures)
 
     # === 4. Event Ends (日期篩選) ===
     event_ends = request.GET.get('event_ends', '').strip()
@@ -93,23 +81,23 @@ def activities(request):
         'page_obj': page_obj,
         'query': query,
         'type_filters': type_filters,
-        'region_filters': region_filters,
         'event_ends': event_ends,
         'charge_min': charge_min,
         'charge_max': charge_max,
-
-        # 供模板使用
         'type_choices': Activity.Type_CHOICES,
-        'regions': [
-            ('hokkaido', 'Hokkaido'),
-            ('tohoku', 'Tohoku'),
-            ('kanto', 'Kanto'),
-            ('chubu', 'Chubu'),
-            ('kansai', 'Kansai'),
-            ('chugoku', 'Chugoku'),
-            ('shikoku', 'Shikoku'),
-            ('kyushu_okinawa', 'Kyushu & Okinawa'),
+        'selected_prefectures': selected_prefectures,  # 用於 checked
+        # 供模板使用
+        'region_groups': [
+            {'value': 'hokkaido', 'label': 'Hokkaido', 'prefectures': Activity.HOKKAIDO},
+            {'value': 'tohoku', 'label': 'Tohoku', 'prefectures': Activity.TOHOKU},
+            {'value': 'kanto', 'label': 'Kanto', 'prefectures': Activity.KANTO},
+            {'value': 'chubu', 'label': 'Chubu', 'prefectures': Activity.CHUBU},
+            {'value': 'kansai', 'label': 'Kansai', 'prefectures': Activity.KANSAI},
+            {'value': 'chugoku', 'label': 'Chugoku', 'prefectures': Activity.CHUGOKU},
+            {'value': 'shikoku', 'label': 'Shikoku', 'prefectures': Activity.SHIKOKU},
+            {'value': 'kyushu_okinawa', 'label': 'Kyushu & Okinawa', 'prefectures': Activity.KYUSHU_OKINAWA},
         ],
+
     }
 
     return render(request, 'activities/activities.html', context)

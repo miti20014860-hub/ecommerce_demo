@@ -31,14 +31,15 @@ class NewsImageInline(admin.TabularInline):
 
 @admin.register(News)
 class NewsAdmin(admin.ModelAdmin):
-    list_display = ('title', 'date', 'created_at')
+    list_display = ('title', 'created_at', 'is_featured')
+    list_editable = ['is_featured']
     list_filter = ('date', 'created_at')
-    search_fields = ('title', 'contents_main', 'address')
+    search_fields = ('title', 'contents_main')
     inlines = [NewsImageInline]
 
     fieldsets = (
         (None, {
-            'fields': ('title', 'date', 'contents_main')
+            'fields': ('title', 'contents_main', 'is_featured')
         }),
         ('Content 1', {
             'fields': ('subtitle_1', 'contents_1'),

@@ -20,13 +20,14 @@
                 </section>
             {% endfor %}
         {% endif %}
+        <!-- 主新聞區：前 2 則 -->
         <section class="row mt-2 mb-2">
-            {% for news in newses %}
-                <article class="col-lg-6 mt-2{% if not forloop.first %}blog-post{% endif %}">
+            {% for news in featured_newses %}
+                <article class="col-lg-6 mt-2{% if not forloop.first %} blog-post{% endif %}">
                     <div class="row g-0 border rounded shadow-sm">
                         <div class="col p-4 d-flex flex-column">
                             <h4 class="mb-0">{{ news.title }}</h4>
-                            <div class="mb-1 text-body-secondary">{{ news.date|date:"F j, Y" }}</div>
+                            <div class="my-1 text-body-secondary">{{ news.created_at|naturaltime }}</div>
                             <p class="card-text mb-auto">{{ news.contents_main|striptags|truncatewords:12 }}</p>
                             <a href="{% url 'index:news' news.pk %}"
                                class="link-body-emphasis text-secondary">Continue reading »</a>
@@ -51,22 +52,18 @@
                 {% for notice in notices %}
                     <article class="{% if not forloop.first %}blog-post{% endif %}">
                         <h4 class="mb-1">{{ notice.title }}</h4>
-                        <p>{{ notice.date|date:"F j, Y" }}</p>
+                        <p>{{ notice.created_at|date:"F j, Y" }}</p>
                         <div class="g-0">
                             <p>
                                 {% if notice.contents_1 %}
                                     {{ notice.contents_1|striptags|truncatewords:30 }}
-                                {% elif notice.contents_2 %}
-                                    {{ notice.contents_2|striptags|truncatewords:30 }}
-                                {% elif notice.contents_3 %}
-                                    {{ notice.contents_3|striptags|truncatewords:30 }}
                                 {% else %}
                                     No content available.
                                 {% endif %}
                             </p>
                         </div>
                         <a href="{% url 'index:notice' notice.pk %}"
-                           class="link-body-emphasis text-secondary">Continue reading</a>
+                           class="link-body-emphasis text-secondary">Continue reading »</a>
                         <hr />
                     </article>
                 {% empty %}
@@ -75,6 +72,7 @@
                     </article>
                 {% endfor %}
             </section>
+            <!-- 右側欄：Recent posts -->
             <section class="col-lg-4 mt-3">
                 <div class="top-5">
                     <aside class="p-4 mb-3 bg-body-tertiary rounded">
@@ -87,57 +85,30 @@
                     </aside>
                     <ul class="list-unstyled ms-3">
                         <h4 class="fst-italic">Recent posts</h4>
-                        <li>
-                            <div class="row py-3 border-top">
-                                <a href="#" class="col-4">
-                                    <img src="{% static 'img/about.jpg' %}"
-                                         class="object-fit-cover"
-                                         alt="Thumbnail"
-                                         width="100%"
-                                         height="100" />
-                                </a>
-                                <div class="col g-0 pt-1 me-4 d-flex flex-column">
-                                    <a href="#" class="text-decoration-none link-body-emphasis text-black">
-                                        <h6 class="mb-0">This is another blog post title</h6>
+                        {% for news in recent_newses %}
+                            <li>
+                                <div class="row py-3 border-top">
+                                    <a href="{% url 'index:news' news.pk %}" class="col-4">
+                                        <img src="{% if news.main_image_url %}{{ news.main_image_url }}{% else %}{% static 'img/default-news.jpg' %}{% endif %}"
+                                             class="object-fit-cover"
+                                             alt="{{ news.title }}"
+                                             width="100%"
+                                             height="100" />
                                     </a>
-                                    <small class="text-body-secondary">January 14, 2024January 14, 2024January 14, 2024January 14, 2024January 14, 2024January 14</small>
+                                    <div class="col g-0 pt-1 me-4 d-flex flex-column">
+                                        <a href="{% url 'index:news' news.pk %}"
+                                           class="text-decoration-none link-body-emphasis text-black">
+                                            <h6 class="mb-0">{{ news.title|truncatewords:6 }}</h6>
+                                        </a>
+                                        <small class="text-body-secondary">{{ news.created_at|date:"M j, Y" }}</small>
+                                    </div>
                                 </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="row py-3 border-top">
-                                <a href="#" class="col-4">
-                                    <img src="{% static 'img/about.jpg' %}"
-                                         class="object-fit-cover"
-                                         alt="Thumbnail"
-                                         width="100%"
-                                         height="100" />
-                                </a>
-                                <div class="col g-0 pt-1 me-4 d-flex flex-column">
-                                    <a href="#" class="text-decoration-none link-body-emphasis text-black">
-                                        <h6 class="mb-0">This is another blog post title</h6>
-                                    </a>
-                                    <small class="text-body-secondary">January 14, 2024January 14, 2024January 14, 2024January 14, 2024January 14, 2024January 14</small>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="row py-3 border-top">
-                                <a href="#" class="col-4">
-                                    <img src="{% static 'img/ERA_Poster 2480_3508.png' %}"
-                                         class="object-fit-cover"
-                                         alt="Thumbnail"
-                                         width="100%"
-                                         height="100" />
-                                </a>
-                                <div class="col g-0 pt-1 me-4 d-flex flex-column">
-                                    <a href="#" class="text-decoration-none link-body-emphasis text-black">
-                                        <h6 class="mb-0">This is another blog post title</h6>
-                                    </a>
-                                    <small class="text-body-secondary">January 14, 2024January 14, 2024January 14, 2024January 14, 2024January 14, 2024January 14</small>
-                                </div>
-                            </div>
-                        </li>
+                            </li>
+                        {% empty %}
+                            <li>
+                                <p class="text-muted">No recent posts.</p>
+                            </li>
+                        {% endfor %}
                     </ul>
                 </div>
             </section>
