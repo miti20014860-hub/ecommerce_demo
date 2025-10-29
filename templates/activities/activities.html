@@ -7,158 +7,128 @@
             <!-- Filter Bar -->
             <section class="col-md-4 g-0">
                 <div class="position-sticky top-0 bg-body-secondary p-3 shadow-sm">
-                    <!-- Search -->
-                    <form class="mb-3">
-                        <div class="input-group">
-                            <input type="text"
-                                   class="form-control bg-white"
-                                   placeholder="Search something..."
-                                   aria-label="Search">
-                            <button class="btn btn-light border" type="submit">
-                                <i class="bi bi-search" aria-hidden="true"></i>
-                            </button>
+                    <form method="get" id="filterForm">
+                        <!-- 1. Search -->
+                        <div class="mb-3">
+                            <div class="input-group">
+                                <input type="text"
+                                       name="q"
+                                       class="form-control bg-white"
+                                       placeholder="Search title, provider..."
+                                       value="{{ query|default:'' }}"
+                                       aria-label="Search">
+                                <button class="btn btn-light border" type="submit">
+                                    <i class="bi bi-search" aria-hidden="true"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <!-- Accordion Filters -->
+                        <div class="accordion accordion-flush" id="filterAccordion">
+                            <!-- 2. Activity Type -->
+                            <div class="accordion-item border-secondary">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button py-2 collapsed fw-medium"
+                                            type="button"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#type_collapse">Activity Type</button>
+                                </h2>
+                                <div id="type_collapse" class="accordion-collapse collapse">
+                                    <div class="accordion-body py-1">
+                                        {% for value, label in type_choices %}
+                                            <div class="form-check form-check-large my-2">
+                                                <input class="form-check-input"
+                                                       type="checkbox"
+                                                       name="type"
+                                                       value="{{ value }}"
+                                                       id="type_{{ value }}"
+                                                       {% if value in type_filters %}checked{% endif %}>
+                                                <label class="form-check-label" for="type_{{ value }}">{{ label }}</label>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- 3. Region (8 大區) -->
+                            <div class="accordion-item border-secondary">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button py-2 collapsed fw-medium"
+                                            type="button"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#region_collapse">Region</button>
+                                </h2>
+                                <div id="region_collapse" class="accordion-collapse collapse">
+                                    <div class="accordion-body py-1">
+                                        <div class="d-flex flex-wrap gap-2">
+                                            {% for value, label in regions %}
+                                                <div>
+                                                    <input class="btn-check"
+                                                           type="checkbox"
+                                                           name="region"
+                                                           value="{{ value }}"
+                                                           id="region_{{ value }}"
+                                                           {% if value in region_filters %}checked{% endif %}>
+                                                    <label class="btn btn-outline-secondary btn-sm px-3 py-1"
+                                                           for="region_{{ value }}">{{ label }}</label>
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- 4. Event Ends -->
+                            <div class="accordion-item border-secondary">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button py-2 collapsed fw-medium"
+                                            type="button"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#ends_collapse">Event Ends After</button>
+                                </h2>
+                                <div id="ends_collapse" class="accordion-collapse collapse">
+                                    <div class="accordion-body py-1">
+                                        <input type="date"
+                                               name="event_ends"
+                                               class="form-control form-control-sm"
+                                               value="{{ event_ends|default:'' }}">
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- 5. Minimum Charge -->
+                            <div class="accordion-item border-secondary">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button py-2 collapsed fw-medium"
+                                            type="button"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#charge_collapse">Minimum Charge</button>
+                                </h2>
+                                <div id="charge_collapse" class="accordion-collapse collapse">
+                                    <div class="accordion-body py-1">
+                                        <div class="row g-2">
+                                            <div class="col-6">
+                                                <input type="number"
+                                                       name="charge_min"
+                                                       class="form-control form-control-sm"
+                                                       placeholder="Min"
+                                                       value="{{ charge_min|default:'' }}">
+                                            </div>
+                                            <div class="col-6">
+                                                <input type="number"
+                                                       name="charge_max"
+                                                       class="form-control form-control-sm"
+                                                       placeholder="Max"
+                                                       value="{{ charge_max|default:'' }}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Apply & Clear -->
+                        <div class="d-grid gap-2 mt-3">
+                            <button type="submit" class="btn btn-primary rounded-0">Apply Filters</button>
+                            <a href="{% url 'activities:activities' %}"
+                               class="btn btn-outline-secondary rounded-0">Clear All</a>
                         </div>
                     </form>
-                    <!-- Filter -->
-                    <div class="accordion accordion-flush g-0" id="filterAccordion">
-                        <!-- Category 1 -->
-                        <div class="accordion-item border-secondary">
-                            <div class="accordion-header" id="category1_heading">
-                                <button class="accordion-button py-2 collapsed"
-                                        type="button"
-                                        data-bs-toggle="collapse"
-                                        data-bs-target="#category1_collapse"
-                                        aria-expanded="false"
-                                        aria-controls="category1_collapse">Category</button>
-                            </div>
-                            <div id="category1_collapse" class="accordion-collapse collapse">
-                                <div class="accordion-body py-1">
-                                    <div class="form-check my-1">
-                                        <input class="form-check-input" type="checkbox" id="cat1">
-                                        <label class="form-check-label" for="cat1">category</label>
-                                    </div>
-                                    <div class="form-check mb-1">
-                                        <input class="form-check-input" type="checkbox" id="cat2">
-                                        <label class="form-check-label" for="cat2">category</label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="cat3">
-                                        <label class="form-check-label" for="cat3">category</label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Category 2 -->
-                        <div class="accordion-item border-secondary">
-                            <div class="accordion-header" id="category2_heading">
-                                <button class="accordion-button py-2 collapsed"
-                                        type="button"
-                                        data-bs-toggle="collapse"
-                                        data-bs-target="#category2_collapse"
-                                        aria-expanded="false"
-                                        aria-controls="category2_collapse">Category</button>
-                            </div>
-                            <div id="category2_collapse" class="accordion-collapse collapse">
-                                <div class="accordion-body py-1">
-                                    <div class="form-check my-1">
-                                        <input class="form-check-input" type="checkbox" id="cat4">
-                                        <label class="form-check-label" for="cat4">category</label>
-                                    </div>
-                                    <div class="form-check mb-1">
-                                        <input class="form-check-input" type="checkbox" id="cat5">
-                                        <label class="form-check-label" for="cat5">category</label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="cat6">
-                                        <label class="form-check-label" for="cat6">category</label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Category 3 -->
-                        <div class="accordion-item border-secondary">
-                            <div class="accordion-header" id="category3_heading">
-                                <button class="accordion-button py-2 collapsed"
-                                        type="button"
-                                        data-bs-toggle="collapse"
-                                        data-bs-target="#category3_collapse"
-                                        aria-expanded="false"
-                                        aria-controls="category3_collapse">Category</button>
-                            </div>
-                            <div id="category3_collapse" class="accordion-collapse collapse">
-                                <div class="accordion-body py-1">
-                                    <div class="form-check my-1">
-                                        <input class="form-check-input" type="checkbox" id="cat7">
-                                        <label class="form-check-label" for="cat7">category</label>
-                                    </div>
-                                    <div class="form-check mb-1">
-                                        <input class="form-check-input" type="checkbox" id="cat8">
-                                        <label class="form-check-label" for="cat8">category</label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="cat9">
-                                        <label class="form-check-label" for="cat9">category</label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Category 4 -->
-                        <div class="accordion-item border-secondary">
-                            <div class="accordion-header" id="category4_heading">
-                                <button class="accordion-button py-2 collapsed"
-                                        type="button"
-                                        data-bs-toggle="collapse"
-                                        data-bs-target="#category4_collapse"
-                                        aria-expanded="false"
-                                        aria-controls="category4_collapse">Category</button>
-                            </div>
-                            <div id="category4_collapse" class="accordion-collapse collapse">
-                                <div class="accordion-body py-1">
-                                    <div class="form-check my-1">
-                                        <input class="form-check-input" type="checkbox" id="cat10">
-                                        <label class="form-check-label" for="cat10">category</label>
-                                    </div>
-                                    <div class="form-check mb-1">
-                                        <input class="form-check-input" type="checkbox" id="cat11">
-                                        <label class="form-check-label" for="cat11">category</label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="cat12">
-                                        <label class="form-check-label" for="cat12">category</label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Category 5 -->
-                        <div class="accordion-item border-secondary">
-                            <div class="accordion-header" id="category5_heading">
-                                <button class="accordion-button py-2 collapsed"
-                                        type="button"
-                                        data-bs-toggle="collapse"
-                                        data-bs-target="#category5_collapse"
-                                        aria-expanded="false"
-                                        aria-controls="category5_collapse">Category</button>
-                            </div>
-                            <div id="category5_collapse" class="accordion-collapse collapse">
-                                <div class="accordion-body py-1">
-                                    <div class="form-check my-1">
-                                        <input class="form-check-input" type="checkbox" id="cat13">
-                                        <label class="form-check-label" for="cat13">category</label>
-                                    </div>
-                                    <div class="form-check mb-1">
-                                        <input class="form-check-input" type="checkbox" id="cat14">
-                                        <label class="form-check-label" for="cat14">category</label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="cat15">
-                                        <label class="form-check-label" for="cat15">category</label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Apply -->
-                    <button class="btn btn-light w-100 mt-3">Apply</button>
                 </div>
             </section>
             <!-- Aicivities List -->
@@ -181,10 +151,10 @@
                             </a>
                             <!-- 內容 -->
                             <div class="col py-1 d-flex flex-column">
-                                <!-- 供應商 + 地點 -->
+                                <!-- 供應商 + 類型 -->
                                 <div class="d-flex flex-row mt-1 gap-1">
                                     <div class="bg-info text-white px-2 py-1 rounded small">{{ activity.provider|default:"－" }}</div>
-                                    <div class="bg-warning text-dark px-2 py-1 rounded small">{{ activity.location|default:"－" }}</div>
+                                    <div class="bg-warning text-dark px-2 py-1 rounded small">{{ activity.get_type_display|default:"－" }}</div>
                                 </div>
                                 <!-- 描述（截斷 350 字） -->
                                 <p class="mt-1 mb-auto small text-muted">{{ activity.description|striptags|truncatechars:400 }}</p>

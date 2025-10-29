@@ -25,22 +25,19 @@ class ActivityImageInline(admin.TabularInline):
 @admin.register(Activity)
 class ActivityAdmin(admin.ModelAdmin):
     list_display = (
+        'type',
         'title',
         'min_price',
-        'location',
+        'prefecture',
         'provider',
         'participants',
-        'min_p',
-        'deadline',
+        'reg_deadline',
         'created_at'
     )
     list_filter = (
-        'currency',
-        'location',
-        'participating_age',
-        'period',
+        'reg_deadline',
+        'event_ends',
         'created_at',
-        'deadline'
     )
     search_fields = (
         'title',
@@ -53,7 +50,7 @@ class ActivityAdmin(admin.ModelAdmin):
         'address',
         'help_text'
     )
-    readonly_fields = ('created_at', 'updated_at', 'main_image_preview')
+    readonly_fields = ('created_at', 'updated_at')
     inlines = [ActivityImageInline]
 
     # === 嚴格按照 models.py 欄位順序 ===
@@ -61,13 +58,13 @@ class ActivityAdmin(admin.ModelAdmin):
         # === 基本資訊 ===
         (("Basic Information"), {
             'fields': (
+                'type',
                 'title',
                 'minimum_charge',
                 'currency',
                 'help_text',
                 'price_included',
                 'provider',
-                'location',
                 'participants',
                 'participating_age',
                 'duration',
@@ -95,8 +92,9 @@ class ActivityAdmin(admin.ModelAdmin):
         (("Booking & Schedule"), {
             'fields': (
                 'min_p',
-                'period',
-                'deadline',
+                'reg_deadline',
+                'event_ends',
+
             ),
             'classes': ('collapse',)
         }),
@@ -104,10 +102,11 @@ class ActivityAdmin(admin.ModelAdmin):
         # === 地圖資訊 ===
         (("Map Information"), {
             'fields': (
+                'prefecture',
+                'location',
                 ('lat', 'lng'),
                 'address',
                 'map_id',
-                'main_image_preview',
             ),
             'classes': ('collapse',)
         }),
@@ -126,14 +125,3 @@ class ActivityAdmin(admin.ModelAdmin):
             return f"{price_int:,} {obj.currency}"
         return "-"
     min_price.admin_order_field = 'minimum_charge'
-
-    # === 主圖預覽 ===
-
-    def main_image_preview(self, obj):
-        if obj.main_image_url:
-            return format_html(
-                '<img src="{}" style="max-height: 200px; width: auto; border-radius: 4px;" />',
-                obj.main_image_url
-            )
-        return "(No main image)"
-    main_image_preview.short_description = "Main Image"

@@ -2,7 +2,6 @@
 {% load static %}
 {% load humanize %}
 {% block body %}
-    {% for collection in page_obj %}<p>{{ collection.title }}</p>{% endfor %}
     <div class="container">
         <div class="row">
             <!-- Filter Bar -->
@@ -137,9 +136,9 @@
                         </div>
                         <!-- Apply & Clear -->
                         <div class="d-grid gap-2 mt-3">
-                            <button type="submit" class="btn btn-secondary rounded-0">Apply</button>
+                            <button type="submit" class="btn btn-light rounded-0">Apply</button>
                             <a href="{% url 'collection:collection' %}"
-                               class="btn btn-outline-secondary rounded-0">Clear</a>
+                               class="btn btn-light rounded-0">Clear</a>
                         </div>
                     </form>
                 </div>

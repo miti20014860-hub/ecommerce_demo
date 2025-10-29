@@ -4,6 +4,9 @@ from django.utils.translation import gettext_lazy as _
 
 class Activity(models.Model):
     # === 基本資訊 ===
+    Type_CHOICES = [('hands_on', 'Hands-on'), ('performance', 'Performance'), ('exhibition', 'Exhibition'), ('lecture', 'Lecture'), ('workshop', 'Workshop')]
+    type = models.CharField(max_length=20, choices=Type_CHOICES, default='hands_on', verbose_name="Activity Type")
+
     title = models.TextField(
         verbose_name=_("Title (Very Very Very Very Very Very Very Long)")
     )
@@ -43,13 +46,6 @@ class Activity(models.Model):
         blank=True,
         verbose_name=_("Provider"),
         help_text=_("Company or person offering the activity")
-    )
-
-    location = models.CharField(
-        max_length=100,
-        blank=True,
-        verbose_name=_("Location"),
-        help_text=_("General area or venue name")
     )
 
     participants = models.CharField(
@@ -148,21 +144,123 @@ class Activity(models.Model):
         help_text=_("Minimum required to run the activity")
     )
 
-    period = models.CharField(
-        max_length=100,
-        blank=True,
-        verbose_name=_("Period"),
-        help_text=_("e.g., Year-round, Summer only")
-    )
-
-    deadline = models.CharField(
+    reg_deadline = models.CharField(
         max_length=100,
         null=True, blank=True,
         verbose_name=_("Deadline"),
-        help_text=_("Booking deadline")
+        help_text=_("Registration Deadline")
+    )
+
+    event_ends = models.DateField(
+        null=True, blank=True,
+        verbose_name=_("Event Ends"),
     )
 
     # === 地圖資訊 ===
+
+    # === 1. Hokkaido ===
+    HOKKAIDO = [
+        ('hokkaido', 'Hokkaido'),
+    ]
+
+    # === 2. Tohoku ===
+    TOHOKU = [
+        ('aomori', 'Aomori'),
+        ('iwate', 'Iwate'),
+        ('miyagi', 'Miyagi'),
+        ('akita', 'Akita'),
+        ('yamagata', 'Yamagata'),
+        ('fukushima', 'Fukushima'),
+    ]
+
+    # === 3. Kanto ===
+    KANTO = [
+        ('ibaraki', 'Ibaraki'),
+        ('tochigi', 'Tochigi'),
+        ('gunma', 'Gunma'),
+        ('saitama', 'Saitama'),
+        ('chiba', 'Chiba'),
+        ('tokyo', 'Tokyo'),
+        ('kanagawa', 'Kanagawa'),
+    ]
+
+    # === 4. Chubu ===
+    CHUBU = [
+        ('niigata', 'Niigata'),
+        ('toyama', 'Toyama'),
+        ('ishikawa', 'Ishikawa'),
+        ('fukui', 'Fukui'),
+        ('yamanashi', 'Yamanashi'),
+        ('nagano', 'Nagano'),
+        ('gifu', 'Gifu'),
+        ('shizuoka', 'Shizuoka'),
+        ('aichi', 'Aichi'),
+    ]
+
+    # === 5. Kansai (Kinki) ===
+    KANSAI = [
+        ('mie', 'Mie'),
+        ('shiga', 'Shiga'),
+        ('kyoto', 'Kyoto'),
+        ('osaka', 'Osaka'),
+        ('hyogo', 'Hyogo'),
+        ('nara', 'Nara'),
+        ('wakayama', 'Wakayama'),
+    ]
+
+    # === 6. Chugoku ===
+    CHUGOKU = [
+        ('tottori', 'Tottori'),
+        ('shimane', 'Shimane'),
+        ('okayama', 'Okayama'),
+        ('hiroshima', 'Hiroshima'),
+        ('yamaguchi', 'Yamaguchi'),
+    ]
+
+    # === 7. Shikoku ===
+    SHIKOKU = [
+        ('tokushima', 'Tokushima'),
+        ('kagawa', 'Kagawa'),
+        ('ehime', 'Ehime'),
+        ('kochi', 'Kochi'),
+    ]
+
+    # === 8. Kyushu & Okinawa ===
+    KYUSHU_OKINAWA = [
+        ('fukuoka', 'Fukuoka'),
+        ('saga', 'Saga'),
+        ('nagasaki', 'Nagasaki'),
+        ('kumamoto', 'Kumamoto'),
+        ('oita', 'Oita'),
+        ('miyazaki', 'Miyazaki'),
+        ('kagoshima', 'Kagoshima'),
+        ('okinawa', 'Okinawa'),
+    ]
+    # 組合所有區域
+    PREFECTURE_CHOICES = (
+        HOKKAIDO +
+        TOHOKU +
+        KANTO +
+        CHUBU +
+        KANSAI +
+        CHUGOKU +
+        SHIKOKU +
+        KYUSHU_OKINAWA
+    )
+    prefecture = models.CharField(
+        max_length=20,
+        choices=PREFECTURE_CHOICES,
+        blank=True,
+        null=True,
+        verbose_name="Prefecture"
+    )
+
+    location = models.CharField(
+        max_length=100,
+        blank=True,
+        verbose_name=_("Location"),
+        help_text=_("General area or venue name")
+    )
     lat = models.CharField(
         max_length=100,
         null=True, blank=True,
