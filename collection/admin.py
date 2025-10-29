@@ -41,7 +41,7 @@ class CollectionAdmin(admin.ModelAdmin):
             'classes': ('collapse',)
         }),
         ('History & Description', {
-            'fields': ('period', 'koshirae', 'registration', 'certificate', 'remarks'),
+            'fields': ('period_type', 'period', 'koshirae', 'registration', 'certificate', 'remarks'),
             'classes': ('collapse',)
         }),
         ('Price', {

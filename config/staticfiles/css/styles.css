@@ -59,3 +59,22 @@ footer .nav-link:hover {
     border-color: #dee2e6;
     opacity: 0.5;
 }
+.form-check-large .form-check-input {
+    width: 1.3em;
+    height: 1.3em;
+    margin-top: 0.1em;          
+    vertical-align: top;
+    cursor: pointer;
+}
+.form-check-large .form-check-label {
+    font-size: 1.0rem;
+    font-weight: 300;
+    margin-left: 0.5em;
+}
+.accordion-button:focus {
+    box-shadow: none !important;
+    outline: none !important;
+}
+.accordion-button:not(.collapsed) {
+    box-shadow: none !important;
+}

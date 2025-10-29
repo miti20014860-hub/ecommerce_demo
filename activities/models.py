@@ -11,7 +11,6 @@ class Activity(models.Model):
     minimum_charge = models.CharField(
         max_length=100,
         verbose_name=_("Minimum Charge"),
-        help_text=_("The lowest price for this activity")
     )
 
     CURRENCY_CHOICES = [

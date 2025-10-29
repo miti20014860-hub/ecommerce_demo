@@ -1,70 +1,99 @@
-from django.core.paginator import Paginator
 from django.shortcuts import render, redirect, get_object_or_404
+from django.core.paginator import Paginator
 from django.contrib import messages
-from django.views.decorators.http import require_POST
-from django.views.decorators.csrf import csrf_protect
 from django.db.models import Q
 from .models import Collection
 
 
-def collection_search(request):
-    """
-    搜尋 Collections：支援關鍵字 + 類型篩選 + 價格區間
-    """
-    # 所有資料
+def collection(request):
+    # 1. 初始 queryset
     collections = Collection.objects.all().order_by('-created_at', 'name_en')
 
-    # 取得搜尋參數
-    query = request.GET.get('q', '').strip()           # 關鍵字
-    type_filter = request.GET.get('type', '').strip()  # 刀種
-    min_price = request.GET.get('min_price', '').strip()
-    max_price = request.GET.get('max_price', '').strip()
+    # 2. 取得所有可能的 GET 參數
+    query = request.GET.get('q', '').strip()
+    type_filters = request.GET.getlist('type')
+    period_filters = request.GET.getlist('period_type')
+    blade_min = request.GET.get('blade_length_min', '').strip()
+    blade_max = request.GET.get('blade_length_max', '').strip()
+    price_min = request.GET.get('price_min', '').strip()
+    price_max = request.GET.get('price_max', '').strip()
 
-    # === 關鍵字搜尋（多欄位）===
+    # -------------------------------------------------
+    # 3. 只要有任何篩選條件，就執行過濾
+    # -------------------------------------------------
     if query:
         collections = collections.filter(
+            Q(period__icontains=query) |
             Q(name_jp__icontains=query) |
             Q(name_en__icontains=query) |
+            Q(remarks__icontains=query) |
             Q(provider__icontains=query) |
-            Q(signature__icontains=query) |
-            Q(period__icontains=query) |
-            Q(koshirae__icontains=query) |
-            Q(remarks__icontains=query)
+            Q(signature__icontains=query)
         )
 
-    # === 刀種篩選 ===
-    if type_filter and type_filter in dict(Collection.TYPE_CHOICES):
-        collections = collections.filter(type=type_filter)
+    if type_filters:
+        collections = collections.filter(type__in=type_filters)
 
-    # === 價格區間 ===
-    if min_price and min_price.isdigit():
-        collections = collections.filter(price__gte=float(min_price))
-    if max_price and max_price.isdigit():
-        collections = collections.filter(price__lte=float(max_price))
+    if period_filters:
+        collections = collections.filter(period_type__in=period_filters)
 
-    return render(request, 'collections/search.html', {
-        'collections': collections,
-        'query': query,
-        'type_filter': type_filter,
-        'min_price': min_price,
-        'max_price': max_price,
-        'count': collections.count(),
-        'type_choices': Collection.TYPE_CHOICES,
-    })
+    if blade_min:
+        try:
+            collections = collections.filter(blade_length__gte=float(blade_min))
+        except ValueError:
+            pass
 
+    if blade_max:
+        try:
+            collections = collections.filter(blade_length__lte=float(blade_max))
+        except ValueError:
+            pass
 
-def collection(request):
-    collections = Collection.objects.all().order_by('-created_at', 'name_en')
+    if price_min:
+        try:
+            collections = collections.filter(price__gte=float(price_min))
+        except ValueError:
+            pass
 
+    if price_max:
+        try:
+            collections = collections.filter(price__lte=float(price_max))
+        except ValueError:
+            pass
+
+    # -------------------------------------------------
+    # 5. 分頁（每頁 6 筆，與原本一致）
+    # -------------------------------------------------
     paginator = Paginator(collections, 6)
-    page = request.GET.get('page')
-    page_obj = paginator.get_page(page)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
 
-    return render(request, 'collection/collection.html', {
-        'collections': page_obj,
+    # -------------------------------------------------
+    # 6. 傳給模板的 context
+    # -------------------------------------------------
+    context = {
+        'collections': page_obj,          # 用於 {% for obj in page_obj %}
         'page_obj': page_obj,
-        'type_choices': Collection.TYPE_CHOICES,
-    })
+        'query': query,
+        'type_filters': type_filters,
+        'period_filters': period_filters,
+        'blade_min': blade_min,
+        'blade_max': blade_max,
+        'price_min': price_min,
+        'price_max': price_max,
+
+        # 下拉選單
+        'type_choices':   Collection.TYPE_CHOICES,
+        'period_choices': Collection.PERIOD_CHOICES,
+    }
+
+    # 只要有任何篩選條件，就使用搜尋模板；否則使用原本的列表模板
+    template = 'collection/collection.html' if any([
+        query, type_filters, period_filters,
+        blade_min, blade_max, price_min, price_max
+    ]) else 'collection/collection.html'
+
+    return render(request, template, context)
 
 
 def item(request):
@@ -81,8 +110,6 @@ def form(request):
     return render(request, 'collection/form.html')
 
 
-@require_POST
-@csrf_protect
 def order_form(request):
     payment_method = request.POST.get('payment_method')
     # 可加入簡單驗證

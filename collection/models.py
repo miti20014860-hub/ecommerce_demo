@@ -1,15 +1,14 @@
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 
 class Collection(models.Model):
     TYPE_CHOICES = [
         ('katana', 'Katana'),
-        ('wakizashi', 'Wakizashi'),
-        ('tanto', 'Tanto'),
         ('tachi', 'Tachi'),
-        ('naginata', 'Naginata'),
-        ('yari', 'Yari'),
-        ('other', 'Other'),
+        ('wakizashi', 'Wakizashi'),
+        ('kodachi', 'Kodachi'),
+        ('tanto', 'Tanto'),
     ]
 
     CURRENCY_CHOICES = [('JPY', '¥ JPY'), ('USD', '$ USD'), ('EUR', '€ EUR')]
@@ -30,6 +29,9 @@ class Collection(models.Model):
     motogasane = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True, verbose_name="Motogasane (cm)")
     sakigasane = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True, verbose_name="Sakigasane (cm)")
 
+    PERIOD_CHOICES = [('koto', 'Koto'), ('chūkoto', 'Chūkoto'), ('shinto', 'Shinto'), ('gendai_to', 'Gendai-to')]
+    period_type = models.CharField(max_length=20, choices=PERIOD_CHOICES, default='gendai_to', verbose_name="Period Type",
+                                   help_text=("pre-1500, 1500~1596, 1596~1867, 1868~"))
     period = models.CharField(max_length=100, blank=True, verbose_name="Period")
     koshirae = models.CharField(max_length=100, blank=True, verbose_name="Koshirae")
 
