@@ -5,7 +5,7 @@ from django.utils.translation import gettext_lazy as _
 class Activity(models.Model):
     # === 基本資訊 ===
     title = models.TextField(
-        verbose_name=_("Title")
+        verbose_name=_("Title (Very Very Very Very Very Very Very Long)")
     )
 
     minimum_charge = models.CharField(
@@ -48,6 +48,7 @@ class Activity(models.Model):
 
     location = models.CharField(
         max_length=100,
+        blank=True,
         verbose_name=_("Location"),
         help_text=_("General area or venue name")
     )
@@ -68,6 +69,7 @@ class Activity(models.Model):
 
     duration = models.CharField(
         max_length=100,
+        blank=True,
         verbose_name=_("Duration"),
         help_text=_("e.g., 2 hours, Half day, 3 days")
     )
@@ -143,7 +145,7 @@ class Activity(models.Model):
     min_p = models.CharField(
         max_length=100,
         blank=True,
-        verbose_name=_("Min. Participants"),
+        verbose_name=_("Min. P"),
         help_text=_("Minimum required to run the activity")
     )
 

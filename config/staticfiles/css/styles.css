@@ -35,3 +35,27 @@ footer .nav-link:hover {
 .h-70vh { height: 70vh; }
 .h-80vh { height: 80vh; }
 .h-90vh { height: 90vh; }
+.pagination .page-link {
+    color: #495057;
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+}
+
+.pagination .page-link:hover {
+    color: #212529;
+    background-color: #e9ecef;
+    border-color: #adb5bd;
+}
+
+.pagination .page-item.active .page-link {
+    color: #fff;
+    background-color: #6c757d;  /* Bootstrap secondary gray */
+    border-color: #6c757d;
+}
+
+.pagination .page-item.disabled .page-link {
+    color: #6c757d;
+    background-color: #f8f9fa;
+    border-color: #dee2e6;
+    opacity: 0.5;
+}

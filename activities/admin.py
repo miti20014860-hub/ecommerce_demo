@@ -26,7 +26,7 @@ class ActivityImageInline(admin.TabularInline):
 class ActivityAdmin(admin.ModelAdmin):
     list_display = (
         'title',
-        'formatted_price',
+        'min_price',
         'location',
         'provider',
         'participants',
@@ -120,12 +120,12 @@ class ActivityAdmin(admin.ModelAdmin):
     )
 
     # === 價格格式化（整數 + 貨幣符號）===
-    def formatted_price(self, obj):
+    def min_price(self, obj):
         if obj.minimum_charge is not None:
             price_int = int(float(obj.minimum_charge))
             return f"{price_int:,} {obj.currency}"
         return "-"
-    formatted_price.admin_order_field = 'minimum_charge'
+    min_price.admin_order_field = 'minimum_charge'
 
     # === 主圖預覽 ===
 

@@ -78,8 +78,3 @@ class CollectionImage(models.Model):
 
     def __str__(self):
         return f"{self.collection} - {self.caption or 'Image'}"
-
-
-# {% for img in collection.images.all %}
-#     <img src="{{ img.image.url }}" alt="{{ img.caption }}">
-# {% endfor %}

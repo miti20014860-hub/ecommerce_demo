@@ -2,6 +2,34 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 
+class Banner(models.Model):
+    image = models.ImageField(
+        upload_to='banners/',
+        verbose_name=_("banner image")
+    )
+    caption = models.CharField(
+        max_length=100,
+        blank=True,
+        verbose_name=_("caption (optional)")
+    )
+    is_active = models.BooleanField(
+        default=True,
+        verbose_name=_("active")
+    )
+    order = models.PositiveIntegerField(
+        default=0,
+        verbose_name=_("display order")
+    )
+
+    class Meta:
+        ordering = ['order', 'id']
+        verbose_name = _("banner")
+        verbose_name_plural = _("banners")
+
+    def __str__(self):
+        return self.caption or f"Banner {self.id}"
+
+
 class News(models.Model):
     # === 基本資訊 ===
     title = models.CharField(

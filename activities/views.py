@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.core.paginator import Paginator
 from django.contrib import messages
 from django.views.decorators.http import require_POST
 from django.views.decorators.csrf import csrf_protect
@@ -7,8 +8,14 @@ from .models import Activity
 
 def activities(request):
     activities = Activity.objects.all().order_by('-created_at')
+
+    paginator = Paginator(activities, 6)
+    page = request.GET.get('page')
+    page_obj = paginator.get_page(page)
+
     return render(request, 'activities/activities.html', {
-        'activities': activities
+        'activities': page_obj,
+        'page_obj': page_obj,
     })
 
 

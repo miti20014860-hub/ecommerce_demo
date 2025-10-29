@@ -1,15 +1,15 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Notice
-from .models import News
+from .models import Banner, News, Notice
 
 
 def index(request):
     newses = News.objects.all().order_by('-date', '-created_at')
     notices = Notice.objects.all().order_by('-date', '-created_at')
-    return render(request, 'index/index.html', {
-        'newses': newses,
-        'notices': notices
-    })
+    banners = Banner.objects.filter(is_active=True)
+    contents = {'banners': banners,
+                'newses': newses,
+                'notices': notices}
+    return render(request, 'index/index.html', contents)
 
 
 def news(request, pk):
