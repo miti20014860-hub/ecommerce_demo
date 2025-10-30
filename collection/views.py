@@ -122,13 +122,11 @@ def order_form(request):
         if form.is_valid():
             order = form.save(commit=False)
             order.user = request.user if request.user.is_authenticated else None
+            order.item = item
             order.save()
             messages.success(request, "Your order has been submitted successfully!")
             return redirect(f"{reverse('collection:item')}?id={pk}")
     else:
         form = OrderForm(user=request.user, item=item)
 
-    return render(request, 'collection/form.html', {
-        'form': form,
-        'item': item,
-    })
+    return render(request, 'collection/form.html', {'form': form, 'item': item, })

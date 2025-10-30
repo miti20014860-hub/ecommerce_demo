@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.contrib import messages
 from django.db.models import Q
+from django.urls import reverse
 from django.utils import timezone
 from datetime import datetime
 from .models import Activity, Booking
@@ -116,13 +117,11 @@ def booking_view(request, pk):
             booking = form.save(commit=False)
             booking.activity = activity.title
             booking.user = request.user if request.user.is_authenticated else None
+            booking.activity_obj = activity
             booking.save()
             messages.success(request, "Your booking has been submitted successfully!")
             return redirect('activities:plan', pk=pk)
     else:
         form = BookingForm(user=request.user)
 
-    return render(request, 'activities/plan.html', {
-        'form': form,
-        'activity': activity,
-    })
+    return render(request, 'activities/plan.html', {'form': form, 'activity': activity, })

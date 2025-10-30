@@ -368,12 +368,20 @@ class Booking(models.Model):
     comment = models.TextField(blank=True, null=True, verbose_name="Comment")
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Submitted At")
 
+    activity_obj = models.ForeignKey(
+        'Activity',
+        on_delete=models.SET_NULL,
+        null=True, blank=True,
+        related_name='bookings'
+    )
+
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
-        verbose_name="User"
+        related_name='bookings',
+        verbose_name="User",
     )
 
     class Meta:
@@ -383,3 +391,8 @@ class Booking(models.Model):
 
     def __str__(self):
         return f"{self.first_name} {self.last_name} - {self.activity}"
+
+    def save(self, *args, **kwargs):
+        if self.activity_obj and not self.activity:
+            self.activity = self.activity_obj.title
+        super().save(*args, **kwargs)

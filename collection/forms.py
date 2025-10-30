@@ -48,6 +48,7 @@ class OrderForm(forms.ModelForm):
         # 項目名稱
         if item:
             self.fields['item_order'].initial = item.name_en
+            self.instance.item = item
 
         # 自動加 Bootstrap class
         for field_name, field in self.fields.items():

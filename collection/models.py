@@ -94,7 +94,7 @@ class Order(models.Model):
     ]
 
     payment_method = models.CharField(max_length=20, choices=PAYMENT_CHOICES, default='wire_transfer')
-    item_order = models.CharField(max_length=200, verbose_name="Item Ordered")
+    item_order = models.CharField(max_length=200)
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     country = models.CharField(max_length=100)
@@ -105,6 +105,15 @@ class Order(models.Model):
 
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='orders')
     created_at = models.DateTimeField(auto_now_add=True)
+
+    item = models.ForeignKey(
+        Collection,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='orders'
+    )
+    item_order = models.CharField(max_length=200, blank=True)
 
     class Meta:
         ordering = ['-created_at']
@@ -121,3 +130,8 @@ class Order(models.Model):
     def payment_display(self):
         return dict(self.PAYMENT_CHOICES).get(self.payment_method, self.payment_method)
     payment_display.short_description = "Payment Method"
+
+    def save(self, *args, **kwargs):
+        if self.item and not self.item_order:
+            self.item_order = self.item.name_en  # 自動填名稱
+        super().save(*args, **kwargs)

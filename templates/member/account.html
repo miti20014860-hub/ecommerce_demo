@@ -16,12 +16,12 @@
                             aria-controls="profile">Profile</button>
                     <button class="flex-fill btn btn-lg btn-light rounded-0"
                             type="button"
-                            data-target="#orders"
-                            aria-controls="orders">Orders</button>
+                            data-target="#bookings"
+                            aria-controls="bookings">Bookings</button>
                     <button class="flex-fill btn btn-lg btn-light rounded-0"
                             type="button"
-                            data-target="#messages"
-                            aria-controls="messages">Messages</button>
+                            data-target="#orders"
+                            aria-controls="orders">Orders</button>
                 </div>
                 <div class="collapse show p-0" id="home">
                     <div class="h-50vh d-flex align-items-center justify-content-center bg-body-secondary">
@@ -166,22 +166,119 @@
                         </form>
                     </div>
                 </div>
-                <div class="collapse p-0" id="orders">
-                    <div class="h-50vh">
-                        <button class="w-100 btn btn-md btn-dark rounded-0"
-                                type="button"
-                                data-bs-toggle="collapse"
-                                data-bs-target="#"
-                                aria-controls="order1">Order1</button>
+                <div class="collapse p-0" id="bookings">
+                    <div class="bg-body-secondary">
+                        {% if user.is_authenticated %}
+                            {% if user.bookings.exists %}
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-hover mb-0">
+                                        <thead class="table-dark">
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Activity</th>
+                                                <th>Preferred Date</th>
+                                                <th>Submitted</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for booking in user.bookings.all %}
+                                                <tr>
+                                                    <td>
+                                                        <strong>#{{ booking.id }}</strong>
+                                                    </td>
+                                                    <td class="text-truncate">
+                                                        {% if booking.activity_obj %}
+                                                            <a href="{% url 'activities:plan' pk=booking.activity_obj.id %}"
+                                                               class="text-decoration-none text-primary"
+                                                               title="{{ booking.activity }}">
+                                                                {{ booking.activity|truncatechars:40 }}
+                                                            </a>
+                                                        {% else %}
+                                                            <span title="{{ booking.activity }}">{{ booking.activity|truncatechars:40 }}</span>
+                                                        {% endif %}
+                                                    </td>
+                                                    <td>
+                                                        <strong>{{ booking.prefer_date|date:"M d, Y" }}</strong>
+                                                    </td>
+                                                    <td>{{ booking.created_at|date:"M d, Y H:i" }}</td>
+                                                    <td>
+                                                        <span class="badge bg-success">Submitted</span>
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            {% else %}
+                                <div class="text-center py-5">
+                                    <p class="text-muted">You haven't booked any activities yet.</p>
+                                    <a href="{% url 'activities:activities' %}"
+                                       class="btn btn-outline-primary">Explore Activities</a>
+                                </div>
+                            {% endif %}
+                        {% else %}
+                            <p>
+                                Please <a href="{% url 'login' %}">log in</a> to view your bookings.
+                            </p>
+                        {% endif %}
                     </div>
                 </div>
-                <div class="collapse p-0" id="messages">
-                    <div class="h-50vh">
-                        <button class="w-100 btn btn-md btn-dark rounded-0"
-                                type="button"
-                                data-bs-toggle="collapse"
-                                data-bs-target="#"
-                                aria-controls="message1">Messages1</button>
+                <div class="collapse p-0" id="orders">
+                    <div class="bg-body-secondary">
+                        {% if user.is_authenticated %}
+                            {% if user.orders.exists %}
+                                <table class="table table-striped table-hover">
+                                    <thead class="table-dark">
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Item</th>
+                                            <th>Price</th>
+                                            <th>Date</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for order in user.orders.all %}
+                                            <tr>
+                                                <td>
+                                                    <strong>#{{ order.id }}</strong>
+                                                </td>
+                                                <td>
+                                                    {% if order.item %}
+                                                        <a href="{% url 'collection:item' %}?id={{ order.item.id }}"
+                                                           class="text-decoration-none">{{ order.item_order }}</a>
+                                                    {% else %}
+                                                        {{ order.item_order }}
+                                                    {% endif %}
+                                                </td>
+                                                <td>
+                                                    {% if order.item %}
+                                                        <strong>{{ order.item.formatted_price }}</strong>
+                                                    {% else %}
+                                                        <span class="text-muted">-</span>
+                                                    {% endif %}
+                                                </td>
+                                                <td>{{ order.created_at|date:"M d, Y H:i" }}</td>
+                                                <td>
+                                                    <span class="badge bg-success">Submitted</span>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            {% else %}
+                                <div class="text-center py-5">
+                                    <p class="text-muted">You haven't placed any orders yet.</p>
+                                    <a href="{% url 'collection:collection' %}"
+                                       class="btn btn-outline-primary">Explore Collection</a>
+                                </div>
+                            {% endif %}
+                        {% else %}
+                            <p>
+                                Please <a href="{% url 'login' %}">log in</a> to view your orders.
+                            </p>
+                        {% endif %}
                     </div>
                 </div>
             </div>
