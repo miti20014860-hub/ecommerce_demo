@@ -1,8 +1,11 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.contrib import messages
+from django.urls import reverse
 from django.db.models import Q
-from .models import Collection
+from .models import Collection, Order
+from .forms import OrderForm
 
 
 def collection(request):
@@ -100,26 +103,32 @@ def item(request):
     pk = request.GET.get('id')
     if not pk:
         return render(request, 'collection/item.html')
+
     collection = get_object_or_404(Collection, pk=pk)
     return render(request, 'collection/item.html', {
         'collection': collection
     })
 
 
-def form(request):
+def order_form(request):
     pk = request.GET.get('id')
     if not pk:
-        return render(request, 'collection/form.html')
+        return redirect('collection:item')
+
     item = get_object_or_404(Collection, pk=pk)
-    return render(request, 'collection/form.html', {
-        'item': item
-    })
 
-
-def order_form(request):
-    payment_method = request.POST.get('payment_method')
-    if not payment_method:
-        messages.error(request, "請選擇付款方式")
+    if request.method == "POST":
+        form = OrderForm(request.POST, user=request.user, item=item)
+        if form.is_valid():
+            order = form.save(commit=False)
+            order.user = request.user if request.user.is_authenticated else None
+            order.save()
+            messages.success(request, "Your order has been submitted successfully!")
+            return redirect(f"{reverse('collection:item')}?id={pk}")
     else:
-        messages.success(request, f"已提交訂單，付款方式：{payment_method}")
-    return render(request, 'collection/form.html')
+        form = OrderForm(user=request.user, item=item)
+
+    return render(request, 'collection/form.html', {
+        'form': form,
+        'item': item,
+    })
