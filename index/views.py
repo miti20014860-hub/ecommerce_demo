@@ -1,16 +1,18 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Banner, News, Notice
+from .models import Quotes, Banner, News, Notice
 
 
 def index(request):
-    featured_newses = News.objects.filter(is_featured=True).order_by('-updated_at')[:2]
-    recent_newses = News.objects.filter(is_featured=False).order_by('-updated_at')[:7]
+    featured_newses = News.objects.filter(is_featured=True).order_by('-created_at')[:2]
+    recent_newses = News.objects.filter(is_featured=False).order_by('-created_at')[:7]
 
     context = {
         'featured_newses': featured_newses,
         'recent_newses': recent_newses,
+        'quotes': Quotes.objects.filter(is_featured=True),
         'banners': Banner.objects.filter(is_active=True),
-        'notices': Notice.objects.all().order_by('-updated_at'),
+        'notices': Notice.objects.all().order_by('-created_at'),
+        'newses': News.objects.all().order_by('-created_at'),
     }
     return render(request, 'index/index.html', context)
 

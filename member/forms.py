@@ -67,6 +67,7 @@ class ProfileEditForm(forms.ModelForm):
     email = forms.EmailField(required=True, widget=forms.EmailInput(attrs={'class': 'form-control'}))
 
     phone = forms.CharField(max_length=15, required=False, widget=forms.TextInput(attrs={'class': 'form-control'}))
+    country = forms.CharField(max_length=50, required=False, widget=forms.TextInput(attrs={'class': 'form-control'}))
     address = forms.CharField(max_length=200, required=False, widget=forms.TextInput(attrs={'class': 'form-control'}))
 
     current_password = forms.CharField(
@@ -81,12 +82,13 @@ class ProfileEditForm(forms.ModelForm):
 
     class Meta:
         model = CustomUser
-        fields = ('first_name', 'last_name', 'email', 'phone', 'address')
+        fields = ('first_name', 'last_name', 'email', 'phone', 'country', 'address')
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         if self.instance:
             self.fields['phone'].initial = self.instance.phone
+            self.fields['country'].initial = self.instance.country
             self.fields['address'].initial = self.instance.address
 
     def clean_current_password(self):

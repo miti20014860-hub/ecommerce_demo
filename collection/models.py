@@ -40,7 +40,7 @@ class Collection(models.Model):
 
     remarks = models.TextField(blank=True, verbose_name="Remarks")
 
-    price = models.DecimalField(max_digits=12, decimal_places=2, blank=True, null=True, verbose_name="Price")
+    price = models.DecimalField(max_digits=15, decimal_places=2, blank=True, null=True, verbose_name="Price")
     currency = models.CharField(max_length=3, choices=CURRENCY_CHOICES, default='JPY', verbose_name="Currency")
 
     created_at = models.DateTimeField(auto_now_add=True)

@@ -146,7 +146,7 @@
                     </div>
                     <!-- 訂購按鈕 -->
                     <div class="col-auto mx-auto my-2">
-                        <a href="{% url 'collection:form' %}"
+                        <a href="{% url 'collection:form' %}?id={{ collection.pk }}"
                            class="fw-medium text-warning-emphasis">[Open Order Form]</a>
                     </div>
                 </div>

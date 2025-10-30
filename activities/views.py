@@ -1,12 +1,13 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
+from decimal import Decimal, InvalidOperation
+from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.contrib import messages
-from django.views.decorators.http import require_POST
-from django.views.decorators.csrf import csrf_protect
 from django.db.models import Q
 from django.utils import timezone
 from datetime import datetime
-from .models import Activity
+from .models import Activity, Booking
+from .forms import BookingForm
 
 
 def activities(request):
@@ -43,29 +44,27 @@ def activities(request):
         except ValueError:
             pass  # 無效日期忽略
 
-    # === 5. Minimum Charge (數字範圍) ===
+    # === 5. 價格範圍搜尋（核心）===
     charge_min = request.GET.get('charge_min', '').strip()
     charge_max = request.GET.get('charge_max', '').strip()
 
     if charge_min:
-        try:
-            activities = activities.filter(
-                Q(minimum_charge__regex=r'^\d+$') |
-                Q(minimum_charge__regex=r'^\d+[,]\d+$'),
-                minimum_charge__gte=int(charge_min.replace(',', ''))
-            )
-        except:
-            pass
+        clean_min = charge_min.replace(',', '').strip()
+        if clean_min:
+            try:
+                min_val = Decimal(clean_min)
+                activities = activities.filter(minimum_charge__gte=min_val)
+            except (InvalidOperation, ValueError, TypeError):
+                pass
 
     if charge_max:
-        try:
-            activities = activities.filter(
-                Q(minimum_charge__regex=r'^\d+$') |
-                Q(minimum_charge__regex=r'^\d+[,]\d+$'),
-                minimum_charge__lte=int(charge_max.replace(',', ''))
-            )
-        except:
-            pass
+        clean_max = charge_max.replace(',', '').strip()
+        if clean_max:
+            try:
+                max_val = Decimal(clean_max)
+                activities = activities.filter(minimum_charge__lte=max_val)
+            except (InvalidOperation, ValueError, TypeError):
+                pass
 
     # === 排序 ===
     activities = activities.order_by('-created_at')
@@ -108,15 +107,22 @@ def plan(request, pk):
     return render(request, 'activities/plan.html', {'activity': activity})
 
 
-@require_POST
-@csrf_protect
-def booking(request):
-    if request.method == 'POST':
-        activity = request.POST.get('activity')
-        full_name = request.POST.get('full_name')
-        email_address = request.POST.get('email_address')
-        prefer_date = request.POST.get('prefer_date')
-        phone = request.POST.get('phone')
-        comment = request.POST.get('comment')
-        messages.success(request, f"Booking for {activity} on {prefer_date} submitted!")
-    return render(request, 'activities/plan.html')
+def booking_view(request, pk):
+    activity = get_object_or_404(Activity, pk=pk)
+
+    if request.method == "POST":
+        form = BookingForm(request.POST, user=request.user)
+        if form.is_valid():
+            booking = form.save(commit=False)
+            booking.activity = activity.title
+            booking.user = request.user if request.user.is_authenticated else None
+            booking.save()
+            messages.success(request, "Your booking has been submitted successfully!")
+            return redirect('activities:plan', pk=pk)
+    else:
+        form = BookingForm(user=request.user)
+
+    return render(request, 'activities/plan.html', {
+        'form': form,
+        'activity': activity,
+    })

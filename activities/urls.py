@@ -6,5 +6,5 @@ app_name = 'activities'
 urlpatterns = [
     path('', views.activities, name='activities'),
     path('<int:pk>/', views.plan, name='plan'),
-    path('booking/', views.booking, name='booking'),
+    path('booking/<int:pk>/', views.booking_view, name='booking_view'),  # 直接用 pk
 ]

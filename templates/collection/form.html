@@ -81,16 +81,25 @@
                                class="form-control"
                                id="item_order"
                                name="item_order"
-                               value="Item Order"
+                               value="{{ item.name_en }}"
                                required>
                     </div>
                     <div class="mb-3 ms-1">
-                        <label for="full_name" class="form-label">Full Name</label>
+                        <label for="first_name" class="form-label">First name</label>
                         <input type="text"
                                class="form-control"
-                               id="full_name"
-                               name="full_name"
-                               value="Full Name"
+                               id="first_name"
+                               name="first_name"
+                               {% if user.is_authenticated %}value="{{ user.first_name }}"{% endif %}
+                               required>
+                    </div>
+                    <div class="mb-3 ms-1">
+                        <label for="last_name" class="form-label">Last name</label>
+                        <input type="text"
+                               class="form-control"
+                               id="last_name"
+                               name="last_name"
+                               {% if user.is_authenticated %}value="{{ user.last_name }}"{% endif %}
                                required>
                     </div>
                     <div class="mb-3 ms-1">
@@ -99,7 +108,7 @@
                                class="form-control"
                                id="country"
                                name="country"
-                               value="Country"
+                               {% if user.is_authenticated %}value="{{ user.country }}"{% endif %}
                                required>
                     </div>
                     <div class="mb-3 ms-1">
@@ -108,7 +117,7 @@
                                class="form-control"
                                id="delivery_address"
                                name="delivery_address"
-                               value="Delivery Address"
+                               {% if user.is_authenticated %}value="{{ user.address }}"{% endif %}
                                required>
                     </div>
                     <div class="mb-3 ms-1">
@@ -117,7 +126,7 @@
                                class="form-control"
                                id="email_address"
                                name="email_address"
-                               value="Email Address"
+                               {% if user.is_authenticated %}value="{{ user.email }}"{% endif %}
                                required>
                     </div>
                     <div class="mb-3 ms-1">
@@ -126,7 +135,7 @@
                                class="form-control"
                                id="phone_number"
                                name="phone_number"
-                               value="Phone Number"
+                               {% if user.is_authenticated %}value="{{ user.phone }}"{% endif %}
                                equired>
                     </div>
                     <div class="mb-3 ms-1">

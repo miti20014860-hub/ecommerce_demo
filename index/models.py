@@ -2,6 +2,26 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 
+class Quotes(models.Model):
+    author = models.CharField(
+        max_length=50,
+        verbose_name=_("Author")
+    )
+    content = models.TextField(
+        verbose_name=_("Contents")
+    )
+    is_featured = models.BooleanField(default=False, verbose_name="Featured")
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = _("quote")
+        verbose_name_plural = _("quotes")
+
+    def __str__(self):
+        return f"{self.author} - {self.created_at}"
+
+
 class Banner(models.Model):
     # === Banner ===
     image = models.ImageField(

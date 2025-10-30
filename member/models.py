@@ -4,6 +4,7 @@ from django.db import models
 
 class CustomUser(AbstractUser):
     phone = models.CharField(max_length=15, blank=True, verbose_name="phone")
+    country = models.CharField(max_length=50, blank=True, verbose_name="country")
     address = models.CharField(max_length=200, blank=True, verbose_name="address")
 
     def __str__(self):

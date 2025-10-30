@@ -1,7 +1,7 @@
 # admin.py
-from django.contrib import admin
+from .models import Activity, ActivityImage, Booking
 from django.utils.html import format_html
-from .models import Activity, ActivityImage
+from django.contrib import admin
 
 
 # === 圖片 Inline ===
@@ -125,3 +125,24 @@ class ActivityAdmin(admin.ModelAdmin):
             return f"{price_int:,} {obj.currency}"
         return "-"
     min_price.admin_order_field = 'minimum_charge'
+
+
+@admin.register(Booking)
+class BookingAdmin(admin.ModelAdmin):
+    list_display = ('activity', 'get_full_name', 'email', 'prefer_date', 'created_at', 'user')
+    list_filter = ('activity', 'prefer_date', 'created_at')
+    search_fields = ('first_name', 'last_name', 'email', 'activity', 'user__username', 'user__email')
+    readonly_fields = ('created_at',)
+    date_hierarchy = 'created_at'
+
+    def get_full_name(self, obj):
+        return f"{obj.first_name} {obj.last_name}".strip()
+    get_full_name.short_description = "Name"
+    get_full_name.admin_order_field = 'first_name'
+
+    # 可選：限制非 superuser 只能看自己的預約
+    def get_queryset(self, request):
+        qs = super().get_queryset(request)
+        if request.user.is_superuser:
+            return qs
+        return qs.filter(user=request.user)

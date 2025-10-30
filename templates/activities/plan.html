@@ -90,7 +90,7 @@
               <div class="my-2">
                 <p class="text-decoration-underline d-inline mx-1">{{ activity.provider|default:"－" }}</p>
                 <p class="d-inline mx-1">/</p>
-                <p class="text-decoration-underline d-inline mx-1">{{ activity.location|default:"－" }}</p>
+                <p class="text-decoration-underline d-inline mx-1">{{ activity.get_type_display|default:"－" }}</p>
               </div>
               <section class="row p-1">
                 <div class="col-4 border rounded d-flex flex-column mt-1">
@@ -117,8 +117,6 @@
                 <section class="text-muted">
                   <p class="d-block my-1">{{ activity.description|default:"－" }}</p>
                 </section>
-                <!-- 假設你有 plan_1, price_1, summary_1 等欄位，或用 JSONField -->
-                <!-- 若無，可用以下方式模擬（或你可新增 Plan 子模型） -->
                 {% if activity.plan and activity.price %}
                   <div class="mt-3">
                     <h5 class="d-inline">{{ activity.plan }}</h5>
@@ -148,6 +146,9 @@
                   </div>
                 </div>
                 <h6 class="ms-1 mt-2 mb-0">Access Map</h6>
+                <div class="col-12 mt-2 mx-1 bg-light">
+                  <small class="mt-2 mb-0">{{ activity.address|default:"－" }}</small>
+                </div>
                 <div class="mt-0">
                   {% include "partials/_map.html" with lat=activity.lat lng=activity.lng address=activity.address zoom=15 map_id=activity.map_id height="400px" %}
                 </div>
@@ -187,36 +188,47 @@
                           aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                  <form id="booking-form"
-                        action="{% url 'activities:booking' %}"
+                  <form action="{% url 'activities:booking_view' activity.pk %}"
                         method="post">
                     {% csrf_token %}
                     <div class="mb-3 ms-1">
-                      <label for="activity" class="form-label">Activity</label>
+                      <label for="activity" class="form-label text-black">{{ activity.title }}</label>
+                    </div>
+                    <div class="mb-3 ms-1">
+                      <label for="first_name" class="form-label">First name</label>
                       <input type="text"
                              class="form-control"
-                             id="activity"
-                             name="activity"
-                             value="Activity"
+                             id="first_name"
+                             name="first_name"
+                             {% if user.is_authenticated %}value="{{ user.first_name }}"{% endif %}
                              required>
                     </div>
                     <div class="mb-3 ms-1">
-                      <label for="full_name" class="form-label">Full Name</label>
+                      <label for="last_name" class="form-label">Last name</label>
                       <input type="text"
                              class="form-control"
-                             id="full_name"
-                             name="full_name"
-                             value="Full Name"
+                             id="last_name"
+                             name="last_name"
+                             {% if user.is_authenticated %}value="{{ user.last_name }}"{% endif %}
                              required>
                     </div>
                     <div class="mb-3 ms-1">
-                      <label for="email_address" class="form-label">Email Address</label>
+                      <label for="email" class="form-label">Email Address</label>
                       <input type="email"
                              class="form-control"
-                             id="email_address"
-                             name="email_address"
-                             value="Email Address"
+                             id="email"
+                             name="email"
+                             {% if user.is_authenticated %}value="{{ user.email }}"{% endif %}
                              required>
+                    </div>
+                    <div class="mb-3 ms-1">
+                      <label for="phone" class="form-label">Phone Number</label>
+                      <input type="text"
+                             class="form-control"
+                             id="phone"
+                             name="phone"
+                             {% if user.is_authenticated %}value="{{ user.phone }}"{% endif %}
+                             placeholder="Optional">
                     </div>
                     <div class="mb-3 ms-1">
                       <label for="prefer_date" class="form-label">Preferred Date</label>
@@ -225,15 +237,6 @@
                              id="prefer_date"
                              name="prefer_date"
                              required>
-                    </div>
-                    <div class="mb-3 ms-1">
-                      <label for="phone_number" class="form-label">Phone Number</label>
-                      <input type="text"
-                             class="form-control"
-                             id="phone_number"
-                             name="phone_number"
-                             value="Phone Number"
-                             placeholder="Optional">
                     </div>
                     <div class="mb-3 ms-1">
                       <label for="comment" class="form-label">Comment</label>

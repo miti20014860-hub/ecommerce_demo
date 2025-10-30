@@ -75,16 +75,16 @@
             <!-- 右側欄：Recent posts -->
             <section class="col-lg-4 mt-3">
                 <div class="top-5">
-                    <aside class="p-4 mb-3 bg-body-tertiary rounded">
-                        <h4 class="fst-italic">About</h4>
-                        <p class="mb-0">
-                            Customize this section to tell your visitors a little bit about
-                            your publication, writers, content, or something else entirely.
-                            Totally up to you.
-                        </p>
-                    </aside>
+                    {% if quotes.exists %}
+                        {% for quote in quotes %}
+                            <aside class="p-3 mb-3 bg-body-tertiary rounded">
+                                <p>{{ quote.content }}</p>
+                                <p class="text-end my-0">{{ quote.author }}</p>
+                            </aside>
+                        {% endfor %}
+                    {% endif %}
                     <ul class="list-unstyled ms-3">
-                        <h4 class="fst-italic">Recent posts</h4>
+                        <h4 class="fst-italic">Recent news</h4>
                         {% for news in recent_newses %}
                             <li>
                                 <div class="row py-3 border-top">
@@ -98,15 +98,15 @@
                                     <div class="col g-0 pt-1 me-4 d-flex flex-column">
                                         <a href="{% url 'index:news' news.pk %}"
                                            class="text-decoration-none link-body-emphasis text-black">
-                                            <h6 class="mb-0">{{ news.title|truncatewords:6 }}</h6>
+                                            <h6 class="mb-0">{{ news.title }}</h6>
                                         </a>
-                                        <small class="text-body-secondary">{{ news.created_at|date:"M j, Y" }}</small>
+                                        <small class="text-body-secondary">{{ news.contents_main|truncatewords:12 }}</small>
                                     </div>
                                 </div>
                             </li>
                         {% empty %}
                             <li>
-                                <p class="text-muted">No recent posts.</p>
+                                <p class="text-muted">No news</p>
                             </li>
                         {% endfor %}
                     </ul>

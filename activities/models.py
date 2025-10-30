@@ -1,20 +1,30 @@
-from django.db import models
 from django.utils.translation import gettext_lazy as _
+from django.utils.text import slugify
+from django.conf import settings
+from django.db import models
 
 
 class Activity(models.Model):
     # === 基本資訊 ===
-    Type_CHOICES = [('hands_on', 'Hands-on'), ('performance', 'Performance'), ('exhibition', 'Exhibition'), ('lecture', 'Lecture'), ('workshop', 'Workshop')]
-    type = models.CharField(max_length=20, choices=Type_CHOICES, default='hands_on', verbose_name="Activity Type")
+    Type_CHOICES = [
+        ('hands_on', 'Hands-on'),
+        ('performance', 'Performance'),
+        ('exhibition', 'Exhibition'),
+        ('lecture', 'Lecture'),
+        ('workshop', 'Workshop')
+    ]
+    type = models.CharField(
+        max_length=20,
+        choices=Type_CHOICES,
+        default='hands_on',
+        verbose_name="Activity Type"
+    )
 
     title = models.TextField(
         verbose_name=_("Title (Very Very Very Very Very Very Very Long)")
     )
 
-    minimum_charge = models.CharField(
-        max_length=100,
-        verbose_name=_("Minimum Charge"),
-    )
+    minimum_charge = models.DecimalField(max_digits=15, decimal_places=2, blank=True, null=True, verbose_name="Minimum Charge")
 
     CURRENCY_CHOICES = [
         ('JPY', '¥ JPY'),
@@ -282,6 +292,15 @@ class Activity(models.Model):
         verbose_name=_("Map ID"),
         help_text=_("Google Maps Place ID or custom ID")
     )
+    # ... 其他欄位
+
+    slug = models.SlugField(
+        max_length=200,
+        unique=True,
+        blank=True,
+        null=True,
+        verbose_name="URL Slug"
+    )
 
     # === 圖片管理（多圖）===
     created_at = models.DateTimeField(auto_now_add=True)
@@ -303,6 +322,14 @@ class Activity(models.Model):
     def main_image_url(self):
         img = self.main_image
         return img.image.url if img and img.image else None
+
+    # === slug ===
+    def save(self, *args, **kwargs):
+        if not self.pk:
+            super().save(*args, **kwargs)
+        if not self.slug:
+            self.slug = str(self.pk)
+        super().save(*args, **kwargs)
 
 
 # === 圖片模型（關聯式）===
@@ -329,3 +356,30 @@ class ActivityImage(models.Model):
 
     def __str__(self):
         return f"{self.activity.title} - {self.caption or 'Image'}"
+
+
+class Booking(models.Model):
+    activity = models.CharField(max_length=200, verbose_name="Activity")
+    first_name = models.CharField(max_length=100, verbose_name="First Name")
+    last_name = models.CharField(max_length=100, verbose_name="Last Name")
+    email = models.EmailField(verbose_name="Email Address")
+    phone = models.CharField(max_length=20, blank=True, null=True, verbose_name="Phone Number")
+    prefer_date = models.DateField(verbose_name="Preferred Date")
+    comment = models.TextField(blank=True, null=True, verbose_name="Comment")
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Submitted At")
+
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="User"
+    )
+
+    class Meta:
+        verbose_name = "Booking"
+        verbose_name_plural = "Bookings"
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return f"{self.first_name} {self.last_name} - {self.activity}"

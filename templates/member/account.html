@@ -86,23 +86,23 @@
                                 </tr>
                                 <tr>
                                     <th class="align-middle text-nowrap">
+                                        <label for="{{ profile_form.country.id_for_label }}  ">Country</label>
+                                    </th>
+                                    <td class="p-1">
+                                        <div class="input-group input-group-md">{{ profile_form.country }}</div>
+                                        {% if profile_form.country.errors %}
+                                            <div class="text-danger small mt-1">{{ profile_form.country.errors|join:", " }}</div>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th class="align-middle text-nowrap">
                                         <label for="{{ profile_form.address.id_for_label }}  ">Delivery Addresses</label>
                                     </th>
                                     <td class="p-1">
                                         <div class="input-group input-group-md">{{ profile_form.address }}</div>
                                         {% if profile_form.address.errors %}
                                             <div class="text-danger small mt-1">{{ profile_form.address.errors|join:", " }}</div>
-                                        {% endif %}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th class="align-middle text-nowrap">
-                                        <label for="{{ profile_form.payment.id_for_label }}  ">Payment Info</label>
-                                    </th>
-                                    <td class="p-1">
-                                        <div class="input-group input-group-md">{{ profile_form.payment }}</div>
-                                        {% if profile_form.payment.errors %}
-                                            <div class="text-danger small mt-1">{{ profile_form.payment.errors|join:", " }}</div>
                                         {% endif %}
                                     </td>
                                 </tr>

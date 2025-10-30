@@ -107,12 +107,17 @@ def item(request):
 
 
 def form(request):
-    return render(request, 'collection/form.html')
+    pk = request.GET.get('id')
+    if not pk:
+        return render(request, 'collection/form.html')
+    item = get_object_or_404(Collection, pk=pk)
+    return render(request, 'collection/form.html', {
+        'item': item
+    })
 
 
 def order_form(request):
     payment_method = request.POST.get('payment_method')
-    # 可加入簡單驗證
     if not payment_method:
         messages.error(request, "請選擇付款方式")
     else:

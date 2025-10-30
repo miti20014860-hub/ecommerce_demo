@@ -15,7 +15,7 @@ class CustomUserAdmin(UserAdmin):
     fieldsets = (
         (None, {'fields': ('username', 'password')}),
         (_('Personal info'), {'fields': ('first_name', 'last_name', 'email')}),
-        (_('Custom Fields'), {'fields': ('phone', 'address')}),  # 插入這裡
+        (_('Custom Fields'), {'fields': ('phone', 'country', 'address')}),  # 插入這裡
         (_('Permissions'), {'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')}),
         (_('Important dates'), {'fields': ('last_login', 'date_joined')}),
     )
@@ -27,5 +27,5 @@ class CustomUserAdmin(UserAdmin):
             'fields': ('username', 'password1', 'password2'),
         }),
         (_('Personal info'), {'fields': ('first_name', 'last_name', 'email')}),
-        (_('Custom Fields'), {'fields': ('phone', 'address')}),  # 插入這裡
+        (_('Custom Fields'), {'fields': ('phone', 'country', 'address')}),  # 插入這裡
     )

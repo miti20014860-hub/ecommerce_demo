@@ -157,9 +157,9 @@
                             </a>
                             <!-- 內容 -->
                             <div class="col py-1 d-flex flex-column">
-                                <!-- 供應商 + 類型 -->
+                                <!-- 標籤 -->
                                 <div class="d-flex flex-row mt-1 gap-1">
-                                    <div class="bg-info text-white px-2 py-1 rounded small">{{ activity.provider|default:"－" }}</div>
+                                    <div class="bg-info text-white px-2 py-1 rounded small">{{ activity.get_prefecture_display|default:"－" }}</div>
                                     <div class="bg-warning text-dark px-2 py-1 rounded small">{{ activity.get_type_display|default:"－" }}</div>
                                 </div>
                                 <!-- 描述（截斷 350 字） -->

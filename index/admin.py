@@ -1,6 +1,20 @@
 from django.contrib import admin
 from django.utils.html import format_html
-from .models import Banner, News, NewsImage, Notice, NoticeImage
+from .models import Quotes, Banner, News, NewsImage, Notice, NoticeImage
+
+
+@admin.register(Quotes)
+class QuotesAdmin(admin.ModelAdmin):
+    list_display = ('author', 'content', 'is_featured')
+    list_editable = ['is_featured']
+    list_filter = ('author', 'created_at')
+    search_fields = ('author', 'content')
+
+    fieldsets = (
+        (None, {
+            'fields': ('author', 'content', 'is_featured')
+        }),
+    )
 
 
 @admin.register(Banner)
