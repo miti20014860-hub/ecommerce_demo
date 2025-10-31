@@ -8,7 +8,7 @@
                     <h2>Sign in</h2>
                 </div>
                 <div class="modal-body pt-0">
-                    <!-- 登入表單 -->
+                    <!-- Login -->
                     <form id="sign_in"
                           action="{% url 'member:account_sign_in' %}"
                           method="post">
@@ -26,7 +26,7 @@
                                value="Sign in"
                                class="w-100 btn btn-lg btn-dark rounded-0" />
                     </form>
-                    <!-- 註冊切換區 -->
+                    <!-- Registration -->
                     <div class="mt-5">
                         <h2>Not a member?</h2>
                         <button id="sign_upBtn"
@@ -38,7 +38,6 @@
                                 aria-controls="sign_up">Sign up</button>
                         <div class="collapse mt-3" id="sign_up">
                             <h3 class="mb-4 text-danger-emphasis">Required Fields</h3>
-                            <!-- 註冊表單 -->
                             <form id="sign_up"
                                   action="{% url 'member:account_sign_up' %}"
                                   method="post">

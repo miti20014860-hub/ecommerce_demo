@@ -59,7 +59,7 @@
                 <form method="post"
                       action="{% url 'collection:order_form' %}?id={{ item.id }}">
                     {% csrf_token %}
-                    <!-- 付款方式：Radio Button Group（Bootstrap 風格） -->
+                    <!-- Payment method -->
                     <div class="my-3">
                         <div class="btn-group w-100" role="group" aria-label="Payment Method">
                             {% for value, label in form.payment_method.field.choices %}
@@ -78,7 +78,7 @@
                             <div class="text-danger small mt-1">{{ form.payment_method.errors }}</div>
                         {% endif %}
                     </div>
-                    <!-- 其他欄位：自動加上 form-control -->
+                    <!-- form-control -->
                     {% for field in form %}
                         {% if field.name != 'payment_method' %}
                             <div class="mb-3">

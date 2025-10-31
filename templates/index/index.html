@@ -20,7 +20,7 @@
                 </section>
             {% endfor %}
         {% endif %}
-        <!-- 主新聞區：前 2 則 -->
+        <!-- Featured newses -->
         <section class="row mt-2 mb-2">
             {% for news in featured_newses %}
                 <article class="col-lg-6 mt-2{% if not forloop.first %} blog-post{% endif %}">
@@ -72,7 +72,7 @@
                     </article>
                 {% endfor %}
             </section>
-            <!-- 右側欄：Recent posts -->
+            <!-- Recent news -->
             <section class="col-lg-4 mt-3">
                 <div class="top-5">
                     {% if quotes.exists %}

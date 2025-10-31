@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-lg-113 col-xl-10 col-xxl-9 mx-auto">
                 <div class="row border border-secondary g-0">
-                    <!-- 標題 -->
+                    <!-- Name -->
                     <div class="bg-secondary text-black p-2">
                         <h4 class="mt-1 text-center">{{ collection.name_jp }}</h4>
                         <h4 class="mb-0 text-center">{{ collection.name_en }}</h4>
@@ -29,7 +29,7 @@
                             <h3 class="border-bottom m-0">{{ collection.get_type_display }}</h3>
                         </div>
                     </div>
-                    <!-- 尺寸規格 -->
+                    <!-- Size -->
                     <div class="row g-0">
                         <div class="col-3 bg-body-secondary">
                             <table class="table table-transparent border-white fw-normal mb-0">
@@ -144,13 +144,13 @@
                             </div>
                         </div>
                     </div>
-                    <!-- 訂購按鈕 -->
+                    <!-- Order button -->
                     <div class="col-auto mx-auto my-2">
                         <a href="{% url 'collection:order_form' %}?id={{ collection.pk }}"
                            class="fw-medium text-warning-emphasis">[Open Order Form]</a>
                     </div>
                 </div>
-                <!-- 圖片區（從 DB 動態讀取） -->
+                <!-- Image -->
                 <div class="row g-0">
                     {% for img in collection.images.all %}
                         <div class="col-12 p-0">

@@ -57,6 +57,14 @@ def account(request):
     return render(request, 'member/account.html', context)
 
 
+@login_required
+def account_sign_out(request):
+    if request.method == 'POST':
+        logout(request)
+        messages.info(request, 'Logged out successfully')
+    return redirect('index:index')
+
+
 def account_sign_in(request):
     if request.method == 'POST':
         form = LoginForm(data=request.POST)
@@ -72,7 +80,7 @@ def account_sign_in(request):
         form = LoginForm()
     return render(request, 'index/index.html', {
         'form': form,
-        'register_form': RegisterForm()  # 給註冊表單預備
+        'register_form': RegisterForm()
     })
 
 
@@ -95,11 +103,3 @@ def account_sign_up(request):
         'form': LoginForm(),
         'register_form': register_form
     })
-
-
-@login_required
-def account_sign_out(request):
-    if request.method == 'POST':
-        logout(request)
-        messages.info(request, 'Logged out successfully')
-    return redirect('index:index')

@@ -1,18 +1,15 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.contrib import messages
 from django.urls import reverse
 from django.db.models import Q
-from .models import Collection, Order
+from .models import Collection
 from .forms import OrderForm
 
 
 def collection(request):
-    # 1. 初始 queryset
     collections = Collection.objects.all().order_by('-created_at', 'name_en')
 
-    # 2. 取得所有可能的 GET 參數
     query = request.GET.get('q', '').strip()
     type_filters = request.GET.getlist('type')
     period_filters = request.GET.getlist('period_type')
@@ -21,9 +18,6 @@ def collection(request):
     price_min = request.GET.get('price_min', '').strip()
     price_max = request.GET.get('price_max', '').strip()
 
-    # -------------------------------------------------
-    # 3. 只要有任何篩選條件，就執行過濾
-    # -------------------------------------------------
     if query:
         collections = collections.filter(
             Q(period__icontains=query) |
@@ -64,18 +58,13 @@ def collection(request):
         except ValueError:
             pass
 
-    # -------------------------------------------------
-    # 5. 分頁（每頁 6 筆，與原本一致）
-    # -------------------------------------------------
     paginator = Paginator(collections, 6)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
-    # -------------------------------------------------
-    # 6. 傳給模板的 context
-    # -------------------------------------------------
     context = {
-        'collections': page_obj,          # 用於 {% for obj in page_obj %}
+        # {% for obj in page_obj %}
+        'collections': page_obj,
         'page_obj': page_obj,
         'query': query,
         'type_filters': type_filters,
@@ -85,12 +74,11 @@ def collection(request):
         'price_min': price_min,
         'price_max': price_max,
 
-        # 下拉選單
         'type_choices':   Collection.TYPE_CHOICES,
         'period_choices': Collection.PERIOD_CHOICES,
     }
 
-    # 只要有任何篩選條件，就使用搜尋模板；否則使用原本的列表模板
+    # Search or not
     template = 'collection/collection.html' if any([
         query, type_filters, period_filters,
         blade_min, blade_max, price_min, price_max

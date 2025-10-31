@@ -1,31 +1,31 @@
 {% if messages %}
-  <div class="alert-container">
-    {% for message in messages %}
-      <div class="custom-alert alert-dismissible fade show {% if message.tags == 'success' %}alert-success {% elif message.tags == 'error' %}alert-danger {% elif message.tags == 'warning' %}alert-warning {% elif message.tags == 'info' %}alert-info {% elif message.tags == 'debug' %}alert-secondary {% else %}alert-light{% endif %}"
-           role="alert">
-        <span class="alert-text">{{ message }}</span>
-        <button type="button"
-                class="btn-close btn-close-white"
-                data-bs-dismiss="alert"
-                aria-label="Close"></button>
-      </div>
-    {% endfor %}
-  </div>
+    <div class="alert-container">
+        {% for message in messages %}
+            <div class="custom-alert alert-dismissible fade show {% if message.tags == 'success' %}alert-success {% elif message.tags == 'error' %}alert-danger {% elif message.tags == 'warning' %}alert-warning {% elif message.tags == 'info' %}alert-info {% elif message.tags == 'debug' %}alert-secondary {% else %}alert-light{% endif %}"
+                 role="alert">
+                <span class="alert-text">{{ message }}</span>
+                <button type="button"
+                        class="btn-close btn-close-white"
+                        data-bs-dismiss="alert"
+                        aria-label="Close"></button>
+            </div>
+        {% endfor %}
+    </div>
 {% endif %}
 <style>
-/* 浮動容器 */
+/* Floating containers */
 .alert-container {
     position: fixed;
     top: 20px;
     right: 20px;
-    z-index: 1080; /* 高於 Bootstrap modal */
+    z-index: 1080; /* Higher than Bootstrap modal */
     display: flex;
     flex-direction: column;
     gap: 10px;
-    pointer-events: none; /* 容器不擋滑鼠 */
+    pointer-events: none; /* Does not block the mouse */
 }
 
-/* 單一 Alert */
+/* Alert */
 .custom-alert {
     min-width: 300px;
     max-width: 400px;
@@ -38,7 +38,7 @@
     justify-content: space-between;
     gap: 12px;
     animation: slideIn 0.3s ease-out;
-    pointer-events: auto; /* 允許關閉 */
+    pointer-events: auto; /* Allow Close */
     opacity: 0;
     transform: translateX(100%);
 }
@@ -48,7 +48,7 @@
     transform: translateX(0);
 }
 
-/* 關閉按鈕 */
+/* Close button */
 .custom-alert .btn-close {
     opacity: 0.8;
     filter: brightness(1.5);
@@ -58,14 +58,14 @@
     opacity: 1;
 }
 
-/* 文字 */
+/* Text */
 .alert-text {
     font-size: 0.95rem;
     font-weight: 500;
     flex: 1;
 }
 
-/* 動畫 */
+/* Animation */
 @keyframes slideIn {
     from {
         opacity: 0;
@@ -84,7 +84,7 @@
     }
 }
 
-/* 手機優化 */
+/* Phone optimization */
 @media (max-width: 576px) {
     .alert-container {
         left: 20px;
@@ -100,19 +100,19 @@ document.addEventListener('DOMContentLoaded', function () {
     const alerts = document.querySelectorAll('.custom-alert');
     
     alerts.forEach((alert, index) => {
-        // 延遲顯示，避免同時閃現
+        // Delayed display
         setTimeout(() => {
             alert.classList.add('show');
         }, index * 100);
 
-        // 5 秒後自動關閉
+        // Automatically closes
         setTimeout(() => {
             alert.classList.remove('show');
             alert.addEventListener('transitionend', () => alert.remove());
         }, 5000 + index * 100);
     });
 
-    // 支援 Bootstrap 關閉按鈕
+    // Supports Bootstrap close button
     alerts.forEach(alert => {
         const closeBtn = alert.querySelector('[data-bs-dismiss="alert"]');
         if (closeBtn) {

@@ -69,7 +69,7 @@
                                             <div class="col-6">
                                                 <input type="number"
                                                        name="charge_max"
-                                                       class="form-control form-control-sm"
+                                                       class="form-control form-control-md"
                                                        placeholder="Max"
                                                        value="{{ charge_max|default:'' }}">
                                             </div>
@@ -94,7 +94,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- 5. Region (8 大區展開 + 縣市多選) -->
+                            <!-- 5. Region -->
                             <div class="accordion-item border-secondary">
                                 <div class="accordion-header">
                                     <button class="accordion-button py-2 collapsed"
@@ -104,7 +104,7 @@
                                 </div>
                                 <div id="region_collapse" class="accordion-collapse collapse">
                                     <div class="accordion-body py-1">
-                                        <!-- 每個大區的縣市 -->
+                                        <!-- Prefectures -->
                                         {% for group in region_groups %}
                                             <div class="prefecture-group my-2" id="group_{{ group.value }}">
                                                 <small class="text-muted d-block mb-1">{{ group.label }} Prefectures</small>
@@ -142,12 +142,12 @@
                 <ul class="list-unstyled">
                     {% for activity in activities %}
                         <div class="row border mb-3">
-                            <!-- 標題 -->
+                            <!-- Title -->
                             <a href="{% url 'activities:plan' activity.pk %}"
                                class="link-body-emphasis text-decoration-none text-black border-top border-4">
                                 <h4 class="border-bottom border-2 py-3">{{ activity.title }}</h4>
                             </a>
-                            <!-- 圖片 -->
+                            <!-- Image -->
                             <a href="{% url 'activities:plan' activity.pk %}" class="col-lg-5 py-2">
                                 <img src="{% if activity.main_image_url %}{{ activity.main_image_url }}{% else %}{% static 'img/default-activity.jpg' %}{% endif %}"
                                      class="object-fit-cover w-100"
@@ -155,16 +155,16 @@
                                      width="100%"
                                      height="240" />
                             </a>
-                            <!-- 內容 -->
+                            <!-- Content -->
                             <div class="col py-1 d-flex flex-column">
-                                <!-- 標籤 -->
+                                <!-- Label -->
                                 <div class="d-flex flex-row mt-1 gap-1">
                                     <div class="bg-info text-white px-2 py-1 rounded small">{{ activity.get_prefecture_display|default:"－" }}</div>
                                     <div class="bg-warning text-dark px-2 py-1 rounded small">{{ activity.get_type_display|default:"－" }}</div>
                                 </div>
-                                <!-- 描述（截斷 350 字） -->
+                                <!-- Description -->
                                 <p class="mt-1 mb-auto small text-muted">{{ activity.description|striptags|truncatechars:400 }}</p>
-                                <!-- 價格按鈕 -->
+                                <!-- Button -->
                                 <a href="{% url 'activities:plan' activity.pk %}"
                                    class="btn btn-danger mt-1 mb-2 w-100">
                                     {{ activity.minimum_charge|floatformat:0|intcomma|default:"－" }} {{ activity.get_currency_display }}～
@@ -172,14 +172,14 @@
                             </div>
                         </div>
                     {% empty %}
-                        <div class="text-center py-5 text-muted">ERROR</div>
+                        <div class="text-center py-5 text-muted">No results found</div>
                     {% endfor %}
                 </ul>
                 <!-- Paginator-->
                 {% if page_obj.has_other_pages %}
                     <section aria-label="pagination" class="mt-4">
                         <ul class="pagination justify-content-center">
-                            <!-- 上一頁 -->
+                            <!-- Previous -->
                             {% if page_obj.has_previous %}
                                 <li class="page-item">
                                     <a class="page-link"
@@ -193,7 +193,7 @@
                                     <span class="page-link"><i class="bi bi-chevron-left" aria-hidden="true"></i></span>
                                 </li>
                             {% endif %}
-                            <!-- 頁碼 -->
+                            <!-- Page -->
                             {% for num in page_obj.paginator.page_range %}
                                 {% if page_obj.number == num %}
                                     <li class="page-item active" aria-current="page">
@@ -205,7 +205,7 @@
                                     </li>
                                 {% endif %}
                             {% endfor %}
-                            <!-- 下一頁 -->
+                            <!-- Next -->
                             {% if page_obj.has_next %}
                                 <li class="page-item">
                                     <a class="page-link"
