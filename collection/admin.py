@@ -4,9 +4,10 @@ from .models import Collection, CollectionImage, Order
 
 
 # Inline 讓圖片可以在 Collection 編輯頁面內管理
-class CollectionImageInline(admin.TabularInline):
+class CollectionImageInline(admin.StackedInline):
     model = CollectionImage
-    extra = 1  # 預設顯示 1 個空白上傳欄
+    extra = 0
+    min_num = 1
     fields = ('image', 'image_preview', 'caption', 'order')
     readonly_fields = ('image_preview',)
 

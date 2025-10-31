@@ -131,8 +131,7 @@
                         <!-- Apply & Clear -->
                         <div class="d-grid gap-2 mt-3">
                             <button type="submit" class="btn btn-light rounded-0">Apply</button>
-                            <a href="{% url 'activities:activities' %}"
-                               class="btn btn-light rounded-0">Clear</a>
+                            <a href="{% url 'activity:activity' %}" class="btn btn-light rounded-0">Clear</a>
                         </div>
                     </form>
                 </div>
@@ -143,12 +142,12 @@
                     {% for activity in activities %}
                         <div class="row border mb-3">
                             <!-- Title -->
-                            <a href="{% url 'activities:plan' activity.pk %}"
+                            <a href="{% url 'activity:plan' activity.pk %}"
                                class="link-body-emphasis text-decoration-none text-black border-top border-4">
                                 <h4 class="border-bottom border-2 py-3">{{ activity.title }}</h4>
                             </a>
                             <!-- Image -->
-                            <a href="{% url 'activities:plan' activity.pk %}" class="col-lg-5 py-2">
+                            <a href="{% url 'activity:plan' activity.pk %}" class="col-lg-5 py-2">
                                 <img src="{% if activity.main_image_url %}{{ activity.main_image_url }}{% else %}{% static 'img/default-activity.jpg' %}{% endif %}"
                                      class="object-fit-cover w-100"
                                      alt="{{ activity.title }} Thumbnail"
@@ -165,7 +164,7 @@
                                 <!-- Description -->
                                 <p class="mt-1 mb-auto small text-muted">{{ activity.description|striptags|truncatechars:400 }}</p>
                                 <!-- Button -->
-                                <a href="{% url 'activities:plan' activity.pk %}"
+                                <a href="{% url 'activity:plan' activity.pk %}"
                                    class="btn btn-danger mt-1 mb-2 w-100">
                                     {{ activity.minimum_charge|floatformat:0|intcomma|default:"－" }} {{ activity.get_currency_display }}～
                                 </a>

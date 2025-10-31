@@ -42,7 +42,6 @@ class ActivityAdmin(admin.ModelAdmin):
     search_fields = (
         'title',
         'provider',
-        'location',
         'description',
         'plan',
         'price',
@@ -103,7 +102,6 @@ class ActivityAdmin(admin.ModelAdmin):
         (("Map Information"), {
             'fields': (
                 'prefecture',
-                'location',
                 ('lat', 'lng'),
                 'address',
                 'map_id',

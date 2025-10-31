@@ -16,7 +16,6 @@ class Activity(models.Model):
     type = models.CharField(
         max_length=20,
         choices=Type_CHOICES,
-        default='hands_on',
         verbose_name="Activity Type"
     )
 
@@ -24,7 +23,7 @@ class Activity(models.Model):
         verbose_name=_("Title (Very Very Very Very Very Very Very Long)")
     )
 
-    minimum_charge = models.DecimalField(max_digits=15, decimal_places=2, blank=True, null=True, verbose_name="Minimum Charge")
+    minimum_charge = models.DecimalField(max_digits=15, decimal_places=2, verbose_name="Minimum Charge")
 
     CURRENCY_CHOICES = [
         ('JPY', '¥ JPY'),
@@ -53,28 +52,24 @@ class Activity(models.Model):
 
     provider = models.CharField(
         max_length=100,
-        blank=True,
         verbose_name=_("Provider"),
         help_text=_("Company or person offering the activity")
     )
 
     participants = models.CharField(
         max_length=50,
-        blank=True,
         verbose_name=_("Participants"),
         help_text=_("Possible number of bookings")
     )
 
     participating_age = models.CharField(
         max_length=50,
-        blank=True,
         verbose_name=_("Participating Age"),
         help_text=_("e.g., 6+, 18+, All ages")
     )
 
     duration = models.CharField(
         max_length=100,
-        blank=True,
         verbose_name=_("Duration"),
         help_text=_("e.g., 2 hours, Half day, 3 days")
     )
@@ -149,20 +144,17 @@ class Activity(models.Model):
 
     min_p = models.CharField(
         max_length=100,
-        blank=True,
         verbose_name=_("Min. P"),
         help_text=_("Minimum required to run the activity")
     )
 
     reg_deadline = models.CharField(
         max_length=100,
-        null=True, blank=True,
         verbose_name=_("Deadline"),
         help_text=_("Registration Deadline")
     )
 
     event_ends = models.DateField(
-        null=True, blank=True,
         verbose_name=_("Event Ends"),
     )
 
@@ -260,17 +252,9 @@ class Activity(models.Model):
     prefecture = models.CharField(
         max_length=20,
         choices=PREFECTURE_CHOICES,
-        blank=True,
-        null=True,
         verbose_name="Prefecture"
     )
 
-    location = models.CharField(
-        max_length=100,
-        blank=True,
-        verbose_name=_("Location"),
-        help_text=_("General area or venue name")
-    )
     lat = models.CharField(
         max_length=100,
         null=True, blank=True,

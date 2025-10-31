@@ -9,9 +9,9 @@
             <a class="nav-item nav-link link-body-emphasis {% if request.path == '/' %}active{% endif %}"
                href="{% url 'index:index' %}"
                {% if request.path == '/' %}aria-current="page"{% endif %}>News</a>
-            <a class="nav-item nav-link link-body-emphasis {% if '/activities/' in request.path %}active{% endif %}"
-               href="{% url 'activities:activities' %}"
-               {% if '/activities/' in request.path %}aria-current="page"{% endif %}>Activities</a>
+            <a class="nav-item nav-link link-body-emphasis {% if '/activity/' in request.path %}active{% endif %}"
+               href="{% url 'activity:activity' %}"
+               {% if '/activity/' in request.path %}aria-current="page"{% endif %}>Activity</a>
             <a class="nav-item nav-link link-body-emphasis {% if '/collection/' in request.path %}active{% endif %}"
                href="{% url 'collection:collection' %}"
                {% if '/collection/' in request.path %}aria-current="page"{% endif %}>Collection</a>

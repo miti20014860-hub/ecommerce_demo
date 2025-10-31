@@ -24,7 +24,7 @@ from debug_toolbar.toolbar import debug_toolbar_urls
 
 urlpatterns = [
     path('', include('index.urls', namespace='index')),
-    path('activities/', include('activities.urls', namespace='activities')),
+    path('activity/', include('activity.urls', namespace='activity')),
     path('kenshi/', include('kenshi.urls', namespace='kenshi')),
     path('member/', include('member.urls', namespace='member')),
     path('collection/', include('collection.urls', namespace='collection')),

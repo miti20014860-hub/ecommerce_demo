@@ -18,31 +18,31 @@ class Collection(models.Model):
 
     name_jp = models.CharField(max_length=100, verbose_name="Name (JP)")
     name_en = models.CharField(max_length=100, verbose_name="Name (EN)")
-    provider = models.CharField(max_length=100, blank=True, verbose_name="Provider")
-    signature = models.CharField(max_length=100, blank=True, verbose_name="Signature (Mei)")
+    provider = models.CharField(max_length=100, verbose_name="Provider")
+    signature = models.CharField(max_length=100, verbose_name="Signature (Mei)")
 
-    type = models.CharField(max_length=20, choices=TYPE_CHOICES, default='katana', verbose_name="Type")
-    blade_length = models.DecimalField(max_digits=6, decimal_places=2, blank=True, null=True, verbose_name="Blade Length (cm)")
-    curvature = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True, verbose_name="Curvature (cm)")
-    sword_weight = models.DecimalField(max_digits=6, decimal_places=2, blank=True, null=True, verbose_name="Sword Weight (g)")
+    type = models.CharField(max_length=20, choices=TYPE_CHOICES, verbose_name="Type")
+    blade_length = models.DecimalField(max_digits=6, decimal_places=2, null=True, verbose_name="Blade Length (cm)")
+    curvature = models.DecimalField(max_digits=5, decimal_places=2, verbose_name="Curvature (cm)")
+    sword_weight = models.DecimalField(max_digits=6, decimal_places=2, verbose_name="Sword Weight (g)")
 
-    motohaba = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True, verbose_name="Motohaba (cm)")
-    sakihaba = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True, verbose_name="Sakihaba (cm)")
-    motogasane = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True, verbose_name="Motogasane (cm)")
-    sakigasane = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True, verbose_name="Sakigasane (cm)")
+    motohaba = models.DecimalField(max_digits=5, decimal_places=2, verbose_name="Motohaba (cm)")
+    sakihaba = models.DecimalField(max_digits=5, decimal_places=2, verbose_name="Sakihaba (cm)")
+    motogasane = models.DecimalField(max_digits=5, decimal_places=2, verbose_name="Motogasane (cm)")
+    sakigasane = models.DecimalField(max_digits=5, decimal_places=2, verbose_name="Sakigasane (cm)")
 
     PERIOD_CHOICES = [('koto', 'Koto'), ('chūkoto', 'Chūkoto'), ('shinto', 'Shinto'), ('gendai_to', 'Gendai-to')]
-    period_type = models.CharField(max_length=20, choices=PERIOD_CHOICES, default='gendai_to', verbose_name="Period Type",
+    period_type = models.CharField(max_length=20, choices=PERIOD_CHOICES, verbose_name="Period Type",
                                    help_text=("pre-1500, 1500~1596, 1596~1867, 1868~"))
-    period = models.CharField(max_length=100, blank=True, verbose_name="Period")
-    koshirae = models.CharField(max_length=100, blank=True, verbose_name="Koshirae")
+    period = models.CharField(max_length=100, verbose_name="Period")
+    koshirae = models.CharField(max_length=100, verbose_name="Koshirae")
 
-    registration = models.CharField(max_length=100, blank=True, verbose_name="Registration")
-    certificate = models.CharField(max_length=100, blank=True, verbose_name="Certificate")
+    registration = models.CharField(max_length=100, null=True, blank=True, verbose_name="Registration")
+    certificate = models.CharField(max_length=100, null=True, blank=True, verbose_name="Certificate")
 
-    remarks = models.TextField(blank=True, verbose_name="Remarks")
+    remarks = models.TextField(verbose_name="Remarks")
 
-    price = models.DecimalField(max_digits=15, decimal_places=2, blank=True, null=True, verbose_name="Price")
+    price = models.DecimalField(max_digits=15, decimal_places=2, verbose_name="Price")
     currency = models.CharField(max_length=3, choices=CURRENCY_CHOICES, default='JPY', verbose_name="Currency")
 
     created_at = models.DateTimeField(auto_now_add=True)

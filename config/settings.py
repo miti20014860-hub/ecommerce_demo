@@ -50,7 +50,7 @@ DJANGO_APP = [
 ]
 
 CUSTOM_APP = [
-    'activities.apps.ActivitiesConfig',
+    'activity.apps.ActivityConfig',
     'kenshi.apps.KenshiConfig',
     'member.apps.MemberConfig',
     'collection.apps.CollectionConfig',

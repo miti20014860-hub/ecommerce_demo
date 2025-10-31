@@ -188,7 +188,7 @@
                                                 </td>
                                                 <td>
                                                     {% if booking.activity_obj %}
-                                                        <a href="{% url 'activities:plan' pk=booking.activity_obj.id %}"
+                                                        <a href="{% url 'activity:plan' pk=booking.activity_obj.id %}"
                                                            class="text-decoration-none text-primary"
                                                            title="{{ booking.activity }}">
                                                             {{ booking.activity|truncatechars:40 }}
@@ -210,9 +210,9 @@
                                 </table>
                             {% else %}
                                 <div class="text-center h-50vh py-5">
-                                    <p class="text-muted">You haven't booked any activities yet.</p>
-                                    <a href="{% url 'activities:activities' %}"
-                                       class="btn btn-outline-secondary">Explore Activities</a>
+                                    <p class="text-muted">You haven't booked any activity yet.</p>
+                                    <a href="{% url 'activity:activity' %}"
+                                       class="btn btn-outline-secondary">Explore activity</a>
                                 </div>
                             {% endif %}
                         </div>
