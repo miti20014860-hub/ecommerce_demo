@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.core.paginator import Paginator
+from django.utils.http import urlencode
 from django.contrib import messages
 from django.urls import reverse
 from django.db.models import Q
@@ -83,6 +84,15 @@ def collection(request):
         query, type_filters, period_filters,
         blade_min, blade_max, price_min, price_max
     ]) else 'collection/collection.html'
+
+    current_query = request.GET.copy()
+    if 'page' in current_query:
+        del current_query['page']
+    clean_query = {}
+    for key, value in current_query.lists():
+        if value and (value != [''] and value != ['[]']):
+            clean_query[key] = value
+    context['current_query'] = urlencode(clean_query, doseq=True)
 
     return render(request, template, context)
 

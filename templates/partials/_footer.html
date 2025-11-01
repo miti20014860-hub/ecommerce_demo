@@ -7,28 +7,28 @@
                 <ul class="nav justify-content-center justify-content-md-end">
                     <li class="nav-item">
                         <a class="nav-link text-black"
-                           href="{% url 'index:about' %}"
-                           {% if request.path == '/index/' %}aria-current="page"{% endif %}>About Us |</a>
+                           href="{% url 'others:about' %}"
+                           {% if request.path == '/about/' %}aria-current="page"{% endif %}>About Us |</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-black"
-                           href="{% url 'index:contact' %}"
-                           {% if request.path == '/index/' %}aria-current="page"{% endif %}>Contact |</a>
+                           href="{% url 'others:contact' %}"
+                           {% if request.path == '/contact/' %}aria-current="page"{% endif %}>Contact |</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-black"
-                           href="{% url 'index:terms' %}"
-                           {% if request.path == '/index/' %}aria-current="page"{% endif %}>Terms & Conditions |</a>
+                           href="{% url 'others:terms' %}"
+                           {% if request.path == '/terms/' %}aria-current="page"{% endif %}>Terms & Conditions |</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-black"
-                           href="{% url 'index:privacy' %}"
-                           {% if request.path == '/index/' %}aria-current="page"{% endif %}>Privacy |</a>
+                           href="{% url 'others:privacy' %}"
+                           {% if request.path == '/privacy/' %}aria-current="page"{% endif %}>Privacy |</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-black"
-                           href="{% url 'index:faq' %}"
-                           {% if request.path == '/index/' %}aria-current="page"{% endif %}>FAQ |</a>
+                           href="{% url 'others:faq' %}"
+                           {% if request.path == '/faq/' %}aria-current="page"{% endif %}>FAQ |</a>
                     </li>
                 </ul>
             </div>

@@ -58,9 +58,7 @@ class News(models.Model):
         verbose_name=_("title")
     )
     is_featured = models.BooleanField(default=False, verbose_name="Featured")
-    date = models.DateField(
-        verbose_name=_("date")
-    )
+
     contents_main = models.TextField(
         blank=True,
         verbose_name=_("contents main")
@@ -117,7 +115,7 @@ class News(models.Model):
         ordering = ['-created_at']
 
     def __str__(self):
-        return f"{self.title} - {self.date}"
+        return f"{self.title}"
 
     @property
     def main_image(self):
@@ -165,9 +163,6 @@ class Notice(models.Model):
     title = models.CharField(
         max_length=100,
         verbose_name=_("title")
-    )
-    date = models.DateField(
-        verbose_name=_("date")
     )
 
     # === Contents 1 ===
@@ -233,10 +228,10 @@ class Notice(models.Model):
     class Meta:
         verbose_name = _("notice")
         verbose_name_plural = _("notices")
-        ordering = ['-date', '-created_at']
+        ordering = ['-created_at',]
 
     def __str__(self):
-        return f"{self.title} - {self.date}"
+        return f"{self.title}"
 
     @property
     def main_image(self):

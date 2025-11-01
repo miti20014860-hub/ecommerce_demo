@@ -47,7 +47,7 @@ class NewsImageInline(admin.TabularInline):
 class NewsAdmin(admin.ModelAdmin):
     list_display = ('title', 'created_at', 'is_featured')
     list_editable = ['is_featured']
-    list_filter = ('date', 'created_at')
+    list_filter = ('created_at',)
     search_fields = ('title', 'contents_main')
     inlines = [NewsImageInline]
 
@@ -85,14 +85,14 @@ class NoticeImageInline(admin.TabularInline):
 
 @admin.register(Notice)
 class NoticeAdmin(admin.ModelAdmin):
-    list_display = ('title', 'date', 'created_at')
-    list_filter = ('date', 'created_at')
+    list_display = ('title', 'created_at')
+    list_filter = ('created_at',)
     search_fields = ('title', 'subtitle_1', 'contents_1', 'address')
     inlines = [NoticeImageInline]
 
     fieldsets = (
         (None, {
-            'fields': ('title', 'date')
+            'fields': ('title',)
         }),
         ('Content 1', {
             'fields': ('subtitle_1', 'contents_1'),

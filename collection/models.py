@@ -133,5 +133,5 @@ class Order(models.Model):
 
     def save(self, *args, **kwargs):
         if self.item and not self.item_order:
-            self.item_order = self.item.name_en  # 自動填名稱
+            self.item_order = self.item.name_en
         super().save(*args, **kwargs)

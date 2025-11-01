@@ -177,7 +177,7 @@
                             {% if page_obj.has_previous %}
                                 <li class="page-item">
                                     <a class="page-link"
-                                       href="?page={{ page_obj.previous_page_number }}"
+                                       href="?{% if current_query %}{{ current_query }}&{% endif %}page={{ page_obj.previous_page_number }}"
                                        aria-label="Previous">
                                         <i class="bi bi-chevron-left" aria-hidden="true"></i>
                                     </a>
@@ -195,7 +195,8 @@
                                     </li>
                                 {% else %}
                                     <li class="page-item">
-                                        <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                                        <a class="page-link"
+                                           href="?{% if current_query %}{{ current_query }}&{% endif %}page={{ num }}">{{ num }}</a>
                                     </li>
                                 {% endif %}
                             {% endfor %}
@@ -203,7 +204,7 @@
                             {% if page_obj.has_next %}
                                 <li class="page-item">
                                     <a class="page-link"
-                                       href="?page={{ page_obj.next_page_number }}"
+                                       href="?{% if current_query %}{{ current_query }}&{% endif %}page={{ page_obj.next_page_number }}"
                                        aria-label="Next">
                                         <i class="bi bi-chevron-right" aria-hidden="true"></i>
                                     </a>

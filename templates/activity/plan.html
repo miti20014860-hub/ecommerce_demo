@@ -114,15 +114,29 @@
               <div class="mt-4">
                 <h4>Plan Description</h4>
                 <section class="text-muted">
-                  <p class="d-block my-1">{{ activity.description|default:"－" }}</p>
+                  <p class="d-block my-1">{{ activity.description|linebreaks }}</p>
                 </section>
-                {% if activity.plan and activity.price %}
+                {% if activity.plan_1 %}
                   <div class="mt-3">
-                    <h5 class="d-inline">{{ activity.plan }}</h5>
+                    <h5 class="d-inline">{{ activity.plan_1 }}</h5>
                     <h5 class="d-inline mx-1"></h5>
-                    <h5 class="d-inline">{{ activity.price }}</h5>
+                    <h5 class="d-inline">{{ activity.price_1 }}</h5>
                     <h6 class="d-inline">JPY</h6>
-                    <p class="d-block text-muted">{{ activity.summary|default:"－" }}</p>
+                    <p class="d-block text-muted">{{ activity.summary_1 }}</p>
+                  </div>
+                  <div class="mt-3">
+                    <h5 class="d-inline">{{ activity.plan_2 }}</h5>
+                    <h5 class="d-inline mx-1"></h5>
+                    <h5 class="d-inline">{{ activity.price_2 }}</h5>
+                    <h6 class="d-inline">JPY</h6>
+                    <p class="d-block text-muted">{{ activity.summary_2 }}</p>
+                  </div>
+                  <div class="mt-3">
+                    <h5 class="d-inline">{{ activity.plan_3 }}</h5>
+                    <h5 class="d-inline mx-1"></h5>
+                    <h5 class="d-inline">{{ activity.price_3 }}</h5>
+                    <h6 class="d-inline">JPY</h6>
+                    <p class="d-block text-muted">{{ activity.summary_3 }}</p>
                   </div>
                 {% endif %}
               </div>
@@ -157,17 +171,23 @@
             <section class="col-md-4">
               <div class="position-sticky top-0 rounded border shadow-sm p-3 mt-1">
                 <p class="text-muted mb-0">{{ activity.help_text|default:"－" }}</p>
-                <div>
-                  <h3 class="d-inline">{{ activity.minimum_charge|floatformat:0|intcomma|default:"－" }}</h3>
-                  <h6 class="d-inline text-right mx-auto my-1">{{ activity.get_currency_display }} ～ (with tax)</h6>
+                <div class="mb-1">
+                  {% if activity.minimum_charge == 0 %}
+                    <h3 class="d-inline">Free</h3>
+                  {% else %}
+                    <h3 class="d-inline">{{ activity.minimum_charge|floatformat:0|intcomma|default:"－" }}</h3>
+                    <h6 class="d-inline text-right mx-auto my-1">{{ activity.get_currency_display }} ～ (with tax)</h6>
+                  {% endif %}
                 </div>
                 <div class="bg-light rounded text-muted p-1">
                   <small class="d-block">Included in price:</small>
                   <small>{{ activity.price_included|default:"－" }}</small>
                 </div>
-                <button class="btn btn-danger w-100 mt-3"
-                        data-bs-toggle="modal"
-                        data-bs-target="#bookingModal">Book</button>
+                {% if activity.is_appointment == 'yes' %}
+                  <button class="btn btn-danger w-100 mt-3"
+                          data-bs-toggle="modal"
+                          data-bs-target="#bookingModal">Book</button>
+                {% endif %}
               </div>
             </section>
           </div>

@@ -50,22 +50,23 @@ DJANGO_APP = [
 ]
 
 CUSTOM_APP = [
+    'index.apps.IndexConfig',
     'activity.apps.ActivityConfig',
+    'collection.apps.CollectionConfig',
     'kenshi.apps.KenshiConfig',
     'member.apps.MemberConfig',
-    'collection.apps.CollectionConfig',
-    'index.apps.IndexConfig',
+    'others.apps.OthersConfig',
 ]
 
 INSTALLED_APPS = DJANGO_APP + CUSTOM_APP
 
 
 MIDDLEWARE = [
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -167,3 +168,9 @@ TAGGIT_CASE_INSENSITVE = True
 
 # CustomUser
 AUTH_USER_MODEL = 'member.CustomUser'
+
+
+INTERNAL_IPS = [
+    "127.0.0.1",
+    "localhost",
+]

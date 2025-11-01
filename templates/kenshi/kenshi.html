@@ -5,7 +5,7 @@
     {% for kenshi in kenjutsuka %}
         {% if kenshi.video %}
             <section class="ratio ratio-16x9">
-                <video autoplay muted class="w-100">
+                <video autoplay muted class="w-100" id="kenshi-video">
                     <source src="{{ kenshi.video.url }}" type="video/mp4">
                 </video>
             </section>
@@ -21,9 +21,21 @@
                          height="100%" />
                 </div>
                 <div class="col-lg-6 bg-light px-4">
-                    <p class="my-3">{{ kenshi.contents_main }}</p>
+                    <p class="my-3">{{ kenshi.contents_main|linebreaks }}</p>
                 </div>
             </div>
         </section>
+        <script>
+const video = document.getElementById('kenshi-video');
+
+video.muted = true;
+video.play().catch(() => {});
+
+video.addEventListener('click', function unlockAudio() {
+    video.muted = false;
+    video.play();
+    video.removeEventListener('click', unlockAudio);
+});
+        </script>
     {% endfor %}
 {% endblock body %}

@@ -59,6 +59,7 @@ class ActivityAdmin(admin.ModelAdmin):
             'fields': (
                 'type',
                 'title',
+                'is_appointment',
                 'minimum_charge',
                 'currency',
                 'help_text',

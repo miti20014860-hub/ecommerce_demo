@@ -13,152 +13,119 @@ class Activity(models.Model):
         ('lecture', 'Lecture'),
         ('workshop', 'Workshop')
     ]
-    type = models.CharField(
-        max_length=20,
-        choices=Type_CHOICES,
-        verbose_name="Activity Type"
-    )
+    type = models.CharField(max_length=20, choices=Type_CHOICES, verbose_name="Activity Type")
 
-    title = models.TextField(
-        verbose_name=_("Title (Very Very Very Very Very Very Very Long)")
-    )
+    title = models.TextField(verbose_name=_("Title"))
+
+    Appointment_CHOICES = [('yes', 'Yes'), ('no', 'No'),]
+
+    is_appointment = models.CharField(max_length=20, null=True, blank=True, choices=Appointment_CHOICES, verbose_name="Is Appointment")
 
     minimum_charge = models.DecimalField(max_digits=15, decimal_places=2, verbose_name="Minimum Charge")
 
-    CURRENCY_CHOICES = [
-        ('JPY', '¥ JPY'),
-        ('USD', '$ USD'),
-        ('EUR', '€ EUR'),
-    ]
-    currency = models.CharField(
-        max_length=3,
-        choices=CURRENCY_CHOICES,
-        default='JPY',
-        verbose_name=_("Currency")
-    )
+    CURRENCY_CHOICES = [('JPY', '¥ JPY'), ('USD', '$ USD'), ('EUR', '€ EUR'),]
 
-    help_text = models.CharField(
-        max_length=100,
-        blank=True,
-        verbose_name=_("Help Text"),
-        help_text=_("Additional guidance or notes for customers")
-    )
+    currency = models.CharField(max_length=3, choices=CURRENCY_CHOICES, default='JPY', verbose_name=_("Currency"))
 
-    price_included = models.TextField(
-        blank=True,
-        verbose_name=_("Price Included"),
-        help_text=_("What is included in the price (e.g., meals, equipment)")
-    )
+    help_text = models.CharField(max_length=100, blank=True, verbose_name=_("Help Text"),)
 
-    provider = models.CharField(
-        max_length=100,
-        verbose_name=_("Provider"),
-        help_text=_("Company or person offering the activity")
-    )
+    price_included = models.TextField(blank=True, verbose_name=_("Price Included"),)
+
+    provider = models.CharField(max_length=100, verbose_name=_("Provider"),)
 
     participants = models.CharField(
         max_length=50,
+        null=True, blank=True,
         verbose_name=_("Participants"),
-        help_text=_("Possible number of bookings")
     )
 
     participating_age = models.CharField(
         max_length=50,
+        null=True, blank=True,
         verbose_name=_("Participating Age"),
-        help_text=_("e.g., 6+, 18+, All ages")
     )
 
     duration = models.CharField(
         max_length=100,
+        null=True, blank=True,
         verbose_name=_("Duration"),
-        help_text=_("e.g., 2 hours, Half day, 3 days")
     )
 
-    # === 內容描述 ===
+    # === Description ===
     description = models.TextField(
         verbose_name=_("Description"),
-        help_text=_("Full description of the activity")
     )
 
     plan_1 = models.CharField(
         max_length=100,
         blank=True,
         verbose_name=_("Plan 1"),
-        help_text=_("Package options")
     )
 
     price_1 = models.CharField(
         max_length=100,
         blank=True,
         verbose_name=_("Price 1"),
-        help_text=_("Pricing tiers")
     )
 
     summary_1 = models.CharField(
         max_length=100,
         blank=True,
         verbose_name=_("Summary 1"),
-        help_text=_("Short highlight or tagline")
     )
     plan_2 = models.CharField(
         max_length=100,
         blank=True,
         verbose_name=_("Plan 2"),
-        help_text=_("Package options")
     )
 
     price_2 = models.CharField(
         max_length=100,
         blank=True,
         verbose_name=_("Price 2"),
-        help_text=_("Pricing tiers")
     )
 
     summary_2 = models.CharField(
         max_length=100,
         blank=True,
         verbose_name=_("Summary 2"),
-        help_text=_("Short highlight or tagline")
     )
 
     plan_3 = models.CharField(
         max_length=100,
         blank=True,
         verbose_name=_("Plan 3"),
-        help_text=_("Package options")
     )
 
     price_3 = models.CharField(
         max_length=100,
         blank=True,
         verbose_name=_("Price 3"),
-        help_text=_("Pricing tiers")
     )
 
     summary_3 = models.CharField(
         max_length=100,
         blank=True,
         verbose_name=_("Summary 3"),
-        help_text=_("Short highlight or tagline")
     )
 
     min_p = models.CharField(
         max_length=100,
+        null=True, blank=True,
         verbose_name=_("Min. P"),
-        help_text=_("Minimum required to run the activity")
     )
 
     reg_deadline = models.CharField(
+        null=True, blank=True,
         max_length=100,
         verbose_name=_("Deadline"),
-        help_text=_("Registration Deadline")
     )
 
     event_ends = models.DateField(
         verbose_name=_("Event Ends"),
     )
 
-    # === 地圖資訊 ===
+    # === Map ===
 
     # === 1. Hokkaido ===
     HOKKAIDO = [
@@ -238,45 +205,18 @@ class Activity(models.Model):
         ('kagoshima', 'Kagoshima'),
         ('okinawa', 'Okinawa'),
     ]
-    # 組合所有區域
-    PREFECTURE_CHOICES = (
-        HOKKAIDO +
-        TOHOKU +
-        KANTO +
-        CHUBU +
-        KANSAI +
-        CHUGOKU +
-        SHIKOKU +
-        KYUSHU_OKINAWA
-    )
-    prefecture = models.CharField(
-        max_length=20,
-        choices=PREFECTURE_CHOICES,
-        verbose_name="Prefecture"
-    )
 
-    lat = models.CharField(
-        max_length=100,
-        null=True, blank=True,
-        verbose_name=_("Latitude")
-    )
-    lng = models.CharField(
-        max_length=100,
-        null=True, blank=True,
-        verbose_name=_("Longitude")
-    )
-    address = models.CharField(
-        max_length=100,
-        blank=True,
-        verbose_name=_("Address")
-    )
-    map_id = models.CharField(
-        max_length=100,
-        blank=True,
-        verbose_name=_("Map ID"),
-        help_text=_("Google Maps Place ID or custom ID")
-    )
-    # ... 其他欄位
+    PREFECTURE_CHOICES = (HOKKAIDO + TOHOKU + KANTO + CHUBU + KANSAI + CHUGOKU + SHIKOKU + KYUSHU_OKINAWA)
+
+    prefecture = models.CharField(max_length=20, choices=PREFECTURE_CHOICES, verbose_name="Prefecture")
+
+    lat = models.CharField(max_length=100, null=True, blank=True, verbose_name=_("Latitude"))
+
+    lng = models.CharField(max_length=100, null=True, blank=True, verbose_name=_("Longitude"))
+
+    address = models.CharField(max_length=100, blank=True, verbose_name=_("Address"))
+
+    map_id = models.CharField(max_length=100, blank=True, verbose_name=_("Map ID"), help_text=_("Google Maps Place ID or custom ID"))
 
     slug = models.SlugField(
         max_length=200,
@@ -286,14 +226,13 @@ class Activity(models.Model):
         verbose_name="URL Slug"
     )
 
-    # === 圖片管理（多圖）===
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
         verbose_name = _("Activity")
         verbose_name_plural = _("Activities")
-        ordering = ['-created_at']
+        ordering = ['-updated_at']
 
     def __str__(self):
         return self.title
