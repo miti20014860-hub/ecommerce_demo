@@ -84,10 +84,8 @@ class CollectionImage(models.Model):
         return f"{self.collection} - {self.caption or 'Image'}"
 
 
-User = get_user_model()
-
-
 class Order(models.Model):
+    User = get_user_model()
     PAYMENT_CHOICES = [
         ('wire_transfer', 'Wire Transfer'),
         ('credit_card', 'Credit Card'),

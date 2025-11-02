@@ -3,7 +3,6 @@ from django.utils.html import format_html
 from .models import Collection, CollectionImage, Order
 
 
-# Inline 讓圖片可以在 Collection 編輯頁面內管理
 class CollectionImageInline(admin.StackedInline):
     model = CollectionImage
     extra = 0
@@ -53,7 +52,6 @@ class CollectionAdmin(admin.ModelAdmin):
         }),
     )
 
-    # 讓 formatted_price 能在列表中顯示
     def formatted_price(self, obj):
         return obj.formatted_price()
     formatted_price.short_description = "Price"
@@ -100,11 +98,9 @@ class OrderAdmin(admin.ModelAdmin):
     user_link.short_description = "User"
 
     def has_add_permission(self, request):
-        # 管理員不能手動新增（只從表單來）
         return False
 
     def has_change_permission(self, request, obj=None):
-        # 可編輯備註或聯絡客戶
         return True
 
     def has_delete_permission(self, request, obj=None):

@@ -2,28 +2,7 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 
-class Quotes(models.Model):
-    author = models.CharField(
-        max_length=50,
-        verbose_name=_("Author")
-    )
-    content = models.TextField(
-        verbose_name=_("Contents")
-    )
-    is_featured = models.BooleanField(default=False, verbose_name="Featured")
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-    class Meta:
-        verbose_name = _("quote")
-        verbose_name_plural = _("quotes")
-
-    def __str__(self):
-        return f"{self.author} - {self.created_at}"
-
-
 class Banner(models.Model):
-    # === Banner ===
     image = models.ImageField(
         upload_to='banners/',
         verbose_name=_("banner image")
@@ -51,8 +30,27 @@ class Banner(models.Model):
         return self.caption or f"Banner {self.id}"
 
 
+class Quotes(models.Model):
+    author = models.CharField(
+        max_length=50,
+        verbose_name=_("Author")
+    )
+    content = models.TextField(
+        verbose_name=_("Contents")
+    )
+    is_featured = models.BooleanField(default=False, verbose_name="Featured")
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = _("quote")
+        verbose_name_plural = _("quotes")
+
+    def __str__(self):
+        return f"{self.author} - {self.created_at}"
+
+
 class News(models.Model):
-    # === News ===
     title = models.CharField(
         max_length=100,
         verbose_name=_("title")
@@ -63,7 +61,6 @@ class News(models.Model):
         blank=True,
         verbose_name=_("contents main")
     )
-    # === Contents 1 ===
     subtitle_1 = models.CharField(
         max_length=100,
         blank=True,
@@ -73,7 +70,6 @@ class News(models.Model):
         blank=True,
         verbose_name=_("contents 1")
     )
-    # === Contents 2 ===
     subtitle_2 = models.CharField(
         max_length=100,
         blank=True,
@@ -83,7 +79,6 @@ class News(models.Model):
         blank=True,
         verbose_name=_("contents 2")
     )
-    # === Map Info ===
     lat = models.CharField(
         max_length=100,
         null=True, blank=True,
@@ -105,7 +100,6 @@ class News(models.Model):
         verbose_name=_("map id"),
         help_text=_("Google Maps Place ID or custom ID")
     )
-    # === Time ===
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -127,7 +121,6 @@ class News(models.Model):
         return img.image.url if img and img.image else None
 
 
-# === Image (Multiple)===
 class NewsImage(models.Model):
     news = models.ForeignKey(
         News, on_delete=models.CASCADE,
@@ -159,13 +152,11 @@ class NewsImage(models.Model):
 
 
 class Notice(models.Model):
-    # === Notice ===
     title = models.CharField(
         max_length=100,
         verbose_name=_("title")
     )
 
-    # === Contents 1 ===
     subtitle_1 = models.CharField(
         max_length=100,
         blank=True,
@@ -176,7 +167,6 @@ class Notice(models.Model):
         verbose_name=_("contents 1")
     )
 
-    # === Contents 2 ===
     subtitle_2 = models.CharField(
         max_length=100,
         blank=True,
@@ -187,7 +177,6 @@ class Notice(models.Model):
         verbose_name=_("contents 2")
     )
 
-    # === Contents 3 ===
     subtitle_3 = models.CharField(
         max_length=100,
         blank=True,
@@ -198,7 +187,6 @@ class Notice(models.Model):
         verbose_name=_("contents 3")
     )
 
-    # === Map Info ===
     lat = models.CharField(
         max_length=100,
         null=True, blank=True,
@@ -221,7 +209,6 @@ class Notice(models.Model):
         help_text=_("Google Maps Place ID or custom ID")
     )
 
-    # === Time ===
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -243,7 +230,6 @@ class Notice(models.Model):
         return img.image.url if img and img.image else None
 
 
-# === Image (Multiple)===
 class NoticeImage(models.Model):
     notice = models.ForeignKey(
         Notice, on_delete=models.CASCADE,

@@ -36,7 +36,6 @@ class OrderForm(forms.ModelForm):
     def __init__(self, *args, user=None, item=None, **kwargs):
         super().__init__(*args, **kwargs)
 
-        # 自動填入登入者資料
         if user and user.is_authenticated:
             self.fields['first_name'].initial = user.first_name or ''
             self.fields['last_name'].initial = user.last_name or ''
@@ -45,12 +44,10 @@ class OrderForm(forms.ModelForm):
             self.fields['country'].initial = getattr(user, 'country', '') or ''
             self.fields['delivery_address'].initial = getattr(user, 'address', '') or ''
 
-        # 項目名稱
         if item:
             self.fields['item_order'].initial = item.name_en
             self.instance.item = item
 
-        # 自動加 Bootstrap class
         for field_name, field in self.fields.items():
             if field_name != 'payment_method':
                 field.widget.attrs['class'] = 'form-control'

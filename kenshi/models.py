@@ -3,7 +3,6 @@ from django.utils.translation import gettext_lazy as _
 
 
 class Kenshi(models.Model):
-    # === 基本資訊 ===
     title = models.CharField(
         max_length=100,
         verbose_name=_("title")
@@ -18,7 +17,6 @@ class Kenshi(models.Model):
         verbose_name=_("contents main")
     )
 
-    # === 內容區塊 1 ===
     subtitle_1 = models.CharField(
         max_length=100,
         blank=True,
@@ -29,21 +27,18 @@ class Kenshi(models.Model):
         verbose_name=_("contents 1")
     )
 
-    # === 影片欄位 ===
     video = models.FileField(
-        upload_to='kenshi/videos/%Y/%m/%d/',  # 上傳路徑
+        upload_to='kenshi/videos/%Y/%m/%d/',
         blank=True,
         null=True,
         verbose_name=_("video file"),
         help_text=_("Upload MP4 file (max 100MB recommended)")
     )
 
-    # === YouTube ===
     @property
     def youtube_id(self):
         if not self.video:
             return None
-        # 支援多種 YouTube 格式
         import re
         patterns = [
             r'(?:youtube\.com/watch\?v=|youtu\.be/)([a-zA-Z0-9_-]{11})',
@@ -55,7 +50,6 @@ class Kenshi(models.Model):
                 return match.group(1)
         return None
 
-    # === 時間戳記 ===
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -77,7 +71,6 @@ class Kenshi(models.Model):
         return img.image.url if img and img.image else None
 
 
-# === 圖片模型（多圖管理）===
 class KenshiImage(models.Model):
     kenshi = models.ForeignKey(
         Kenshi, on_delete=models.CASCADE,

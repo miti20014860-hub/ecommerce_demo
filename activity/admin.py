@@ -4,7 +4,6 @@ from django.utils.html import format_html
 from django.contrib import admin
 
 
-# === 圖片 Inline ===
 class ActivityImageInline(admin.TabularInline):
     model = ActivityImage
     extra = 1
@@ -21,7 +20,6 @@ class ActivityImageInline(admin.TabularInline):
     image_preview.short_description = "Preview"
 
 
-# === Activity Admin ===
 @admin.register(Activity)
 class ActivityAdmin(admin.ModelAdmin):
     list_display = (
@@ -52,9 +50,7 @@ class ActivityAdmin(admin.ModelAdmin):
     readonly_fields = ('created_at', 'updated_at')
     inlines = [ActivityImageInline]
 
-    # === 嚴格按照 models.py 欄位順序 ===
     fieldsets = (
-        # === 基本資訊 ===
         (("Basic Information"), {
             'fields': (
                 'type',
@@ -71,7 +67,6 @@ class ActivityAdmin(admin.ModelAdmin):
             )
         }),
 
-        # === 內容描述 ===
         (("Content Description"), {
             'fields': (
                 'description',
@@ -88,7 +83,6 @@ class ActivityAdmin(admin.ModelAdmin):
             'classes': ('collapse',)
         }),
 
-        # === 預約與時間 ===
         (("Booking & Schedule"), {
             'fields': (
                 'min_p',
@@ -99,7 +93,6 @@ class ActivityAdmin(admin.ModelAdmin):
             'classes': ('collapse',)
         }),
 
-        # === 地圖資訊 ===
         (("Map Information"), {
             'fields': (
                 'prefecture',
@@ -110,14 +103,12 @@ class ActivityAdmin(admin.ModelAdmin):
             'classes': ('collapse',)
         }),
 
-        # === 時間戳記 ===
         (("Timestamps"), {
             'fields': ('created_at', 'updated_at'),
             'classes': ('collapse',)
         }),
     )
 
-    # === 價格格式化（整數 + 貨幣符號）===
     def min_price(self, obj):
         if obj.minimum_charge is not None:
             price_int = int(float(obj.minimum_charge))
@@ -139,7 +130,6 @@ class BookingAdmin(admin.ModelAdmin):
     get_full_name.short_description = "Name"
     get_full_name.admin_order_field = 'first_name'
 
-    # 可選：限制非 superuser 只能看自己的預約
     def get_queryset(self, request):
         qs = super().get_queryset(request)
         if request.user.is_superuser:

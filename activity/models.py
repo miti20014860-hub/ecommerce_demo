@@ -1,11 +1,9 @@
 from django.utils.translation import gettext_lazy as _
-from django.utils.text import slugify
 from django.conf import settings
 from django.db import models
 
 
 class Activity(models.Model):
-    # === 基本資訊 ===
     Type_CHOICES = [
         ('hands_on', 'Hands-on'),
         ('performance', 'Performance'),
@@ -51,7 +49,6 @@ class Activity(models.Model):
         verbose_name=_("Duration"),
     )
 
-    # === Description ===
     description = models.TextField(
         verbose_name=_("Description"),
     )
@@ -125,14 +122,10 @@ class Activity(models.Model):
         verbose_name=_("Event Ends"),
     )
 
-    # === Map ===
-
-    # === 1. Hokkaido ===
     HOKKAIDO = [
         ('hokkaido', 'Hokkaido'),
     ]
 
-    # === 2. Tohoku ===
     TOHOKU = [
         ('aomori', 'Aomori'),
         ('iwate', 'Iwate'),
@@ -142,7 +135,6 @@ class Activity(models.Model):
         ('fukushima', 'Fukushima'),
     ]
 
-    # === 3. Kanto ===
     KANTO = [
         ('ibaraki', 'Ibaraki'),
         ('tochigi', 'Tochigi'),
@@ -153,7 +145,6 @@ class Activity(models.Model):
         ('kanagawa', 'Kanagawa'),
     ]
 
-    # === 4. Chubu ===
     CHUBU = [
         ('niigata', 'Niigata'),
         ('toyama', 'Toyama'),
@@ -166,7 +157,6 @@ class Activity(models.Model):
         ('aichi', 'Aichi'),
     ]
 
-    # === 5. Kansai (Kinki) ===
     KANSAI = [
         ('mie', 'Mie'),
         ('shiga', 'Shiga'),
@@ -177,7 +167,6 @@ class Activity(models.Model):
         ('wakayama', 'Wakayama'),
     ]
 
-    # === 6. Chugoku ===
     CHUGOKU = [
         ('tottori', 'Tottori'),
         ('shimane', 'Shimane'),
@@ -186,7 +175,6 @@ class Activity(models.Model):
         ('yamaguchi', 'Yamaguchi'),
     ]
 
-    # === 7. Shikoku ===
     SHIKOKU = [
         ('tokushima', 'Tokushima'),
         ('kagawa', 'Kagawa'),
@@ -194,7 +182,6 @@ class Activity(models.Model):
         ('kochi', 'Kochi'),
     ]
 
-    # === 8. Kyushu & Okinawa ===
     KYUSHU_OKINAWA = [
         ('fukuoka', 'Fukuoka'),
         ('saga', 'Saga'),
@@ -246,16 +233,7 @@ class Activity(models.Model):
         img = self.main_image
         return img.image.url if img and img.image else None
 
-    # === slug ===
-    def save(self, *args, **kwargs):
-        if not self.pk:
-            super().save(*args, **kwargs)
-        if not self.slug:
-            self.slug = str(self.pk)
-        super().save(*args, **kwargs)
 
-
-# === 圖片模型（關聯式）===
 class ActivityImage(models.Model):
     activity = models.ForeignKey(
         Activity, on_delete=models.CASCADE,

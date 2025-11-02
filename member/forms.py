@@ -4,7 +4,6 @@ from django.core.exceptions import ValidationError
 from .models import CustomUser
 
 
-# ==================== 登入表單 ====================
 class LoginForm(AuthenticationForm):
     username = forms.CharField(
         widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Username'}),
@@ -20,7 +19,6 @@ class LoginForm(AuthenticationForm):
     }
 
 
-# ==================== 註冊表單 ====================
 class RegisterForm(UserCreationForm):
     username = forms.CharField(
         widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Username'}),
@@ -60,7 +58,6 @@ class RegisterForm(UserCreationForm):
         return user
 
 
-# ==================== 個人資料編輯 ====================
 class ProfileEditForm(forms.ModelForm):
     first_name = forms.CharField(required=False, widget=forms.TextInput(attrs={'class': 'form-control'}))
     last_name = forms.CharField(required=False, widget=forms.TextInput(attrs={'class': 'form-control'}))
@@ -104,7 +101,6 @@ class ProfileEditForm(forms.ModelForm):
         return user
 
 
-# ==================== 密碼變更 ====================
 class PasswordChangeForm(BasePasswordChangeForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
