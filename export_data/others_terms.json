@@ -1,0 +1,13 @@
+[
+{
+  "model": "others.terms",
+  "pk": 1,
+  "fields": {
+    "title": "Terms & Conditions",
+    "subtitle_1": "Refund Policy",
+    "description_1": "At Habaki, we take pride in the craftsmanship and quality of every katana we produce. Due to the custom nature and artisanal value of our swords, we carefully review all orders before production to ensure your specifications are correctly understood.",
+    "subtitle_2": "Contract Terms",
+    "description_2": "For any questions regarding your order or our refund policy, please reach out to our customer service team. We are committed to ensuring your satisfaction with every Habaki katana."
+  }
+}
+]

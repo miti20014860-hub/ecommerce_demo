@@ -1,0 +1,11 @@
+[
+{
+  "model": "others.privacy",
+  "pk": 1,
+  "fields": {
+    "title": "Privacy",
+    "description": "At Habaki, we are committed to protecting your personal and financial information in full compliance with the European Union’s General Data Protection Regulation (GDPR). When you place an order or contact us, we collect only the personal data necessary to process your purchase, manage your account, and provide excellent customer service. This information may include your name, address, contact details, payment information, and any other data you voluntarily provide.\r\n\r\nWe process your data lawfully, fairly, and transparently, using it solely for purposes related to order fulfillment, payment processing, delivery, and communication regarding your purchase. Your data is stored securely and accessed only by authorized personnel and trusted third-party service providers, such as payment processors and shipping companies, under strict confidentiality agreements.\r\n\r\nWe retain your personal data only for as long as necessary to fulfill the purposes for which it was collected, including complying with legal, accounting, or reporting requirements. Typically, this period does not exceed *7 years* following the completion or cancellation of your order, after which your data will be securely deleted or anonymized.\r\n\r\nYou have the right to access, rectify, or request deletion of your personal data at any time. Upon your request, and provided no legal obligations require us to retain certain information, we will erase your personal data without undue delay. You may also object to or restrict certain data processing activities and have the right to data portability.\r\n\r\nFor any questions about how we manage your personal data, to exercise your rights under GDPR, or to request data deletion, please contact our Data Protection Officer at privacy@takemurab.com. We are dedicated to safeguarding your privacy while delivering the highest quality katana craftsmanship and service.",
+    "ending": ""
+  }
+}
+]

@@ -1,0 +1,12 @@
+[
+{
+  "model": "index.banner",
+  "pk": 1,
+  "fields": {
+    "image": "banners/cover21_9_X6ZWCm7.jpg",
+    "caption": "",
+    "is_active": true,
+    "order": 0
+  }
+}
+]

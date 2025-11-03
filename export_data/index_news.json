@@ -1,0 +1,116 @@
+[
+{
+  "model": "index.news",
+  "pk": 10,
+  "fields": {
+    "title": "An exhibition is being held at the Nagoya Sword World Museum.",
+    "is_featured": false,
+    "contents_main": "Nestled in the vibrant heart of Nagoya's Sakae district, the Nagoya Japanese Sword Museum—affectionately known as \"Nagoya Tokken World\"—stands as a beacon for enthusiasts of Japan's storied blade legacy. Opened in May 2024, this state-of-the-art facility, operated by the Tokken World Foundation under Tobu Corporation, boasts the largest collection in Japan, housing over 550 swords with space to display up to 200 at once. From November 1, 2025, to January 18, 2026, the museum hosts its captivating special exhibition, Edo Sansaku and Their Disciples: Masters of the Edge, transforming its fourth-floor gallery into a portal to the Edo period's golden age of swordsmithing.\r\n\r\nThe exhibition spotlights the \"Edo Three Masters\"—Yoshimichi, Sukehiro, and Inoue Shinkai—renowned for their exquisite craftsmanship during the 17th and 18th centuries. These artisans, working under the shogunate's patronage, elevated the katana from battlefield tool to artistic masterpiece, blending functionality with poetic elegance. Over 50 blades are on view, including National Treasure Yuraku Kunikiyo, a short sword gifted to Oda Nagamasa by Toyotomi Hideyori, its flamboyant choji hamon (clove-like temper line) evoking flames frozen in steel. Visitors will marvel at the intricate jihada grain patterns, forged from tamahagane steel folded thousands of times, and the subtle utsuri reflections that dance like moonlight on water.\r\n\r\nComplementing the swords are 20 sets of samurai armor (yoroi) and ukiyo-e prints depicting legendary duels, offering a holistic glimpse into bushido culture. Interactive elements abound: a VR simulator lets guests \"wield\" a virtual iaito in simulated iaido forms, practicing nukitsuke draws with haptic feedback. Hands-on workshops, led by 6th-dan instructors, teach basic tenouchi grip techniques on bokken replicas, while a \"Sword Weighing Corner\" reveals the deceptive heft of a 1 kg blade. For families, child-friendly zones feature puppet shows reenacting the Battle of Sekigahara, with toy tanto for safe play.\r\n\r\nTo celebrate the exhibit, the museum launches \"Edo Sansaku Night\" on select evenings—a lantern-lit event with taiko drumming and sake tastings, where guests don replica hakama for group photos. Curator Dr. Akira Tanaka emphasizes the exhibit's mission: \"These blades aren't relics; they're living testaments to resilience and beauty, bridging Edo's warriors to modern minds.\"\r\n\r\nSince opening, Tokken World has drawn over 300,000 visitors, boosting Nagoya's tourism by 15%. Affordable tickets (¥1,500 adults) and English audio guides make it accessible, with proceeds funding conservation. As cherry blossoms fade into autumn, this exhibition reminds us: in every curve of a hamon lies a story of fire-forged spirit, eternally sharp.",
+    "subtitle_1": "",
+    "contents_1": "",
+    "subtitle_2": "",
+    "contents_2": "",
+    "lat": null,
+    "lng": null,
+    "address": "",
+    "map_id": "",
+    "created_at": "2025-10-31T15:54:34.921Z",
+    "updated_at": "2025-10-31T15:54:34.921Z"
+  }
+},
+{
+  "model": "index.news",
+  "pk": 9,
+  "fields": {
+    "title": "ERA – A 3D Animated Films Epic",
+    "is_featured": true,
+    "contents_main": "In the mist-shrouded dawn of 4th-century Japan, ERA unfolds as a visually stunning 3D animated film that breathes life into the ancient Wa kingdom. Directed by visionary animator Akihiro Yamada, this 110-minute masterpiece blends hyper-realistic CGI with hand-drawn ukiyo-e aesthetics, transporting audiences to a realm where gods, spirits, and warriors collide.\r\n\r\nThe story centers on Princess Himiko, the legendary shaman-queen of Yamatai, reimagined as a fierce 17-year-old oracle wielding the sacred mirror Yata no Kagami. When a cataclysmic drought threatens her people, Himiko embarks on a perilous quest to retrieve the lost sword Kusanagi from the underworld Yomi. Guided by a shape-shifting fox spirit, she crosses animated landscapes: bioluminescent forests where cherry blossoms glow like fireflies, storm-lashed seas patrolled by dragon-headed ships, and volcanic peaks echoing with taiko drums.\r\n\r\nAntagonist Emperor Suinin, a power-hungry warlord armed with iron-forged chokuto blades, seeks to seize the Kusanagi to conquer rival clans. Epic battles erupt in fully rendered 3D—arrows arc in slow-motion trails, kabuto helmets gleam under torchlight, and naginata spears clash with thunderous impacts. Iaido-inspired choreography animates fluid nukitsuke draws, each strike leaving luminous afterimages symbolizing ki energy.\r\n\r\nThe film’s heart lies in its cultural fidelity. Voice actress Yui Ishikawa channels Himiko’s ethereal norito chants, while Tetsuya Nakatake’s score fuses shakuhachi flutes with orchestral swells. Animators consulted Nara’s Hōryū-ji Temple to recreate kofun burial mounds, their keyhole shapes rotating in dreamlike sequences. A climactic ritual at Ise Shrine sees Himiko shatter a cursed mirror, unleashing a tsunami of light that restores rain—rendered as millions of water particles shimmering in ray-traced glory.ERA grossed $120 million in its opening weekend, praised for empowering female mythology and reviving Kojiki lore. Its final frame—a lone katana planted in fertile soil—promises sequels exploring the rise of the samurai spirit.",
+    "subtitle_1": "",
+    "contents_1": "",
+    "subtitle_2": "",
+    "contents_2": "",
+    "lat": null,
+    "lng": null,
+    "address": "",
+    "map_id": "",
+    "created_at": "2025-10-31T15:45:09.252Z",
+    "updated_at": "2025-11-03T10:47:51.331Z"
+  }
+},
+{
+  "model": "index.news",
+  "pk": 8,
+  "fields": {
+    "title": "Japanese Swords Are Beautiful",
+    "is_featured": true,
+    "contents_main": "From October 12 to November 30, 2025, Matsumoto City Museum in Nagano Prefecture hosts “Nihontō wa Utsukushii”—a breathtaking exhibition celebrating the aesthetic and spiritual essence of the Japanese sword. Over 60 masterpieces, including National Treasure–class blades from the Bizen Osafune, Yamato, and Soshu traditions, are displayed under precisely controlled lighting to reveal intricate hamon (temper lines) and jihada (steel grain patterns).\r\n\r\nHighlights include a 13th-century tachi by Masamune’s disciple Shizu Saburo Kaneuji, its choji hamon resembling clustered cloves, and a rare Kamakura-period katana with utsuri reflections shimmering like moonlight on water. For the first time, a full set of koshirae (mountings) from the Edo era is reunited with its original blade, showcasing lacquered scabbards inlaid with mother-of-pearl.\r\n\r\nDaily iaido demonstrations by 7th-dan practitioners from the All Japan Kendo Federation bring the blades to life. Using museum-approved shinken, performers execute seitei gata forms such as Mae and Tsuka Ate, their nukitsuke draws slicing silence with surgical grace. A restored tatara furnace replica and live polishing (togishi) sessions using narutaki stones allow visitors to witness the birth of a blade—from iron sand to mirror finish.\r\n\r\nCurated by Dr. Kenji Mishina, the exhibit traces the sword’s evolution from battlefield weapon to Zen object, emphasizing mushin (no-mind) and wabi-sabi imperfection. Interactive digital kiosks let guests overlay X-ray views of folded steel (up to 16,000 layers) and compare nie crystal formations under 100x magnification.\r\n\r\nA children’s corner introduces bokken (wooden sword) handling, while a symposium on November 15 features swordsmith Yoshindo Yoshiwara discussing modern tamahagane forging. Limited-edition tenugui and catalog sales support blade preservation.With over 50,000 visitors projected, “Nihontō wa Utsukushii” reaffirms Matsumoto’s role as a cultural beacon, proving that beauty forged in fire endures across centuries.",
+    "subtitle_1": "",
+    "contents_1": "",
+    "subtitle_2": "",
+    "contents_2": "",
+    "lat": null,
+    "lng": null,
+    "address": "",
+    "map_id": "",
+    "created_at": "2025-10-31T15:40:18.042Z",
+    "updated_at": "2025-11-03T10:45:01.269Z"
+  }
+},
+{
+  "model": "index.news",
+  "pk": 7,
+  "fields": {
+    "title": "Bizen Osafune Japanese Sword Museum New York Exhibition: Clay, Iron, and Fire",
+    "is_featured": false,
+    "contents_main": "From November 6 to 10, 2025, the Bizen Osafune Japanese Sword Museum brings the soul of Japan’s ancient sword-making tradition to the heart of Manhattan in an unprecedented exhibition titled Clay, Iron, and Fire: The Bizen Legacy. Co-hosted at the prestigious Onishi Gallery in Midtown and the historic Park Avenue Armory, this landmark event showcases over 40 masterworks by contemporary swordsmiths from Okayama Prefecture’s Bizen Osafune region—recognized by UNESCO as an Intangible Cultural Heritage of Humanity. For the first time outside Japan, New York audiences will witness the living art of tamahagane forging, the rhythmic dance of hammer on anvil, and the spiritual depth embedded in every curve of a katana.\r\n\r\nThe exhibition opens with a dramatic installation: a full-scale replica of a traditional tatara smelting furnace, constructed using authentic clay and timber. Visitors walk through a sensory journey—smoke-scented air, the glow of simulated charcoal fires, and the resonant clang of recorded hammer strikes—recreating the 1,300-year-old Bizen process. At the core lies the sacred transformation of satetsu (iron sand) into tamahagane, the pure steel that forms the heart of every Japanese sword. A rare 3D projection maps the folding of steel over 15 times, illustrating how 12,000 layers create the iconic hamon (temper line) and jihada (grain pattern), signatures of Bizen blades.\r\n\r\n\r\nCentral to the display are newly forged swords by sixth-generation masters such as Yoshinobu Gassan and Kunihiko Matsuba, each accompanied by live demonstrations of tameshigiri (test cutting) on rolled tatami. One highlight is a 73 cm katana in the classic choji hamon style, its edge capable of slicing silk in mid-air—a testament to differential hardening using clay coatings applied before quenching in water. Another masterpiece is a wakizashi with a suguha (straight) temper line, polished to reveal a mirror-like hadagane, reflecting the forger’s breath control and decades of discipline.\r\n\r\nThe Park Avenue Armory wing transforms into a dojo-like space where iaido practitioners from the New York Iaido Association perform seitei gata forms with museum-approved shinken (live blades). The sharp nukitsuke draw and silent noto sheathing echo through the vaulted hall, merging martial precision with aesthetic reverence. Interactive stations allow visitors to handle iaito (unsharpened practice swords) and learn grip pressure (tenouchi) under guidance from 7th-dan instructors flown in from Osafune.",
+    "subtitle_1": "",
+    "contents_1": "",
+    "subtitle_2": "",
+    "contents_2": "",
+    "lat": null,
+    "lng": null,
+    "address": "",
+    "map_id": "",
+    "created_at": "2025-10-31T15:32:46.215Z",
+    "updated_at": "2025-10-31T15:55:10.436Z"
+  }
+},
+{
+  "model": "index.news",
+  "pk": 6,
+  "fields": {
+    "title": "Yamagata: Test cutting with real swords suddenly banned, disappointing locals.",
+    "is_featured": false,
+    "contents_main": "Murayama City, Yamagata Prefecture, the birthplace of iaido, has been forced to cancel a popular experience program in which tourists test-cut with real Japanese swords. The program was well-received by foreign visitors as a unique opportunity to experience Japanese culture and even received government recognition. However, last year the National Police Agency stated that the program violated the Swords and Firearms Control Law, resulting in the cancellation of the program. While disappointed, local residents have decided to switch to a program that only allows visitors to watch the test-cutting in an effort to attract more visitors.\r\n\r\nIaido is said to have been founded by Hayashizaki Jinsuke Shigenobu, a master swordsman active from the Sengoku period through the Edo period. His birthplace, Murayama City, is home to the only Hayashizaki Iai Shrine in Japan, dedicated to his founder.\r\n\r\nIn 2017, the city's Tourism and Products Association launched a \"Samurai Experience\" tourist program in which participants don a karate uniform and cut tatami mat tubes with real swords, in an effort to deepen their understanding of the history and spirit of iaido. At the time, the city consulted with the Yamagata Prefectural Police about the use of real swords, and received a response that there was no problem.\r\n\r\nHowever, in December last year, the National Police Agency issued a notice to the Tokyo Metropolitan Police Department and prefectural police departments stating that test cutting by tourists is \"not permitted in principle.\"\r\n\r\nMurayama City has now changed the program to include observing a master demonstrate the samurai sword, but is continuing to offer the samurai experience.",
+    "subtitle_1": "",
+    "contents_1": "",
+    "subtitle_2": "",
+    "contents_2": "",
+    "lat": null,
+    "lng": null,
+    "address": "",
+    "map_id": "",
+    "created_at": "2025-10-31T15:20:57.751Z",
+    "updated_at": "2025-10-31T15:23:36.024Z"
+  }
+},
+{
+  "model": "index.news",
+  "pk": 5,
+  "fields": {
+    "title": "The 51st National Iaido Kagawa Tournament",
+    "is_featured": false,
+    "contents_main": "On a crisp autumn morning in Takamatsu, Kagawa Prefecture, the 51st National Iaido Kagawa Tournament unfolded with the quiet intensity that defines this ancient martial art. Held at the Kagawa Prefectural Budokan on October 12, 2024, the event drew over 300 practitioners from across Japan, ranging from seasoned sensei in their seventies to eager teenagers clutching their first shinken. \r\n\r\nOrganized by the All Japan Kendo Federation (AJKF) in collaboration with the Kagawa Iaido Association, the tournament served not only as a showcase of technical prowess but also as a living bridge between Japan’s samurai heritage and its modern practitioners. The air hummed with the subtle rustle of hakama and the sharp hiss of blades cutting through silence—a symphony of discipline amid the scent of polished wood and tatami.The tournament opened with an elaborate ceremony steeped in tradition. \r\n\r\nParticipants, clad in indigo keikogi and black hakama, lined up in perfect seiza formation. The head judge, 8th-dan master Hiroshi Tanaka from Tokyo, delivered a brief address emphasizing bushido principles: “Iaido is not about defeating others, but conquering the self.” A Shinto priest from nearby Kotohira-gu Shrine performed a purification rite, waving a tamagushi branch over the competition area to invoke blessings for safety and clarity of mind. This ritual underscored Kagawa’s role as a spiritual heartland, home to the famous Kompira Shrine and a prefecture where martial arts intertwine with local culture.\r\n\r\nCompetition began promptly at 9:00 a.m., divided into five categories: Individual Kata (forms), Team Kata, Embu (paired demonstration), Grading Examinations, and the prestigious Open Division. The Individual Kata section featured the 12 standard Seitei Gatana forms of the Zen Nihon Kendo Renmei, executed with breathtaking precision. Spectators held their breath as competitors performed techniques like Mae (forward cut) and Morote Tsuki (two-handed thrust), each movement a microcosm of zanshin—lingering awareness after the strike.\r\n\r\n Judges scored on criteria including nukitsuke (draw), kirioroshi (downward cut), chiburi (blood shake), and noto (sheathing), with penalties for even the slightest hesitation or imbalance.Highlights abounded. In the Men’s 5th Dan and Above division, 68-year-old veteran Kenji Yamamoto from Osaka captivated the audience with his rendition of Ukenagashi (receiving and parrying). His blade seemed an extension of his breath, deflecting an imaginary opponent’s strike before countering in one fluid motion. \r\n\r\n“I’ve practiced this form 10,000 times,” Yamamoto later shared, “but today, the sword felt alive.” The Women’s division saw 24-year-old university student Aiko Nakamura from Sapporo upset higher-ranked opponents with her explosive kiriage (upward cut) in the Tsuka Ate form, earning her a silver medal and widespread praise for bridging generational gaps in iaido.",
+    "subtitle_1": "",
+    "contents_1": "",
+    "subtitle_2": "",
+    "contents_2": "",
+    "lat": null,
+    "lng": null,
+    "address": "",
+    "map_id": "",
+    "created_at": "2025-10-31T15:10:10.762Z",
+    "updated_at": "2025-10-31T15:12:11.120Z"
+  }
+}
+]

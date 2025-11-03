@@ -1,0 +1,156 @@
+[
+{
+  "model": "others.contact",
+  "pk": 1,
+  "fields": {
+    "title": "Contact",
+    "subtitle": "Habaki , Ltd.",
+    "person": "Head Office (Japan)",
+    "description": "Address: 123 Kenzo Street, Kyoto City, Kyoto Prefecture, 600-0000, Japan\r\nTel: +81 75-123-4567\r\nFax: +81 75-123-4568\r\nEmail: info@takemurablades.jp",
+    "ending": ""
+  }
+},
+{
+  "model": "others.contact",
+  "pk": 2,
+  "fields": {
+    "title": "Contact",
+    "subtitle": "Factory Address",
+    "person": "Habaki Manufacturing Facility",
+    "description": "Address: 456 Katana Road, Uji City, Kyoto Prefecture, 611-0000, Japan\r\nTel: +81 75-123-4567\r\nFax: +81 77-654-3211",
+    "ending": ""
+  }
+},
+{
+  "model": "others.contact",
+  "pk": 3,
+  "fields": {
+    "title": "Contact",
+    "subtitle": "International Sales and Customer Support",
+    "person": "For inquiries outside Japan, please contact our global sales team:",
+    "description": "Email: sales@takemurablades.com",
+    "ending": ""
+  }
+},
+{
+  "model": "others.contact",
+  "pk": 4,
+  "fields": {
+    "title": "Contact",
+    "subtitle": "Japanese-Speaking Sales Representatives",
+    "person": "Hiroshi Tanaka",
+    "description": "Senior Sales Manager (Japan)\r\nEmail: h.tanaka@takemurablades.jp\r\nTel: +81 75-123-4599",
+    "ending": ""
+  }
+},
+{
+  "model": "others.contact",
+  "pk": 5,
+  "fields": {
+    "title": "Contact",
+    "subtitle": "Kenji Nakamura",
+    "person": "Customer Relations (Asia-Pacific)",
+    "description": "Email: k.nakamura@takemurablades.jp\r\nTel: +81 80-9999-8888",
+    "ending": ""
+  }
+},
+{
+  "model": "others.contact",
+  "pk": 6,
+  "fields": {
+    "title": "Contact",
+    "subtitle": "English-Speaking Sales Representatives",
+    "person": "Emily Roberts",
+    "description": "International Sales Director\r\nEmail: e.roberts@takemurablades.com\r\nTel: +1 212-555-7891",
+    "ending": ""
+  }
+},
+{
+  "model": "others.contact",
+  "pk": 7,
+  "fields": {
+    "title": "Contact",
+    "subtitle": "Michael Smith",
+    "person": "Sales Coordinator (Europe and Americas)",
+    "description": "Email: m.smith@takemurablades.com\r\nTel: +44 20 7946 0123",
+    "ending": ""
+  }
+},
+{
+  "model": "others.contact",
+  "pk": 8,
+  "fields": {
+    "title": "Contact",
+    "subtitle": null,
+    "person": null,
+    "description": "",
+    "ending": "For custom orders, consultations, or wholesale inquiries, please reach out to the appropriate contact. We are dedicated to providing expert guidance and personalized support in your preferred language."
+  }
+},
+{
+  "model": "others.contact",
+  "pk": 9,
+  "fields": {
+    "title": "Contact",
+    "subtitle": "Habaki , Ltd.",
+    "person": "Head Office (Japan)",
+    "description": "Address: 123 Kenzo Street, Kyoto City, Kyoto Prefecture, 600-0000, Japan\r\nTel: +81 75-123-4567\r\nFax: +81 75-123-4568\r\nEmail: info@takemurablades.jp",
+    "ending": ""
+  }
+},
+{
+  "model": "others.contact",
+  "pk": 10,
+  "fields": {
+    "title": "Contact",
+    "subtitle": "Factory Address",
+    "person": "Habaki Manufacturing Facility",
+    "description": "Address: 456 Katana Road, Uji City, Kyoto Prefecture, 611-0000, Japan\r\nTel: +81 75-123-4567\r\nFax: +81 77-654-3211",
+    "ending": ""
+  }
+},
+{
+  "model": "others.contact",
+  "pk": 11,
+  "fields": {
+    "title": "Contact",
+    "subtitle": "International Sales",
+    "person": "Customer Support",
+    "description": "For inquiries outside Japan, please contact our global sales team:\r\nEmail: sales@takemurablades.com",
+    "ending": ""
+  }
+},
+{
+  "model": "others.contact",
+  "pk": 17,
+  "fields": {
+    "title": "Contact",
+    "subtitle": "Japanese-Speaking Sales Representatives",
+    "person": "Kenji Nakamura",
+    "description": "Customer Relations (Asia-Pacific)\r\nEmail: k.nakamura@takemurablades.jp\r\nTel: +81 80-9999-8888",
+    "ending": ""
+  }
+},
+{
+  "model": "others.contact",
+  "pk": 18,
+  "fields": {
+    "title": "Contact",
+    "subtitle": "English-Speaking Sales Representatives",
+    "person": "Michael Smith",
+    "description": "Sales Coordinator (Europe and Americas)\r\nEmail: m.smith@takemurablades.com\r\nTel: +44 20 7946 0123",
+    "ending": ""
+  }
+},
+{
+  "model": "others.contact",
+  "pk": 20,
+  "fields": {
+    "title": "Contact",
+    "subtitle": null,
+    "person": null,
+    "description": "",
+    "ending": "For custom orders, consultations, or wholesale inquiries, please reach out to the appropriate contact. We are dedicated to providing expert guidance and personalized support in your preferred language."
+  }
+}
+]
