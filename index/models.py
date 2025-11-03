@@ -128,7 +128,7 @@ class NewsImage(models.Model):
         verbose_name=_("news")
     )
     image = models.ImageField(
-        upload_to='newses/%Y/%m/%d/',
+        upload_to='news/%Y/%m/%d/',
         verbose_name=_("image")
     )
     caption = models.CharField(
@@ -237,7 +237,7 @@ class NoticeImage(models.Model):
         verbose_name=_("notice")
     )
     image = models.ImageField(
-        upload_to='notices/%Y/%m/%d/',
+        upload_to='notice/%Y/%m/%d/',
         verbose_name=_("image")
     )
     caption = models.CharField(

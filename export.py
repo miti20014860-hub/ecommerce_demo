@@ -1,10 +1,10 @@
 from django.core.management import call_command
 from django.core import serializers
-from django.conf import settings
-from django.db import connection
-import os
-import sys
+import subprocess
 import django
+import sys
+import os
+
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 if BASE_DIR not in sys.path:
@@ -65,39 +65,60 @@ def export_to_json():
         print(f"[Success] {model_path} → {filename} ({count} record{'s' if count != 1 else ''})")
 
 
+def clean_data():
+    print("\nCleaning data from specified models...")
+    deleted_total = 0
+
+    for model_path in EXPORT_MODELS:
+        app_label, model_name = model_path.split('.')
+        try:
+            Model = django.apps.apps.get_model(app_label, model_name)
+        except LookupError:
+            print(f"[!] Model not found: {model_path}")
+            continue
+
+        count = Model.objects.count()
+        if count == 0:
+            print(f"[i] {model_path}: No data to delete.")
+            continue
+
+        Model.objects.all().delete()
+        print(f"[Success] Deleted {count} record{'s' if count != 1 else ''} from {model_path}")
+        deleted_total += count
+
+    print(f"\n[Summary] Clean completed! Total {deleted_total} record(s) deleted.")
+
+
 def import_from_json():
-    import_path = OUTPUT_DIR
-    if not os.path.exists(import_path):
-        print(f"[Error] Directory not found: {import_path}")
+    if not os.path.exists(OUTPUT_DIR):
+        print(f"[Error] Export directory not found: {OUTPUT_DIR}")
         return
 
-    json_files = [f for f in os.listdir(import_path) if f.endswith('.json')]
+    json_files = [f for f in os.listdir(OUTPUT_DIR) if f.endswith('.json')]
     if not json_files:
-        print(f"[i] No JSON files found in {import_path}")
+        print(f"[i] No JSON files found in {OUTPUT_DIR}")
         return
 
-    print(f"[i] Found {len(json_files)} file(s) to import:")
+    print(f"[i] Found {len(json_files)} JSON file(s) to import:")
     for f in json_files:
         print(f"   • {f}")
 
-    if not confirm("Proceed with import?", default=False):
-        print("Data import cancelled.")
+    if not confirm("Run: python manage.py loaddata export_data/*.json ?", default=False):
+        print("Import cancelled.")
         return
 
-    total = 0
-    for filename in json_files:
-        filepath = os.path.join(import_path, filename)
-        try:
-            print(f"Importing {filename}...", end=" ")
-            call_command('loaddata', filepath, verbosity=0)
-            with open(filepath, 'r', encoding='utf-8') as f:
-                data = f.read().count('"pk":')
-            print(f"Success ({data} record{'s' if data != 1 else ''})")
-            total += data
-        except Exception as e:
-            print(f"Failed: {e}")
-
-    print(f"\n[Summary] Successfully imported {total} record{'s' if total != 1 else ''}.")
+    print(f"\nRunning: python manage.py loaddata {OUTPUT_DIR}/*.json")
+    try:
+        result = subprocess.run(
+            ['python', 'manage.py', 'loaddata'] + [os.path.join(OUTPUT_DIR, f) for f in json_files],
+            check=True,
+            capture_output=True,
+            text=True
+        )
+        print(result.stdout)
+        print("[Success] All data imported successfully via manage.py loaddata!")
+    except subprocess.CalledProcessError as e:
+        print(f"[Error] Import failed:\n{e.stderr}")
 
 
 def confirm(prompt, default=False):
@@ -124,7 +145,16 @@ def main_menu():
     else:
         print("Data export cancelled.")
 
-    # Option 2: Format database
+    # Option 2: Clean data
+    if confirm("Do you want to CLEAN data (delete only app data)?", default=False):
+        if confirm("WARNING: This will delete ALL data in your models! Continue?", default=False):
+            clean_data()
+        else:
+            print("Clean cancelled.")
+    else:
+        print("Skipping data cleaning.")
+
+    # Option 3: Format database
     if confirm("Do you want to format the database (delete all data)?", default=False):
         if confirm("WARNING: This will delete ALL data! Are you sure you want to continue?", default=False):
             print("Formatting database...")
@@ -135,7 +165,7 @@ def main_menu():
     else:
         print("Skipping database formatting.")
 
-    # Option 3: Import data
+    # Option 4: Import data
     if confirm("Do you want to import data from JSON files?", default=False):
         import_from_json()
     else:
