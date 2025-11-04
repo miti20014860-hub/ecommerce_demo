@@ -22,7 +22,7 @@ class CollectionImageInline(admin.StackedInline):
 
 @admin.register(Collection)
 class CollectionAdmin(admin.ModelAdmin):
-    list_display = ('name_en', 'name_jp', 'type', 'formatted_price', 'provider', 'created_at')
+    list_display = ('name_en', 'name_jp', 'type', 'formatted_price', 'provider', 'updated_at')
     list_filter = ('type', 'currency', 'provider', 'created_at')
     search_fields = ('name_en', 'name_jp', 'provider', 'signature', 'period', 'registration', 'certificate')
     readonly_fields = ('created_at', 'updated_at')
