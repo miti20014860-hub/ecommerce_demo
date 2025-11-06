@@ -91,7 +91,6 @@ class OrderAdmin(admin.ModelAdmin):
 
     def user_link(self, obj):
         if obj.user:
-            from django.utils.html import format_html
             url = f"/admin/auth/user/{obj.user.id}/change/"
             return format_html('<a href="{}">{}</a>', url, obj.user.get_full_name() or obj.user.username)
         return "-"
