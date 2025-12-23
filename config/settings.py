@@ -50,18 +50,23 @@ DJANGO_APP = [
 ]
 
 CUSTOM_APP = [
+    'api.apps.ApiConfig',
     'index.apps.IndexConfig',
     'activity.apps.ActivityConfig',
     'collection.apps.CollectionConfig',
     'kenshi.apps.KenshiConfig',
     'member.apps.MemberConfig',
     'others.apps.OthersConfig',
+    'rest_framework',
+    'corsheaders',
+    'django_vite',
 ]
 
 INSTALLED_APPS = DJANGO_APP + CUSTOM_APP
 
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -72,13 +77,26 @@ MIDDLEWARE = [
     'django.middleware.csrf.CsrfViewMiddleware',
 ]
 
+CORS_ALLOWED_ORIGINS = ["http://localhost:5173", "http://127.0.0.1:5173"]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+    ],
+}
+
 ROOT_URLCONF = 'config.urls'
 
+DJANGO_VITE_ASSETS_PATH = BASE_DIR / "static/dist"
+DJANGO_VITE_DEV_MODE = DEBUG
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [BASE_DIR / 'templates'], 
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -100,7 +118,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'ecommerce',
+        'NAME': 'demo',
         'USER': 'postgres',
         'PASSWORD': '1',
         'HOST': 'localhost',
@@ -143,14 +161,17 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'config/staticfiles')]
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATICFILES_DIRS = [
+    BASE_DIR / "config" / "staticfiles",
+    BASE_DIR / "static" / "dist",
+]
+STATIC_ROOT = BASE_DIR / 'static'
 STATIC_URL = '/static/'
 
 
 # Media resources from DATABASE
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = BASE_DIR / 'media'
 MEDIA_URL = '/media/'
 
 

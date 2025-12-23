@@ -1,4 +1,4 @@
-{% load static %}
+<!-- {% load static %}
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="auto">
     <head>
@@ -28,4 +28,20 @@
                 integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
                 crossorigin=""></script>
     </body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="null" />
+  <meta name="keywords" content="null, null" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Habaki</title>
+  {% load django_vite %}
+  {% vite_hmr_client %}
+  {% vite_asset 'src/main.tsx' %}
+</head>
+<body class="bg-gray-50">
+  <div id="root"></div>
+</body>
 </html>
