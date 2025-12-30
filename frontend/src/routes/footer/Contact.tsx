@@ -1,7 +1,7 @@
-export default function Kenshi() {
+export default function Contact() {
     return (
         <main className="min-h-screen">
-            <h1>Kenshi</h1>
+            <h1>Contact</h1>
         </main>
     )
 }

@@ -30,7 +30,7 @@ export default function Index() {
     if (loading) return <p className="text-center py-10">Loading...</p>
 
     return (
-        <div className="container mx-auto px-2">
+        <div className="container mx-auto px-2 min-h-screen">
             <h1 className="text-4xl font-bold">Quotes API</h1>
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                 {quotes.map(quote => (

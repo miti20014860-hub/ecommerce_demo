@@ -1,7 +1,7 @@
-export default function Kenshi() {
+export default function Privacy() {
     return (
         <main className="min-h-screen">
-            <h1>Kenshi</h1>
+            <h1>Privacy</h1>
         </main>
     )
 }
