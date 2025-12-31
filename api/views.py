@@ -1,14 +1,18 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from index.models import Quotes
-from .serializers import QuotesSerializer
+from index.models import Banner, Quotes
+from .serializers import BannerSerializer, QuotesSerializer
+
+class BannerListAPIView(APIView):
+    def get(self, request):
+        banner = Banner.objects.filter(is_active=True)
+        serializer = BannerSerializer(banner, many=True, context={'request': request})
+        return Response(serializer.data)
 
 class QuotesListAPIView(APIView):
-    """
-    回傳所有 Quotes（可之後加篩選 is_featured=True）
-    """
     def get(self, request):
-        quotes = Quotes.objects.all()  # 或 .filter(is_featured=True)
+        quotes = Quotes.objects.filter(is_featured=True)
         serializer = QuotesSerializer(quotes, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.data,)
+    

@@ -5,29 +5,24 @@ from django.utils.translation import gettext_lazy as _
 class Banner(models.Model):
     image = models.ImageField(
         upload_to='banners/',
-        verbose_name=_("banner image")
+        verbose_name="banner image"
     )
     caption = models.CharField(
         max_length=100,
         blank=True,
         verbose_name=_("caption (optional)")
     )
-    is_active = models.BooleanField(
-        default=True,
-        verbose_name=_("active")
-    )
-    order = models.PositiveIntegerField(
-        default=0,
-        verbose_name=_("display order")
-    )
+    is_active = models.BooleanField(default=True, verbose_name="active")
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering = ['order', 'id']
+        ordering = ["-created_at"]
         verbose_name = _("banner")
         verbose_name_plural = _("banners")
 
     def __str__(self):
-        return self.caption or f"Banner {self.id}"
+        return f"{self.created_at} - {self.caption}"
 
 
 class Quotes(models.Model):
@@ -43,11 +38,12 @@ class Quotes(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
+        ordering = ["-created_at"]
         verbose_name = _("quote")
         verbose_name_plural = _("quotes")
 
     def __str__(self):
-        return f"{self.author} - {self.created_at}"
+        return f"{self.created_at} - {self.author}"
 
 
 class News(models.Model):
@@ -55,8 +51,6 @@ class News(models.Model):
         max_length=100,
         verbose_name=_("title")
     )
-    is_featured = models.BooleanField(default=False, verbose_name="Featured")
-
     contents_main = models.TextField(
         blank=True,
         verbose_name=_("contents main")
@@ -82,12 +76,12 @@ class News(models.Model):
     lat = models.CharField(
         max_length=100,
         null=True, blank=True,
-        verbose_name=_("latitude")
+        verbose_name="latitude"
     )
     lng = models.CharField(
         max_length=100,
         null=True, blank=True,
-        verbose_name=_("longitude")
+        verbose_name="longitude"
     )
     address = models.CharField(
         max_length=100,
@@ -98,18 +92,18 @@ class News(models.Model):
         max_length=100,
         blank=True,
         verbose_name=_("map id"),
-        help_text=_("Google Maps Place ID or custom ID")
     )
+    is_featured = models.BooleanField(default=False, verbose_name="Featured")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
+        ordering = ["-created_at"]
         verbose_name = _("news")
         verbose_name_plural = _("newses")
-        ordering = ['-created_at']
 
     def __str__(self):
-        return f"{self.title}"
+        return f"{self.created_at} - {self.title}"
 
     @property
     def main_image(self):
@@ -148,7 +142,7 @@ class NewsImage(models.Model):
         verbose_name_plural = _("news images")
 
     def __str__(self):
-        return f"{self.news.title} - {self.caption or 'Image'}"
+        return f"{self.order} - {self.news.title} - {self.caption}"
 
 
 class Notice(models.Model):
@@ -190,12 +184,12 @@ class Notice(models.Model):
     lat = models.CharField(
         max_length=100,
         null=True, blank=True,
-        verbose_name=_("latitude")
+        verbose_name="latitude"
     )
     lng = models.CharField(
         max_length=100,
         null=True, blank=True,
-        verbose_name=_("longitude")
+        verbose_name="longitude"
     )
     address = models.CharField(
         max_length=100,
@@ -206,19 +200,18 @@ class Notice(models.Model):
         max_length=100,
         blank=True,
         verbose_name=_("map id"),
-        help_text=_("Google Maps Place ID or custom ID")
     )
-
+    is_featured = models.BooleanField(default=False, verbose_name="Featured")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
+        ordering = ["-created_at"]
         verbose_name = _("notice")
         verbose_name_plural = _("notices")
-        ordering = ['-created_at',]
 
     def __str__(self):
-        return f"{self.title}"
+        return f"{self.created_at} - {self.title}"
 
     @property
     def main_image(self):
@@ -257,4 +250,4 @@ class NoticeImage(models.Model):
         verbose_name_plural = _("notice images")
 
     def __str__(self):
-        return f"{self.notice.title} - {self.caption or 'Image'}"
+        return f"{self.order} - {self.notice.title} - {self.caption}"

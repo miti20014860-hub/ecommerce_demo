@@ -1,27 +1,20 @@
 from django.contrib import admin
 from django.utils.html import format_html
-from .models import Quotes, Banner, News, NewsImage, Notice, NoticeImage
-
-
-@admin.register(Quotes)
-class QuotesAdmin(admin.ModelAdmin):
-    list_display = ('author', 'content', 'is_featured')
-    list_editable = ['is_featured']
-    list_filter = ('author', 'created_at')
-    search_fields = ('author', 'content')
-
-    fieldsets = (
-        (None, {
-            'fields': ('author', 'content', 'is_featured')
-        }),
-    )
+from .models import Banner, Quotes, News, NewsImage, Notice, NoticeImage
 
 
 @admin.register(Banner)
 class BannerAdmin(admin.ModelAdmin):
-    list_display = ('image_preview', 'caption', 'is_active', 'order')
-    list_editable = ('is_active', 'order')
-    list_per_page = 20
+    list_display = ('image_preview', 'caption', 'is_active')
+    list_editable = ['is_active']
+    list_filter = ('created_at', 'updated_at')
+    search_fields = ('caption',)
+
+    fieldsets = (
+        (None, {
+            'fields': ('image', 'caption', 'is_active')
+        }),
+    )
 
     def image_preview(self, obj):
         if obj.image:
@@ -29,6 +22,18 @@ class BannerAdmin(admin.ModelAdmin):
         return "(No image)"
     image_preview.short_description = "Preview"
 
+@admin.register(Quotes)
+class QuotesAdmin(admin.ModelAdmin):
+    list_display = ('author', 'content', 'is_featured')
+    list_editable = ['is_featured']
+    list_filter = ('created_at', 'updated_at')
+    search_fields = ('author', 'content')
+
+    fieldsets = (
+        (None, {
+            'fields': ('author', 'content', 'is_featured')
+        }),
+    )
 
 class NewsImageInline(admin.TabularInline):
     model = NewsImage
@@ -42,12 +47,11 @@ class NewsImageInline(admin.TabularInline):
         return "(No image)"
     image_preview.short_description = "Preview"
 
-
 @admin.register(News)
 class NewsAdmin(admin.ModelAdmin):
-    list_display = ('title', 'created_at', 'is_featured')
+    list_display = ('title', 'contents_main', 'is_featured')
     list_editable = ['is_featured']
-    list_filter = ('created_at',)
+    list_filter = ('created_at', 'updated_at')
     search_fields = ('title', 'contents_main')
     inlines = [NewsImageInline]
 
@@ -69,7 +73,6 @@ class NewsAdmin(admin.ModelAdmin):
         }),
     )
 
-
 class NoticeImageInline(admin.TabularInline):
     model = NoticeImage
     extra = 1
@@ -82,12 +85,12 @@ class NoticeImageInline(admin.TabularInline):
         return "(No image)"
     image_preview.short_description = "Preview"
 
-
 @admin.register(Notice)
 class NoticeAdmin(admin.ModelAdmin):
-    list_display = ('title', 'created_at')
-    list_filter = ('created_at',)
-    search_fields = ('title', 'subtitle_1', 'contents_1', 'address')
+    list_display = ('title', 'subtitle_1', 'contents_1','is_featured')
+    list_editable = ['is_featured']
+    list_filter = ('created_at', 'updated_at')
+    search_fields = ('title', 'subtitle_1', 'contents_1')
     inlines = [NoticeImageInline]
 
     fieldsets = (

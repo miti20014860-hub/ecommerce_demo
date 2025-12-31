@@ -1,12 +1,13 @@
 [
-{
-  "model": "index.banner",
-  "pk": 1,
-  "fields": {
-    "image": "banners/cover21_9_X6ZWCm7.jpg",
-    "caption": "",
-    "is_active": true,
-    "order": 0
+  {
+    "model": "index.banner",
+    "pk": 1,
+    "fields": {
+      "image": "banners/cover21_9_X6ZWCm7.jpg",
+      "caption": "",
+      "is_active": true,
+      "created_at": "2025-10-31T15:54:34.921Z",
+      "updated_at": "2025-10-31T15:54:34.921Z"
+    }
   }
-}
 ]
