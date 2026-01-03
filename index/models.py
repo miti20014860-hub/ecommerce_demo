@@ -8,11 +8,11 @@ class Banner(models.Model):
         verbose_name="banner image"
     )
     caption = models.CharField(
-        max_length=100,
+        max_length=60,
         blank=True,
         verbose_name=_("caption (optional)")
     )
-    is_active = models.BooleanField(default=True, verbose_name="active")
+    is_active = models.BooleanField(default=True, verbose_name="Active")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -25,26 +25,6 @@ class Banner(models.Model):
         return f"{self.created_at} - {self.caption}"
 
 
-class Quotes(models.Model):
-    author = models.CharField(
-        max_length=50,
-        verbose_name=_("Author")
-    )
-    content = models.TextField(
-        verbose_name=_("Contents")
-    )
-    is_featured = models.BooleanField(default=False, verbose_name="Featured")
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-    class Meta:
-        ordering = ["-created_at"]
-        verbose_name = _("quote")
-        verbose_name_plural = _("quotes")
-
-    def __str__(self):
-        return f"{self.created_at} - {self.author}"
-
 
 class News(models.Model):
     title = models.CharField(
@@ -56,7 +36,7 @@ class News(models.Model):
         verbose_name=_("contents main")
     )
     subtitle_1 = models.CharField(
-        max_length=100,
+        max_length=60,
         blank=True,
         verbose_name=_("subtitle 1")
     )
@@ -65,7 +45,7 @@ class News(models.Model):
         verbose_name=_("contents 1")
     )
     subtitle_2 = models.CharField(
-        max_length=100,
+        max_length=60,
         blank=True,
         verbose_name=_("subtitle 2")
     )
@@ -74,13 +54,13 @@ class News(models.Model):
         verbose_name=_("contents 2")
     )
     lat = models.CharField(
-        max_length=100,
-        null=True, blank=True,
+        max_length=20,
+        blank=True,
         verbose_name="latitude"
     )
     lng = models.CharField(
-        max_length=100,
-        null=True, blank=True,
+        max_length=20,
+        blank=True,
         verbose_name="longitude"
     )
     address = models.CharField(
@@ -100,7 +80,7 @@ class News(models.Model):
     class Meta:
         ordering = ["-created_at"]
         verbose_name = _("news")
-        verbose_name_plural = _("newses")
+        verbose_name_plural = _("news")
 
     def __str__(self):
         return f"{self.created_at} - {self.title}"
@@ -126,12 +106,11 @@ class NewsImage(models.Model):
         verbose_name=_("image")
     )
     caption = models.CharField(
-        max_length=200,
+        max_length=60,
         blank=True,
         verbose_name=_("caption")
     )
     order = models.PositiveIntegerField(
-        default=0,
         db_index=True,
         verbose_name=_("order")
     )
@@ -152,7 +131,7 @@ class Notice(models.Model):
     )
 
     subtitle_1 = models.CharField(
-        max_length=100,
+        max_length=40,
         blank=True,
         verbose_name=_("subtitle 1")
     )
@@ -162,7 +141,7 @@ class Notice(models.Model):
     )
 
     subtitle_2 = models.CharField(
-        max_length=100,
+        max_length=40,
         blank=True,
         verbose_name=_("subtitle 2")
     )
@@ -172,7 +151,7 @@ class Notice(models.Model):
     )
 
     subtitle_3 = models.CharField(
-        max_length=100,
+        max_length=40,
         blank=True,
         verbose_name=_("subtitle 3")
     )
@@ -182,13 +161,13 @@ class Notice(models.Model):
     )
 
     lat = models.CharField(
-        max_length=100,
-        null=True, blank=True,
+        max_length=20,
+        blank=True,
         verbose_name="latitude"
     )
     lng = models.CharField(
-        max_length=100,
-        null=True, blank=True,
+        max_length=20,
+        blank=True,
         verbose_name="longitude"
     )
     address = models.CharField(
@@ -234,12 +213,11 @@ class NoticeImage(models.Model):
         verbose_name=_("image")
     )
     caption = models.CharField(
-        max_length=200,
+        max_length=60,
         blank=True,
         verbose_name=_("caption")
     )
     order = models.PositiveIntegerField(
-        default=0,
         db_index=True,
         verbose_name=_("order")
     )
@@ -251,3 +229,24 @@ class NoticeImage(models.Model):
 
     def __str__(self):
         return f"{self.order} - {self.notice.title} - {self.caption}"
+
+
+class Quote(models.Model):
+    author = models.CharField(
+        max_length=40,
+        verbose_name=_("Author")
+    )
+    content = models.TextField(
+        verbose_name=_("Contents")
+    )
+    is_active = models.BooleanField(default=False, verbose_name="Active")
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ["-created_at"]
+        verbose_name = _("quote")
+        verbose_name_plural = _("quotes")
+
+    def __str__(self):
+        return f"{self.created_at} - {self.author}"

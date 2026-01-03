@@ -19,7 +19,7 @@ EXPORT_MODELS = [
     'collection.Collection',
     'collection.CollectionImage',
     'index.Banner',
-    'index.Quotes',
+    'index.Quote',
     'index.News',
     'index.NewsImage',
     'index.Notice',

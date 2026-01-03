@@ -1,6 +1,6 @@
 import { useQueries } from '@tanstack/react-query';
-import { fetchBanners, fetchQuotes } from '../lib/api';
-import type { Banner, Quote } from '../types/api';
+import { fetchBanners, fetchQuotes } from '../lib/fetcher';
+import type { Banner, Quote } from '../types/type';
 
 
 export default function Index() {
@@ -29,7 +29,7 @@ export default function Index() {
   }
 
   if (isError) {
-    return <div className="text-center py-20">Loading failed:{error?.message}</div>;
+    return <div className="text-center py-20">Loading failed: {error?.message}</div>;
   }
 
   return (

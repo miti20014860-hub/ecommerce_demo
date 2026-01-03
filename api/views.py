@@ -1,18 +1,15 @@
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework import status
-from index.models import Banner, Quotes
-from .serializers import BannerSerializer, QuotesSerializer
+from rest_framework import viewsets
+from index.models import Banner, News, Quote
+from .serializers import BannerSerializer, NewsSerializer,QuoteSerializer
 
-class BannerListAPIView(APIView):
-    def get(self, request):
-        banner = Banner.objects.filter(is_active=True)
-        serializer = BannerSerializer(banner, many=True, context={'request': request})
-        return Response(serializer.data)
+class BannerViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = Banner.objects.filter(is_active=True)
+    serializer_class = BannerSerializer
 
-class QuotesListAPIView(APIView):
-    def get(self, request):
-        quotes = Quotes.objects.filter(is_featured=True)
-        serializer = QuotesSerializer(quotes, many=True)
-        return Response(serializer.data,)
-    
+class NewsViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = News.objects.all().order_by('-created_at')
+    serializer_class = NewsSerializer
+
+class QuoteViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = Quote.objects.filter(is_active=True)
+    serializer_class = QuoteSerializer

@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.utils.html import format_html
-from .models import Banner, Quotes, News, NewsImage, Notice, NoticeImage
+from .models import Banner, News, NewsImage, Notice, NoticeImage , Quote
 
 
 @admin.register(Banner)
@@ -22,18 +22,6 @@ class BannerAdmin(admin.ModelAdmin):
         return "(No image)"
     image_preview.short_description = "Preview"
 
-@admin.register(Quotes)
-class QuotesAdmin(admin.ModelAdmin):
-    list_display = ('author', 'content', 'is_featured')
-    list_editable = ['is_featured']
-    list_filter = ('created_at', 'updated_at')
-    search_fields = ('author', 'content')
-
-    fieldsets = (
-        (None, {
-            'fields': ('author', 'content', 'is_featured')
-        }),
-    )
 
 class NewsImageInline(admin.TabularInline):
     model = NewsImage
@@ -46,6 +34,7 @@ class NewsImageInline(admin.TabularInline):
             return format_html('<img src="{}" style="height: 80px; object-fit: contain;" />', obj.image.url)
         return "(No image)"
     image_preview.short_description = "Preview"
+
 
 @admin.register(News)
 class NewsAdmin(admin.ModelAdmin):
@@ -95,7 +84,7 @@ class NoticeAdmin(admin.ModelAdmin):
 
     fieldsets = (
         (None, {
-            'fields': ('title',)
+            'fields': ('title', 'is_featured')
         }),
         ('Content 1', {
             'fields': ('subtitle_1', 'contents_1'),
@@ -112,5 +101,19 @@ class NoticeAdmin(admin.ModelAdmin):
         ('Map', {
             'fields': (('lat', 'lng'), 'address', 'map_id'),
             'classes': ('collapse',)
+        }),
+    )
+
+
+@admin.register(Quote)
+class QuoteAdmin(admin.ModelAdmin):
+    list_display = ('author', 'content', 'is_active')
+    list_editable = ['is_active']
+    list_filter = ('created_at', 'updated_at')
+    search_fields = ('author', 'content')
+
+    fieldsets = (
+        (None, {
+            'fields': ('author', 'content', 'is_active')
         }),
     )
