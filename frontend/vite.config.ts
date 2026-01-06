@@ -23,4 +23,9 @@ export default defineConfig({
       input: path.resolve(__dirname, 'src/main.tsx'),
     },
   },
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './src'),
+    },
+  },
 })

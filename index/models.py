@@ -25,7 +25,6 @@ class Banner(models.Model):
         return f"{self.created_at} - {self.caption}"
 
 
-
 class News(models.Model):
     title = models.CharField(
         max_length=100,
@@ -84,15 +83,6 @@ class News(models.Model):
 
     def __str__(self):
         return f"{self.created_at} - {self.title}"
-
-    @property
-    def main_image(self):
-        return self.images.first()
-
-    @property
-    def main_image_url(self):
-        img = self.main_image
-        return img.image.url if img and img.image else None
 
 
 class NewsImage(models.Model):
@@ -191,15 +181,6 @@ class Notice(models.Model):
 
     def __str__(self):
         return f"{self.created_at} - {self.title}"
-
-    @property
-    def main_image(self):
-        return self.images.first()
-
-    @property
-    def main_image_url(self):
-        img = self.main_image
-        return img.image.url if img and img.image else None
 
 
 class NoticeImage(models.Model):

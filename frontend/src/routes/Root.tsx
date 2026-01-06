@@ -3,11 +3,11 @@ import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 
 export default function Root() {
-    return (
-        <main className="min-h-screen">
-            <Navbar />
-            <Outlet />
-            <Footer />
-        </main>
-    )
+  return (
+    <main className='min-h-screen'>
+      <Navbar />
+      <Outlet />
+      <Footer />
+    </main>
+  )
 }

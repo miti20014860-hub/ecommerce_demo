@@ -6,7 +6,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import './main.css'
 
 import Root from './routes/Root'
-import Index from './routes/Index'
+import Index from './routes/Index/Index'
 import Activity from './routes/Activity'
 import Collection from './routes/Collection'
 import Kenshi from './routes/Kenshi'
@@ -20,20 +20,20 @@ import Terms from './routes/footer/Terms'
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: '/',
     element: <Root />,
     errorElement: <ErrorPage />,
     children: [
       { index: true, element: <Index />, },
-      { path: "activity/*", element: <Activity />, },
-      { path: "collection/*", element: <Collection />, },
-      { path: "kenshi/*", element: <Kenshi />, },
-      { path: "member/*", element: <Member />, },
-      { path: "about/*", element: <About />, },
-      { path: "contact/*", element: <Contact />, },
-      { path: "faq/*", element: <FAQ />, },
-      { path: "privacy/*", element: <Privacy />, },
-      { path: "terms/*", element: <Terms />, },
+      { path: 'activity/*', element: <Activity />, },
+      { path: 'collection/*', element: <Collection />, },
+      { path: 'kenshi/*', element: <Kenshi />, },
+      { path: 'member/*', element: <Member />, },
+      { path: 'about/*', element: <About />, },
+      { path: 'contact/*', element: <Contact />, },
+      { path: 'faq/*', element: <FAQ />, },
+      { path: 'privacy/*', element: <Privacy />, },
+      { path: 'terms/*', element: <Terms />, },
     ],
   },
 ])

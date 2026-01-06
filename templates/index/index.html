@@ -33,7 +33,7 @@
                  class="link-body-emphasis text-secondary">Continue reading »</a>
             </div>
             <a href="{% url 'index:news' news.pk %}" class="col-5">
-              <img src="{% if news.main_image_url %}{{ news.main_image_url }}{% else %}{% static 'img/default-news.jpg' %}{% endif %}"
+              <img src="{{ news.images.first.image.url }}"
                    class="object-fit-cover"
                    alt="Thumbnail"
                    width="100%"
@@ -89,7 +89,7 @@
               <li>
                 <div class="row py-3 border-top">
                   <a href="{% url 'index:news' news.pk %}" class="col-4">
-                    <img src="{% if news.main_image_url %}{{ news.main_image_url }}{% else %}{% static 'img/default-news.jpg' %}{% endif %}"
+                    <img src="{{ news.images.first.image.url }}"
                          class="object-fit-cover"
                          alt="{{ news.title }}"
                          width="100%"

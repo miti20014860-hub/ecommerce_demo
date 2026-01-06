@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from index.models import Banner, NewsImage, News, Quote
+from index.models import Banner, NewsImage, News, NoticeImage, Notice, Quote
 
 class BannerSerializer(serializers.ModelSerializer):
     class Meta:
@@ -13,10 +13,21 @@ class NewsImageSerializer(serializers.ModelSerializer):
 
 class NewsSerializer(serializers.ModelSerializer):
     images = NewsImageSerializer(many=True, read_only=True)
-    main_image_url = serializers.CharField(read_only=True)
 
     class Meta:
         model = News
+        fields = '__all__'
+
+class NoticeImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = NoticeImage
+        fields = ['id', 'image', 'caption', 'order']
+
+class NoticeSerializer(serializers.ModelSerializer):
+    images = NoticeImageSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Notice
         fields = '__all__'
 
 class QuoteSerializer(serializers.ModelSerializer):

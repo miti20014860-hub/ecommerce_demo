@@ -1,42 +1,37 @@
 import { Link, useLocation } from 'react-router-dom';
 
-const Footer = () => {
+export default function Footer() {
 
   const location = useLocation();
   const pathname = location.pathname;
-  const isActive = (path: string) => {
-    if (path === "/") return pathname === "/";
+  const isCurrent = (path: string) => {
     return pathname.startsWith(path);
   };
 
   return (
-    <footer className="border-y-1 bg-gray-100">
-      <div className="container mx-auto my-6">
+    <footer className='bg-gray-100 border-y-1 text-sm mt-5'>
+      <div className='container mx-auto lg:px-8 xl:px-16 2xl:px-32 my-6'>
         {/* Link */}
-        <div className="nav-link text-center md:text-right text-sm my-4 ">
-          <Link to="/about/"
-            className="mx-4"
-            aria-current={isActive("/about/") ? "page" : undefined}>About Us |</Link>
-          <Link to="/contact/"
-            className="mx-4"
-            aria-current={isActive("/contact/") ? "page" : undefined}>Contact |</Link>
-          <Link to="/faq/"
-            className="mx-4"
-            aria-current={isActive("/faq/") ? "page" : undefined}>FAQ |</Link>
-          <Link to="/privacy/"
-            className="mx-4"
-            aria-current={isActive("/privacy/") ? "page" : undefined}>Privacy |</Link>
-          <Link to="/terms/"
-            className="mx-4"
-            aria-current={isActive("/terms/") ? "page" : undefined}>Terms & Conditions |</Link>
+        <div className='nav-link text-center md:text-right my-4 '>
+          <Link to='/about/'
+            className='mx-4'
+            aria-current={isCurrent('/about/') ? 'page' : undefined}>About Us |</Link>
+          <Link to='/contact/'
+            className='mx-4'
+            aria-current={isCurrent('/contact/') ? 'page' : undefined}>Contact |</Link>
+          <Link to='/faq/'
+            className='mx-4'
+            aria-current={isCurrent('/faq/') ? 'page' : undefined}>FAQ |</Link>
+          <Link to='/privacy/'
+            className='mx-4'
+            aria-current={isCurrent('/privacy/') ? 'page' : undefined}>Privacy |</Link>
+          <Link to='/terms/'
+            className='mx-4'
+            aria-current={isCurrent('/terms/') ? 'page' : undefined}>Terms & Conditions |</Link>
         </div >
         {/* Copyright */}
-        < div className="text-center md:text-left ms-2" >
-          <small>© Habaki, Ltd. All Rights Reserved.</small>
-        </div >
+        <p className='text-center md:text-left lg:ms-4' >© Habaki, Ltd. All Rights Reserved.</p>
       </div >
     </footer >
   );
 };
-
-export default Footer;
