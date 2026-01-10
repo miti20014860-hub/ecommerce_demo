@@ -12,7 +12,7 @@ export default function Navbar() {
   const memberHref = isAuthenticated ? '/member/account/' : '/member/';
 
   return (
-    <nav className='container mx-auto lg:px-8 xl:px-16 2xl:px-32 font-serif'>
+    <nav className='container mx-auto lg:px-8 xl:px-16 2xl:px-24 font-serif'>
       {/* Logo */}
       <header className='nav-link border-b-1 text-center p-2'>
         <Link to='/'

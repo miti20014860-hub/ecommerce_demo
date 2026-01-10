@@ -7,6 +7,8 @@ import './main.css'
 
 import Root from './routes/Root'
 import Index from './routes/Index/Index'
+import News from './routes/Index/News'
+import Notice from './routes/Index/Notice'
 import Activity from './routes/Activity'
 import Collection from './routes/Collection'
 import Kenshi from './routes/Kenshi'
@@ -25,6 +27,8 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       { index: true, element: <Index />, },
+      { path: 'news/:id', element: <News />, },
+      { path: 'notice/:id', element: <Notice />, },
       { path: 'activity/*', element: <Activity />, },
       { path: 'collection/*', element: <Collection />, },
       { path: 'kenshi/*', element: <Kenshi />, },

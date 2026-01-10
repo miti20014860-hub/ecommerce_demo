@@ -50,18 +50,20 @@ export default function Index() {
   }
 
   return (
-    <main className='container mx-auto lg:px-8 xl:px-16 2xl:px-32'>
+    <main className='container mx-auto lg:px-8 xl:px-16 2xl:px-24'>
       {/* Banner */}
-      {banners.map((banner) => (
-        <Link to='/kenshi/'
-          aria-current={isCurrent('/kenshi/') ? 'page' : undefined}>
-          <img
-            key={banner.id}
-            src={banner.image}
-            alt={banner.caption || 'Banner'}
-            className='w-full mb-2' />
-        </Link>
-      ))}
+      <figure className="mb-2">
+        {banners.map((banner) => (
+          <Link to='/kenshi/'
+            aria-current={isCurrent('/kenshi/') ? 'page' : undefined}>
+            <img
+              key={banner.id}
+              src={banner.image}
+              alt={banner.caption || 'Banner'}
+              className='w-full' />
+          </Link>
+        ))}
+      </figure>
       {/* Featured News */}
       <section className='grid lg:grid-cols-2 mb-2 '>
         {featuredNews.map((news) => (
@@ -69,17 +71,17 @@ export default function Index() {
             <article className='relative grid grid-cols-5 w-full h-full'>
               <div className='col-span-3 p-6'>
                 <h2 className='font-serif text-2xl'>{news.title}</h2>
-                <time className='text-gray-500 my-1'>{naturalTime(news.created_at)}</time>
+                <time className='text-gray-700'>{naturalTime(news.created_at)}</time>
                 <p className='line-clamp-2 md:line-clamp-3 xl:line-clamp-4 mb-6 xl:mt-2'>{news.contents_main}</p>
-                <Link to={`/news_detail/${news.id}/`}
+                <Link to={`/news/${news.id}/`}
                   className='absolute bottom-4 underline text-gray-500 hover:text-gray-700'
-                  aria-current={isCurrent(`/news_detail/${news.id}/`) ? 'page' : undefined}>
+                  aria-current={isCurrent(`/news/${news.id}/`) ? 'page' : undefined}>
                   Continue reading »
                 </Link>
               </div>
               <div className='relative col-span-2'>
-                <Link to={`/news_detail/${news.id}/`}
-                  aria-current={isCurrent(`/news_detail/${news.id}/`) ? 'page' : undefined}>
+                <Link to={`/news/${news.id}/`}
+                  aria-current={isCurrent(`/news/${news.id}/`) ? 'page' : undefined}>
                   <img
                     src={news.images[0]?.image}
                     alt={news.images[0]?.caption || 'Thumbnail'}
@@ -96,19 +98,19 @@ export default function Index() {
           {notices.map((notice) => (
             <article key={notice.id} className='p-3 mt-3 mx-2'>
               <h2 className='font-serif text-2xl'>{notice.title}</h2>
-              <time className='text-gray-700 my-1'>{formatDate(notice.created_at)}</time>
+              <time className='text-gray-700'>{formatDate(notice.created_at)}</time>
               <p className='line-clamp-2 my-3'>{notice.contents_1}</p>
-              <Link to={`/notice_detail/${notice.id}/`}
+              <Link to={`/notice/${notice.id}/`}
                 className='underline text-gray-500 hover:text-gray-700'
-                aria-current={isCurrent(`/notice_detail/${notice.id}/`) ? 'page' : undefined}>
+                aria-current={isCurrent(`/notice/${notice.id}/`) ? 'page' : undefined}>
                 Continue reading »
               </Link>
               <hr className='text-gray-400 mt-6' />
             </article>
           ))}
         </div>
-        {/* Quote */}
-        <aside className='lg:col-span-1 me-2'>
+        <aside className='lg:col-span-1 px-2'>
+          {/* Quote */}
           {quotes.map((quote) => (
             <div key={quote.id} className='bg-gray-50 p-3 mt-2'>
               <p className='font-serif text-lg mb-2' >{quote.content}</p>
@@ -118,9 +120,10 @@ export default function Index() {
           {/* Recent news */}
           <h4 className='italic text-2xl mt-5 ms-2'>Recent news</h4>
           {recentNews.map((news) => (
-            <article key={news.id} className='grid grid-cols-3 p-1 border-t border-gray-400 mt-4'>
+            <article key={news.id} className='grid grid-cols-3 border-t border-gray-400 mt-3 p-1'>
               <Link to={`/news/${news.id}/`}
-                className='relative col-span-1 mt-4'>
+                className='relative col-span-1 mt-4'
+                aria-current={isCurrent(`/news/${news.id}/`) ? 'page' : undefined}>
                 <img
                   src={news.images[0]?.image}
                   alt={news.images[0]?.caption || 'Thumbnail'}
@@ -129,7 +132,8 @@ export default function Index() {
               </Link>
               <div className='col-span-2 ms-1 mt-3 p-2'>
                 <Link to={`/news/${news.id}/`}
-                  className='italic hover:text-gray-700'>
+                  className='italic hover:text-gray-700'
+                  aria-current={isCurrent(`/news/${news.id}/`) ? 'page' : undefined}>
                   {news.title}
                 </Link>
                 <p className='line-clamp-2 text-sm mt-2'>{news.contents_main}</p>
