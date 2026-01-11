@@ -16,14 +16,7 @@ export interface News {
   id: number;
   title: string;
   contents_main: string;
-  subtitle_1: string;
-  contents_1: string;
-  subtitle_2: string;
-  contents_2: string;
-  lat: string;
-  lng: string;
-  address: string;
-  map_id: string;
+
   is_featured: boolean;
   created_at: string;
   updated_at: string;
@@ -41,12 +34,11 @@ export interface NoticeImage {
 export interface Notice {
   id: number;
   title: string;
+  contents_main: string;
   subtitle_1: string;
   contents_1: string;
   subtitle_2: string;
-  subtitle_3: string;
   contents_2: string;
-  contents_3: string;
   lat: string;
   lng: string;
   address: string;

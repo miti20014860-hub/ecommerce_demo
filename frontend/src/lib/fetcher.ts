@@ -23,7 +23,7 @@ export const fetchNotice = async () => {
 };
 
 export const fetchNoticeById = async (id: number) => {
-  const res = await fetch(`/api/notice/${id}/`);
+  const res = await fetch(`/api/notices/${id}/`);
   if (!res.ok) throw new Error('Failed to fetch notice detail');
   return res.json();
 };

@@ -34,44 +34,7 @@ class News(models.Model):
         blank=True,
         verbose_name=_("contents main")
     )
-    subtitle_1 = models.CharField(
-        max_length=60,
-        blank=True,
-        verbose_name=_("subtitle 1")
-    )
-    contents_1 = models.TextField(
-        blank=True,
-        verbose_name=_("contents 1")
-    )
-    subtitle_2 = models.CharField(
-        max_length=60,
-        blank=True,
-        verbose_name=_("subtitle 2")
-    )
-    contents_2 = models.TextField(
-        blank=True,
-        verbose_name=_("contents 2")
-    )
-    lat = models.CharField(
-        max_length=20,
-        blank=True,
-        verbose_name="latitude"
-    )
-    lng = models.CharField(
-        max_length=20,
-        blank=True,
-        verbose_name="longitude"
-    )
-    address = models.CharField(
-        max_length=100,
-        blank=True,
-        verbose_name=_("address")
-    )
-    map_id = models.CharField(
-        max_length=100,
-        blank=True,
-        verbose_name=_("map id"),
-    )
+
     is_featured = models.BooleanField(default=False, verbose_name="Featured")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -119,7 +82,10 @@ class Notice(models.Model):
         max_length=100,
         verbose_name=_("title")
     )
-
+    contents_main = models.TextField(
+        blank=True,
+        verbose_name=_("contents main")
+    )
     subtitle_1 = models.CharField(
         max_length=40,
         blank=True,
@@ -129,7 +95,6 @@ class Notice(models.Model):
         blank=True,
         verbose_name=_("contents 1")
     )
-
     subtitle_2 = models.CharField(
         max_length=40,
         blank=True,
@@ -139,17 +104,6 @@ class Notice(models.Model):
         blank=True,
         verbose_name=_("contents 2")
     )
-
-    subtitle_3 = models.CharField(
-        max_length=40,
-        blank=True,
-        verbose_name=_("subtitle 3")
-    )
-    contents_3 = models.TextField(
-        blank=True,
-        verbose_name=_("contents 3")
-    )
-
     lat = models.CharField(
         max_length=20,
         blank=True,

@@ -1,62 +1,62 @@
 [
-{
-  "model": "index.newsimage",
-  "pk": 1,
-  "fields": {
-    "news": 5,
-    "image": "newses/2025/10/31/51st_National_Iaido.jpg",
-    "caption": "",
-    "order": 0
+  {
+    "model": "index.newsimage",
+    "pk": 1,
+    "fields": {
+      "news": 1,
+      "image": "newses/2025/10/31/ERA_Poster_2480_3508.png",
+      "caption": "",
+      "order": 0
+    }
+  },
+  {
+    "model": "index.newsimage",
+    "pk": 2,
+    "fields": {
+      "news": 2,
+      "image": "newses/2025/10/31/An_exhibition_is_being_held_at_the_Nagoya_Sword_World_Museum..png",
+      "caption": "",
+      "order": 0
+    }
+  },
+  {
+    "model": "index.newsimage",
+    "pk": 3,
+    "fields": {
+      "news": 3,
+      "image": "newses/2025/10/31/Matsumoto_City_Museum_Special_Exhibition_Nihontō_wa_Utsukushii.png",
+      "caption": "",
+      "order": 0
+    }
+  },
+  {
+    "model": "index.newsimage",
+    "pk": 4,
+    "fields": {
+      "news": 4,
+      "image": "newses/2025/10/31/Bizen_Osafune_Japanese_Sword_Museum_New_York_Exhibition_Clay_Iron_and_Fire.jpeg",
+      "caption": "",
+      "order": 0
+    }
+  },
+  {
+    "model": "index.newsimage",
+    "pk": 5,
+    "fields": {
+      "news": 5,
+      "image": "newses/2025/10/31/Yamagata_Test_cutting_with_real_swords_suddenly_banned_disappointing_locals..png",
+      "caption": "",
+      "order": 0
+    }
+  },
+  {
+    "model": "index.newsimage",
+    "pk": 6,
+    "fields": {
+      "news": 6,
+      "image": "newses/2025/10/31/51st_National_Iaido.jpg",
+      "caption": "",
+      "order": 0
+    }
   }
-},
-{
-  "model": "index.newsimage",
-  "pk": 2,
-  "fields": {
-    "news": 6,
-    "image": "newses/2025/10/31/Yamagata_Test_cutting_with_real_swords_suddenly_banned_disappointing_locals..png",
-    "caption": "",
-    "order": 0
-  }
-},
-{
-  "model": "index.newsimage",
-  "pk": 3,
-  "fields": {
-    "news": 7,
-    "image": "newses/2025/10/31/Bizen_Osafune_Japanese_Sword_Museum_New_York_Exhibition_Clay_Iron_and_Fire.jpeg",
-    "caption": "",
-    "order": 0
-  }
-},
-{
-  "model": "index.newsimage",
-  "pk": 4,
-  "fields": {
-    "news": 8,
-    "image": "newses/2025/10/31/Matsumoto_City_Museum_Special_Exhibition_Nihontō_wa_Utsukushii.png",
-    "caption": "",
-    "order": 0
-  }
-},
-{
-  "model": "index.newsimage",
-  "pk": 5,
-  "fields": {
-    "news": 9,
-    "image": "newses/2025/10/31/ERA_Poster_2480_3508.png",
-    "caption": "",
-    "order": 0
-  }
-},
-{
-  "model": "index.newsimage",
-  "pk": 6,
-  "fields": {
-    "news": 10,
-    "image": "newses/2025/10/31/An_exhibition_is_being_held_at_the_Nagoya_Sword_World_Museum..png",
-    "caption": "",
-    "order": 0
-  }
-}
 ]

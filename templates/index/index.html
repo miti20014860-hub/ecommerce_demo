@@ -55,8 +55,8 @@
             <p>{{ notice.created_at|date:"F j, Y" }}</p>
             <div class="g-0">
               <p>
-                {% if notice.contents_1 %}
-                  {{ notice.contents_1|striptags|truncatewords:30 }}
+                {% if notice.contents_main %}
+                  {{ notice.contents_main|striptags|truncatewords:30 }}
                 {% else %}
                   No content available.
                 {% endif %}

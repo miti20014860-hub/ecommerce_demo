@@ -48,18 +48,6 @@ class NewsAdmin(admin.ModelAdmin):
         (None, {
             'fields': ('title', 'contents_main', 'is_featured')
         }),
-        ('Content 1', {
-            'fields': ('subtitle_1', 'contents_1'),
-            'classes': ('collapse',)
-        }),
-        ('Content 2', {
-            'fields': ('subtitle_2', 'contents_2'),
-            'classes': ('collapse',)
-        }),
-        ('Map', {
-            'fields': (('lat', 'lng'), 'address', 'map_id'),
-            'classes': ('collapse',)
-        }),
     )
 
 class NoticeImageInline(admin.TabularInline):
@@ -76,15 +64,15 @@ class NoticeImageInline(admin.TabularInline):
 
 @admin.register(Notice)
 class NoticeAdmin(admin.ModelAdmin):
-    list_display = ('title', 'subtitle_1', 'contents_1','is_featured')
+    list_display = ('title', 'contents_main', 'is_featured')
     list_editable = ['is_featured']
     list_filter = ('created_at', 'updated_at')
-    search_fields = ('title', 'subtitle_1', 'contents_1')
+    search_fields = ('title', 'contents_main')
     inlines = [NoticeImageInline]
 
     fieldsets = (
         (None, {
-            'fields': ('title', 'is_featured')
+            'fields': ('title', 'contents_main', 'is_featured')
         }),
         ('Content 1', {
             'fields': ('subtitle_1', 'contents_1'),
@@ -92,10 +80,6 @@ class NoticeAdmin(admin.ModelAdmin):
         }),
         ('Content 2', {
             'fields': ('subtitle_2', 'contents_2'),
-            'classes': ('collapse',)
-        }),
-        ('Content 3', {
-            'fields': ('subtitle_3', 'contents_3'),
             'classes': ('collapse',)
         }),
         ('Map', {

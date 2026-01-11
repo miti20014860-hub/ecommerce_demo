@@ -2,37 +2,30 @@
 {% load static %}
 {% load humanize %}
 {% block body %}
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-11 col-md-10 col-lg-9 col-xl-8 col-xxl-7 mx-auto">
-                <section class="p-1 mb-0">
-                    <!-- Title -->
-                    <h2 class="text-center mt-2 p-2">{{ notice.title }}</h2>
-                    <!-- Date -->
-                    <div class="mb-3">
-                        <small class="bg-light p-1">{{ notice.updated_at|date:"F j, Y" }}</small>
-                    </div>
-                    <!-- Contents 1  -->
-                    {% if notice.subtitle_1 or notice.contents_1 %}
-                        <h2 class="bg-body-secondary">{{ notice.subtitle_1|default:"" }}</h2>
-                        <p>{{ notice.contents_1|linebreaks|default:"" }}</p>
-                    {% endif %}
-                    <!-- Contents 2 -->
-                    {% if notice.subtitle_2 or notice.contents_2 %}
-                        <h2 class="bg-body-secondary my-3">{{ notice.subtitle_2|default:"" }}</h2>
-                        <div>{{ notice.contents_2|linebreaks|default:"" }}</div>
-                    {% endif %}
-                    <!-- Contents 3 -->
-                    {% if notice.subtitle_3 or notice.contents_3 %}
-                        <h2 class="bg-body-secondary my-3">{{ notice.subtitle_3|default:"" }}</h2>
-                        <div>{{ notice.contents_3|linebreaks|default:"" }}</div>
-                    {% endif %}
-                </section>
-                <!-- Map -->
-                {% if notice.lat and notice.lng %}
-                    {% include "partials/_map.html" with lat=notice.lat lng=notice.lng address=notice.address zoom=15 map_id=notice.map_id height="400px" %}
-                {% endif %}
-            </div>
-        </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-11 col-md-10 col-lg-9 col-xl-8 col-xxl-7 mx-auto">
+        <section class="p-1 mb-0">
+          <!-- Title -->
+          <h2 class="text-center mt-2 p-2">{{ notice.title }}</h2>
+          <small class="bg-light mb-3 p-1">{{ notice.updated_at|date:"F j, Y" }}</small>
+          <p>{{ notice.contents_main|linebreaks|default:"" }}</p>
+          <!-- Contents 1  -->
+          {% if notice.subtitle_1 or notice.contents_1 %}
+            <h2 class="bg-body-secondary">{{ notice.subtitle_1|default:"" }}</h2>
+            <p>{{ notice.contents_1|linebreaks|default:"" }}</p>
+          {% endif %}
+          <!-- Contents 2 -->
+          {% if notice.subtitle_2 or notice.contents_2 %}
+            <h2 class="bg-body-secondary my-3">{{ notice.subtitle_2|default:"" }}</h2>
+            <div>{{ notice.contents_2|linebreaks|default:"" }}</div>
+          {% endif %}
+        </section>
+        <!-- Map -->
+        {% if notice.lat and notice.lng %}
+          {% include "partials/_map.html" with lat=notice.lat lng=notice.lng address=notice.address zoom=15 map_id=notice.map_id height="400px" %}
+        {% endif %}
+      </div>
     </div>
+  </div>
 {% endblock body %}

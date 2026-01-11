@@ -72,7 +72,7 @@ export default function Index() {
               <div className='col-span-3 p-6'>
                 <h2 className='font-serif text-2xl'>{news.title}</h2>
                 <time className='text-gray-700'>{naturalTime(news.created_at)}</time>
-                <p className='line-clamp-2 md:line-clamp-3 xl:line-clamp-4 mb-6 xl:mt-2'>{news.contents_main}</p>
+                <p className='line-clamp-2 md:line-clamp-3 xl:line-clamp-4 mb-6 mt-1'>{news.contents_main}</p>
                 <Link to={`/news/${news.id}/`}
                   className='absolute bottom-4 underline text-gray-500 hover:text-gray-700'
                   aria-current={isCurrent(`/news/${news.id}/`) ? 'page' : undefined}>
@@ -99,7 +99,7 @@ export default function Index() {
             <article key={notice.id} className='p-3 mt-3 mx-2'>
               <h2 className='font-serif text-2xl'>{notice.title}</h2>
               <time className='text-gray-700'>{formatDate(notice.created_at)}</time>
-              <p className='line-clamp-2 my-3'>{notice.contents_1}</p>
+              <p className='line-clamp-2 my-3'>{notice.contents_main}</p>
               <Link to={`/notice/${notice.id}/`}
                 className='underline text-gray-500 hover:text-gray-700'
                 aria-current={isCurrent(`/notice/${notice.id}/`) ? 'page' : undefined}>
@@ -122,7 +122,7 @@ export default function Index() {
           {recentNews.map((news) => (
             <article key={news.id} className='grid grid-cols-3 border-t border-gray-400 mt-3 p-1'>
               <Link to={`/news/${news.id}/`}
-                className='relative col-span-1 mt-4'
+                className='relative min-h-30 col-span-1 mt-4'
                 aria-current={isCurrent(`/news/${news.id}/`) ? 'page' : undefined}>
                 <img
                   src={news.images[0]?.image}
@@ -132,7 +132,7 @@ export default function Index() {
               </Link>
               <div className='col-span-2 ms-1 mt-3 p-2'>
                 <Link to={`/news/${news.id}/`}
-                  className='italic hover:text-gray-700'
+                  className='line-clamp-3 italic hover:text-gray-700'
                   aria-current={isCurrent(`/news/${news.id}/`) ? 'page' : undefined}>
                   {news.title}
                 </Link>
