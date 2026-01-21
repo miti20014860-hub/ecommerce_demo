@@ -4,9 +4,7 @@ export default function Navbar() {
 
   const location = useLocation();
   const pathname = location.pathname;
-  const isCurrent = (path: string) => {
-    return pathname.startsWith(path);
-  };
+  const isCurrent = (path: string) => pathname.startsWith(path);
 
   const isAuthenticated = window.currentUser?.isAuthenticated || false;
   const memberHref = isAuthenticated ? '/member/account/' : '/member/';
@@ -21,7 +19,7 @@ export default function Navbar() {
       </header>
       {/* Link */}
       <div className='nav-link border-b-1 text-lg p-1 mb-1'>
-        <div className='flex justify-between overflow-x-auto px-2 py-1'>
+        <div className='flex justify-between px-2 py-1'>
           <Link to='/'
             className={`px-2 ${pathname === '/' ? 'border-b-2' : 'hover:border-b-2'}`}
             aria-current={pathname === '/' ? 'page' : undefined}>News</Link>

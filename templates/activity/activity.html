@@ -2,231 +2,229 @@
 {% load static %}
 {% load humanize %}
 {% block body %}
-    <div class="container">
-        <div class="row">
-            <!-- Filter Bar -->
-            <section class="col-md-4 g-0">
-                <div class="position-sticky top-0 bg-body-secondary p-3 shadow-sm">
-                    <form method="get" id="filterForm">
-                        <!-- 1. Search -->
-                        <div class="mb-3">
-                            <div class="input-group">
-                                <input type="text"
-                                       name="q"
-                                       class="form-control bg-white"
-                                       placeholder="Search..."
-                                       value="{{ query|default:'' }}"
-                                       aria-label="Search">
-                                <button class="btn btn-light border" type="submit">
-                                    <i class="bi bi-search" aria-hidden="true"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <!-- Accordion Filters -->
-                        <div class="accordion accordion-flush" id="filterAccordion">
-                            <!-- 2. Activity Type -->
-                            <div class="accordion-item border-secondary">
-                                <div class="accordion-header">
-                                    <button class="accordion-button py-2 collapsed"
-                                            type="button"
-                                            data-bs-toggle="collapse"
-                                            data-bs-target="#type_collapse">Type</button>
-                                </div>
-                                <div id="type_collapse" class="accordion-collapse collapse">
-                                    <div class="accordion-body py-1">
-                                        {% for value, label in type_choices %}
-                                            <div class="form-check form-check-large my-1">
-                                                <input class="form-check-input"
-                                                       type="checkbox"
-                                                       name="type"
-                                                       value="{{ value }}"
-                                                       id="type_{{ value }}"
-                                                       {% if value in type_filters %}checked{% endif %}>
-                                                <label class="form-check-label" for="type_{{ value }}">{{ label }}</label>
-                                            </div>
-                                        {% endfor %}
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- 3. Price  -->
-                            <div class="accordion-item border-secondary">
-                                <div class="accordion-header">
-                                    <button class="accordion-button py-2 collapsed"
-                                            type="button"
-                                            data-bs-toggle="collapse"
-                                            data-bs-target="#charge_collapse">Price</button>
-                                </div>
-                                <div id="charge_collapse" class="accordion-collapse collapse">
-                                    <div class="accordion-body py-2">
-                                        <div class="row g-2">
-                                            <div class="col-6">
-                                                <input type="number"
-                                                       name="charge_min"
-                                                       class="form-control form-control-md"
-                                                       placeholder="Min"
-                                                       value="{{ charge_min|default:'' }}">
-                                            </div>
-                                            <div class="col-6">
-                                                <input type="number"
-                                                       name="charge_max"
-                                                       class="form-control form-control-md"
-                                                       placeholder="Max"
-                                                       value="{{ charge_max|default:'' }}">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- 4. Event Ends -->
-                            <div class="accordion-item border-secondary">
-                                <div class="accordion-header">
-                                    <button class="accordion-button py-2 collapsed"
-                                            type="button"
-                                            data-bs-toggle="collapse"
-                                            data-bs-target="#ends_collapse">Until</button>
-                                </div>
-                                <div id="ends_collapse" class="accordion-collapse collapse my-1">
-                                    <div class="accordion-body py-1">
-                                        <input type="date"
-                                               name="event_ends"
-                                               class="form-control form-control-md"
-                                               value="{{ event_ends|default:'' }}">
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- 5. Region -->
-                            <div class="accordion-item border-secondary">
-                                <div class="accordion-header">
-                                    <button class="accordion-button py-2 collapsed"
-                                            type="button"
-                                            data-bs-toggle="collapse"
-                                            data-bs-target="#region_collapse">Region</button>
-                                </div>
-                                <div id="region_collapse" class="accordion-collapse collapse">
-                                    <div class="accordion-body py-1">
-                                        <!-- Prefectures -->
-                                        {% for group in region_groups %}
-                                            <div class="prefecture-group my-2" id="group_{{ group.value }}">
-                                                <small class="text-muted d-block mb-1">{{ group.label }} Prefectures</small>
-                                                <div class="d-flex flex-wrap gap-1">
-                                                    {% for pref_value, pref_label in group.prefectures %}
-                                                        <div>
-                                                            <input class="btn-check"
-                                                                   type="checkbox"
-                                                                   name="prefecture"
-                                                                   value="{{ pref_value }}"
-                                                                   id="pref_{{ pref_value }}"
-                                                                   {% if pref_value in selected_prefectures %}checked{% endif %}>
-                                                            <label class="btn btn-outline-secondary btn-xs px-2 py-0"
-                                                                   for="pref_{{ pref_value }}">{{ pref_label }}</label>
-                                                        </div>
-                                                    {% endfor %}
-                                                </div>
-                                            </div>
-                                        {% endfor %}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Apply & Clear -->
-                        <div class="d-grid gap-2 mt-3">
-                            <button type="submit" class="btn btn-light rounded-0">Apply</button>
-                            <a href="{% url 'activity:activity' %}" class="btn btn-light rounded-0">Clear</a>
-                        </div>
-                    </form>
+  <div class="container">
+    <div class="row">
+      <!-- Filter Bar -->
+      <section class="col-md-4 g-0">
+        <div class="position-sticky top-0 bg-body-secondary p-3 shadow-sm">
+          <form method="get" id="filterForm">
+            <!-- 1. Search -->
+            <div class="mb-3">
+              <div class="input-group">
+                <input type="text"
+                       name="q"
+                       class="form-control bg-white"
+                       placeholder="Search..."
+                       value="{{ query|default:'' }}"
+                       aria-label="Search">
+                <button class="btn btn-light border" type="submit">
+                  <i class="bi bi-search" aria-hidden="true"></i>
+                </button>
+              </div>
+            </div>
+            <!-- Accordion Filters -->
+            <div class="accordion accordion-flush" id="filterAccordion">
+              <!-- 2. Activity Type -->
+              <div class="accordion-item border-secondary">
+                <div class="accordion-header">
+                  <button class="accordion-button py-2 collapsed"
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#type_collapse">Type</button>
                 </div>
-            </section>
-            <!-- Aicivities List -->
-            <section class="col-md-8">
-                <ul class="list-unstyled">
-                    {% for activity in activities %}
-                        <div class="row border mb-3">
-                            <!-- Title -->
-                            <a href="{% url 'activity:plan' activity.pk %}"
-                               class="link-body-emphasis text-decoration-none text-black border-top border-4">
-                                <h4 class="border-bottom border-2 py-3">{{ activity.title }}</h4>
-                            </a>
-                            <!-- Image -->
-                            <a href="{% url 'activity:plan' activity.pk %}" class="col-lg-5 py-2">
-                                <img src="{% if activity.main_image_url %}{{ activity.main_image_url }}{% else %}{% static 'img/default-activity.jpg' %}{% endif %}"
-                                     class="object-fit-cover w-100"
-                                     alt="{{ activity.title }} Thumbnail"
-                                     width="100%"
-                                     height="240" />
-                            </a>
-                            <!-- Content -->
-                            <div class="col py-1 d-flex flex-column">
-                                <!-- Label -->
-                                <div class="d-flex flex-row mt-1 gap-1">
-                                    <div class="bg-info text-white px-2 py-1 rounded small">{{ activity.get_prefecture_display|default:"－" }}</div>
-                                    <div class="bg-warning text-dark px-2 py-1 rounded small">{{ activity.get_type_display|default:"－" }}</div>
-                                </div>
-                                <!-- Description -->
-                                <p class="mt-1 mb-auto small text-muted">{{ activity.description|striptags|truncatechars:400 }}</p>
-                                <!-- Button -->
-                                <a href="{% url 'activity:plan' activity.pk %}"
-                                   class="btn btn-danger mt-1 mb-2 w-100">
-                                    {% if activity.minimum_charge == 0 %}
-                                        Free
-                                    {% else %}
-                                        {{ activity.minimum_charge|floatformat:0|intcomma|default:"－" }} {{ activity.get_currency_display }}～
-                                    {% endif %}
-                                </a>
-                            </div>
-                        </div>
-                    {% empty %}
-                        <div class="text-center py-5 text-muted">No results found</div>
+                <div id="type_collapse" class="accordion-collapse collapse">
+                  <div class="accordion-body py-1">
+                    {% for value, label in type_choices %}
+                      <div class="form-check form-check-large my-1">
+                        <input class="form-check-input"
+                               type="checkbox"
+                               name="type"
+                               value="{{ value }}"
+                               id="type_{{ value }}"
+                               {% if value in type_filters %}checked{% endif %}>
+                        <label class="form-check-label" for="type_{{ value }}">{{ label }}</label>
+                      </div>
                     {% endfor %}
-                </ul>
-                <!-- Paginator-->
-                {% if page_obj.has_other_pages %}
-                    <section aria-label="pagination" class="mt-4">
-                        <ul class="pagination justify-content-center">
-                            <!-- Previous -->
-                            {% if page_obj.has_previous %}
-                                <li class="page-item">
-                                    <a class="page-link"
-                                       href="?{% if current_query %}{{ current_query }}&{% endif %}page={{ page_obj.previous_page_number }}"
-                                       aria-label="Previous">
-                                        <i class="bi bi-chevron-left" aria-hidden="true"></i>
-                                    </a>
-                                </li>
-                            {% else %}
-                                <li class="page-item disabled">
-                                    <span class="page-link"><i class="bi bi-chevron-left" aria-hidden="true"></i></span>
-                                </li>
-                            {% endif %}
-                            <!-- Page -->
-                            {% for num in page_obj.paginator.page_range %}
-                                {% if page_obj.number == num %}
-                                    <li class="page-item active" aria-current="page">
-                                        <span class="page-link">{{ num }}</span>
-                                    </li>
-                                {% else %}
-                                    <li class="page-item">
-                                        <a class="page-link"
-                                           href="?{% if current_query %}{{ current_query }}&{% endif %}page={{ num }}">{{ num }}</a>
-                                    </li>
-                                {% endif %}
-                            {% endfor %}
-                            <!-- Next -->
-                            {% if page_obj.has_next %}
-                                <li class="page-item">
-                                    <a class="page-link"
-                                       href="?{% if current_query %}{{ current_query }}&{% endif %}page={{ page_obj.next_page_number }}"
-                                       aria-label="Next">
-                                        <i class="bi bi-chevron-right" aria-hidden="true"></i>
-                                    </a>
-                                </li>
-                            {% else %}
-                                <li class="page-item disabled">
-                                    <span class="page-link"><i class="bi bi-chevron-right" aria-hidden="true"></i></span>
-                                </li>
-                            {% endif %}
-                        </ul>
-                    </section>
-                {% endif %}
-            </section>
+                  </div>
+                </div>
+              </div>
+              <!-- 3. Price  -->
+              <div class="accordion-item border-secondary">
+                <div class="accordion-header">
+                  <button class="accordion-button py-2 collapsed"
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#charge_collapse">Price</button>
+                </div>
+                <div id="charge_collapse" class="accordion-collapse collapse">
+                  <div class="accordion-body py-2">
+                    <div class="row g-2">
+                      <div class="col-6">
+                        <input type="number"
+                               name="charge_min"
+                               class="form-control form-control-md"
+                               placeholder="Min"
+                               value="{{ charge_min|default:'' }}">
+                      </div>
+                      <div class="col-6">
+                        <input type="number"
+                               name="charge_max"
+                               class="form-control form-control-md"
+                               placeholder="Max"
+                               value="{{ charge_max|default:'' }}">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- 4. Event Ends -->
+              <div class="accordion-item border-secondary">
+                <div class="accordion-header">
+                  <button class="accordion-button py-2 collapsed"
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#ends_collapse">Until</button>
+                </div>
+                <div id="ends_collapse" class="accordion-collapse collapse my-1">
+                  <div class="accordion-body py-1">
+                    <input type="date"
+                           name="event_ends"
+                           class="form-control form-control-md"
+                           value="{{ event_ends|default:'' }}">
+                  </div>
+                </div>
+              </div>
+              <!-- 5. Region -->
+              <div class="accordion-item border-secondary">
+                <div class="accordion-header">
+                  <button class="accordion-button py-2 collapsed"
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#region_collapse">Region</button>
+                </div>
+                <div id="region_collapse" class="accordion-collapse collapse">
+                  <div class="accordion-body py-1">
+                    <!-- Prefectures -->
+                    {% for group in region_groups %}
+                      <div class="prefecture-group my-2" id="group_{{ group.value }}">
+                        <small class="text-muted d-block mb-1">{{ group.label }} Prefectures</small>
+                        <div class="d-flex flex-wrap gap-1">
+                          {% for pref_value, pref_label in group.prefectures %}
+                            <div>
+                              <input class="btn-check"
+                                     type="checkbox"
+                                     name="prefecture"
+                                     value="{{ pref_value }}"
+                                     id="pref_{{ pref_value }}"
+                                     {% if pref_value in selected_prefectures %}checked{% endif %}>
+                              <label class="btn btn-outline-secondary btn-xs px-2 py-0"
+                                     for="pref_{{ pref_value }}">{{ pref_label }}</label>
+                            </div>
+                          {% endfor %}
+                        </div>
+                      </div>
+                    {% endfor %}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Apply & Clear -->
+            <div class="d-grid gap-2 mt-3">
+              <button type="submit" class="btn btn-light rounded-0">Apply</button>
+              <a href="{% url 'activity:activity' %}" class="btn btn-light rounded-0">Clear</a>
+            </div>
+          </form>
         </div>
+      </section>
+      <!-- Aicivities List -->
+      <section class="col-md-8">
+        <ul class="list-unstyled">
+          {% for activity in activities %}
+            <div class="row border mb-3">
+              <!-- Title -->
+              <a href="{% url 'activity:plan' activity.pk %}"
+                 class="link-body-emphasis text-decoration-none text-black border-top border-4">
+                <h4 class="border-bottom border-2 py-3">{{ activity.title }}</h4>
+              </a>
+              <!-- Image -->
+              <a href="{% url 'activity:plan' activity.pk %}" class="col-lg-5 py-2">
+                <img src="{{ activity.images.first.image.url }}"
+                     class="object-fit-cover w-100"
+                     alt="{{ activity.title }} Thumbnail"
+                     width="100%"
+                     height="240" />
+              </a>
+              <!-- Content -->
+              <div class="col py-1 d-flex flex-column">
+                <!-- Label -->
+                <div class="d-flex flex-row mt-1 gap-1">
+                  <div class="bg-info text-white px-2 py-1 rounded small">{{ activity.get_prefecture_display }}</div>
+                  <div class="bg-warning text-dark px-2 py-1 rounded small">{{ activity.get_type_display }}</div>
+                </div>
+                <!-- Description -->
+                <p class="mt-1 mb-auto small text-muted">{{ activity.description|striptags|truncatechars:400 }}</p>
+                <!-- Button -->
+                <a href="{% url 'activity:plan' activity.pk %}"
+                   class="btn btn-danger mt-1 mb-2 w-100">
+                  {% if activity.minimum_charge == 0 %}
+                    Free
+                  {% else %}
+                    {{ activity.minimum_charge|floatformat:0|intcomma|default:"－" }} {{ activity.get_currency_display }}～
+                  {% endif %}
+                </a>
+              </div>
+            </div>
+          {% endfor %}
+        </ul>
+        <!-- Paginator-->
+        {% if page_obj.has_other_pages %}
+          <section aria-label="pagination" class="mt-4">
+            <ul class="pagination justify-content-center">
+              <!-- Previous -->
+              {% if page_obj.has_previous %}
+                <li class="page-item">
+                  <a class="page-link"
+                     href="?{% if current_query %}{{ current_query }}&{% endif %}page={{ page_obj.previous_page_number }}"
+                     aria-label="Previous">
+                    <i class="bi bi-chevron-left" aria-hidden="true"></i>
+                  </a>
+                </li>
+              {% else %}
+                <li class="page-item disabled">
+                  <span class="page-link"><i class="bi bi-chevron-left" aria-hidden="true"></i></span>
+                </li>
+              {% endif %}
+              <!-- Page -->
+              {% for num in page_obj.paginator.page_range %}
+                {% if page_obj.number == num %}
+                  <li class="page-item active" aria-current="page">
+                    <span class="page-link">{{ num }}</span>
+                  </li>
+                {% else %}
+                  <li class="page-item">
+                    <a class="page-link"
+                       href="?{% if current_query %}{{ current_query }}&{% endif %}page={{ num }}">{{ num }}</a>
+                  </li>
+                {% endif %}
+              {% endfor %}
+              <!-- Next -->
+              {% if page_obj.has_next %}
+                <li class="page-item">
+                  <a class="page-link"
+                     href="?{% if current_query %}{{ current_query }}&{% endif %}page={{ page_obj.next_page_number }}"
+                     aria-label="Next">
+                    <i class="bi bi-chevron-right" aria-hidden="true"></i>
+                  </a>
+                </li>
+              {% else %}
+                <li class="page-item disabled">
+                  <span class="page-link"><i class="bi bi-chevron-right" aria-hidden="true"></i></span>
+                </li>
+              {% endif %}
+            </ul>
+          </section>
+        {% endif %}
+      </section>
     </div>
+  </div>
 {% endblock body %}

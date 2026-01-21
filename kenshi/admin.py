@@ -13,10 +13,7 @@ class KenshiImageInline(admin.TabularInline):
 
     def image_preview(self, obj):
         if obj.image:
-            return format_html(
-                '<img src="{}" style="height: 80px; width: auto; object-fit: contain; border: 1px solid #ddd;" />',
-                obj.image.url
-            )
+            return format_html('<img src="{}" style="height: 80px; width: auto;" />', obj.image.url)
         return "(No image)"
     image_preview.short_description = "Preview"
 
@@ -28,7 +25,8 @@ class KenshiAdmin(admin.ModelAdmin):
     list_filter = ('date', 'created_at')
     search_fields = ('title', 'contents_main', 'subtitle_1', 'contents_1')
     inlines = [KenshiImageInline]
-    readonly_fields = ('created_at', 'updated_at', 'video_preview', 'main_image_preview')
+    readonly_fields = ('created_at', 'updated_at',
+                       'video_preview', 'main_image_preview')
 
     # === 嚴格按照 models.py 欄位順序 ===
     fieldsets = (

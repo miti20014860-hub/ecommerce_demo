@@ -12,10 +12,7 @@ class ActivityImageInline(admin.TabularInline):
 
     def image_preview(self, obj):
         if obj.image:
-            return format_html(
-                '<img src="{}" style="height: 80px; width: auto; object-fit: contain; border: 1px solid #ddd;" />',
-                obj.image.url
-            )
+            return format_html('<img src="{}" style="height: 80px; width: auto;" />', obj.image.url)
         return "(No image)"
     image_preview.short_description = "Preview"
 
@@ -28,12 +25,11 @@ class ActivityAdmin(admin.ModelAdmin):
         'min_price',
         'prefecture',
         'provider',
-        'participants',
-        'reg_deadline',
+        'event_ends',
         'created_at'
     )
     list_filter = (
-        'reg_deadline',
+        'type',
         'event_ends',
         'created_at',
     )
@@ -41,11 +37,7 @@ class ActivityAdmin(admin.ModelAdmin):
         'title',
         'provider',
         'description',
-        'plan',
-        'price',
-        'summary',
         'address',
-        'help_text'
     )
     readonly_fields = ('created_at', 'updated_at')
     inlines = [ActivityImageInline]
@@ -56,9 +48,9 @@ class ActivityAdmin(admin.ModelAdmin):
                 'type',
                 'title',
                 'is_appointment',
-                'minimum_charge',
+                'fee_details',
                 'currency',
-                'help_text',
+                'minimum_charge',
                 'price_included',
                 'provider',
                 'participants',
@@ -119,9 +111,11 @@ class ActivityAdmin(admin.ModelAdmin):
 
 @admin.register(Booking)
 class BookingAdmin(admin.ModelAdmin):
-    list_display = ('activity', 'get_full_name', 'email', 'prefer_date', 'created_at', 'user')
+    list_display = ('activity', 'get_full_name', 'email',
+                    'prefer_date', 'created_at', 'user')
     list_filter = ('activity', 'prefer_date', 'created_at')
-    search_fields = ('first_name', 'last_name', 'email', 'activity', 'user__username', 'user__email')
+    search_fields = ('first_name', 'last_name', 'email',
+                     'activity', 'user__username', 'user__email')
     readonly_fields = ('created_at',)
     date_hierarchy = 'created_at'
 

@@ -4,9 +4,7 @@ export default function Footer() {
 
   const location = useLocation();
   const pathname = location.pathname;
-  const isCurrent = (path: string) => {
-    return pathname.startsWith(path);
-  };
+  const isCurrent = (path: string) => pathname.startsWith(path);
 
   return (
     <footer className='bg-gray-100 border-y-1 text-sm mt-5'>

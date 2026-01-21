@@ -5,14 +5,14 @@ from django.utils.translation import gettext_lazy as _
 class Banner(models.Model):
     image = models.ImageField(
         upload_to='banners/',
-        verbose_name="banner image"
+        verbose_name=_("banner image")
     )
     caption = models.CharField(
         max_length=60,
         blank=True,
-        verbose_name=_("caption (optional)")
+        verbose_name=_("caption")
     )
-    is_active = models.BooleanField(default=True, verbose_name="Active")
+    is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -35,7 +35,7 @@ class News(models.Model):
         verbose_name=_("contents main")
     )
 
-    is_featured = models.BooleanField(default=False, verbose_name="Featured")
+    is_featured = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -52,7 +52,7 @@ class NewsImage(models.Model):
     news = models.ForeignKey(
         News, on_delete=models.CASCADE,
         related_name='images',
-        verbose_name=_("news")
+        verbose_name=_("news images")
     )
     image = models.ImageField(
         upload_to='news/%Y/%m/%d/',
@@ -83,7 +83,6 @@ class Notice(models.Model):
         verbose_name=_("title")
     )
     contents_main = models.TextField(
-        blank=True,
         verbose_name=_("contents main")
     )
     subtitle_1 = models.CharField(
@@ -107,12 +106,12 @@ class Notice(models.Model):
     lat = models.CharField(
         max_length=20,
         blank=True,
-        verbose_name="latitude"
+        verbose_name=_("latitude")
     )
     lng = models.CharField(
         max_length=20,
         blank=True,
-        verbose_name="longitude"
+        verbose_name=_("longitude")
     )
     address = models.CharField(
         max_length=100,
@@ -122,9 +121,9 @@ class Notice(models.Model):
     map_id = models.CharField(
         max_length=100,
         blank=True,
-        verbose_name=_("map id"),
+        verbose_name=_("map id")
     )
-    is_featured = models.BooleanField(default=False, verbose_name="Featured")
+    is_featured = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -141,7 +140,7 @@ class NoticeImage(models.Model):
     notice = models.ForeignKey(
         Notice, on_delete=models.CASCADE,
         related_name='images',
-        verbose_name=_("notice")
+        verbose_name=_("notice images")
     )
     image = models.ImageField(
         upload_to='notice/%Y/%m/%d/',
@@ -169,12 +168,12 @@ class NoticeImage(models.Model):
 class Quote(models.Model):
     author = models.CharField(
         max_length=40,
-        verbose_name=_("Author")
+        verbose_name=_("author")
     )
     content = models.TextField(
-        verbose_name=_("Contents")
+        verbose_name=_("contents")
     )
-    is_active = models.BooleanField(default=False, verbose_name="Active")
+    is_active = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

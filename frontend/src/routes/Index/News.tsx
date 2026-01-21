@@ -16,11 +16,11 @@ export default function News() {
   });
 
   if (isLoading) {
-    return <div className="text-center py-20">Loading...</div>;
+    return <div className='text-center py-20'>Loading...</div>;
   }
 
   if (isError || !news) {
-    return <div className="text-center py-20">Loading failed: {error?.message}</div>;
+    return <div className='text-center py-20'>Loading failed: {error?.message}</div>;
   }
 
   return (
@@ -32,19 +32,19 @@ export default function News() {
         <p className='whitespace-pre-wrap mt-4'>{news.contents_main}</p>
       </article>
       {/* Lightbox */}
-      <figure className="mx-4">
-        <input type="checkbox" id='lightbox' className="peer hidden" />
+      <figure className='mx-4'>
+        <input type='checkbox' id='lightbox' className='peer hidden' />
         <label htmlFor='lightbox'>
           <img
             src={news.images[0]?.image}
             alt={news.images[0]?.caption || 'Image'}
-            className='cursor-pointer' />
+            className='w-full cursor-pointer' />
         </label>
-        <div className="peer-checked:flex hidden fixed inset-0 bg-black/70 justify-center items-center">
+        <div className='peer-checked:flex hidden fixed inset-0 bg-black/70 justify-center items-center'>
           <label
-            htmlFor="lightbox"
-            aria-label="Close"
-            className="absolute inset-0 cursor-pointer" />
+            htmlFor='lightbox'
+            aria-label='Close'
+            className='absolute inset-0' />
           <img
             src={news.images[0]?.image}
             alt={news.images[0]?.caption || 'Image'}

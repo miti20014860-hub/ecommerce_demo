@@ -87,27 +87,27 @@
             <section class="col-md-8">
               <h4 class="mt-1 mb-0">{{ activity.title }}</h4>
               <div class="my-2">
-                <p class="text-decoration-underline d-inline mx-1">{{ activity.provider|default:"－" }}</p>
+                <p class="text-decoration-underline d-inline mx-1">{{ activity.provider }}</p>
                 <p class="d-inline mx-1">/</p>
-                <p class="text-decoration-underline d-inline mx-1">{{ activity.get_type_display|default:"－" }}</p>
+                <p class="text-decoration-underline d-inline mx-1">{{ activity.get_type_display }}</p>
               </div>
               <section class="row p-1">
                 <div class="col-4 border rounded d-flex flex-column mt-1">
                   <small class="mt-1">Participants:</small>
                   <div class="mt-auto">
-                    <h6>{{ activity.participants|default:"－" }}</h6>
+                    <h6>{{ activity.participants }}</h6>
                   </div>
                 </div>
                 <div class="col-4 border rounded d-flex flex-column mt-1">
                   <small class="mt-1">Participating age:</small>
                   <div class="mt-auto">
-                    <h6>{{ activity.participating_age|default:"－" }}</h6>
+                    <h6>{{ activity.participating_age }}</h6>
                   </div>
                 </div>
                 <div class="col-4 border rounded d-flex flex-column mt-1">
                   <small class="mt-1">Duration:</small>
                   <div class="mt-auto">
-                    <h6>{{ activity.duration|default:"－" }}</h6>
+                    <h6>{{ activity.duration }}</h6>
                   </div>
                 </div>
               </section>
@@ -152,15 +152,15 @@
                     <p class="d-block bg-light p-1 mb-1">Event Ends</p>
                   </div>
                   <div class="col-8">
-                    <p class="d-block p-1 mb-1">{{ activity.min_p|default:"－" }}</p>
-                    <p class="d-block p-1 mb-1">{{ activity.participants|default:"－" }}</p>
-                    <p class="d-block p-1 mb-1">{{ activity.reg_deadline|default:"－" }}</p>
-                    <p class="d-block p-1 mb-1">{{ activity.event_ends|default:"－" }}</p>
+                    <p class="d-block p-1 mb-1">{{ activity.min_p }}</p>
+                    <p class="d-block p-1 mb-1">{{ activity.participants }}</p>
+                    <p class="d-block p-1 mb-1">{{ activity.reg_deadline }}</p>
+                    <p class="d-block p-1 mb-1">{{ activity.event_ends }}</p>
                   </div>
                 </div>
                 <h6 class="ms-1 mt-2 mb-0">Access Map</h6>
                 <div class="col-12 mt-2 mx-1 bg-light">
-                  <small class="mt-2 mb-0">{{ activity.address|default:"－" }}</small>
+                  <small class="mt-2 mb-0">{{ activity.address }}</small>
                 </div>
                 <div class="mt-0">
                   {% include "partials/_map.html" with lat=activity.lat lng=activity.lng address=activity.address zoom=15 map_id=activity.map_id height="400px" %}
@@ -170,18 +170,18 @@
             <!-- Book -->
             <section class="col-md-4">
               <div class="position-sticky top-0 rounded border shadow-sm p-3 mt-1">
-                <p class="text-muted mb-0">{{ activity.help_text|default:"－" }}</p>
+                <p class="text-muted mb-0">{{ activity.fee_details }}</p>
                 <div class="mb-1">
                   {% if activity.minimum_charge == 0 %}
                     <h3 class="d-inline">Free</h3>
                   {% else %}
-                    <h3 class="d-inline">{{ activity.minimum_charge|floatformat:0|intcomma|default:"－" }}</h3>
+                    <h3 class="d-inline">{{ activity.minimum_charge|floatformat:0|intcomma }}</h3>
                     <h6 class="d-inline text-right mx-auto my-1">{{ activity.get_currency_display }} ～ (with tax)</h6>
                   {% endif %}
                 </div>
                 <div class="bg-light rounded text-muted p-1">
                   <small class="d-block">Included in price:</small>
-                  <small>{{ activity.price_included|default:"－" }}</small>
+                  <small>{{ activity.price_included }}</small>
                 </div>
                 {% if activity.is_appointment == 'yes' %}
                   <button class="btn btn-danger w-100 mt-3"
