@@ -19,7 +19,7 @@ export const fetchNewsById = async (id: number): Promise<News> => {
   return res.json();
 };
 
-export const fetchNotice = async (): Promise<Notice[]> => {
+export const fetchNotices = async (): Promise<Notice[]> => {
   const res = await fetch('/api/notices/');
   if (!res.ok) throw new Error(`Failed to fetch notices: ${res.status} ${res.statusText}`);
   return res.json();
@@ -38,7 +38,7 @@ export const fetchQuotes = async (): Promise<Quote[]> => {
 };
 
 // Activity
-export const fetchActivity = async (): Promise<Activity[]> => {
+export const fetchActivities = async (): Promise<Activity[]> => {
   const res = await fetch('/api/activities/');
   if (!res.ok) throw new Error(`Failed to fetch activities: ${res.status} ${res.statusText}`);
   return res.json();
@@ -50,7 +50,7 @@ export const fetchActivityById = async (id: number): Promise<Activity> => {
   return res.json();
 };
 
-export const fetchBooking = async (): Promise<Booking[]> => {
+export const fetchBookings = async (): Promise<Booking[]> => {
   const res = await fetch('/api/bookings/');
   if (!res.ok) throw new Error(`Failed to fetch bookings: ${res.status} ${res.statusText}`);
   return res.json();

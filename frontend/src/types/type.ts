@@ -120,10 +120,3 @@ export interface Booking {
   activity_obj?: number | null;
   user?: number | null;
 }
-
-export interface ActivityListResponse {
-  results: Activity[];
-  count: number;
-  next?: string | null;
-  previous?: string | null;
-}

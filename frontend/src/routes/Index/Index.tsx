@@ -1,11 +1,9 @@
-import { useQueries } from '@tanstack/react-query';
 import { Link, useLocation } from 'react-router-dom';
+import { useQueries } from '@tanstack/react-query';
 import { naturalTime, formatDate } from '@/utils/formatTime';
-import { fetchBanners, fetchNews, fetchNotice, fetchQuotes } from '@/lib/fetcher';
-
+import { fetchBanners, fetchNews, fetchNotices, fetchQuotes } from '@/lib/fetcher';
 
 export default function Index() {
-
   const location = useLocation();
   const pathname = location.pathname;
   const isCurrent = (path: string) => {
@@ -16,7 +14,7 @@ export default function Index() {
     queries: [
       { queryKey: ['banners'], queryFn: fetchBanners },
       { queryKey: ['news'], queryFn: fetchNews },
-      { queryKey: ['notice'], queryFn: fetchNotice },
+      { queryKey: ['notice'], queryFn: fetchNotices },
       { queryKey: ['quotes'], queryFn: fetchQuotes },
     ],
   });

@@ -16,7 +16,7 @@
                        class="form-control bg-white"
                        placeholder="Search..."
                        value="{{ query|default:'' }}"
-                       aria-label="Search">
+                       aria-label="Search" />
                 <button class="btn btn-light border" type="submit">
                   <i class="bi bi-search" aria-hidden="true"></i>
                 </button>
@@ -41,7 +41,7 @@
                                name="type"
                                value="{{ value }}"
                                id="type_{{ value }}"
-                               {% if value in type_filters %}checked{% endif %}>
+                               {% if value in type_filters %}checked{% endif %} />
                         <label class="form-check-label" for="type_{{ value }}">{{ label }}</label>
                       </div>
                     {% endfor %}

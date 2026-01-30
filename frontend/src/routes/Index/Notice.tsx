@@ -2,14 +2,12 @@ import { useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { formatDate } from '@/utils/formatTime';
 import { fetchNoticeById } from '@/lib/fetcher';
-import type { Notice } from '@/types/type';
 import Map from '@/components/Map';
 
 export default function Notice() {
 
   const { id } = useParams<{ id: string }>();
-
-  const { data: notice, isLoading, isError, error } = useQuery<Notice>({
+  const { data: notice, isLoading, isError, error } = useQuery({
     queryKey: ['notice', id],
     queryFn: () => fetchNoticeById(Number(id)),
     enabled: !!id,

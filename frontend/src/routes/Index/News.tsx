@@ -2,14 +2,11 @@ import { useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { formatDate } from '@/utils/formatTime';
 import { fetchNewsById } from '@/lib/fetcher';
-import type { News } from '@/types/type';
-
 
 export default function News() {
 
   const { id } = useParams<{ id: string }>();
-
-  const { data: news, isLoading, isError, error } = useQuery<News>({
+  const { data: news, isLoading, isError, error } = useQuery({
     queryKey: ['news', id],
     queryFn: () => fetchNewsById(Number(id)),
     enabled: !!id,
