@@ -1,7 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 
-export default function Footer() {
-
+export const Footer = () => {
   const location = useLocation();
   const pathname = location.pathname;
   const isCurrent = (path: string) => pathname.startsWith(path);
@@ -27,9 +26,12 @@ export default function Footer() {
             className='mx-2 sm:mx-6'
             aria-current={isCurrent('/terms/') ? 'page' : undefined}>Terms & Conditions |</Link>
         </div >
+
         {/* Copyright */}
         <p className='text-center md:text-left lg:ms-4' >© Habaki, Ltd. All Rights Reserved.</p>
       </div >
     </footer >
   );
 };
+
+export default Footer

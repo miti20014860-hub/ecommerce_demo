@@ -1,7 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 
-export default function Navbar() {
-
+export const Navbar = () => {
   const location = useLocation();
   const pathname = location.pathname;
   const isCurrent = (path: string) => pathname.startsWith(path);
@@ -17,6 +16,7 @@ export default function Navbar() {
           className='text-3xl'
           aria-current={pathname === '/' ? 'page' : undefined}>Habaki</Link>
       </header>
+
       {/* Link */}
       <div className='nav-link border-b-1 text-lg p-1 mb-1'>
         <div className='flex justify-between px-2 py-1'>
@@ -40,3 +40,5 @@ export default function Navbar() {
     </nav>
   );
 };
+
+export default Navbar

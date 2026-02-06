@@ -63,14 +63,14 @@ export interface ActivityImage {
   order: number;
 }
 
-export interface Activity {
+export interface ActivityProps {
   id: number;
   type: 'hands_on' | 'performance' | 'exhibition' | 'lecture' | 'workshop';
   title: string;
   is_appointment: 'yes' | 'no';
   fee_details: string;
   currency: 'JPY' | 'USD' | 'EUR';
-  minimum_charge: number;
+  minimum_charge: string;
   price_included: string;
   provider: string;
   participants: string;
@@ -119,4 +119,42 @@ export interface Booking {
   created_at: string;
   activity_obj?: number | null;
   user?: number | null;
+}
+
+export interface FilterOption<T> {
+  value: T;
+  label: string;
+}
+
+export interface PrefectureOption {
+  value: string;
+  label: string;
+}
+
+export interface RegionGroup {
+  label: string;
+  prefectures: PrefectureOption[];
+}
+
+export interface ActivityFilterOptions {
+  types: FilterOption<ActivityProps['type']>[];
+  price: FilterOption<ActivityProps['minimum_charge']>[];
+  until: FilterOption<ActivityProps['event_ends']>[];
+  region_groups: RegionGroup[];
+}
+
+export interface ActivityFilterState {
+  q: string;
+  types: string[];
+  charge_min: string;
+  charge_max: string;
+  event_ends: string;
+  prefectures: string[];
+}
+
+export interface PaginatedResponse<T> {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  results: T[];
 }

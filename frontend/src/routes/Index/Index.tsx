@@ -3,7 +3,7 @@ import { useQueries } from '@tanstack/react-query';
 import { naturalTime, formatDate } from '@/utils/formatTime';
 import { fetchBanners, fetchNews, fetchNotices, fetchQuotes } from '@/lib/fetcher';
 
-export default function Index() {
+export const Index = () => {
   const location = useLocation();
   const pathname = location.pathname;
   const isCurrent = (path: string) => {
@@ -56,6 +56,7 @@ export default function Index() {
           </Link>
         ))}
       </figure>
+
       {/* Featured News */}
       <section className='grid lg:grid-cols-2 mb-2 '>
         {featuredNews.map((news) => (
@@ -85,6 +86,7 @@ export default function Index() {
         ))}
       </section>
       <div className='grid lg:grid-cols-3'>
+
         {/* Notices */}
         <div className='lg:col-span-2'>
           {notices.map((notice) => (
@@ -102,6 +104,7 @@ export default function Index() {
           ))}
         </div>
         <aside className='lg:col-span-1 px-2'>
+
           {/* Quote */}
           {quotes.map((quote) => (
             <div key={quote.id} className='bg-gray-50 p-3 mt-2'>
@@ -109,6 +112,7 @@ export default function Index() {
               <p className='font-serif text-end'>{quote.author}</p>
             </div>
           ))}
+
           {/* Recent news */}
           <h4 className='italic text-2xl mt-5 ms-2'>Recent news</h4>
           {recentNews.map((news) => (
@@ -137,3 +141,5 @@ export default function Index() {
     </main >
   )
 }
+
+export default Index

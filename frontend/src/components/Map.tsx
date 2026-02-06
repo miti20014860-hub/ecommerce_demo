@@ -2,7 +2,6 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 
-
 const customIcon = new L.Icon({
   iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
   iconRetinaUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
@@ -22,14 +21,14 @@ interface MapProps {
   mapId?: string;
 }
 
-export default function Map({
+export const Map = ({
   lat, lng,
   address = 'address',
   zoom = 15,
   height = '400px',
   mapId = 'map',
   ...rest
-}: MapProps) {
+}: MapProps) => {
   const latitude = Number(lat);
   const longitude = Number(lng);
 
@@ -66,3 +65,5 @@ export default function Map({
     </div>
   );
 }
+
+export default Map

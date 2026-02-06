@@ -4,7 +4,7 @@ import { formatDate } from '@/utils/formatTime';
 import { fetchNoticeById } from '@/lib/fetcher';
 import Map from '@/components/Map';
 
-export default function Notice() {
+export const Notice = () => {
 
   const { id } = useParams<{ id: string }>();
   const { data: notice, isLoading, isError, error } = useQuery({
@@ -33,6 +33,7 @@ export default function Notice() {
         <h2 className='font-medium bg-gray-200 text-3xl mb-4'>{notice.subtitle_2}</h2>
         <p className='whitespace-pre-wrap my-5'>{notice.contents_2}</p>
       </article>
+
       {/* Map */}
       {notice.lat && notice.lng && (
         <section className='mx-3'>
@@ -48,3 +49,5 @@ export default function Notice() {
     </main >
   )
 }
+
+export default Notice

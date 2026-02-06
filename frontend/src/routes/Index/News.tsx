@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import { formatDate } from '@/utils/formatTime';
 import { fetchNewsById } from '@/lib/fetcher';
 
-export default function News() {
+export const News = () => {
 
   const { id } = useParams<{ id: string }>();
   const { data: news, isLoading, isError, error } = useQuery({
@@ -28,6 +28,7 @@ export default function News() {
         <time className='text-gray-700 text-sm'>{formatDate(news.created_at)}</time>
         <p className='whitespace-pre-wrap mt-4'>{news.contents_main}</p>
       </article>
+
       {/* Lightbox */}
       <figure className='mx-4'>
         <input type='checkbox' id='lightbox' className='peer hidden' />
@@ -51,3 +52,5 @@ export default function News() {
     </main >
   )
 }
+
+export default News

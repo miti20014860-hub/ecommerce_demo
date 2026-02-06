@@ -8,8 +8,8 @@ class Activity(models.Model):
         ('hands_on', 'Hands-on'),
         ('performance', 'Performance'),
         ('exhibition', 'Exhibition'),
-        ('lecture', 'Lecture'),
-        ('workshop', 'Workshop')
+        ('workshop', 'Workshop'),
+        ('lecture', 'Lecture')
     ]
     type = models.CharField(
         max_length=20,
