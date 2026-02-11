@@ -63,9 +63,10 @@ export interface ActivityImage {
   order: number;
 }
 
-export interface ActivityProps {
+export interface Activity {
   id: number;
   type: 'hands_on' | 'performance' | 'exhibition' | 'lecture' | 'workshop';
+  type_display: string;
   title: string;
   is_appointment: 'yes' | 'no';
   fee_details: string;
@@ -98,6 +99,7 @@ export interface ActivityProps {
   | 'tottori' | 'shimane' | 'okayama' | 'hiroshima' | 'yamaguchi'
   | 'tokushima' | 'kagawa' | 'ehime' | 'kochi'
   | 'fukuoka' | 'saga' | 'nagasaki' | 'kumamoto' | 'oita' | 'miyazaki' | 'kagoshima' | 'okinawa';
+  prefecture_display: string;
   lat: string;
   lng: string;
   address: string;
@@ -137,9 +139,9 @@ export interface RegionGroup {
 }
 
 export interface ActivityFilterOptions {
-  types: FilterOption<ActivityProps['type']>[];
-  price: FilterOption<ActivityProps['minimum_charge']>[];
-  until: FilterOption<ActivityProps['event_ends']>[];
+  types: FilterOption<Activity['type']>[];
+  price: FilterOption<Activity['minimum_charge']>[];
+  until: FilterOption<Activity['event_ends']>[];
   region_groups: RegionGroup[];
 }
 
@@ -150,6 +152,7 @@ export interface ActivityFilterState {
   charge_max: string;
   event_ends: string;
   prefectures: string[];
+  page: number;
 }
 
 export interface PaginatedResponse<T> {

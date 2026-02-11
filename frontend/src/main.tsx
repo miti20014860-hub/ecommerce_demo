@@ -6,10 +6,11 @@ import 'leaflet/dist/leaflet.css';
 import '@/main.css'
 
 import Root from '@/routes/Root'
-import Index from '@/routes/Index/Index'
-import News from '@/routes/Index/News'
-import Notice from '@/routes/Index/Notice'
+import Index from '@/routes/index/Index'
+import News from '@/routes/index/News'
+import Notice from '@/routes/index/Notice'
 import Activity from '@/routes/acitivity/Activity'
+import Plan from '@/routes/acitivity/Plan'
 import Collection from '@/routes/Collection'
 import Kenshi from '@/routes/Kenshi'
 import Member from '@/routes/Member'
@@ -30,6 +31,7 @@ const router = createBrowserRouter([
       { path: 'news/:id', element: <News />, },
       { path: 'notice/:id', element: <Notice />, },
       { path: 'activity/*', element: <Activity />, },
+      { path: 'activity/:id', element: <Plan />, },
       { path: 'collection/*', element: <Collection />, },
       { path: 'kenshi/*', element: <Kenshi />, },
       { path: 'member/*', element: <Member />, },

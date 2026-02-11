@@ -17,8 +17,8 @@ def activity(request):
     if query:
         activities = activities.filter(
             Q(title__icontains=query) |
-            Q(description__icontains=query) |
-            Q(provider__icontains=query)
+            Q(provider__icontains=query) |
+            Q(description__icontains=query)
         )
 
     # === 2. Activity Type  ===

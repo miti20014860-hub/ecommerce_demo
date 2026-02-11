@@ -147,7 +147,7 @@
                 <h4 class="border-bottom border-2 py-3">{{ activity.title }}</h4>
               </a>
               <!-- Image -->
-              <a href="{% url 'activity:plan' activity.pk %}" class="col-lg-5 py-2">
+              <a href="{% url 'activity:plan' activity.pk %}" class="col-md-5 py-2">
                 <img src="{{ activity.images.first.image.url }}"
                      class="object-fit-cover w-100"
                      alt="{{ activity.title }} Thumbnail"

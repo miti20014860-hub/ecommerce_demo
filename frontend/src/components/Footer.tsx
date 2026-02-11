@@ -11,19 +11,19 @@ export const Footer = () => {
         {/* Link */}
         <div className='nav-link text-center md:text-right my-4'>
           <Link to='/about/'
-            className='mx-2 sm:mx-6'
+            className='mx-2 sm:mx-6 hover:border-b-2'
             aria-current={isCurrent('/about/') ? 'page' : undefined}>About Us |</Link>
           <Link to='/contact/'
-            className='mx-2 sm:mx-6'
+            className='mx-2 sm:mx-6 hover:border-b-2'
             aria-current={isCurrent('/contact/') ? 'page' : undefined}>Contact |</Link>
           <Link to='/faq/'
-            className='mx-2 sm:mx-6'
+            className='mx-2 sm:mx-6 hover:border-b-2'
             aria-current={isCurrent('/faq/') ? 'page' : undefined}>FAQ |</Link>
           <Link to='/privacy/'
-            className='mx-2 sm:mx-6'
+            className='mx-2 sm:mx-6 hover:border-b-2'
             aria-current={isCurrent('/privacy/') ? 'page' : undefined}>Privacy |</Link>
           <Link to='/terms/'
-            className='mx-2 sm:mx-6'
+            className='mx-2 sm:mx-6 hover:border-b-2'
             aria-current={isCurrent('/terms/') ? 'page' : undefined}>Terms & Conditions |</Link>
         </div >
 

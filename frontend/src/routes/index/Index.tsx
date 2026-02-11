@@ -62,10 +62,10 @@ export const Index = () => {
         {featuredNews.map((news) => (
           <div key={news.id} className='border border-gray-200 shadow-md rounded-s-lg mx-2 my-1'>
             <article className='relative grid grid-cols-5 w-full h-full'>
-              <div className='col-span-3 p-6'>
+              <div className='col-span-3 p-5 mb-1'>
                 <h2 className='font-serif line-clamp-2 text-2xl'>{news.title}</h2>
                 <time className='text-gray-700'>{naturalTime(news.created_at)}</time>
-                <p className='line-clamp-1 sm:line-clamp-2 2xl:line-clamp-4 mb-6 mt-1'>{news.contents_main}</p>
+                <p className='line-clamp-2 lg:line-clamp-3 2xl:line-clamp-4 mb-6 mt-1'>{news.contents_main}</p>
                 <Link to={`/news/${news.id}/`}
                   className='absolute bottom-4 underline text-gray-500 hover:text-gray-700'
                   aria-current={isCurrent(`/news/${news.id}/`) ? 'page' : undefined}>

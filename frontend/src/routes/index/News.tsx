@@ -4,7 +4,6 @@ import { formatDate } from '@/utils/formatTime';
 import { fetchNewsById } from '@/lib/fetcher';
 
 export const News = () => {
-
   const { id } = useParams<{ id: string }>();
   const { data: news, isLoading, isError, error } = useQuery({
     queryKey: ['news', id],
@@ -12,13 +11,8 @@ export const News = () => {
     enabled: !!id,
   });
 
-  if (isLoading) {
-    return <div className='text-center py-20'>Loading...</div>;
-  }
-
-  if (isError || !news) {
-    return <div className='text-center py-20'>Loading failed: {error?.message}</div>;
-  }
+  if (isLoading) { return <div className='text-center py-20'>Loading...</div>; }
+  if (isError || !news) { return <div className='text-center py-20'>Loading failed: {error?.message}</div>; }
 
   return (
     <main className='container mx-auto max-w-3xl'>
