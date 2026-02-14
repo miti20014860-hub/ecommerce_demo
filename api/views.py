@@ -5,7 +5,8 @@ from rest_framework.decorators import action
 from rest_framework.pagination import PageNumberPagination
 from index.models import Banner, News, Notice, Quote
 from activity.models import Activity, Booking
-from .serializers import BannerSerializer, NewsSerializer, NoticeSerializer, QuoteSerializer, ActivitySerializer, BookingSerializer
+from collection.models import Collection, Order
+from .serializers import BannerSerializer, NewsSerializer, NoticeSerializer, QuoteSerializer, ActivitySerializer, BookingSerializer, CollectionSerializer, OrderSerializer
 
 
 # Index
@@ -29,13 +30,14 @@ class QuoteViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = QuoteSerializer
 
 
-# Activity
+# Pagination
 class StandardResultsSetPagination(PageNumberPagination):
     page_size = 6
     page_size_query_param = 'page_size'
     max_page_size = 100
 
 
+# Activity
 class ActivityViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Activity.objects.all().order_by('-created_at')
     serializer_class = ActivitySerializer
@@ -47,8 +49,7 @@ class ActivityViewSet(viewsets.ReadOnlyModelViewSet):
             return [{'value': x[0], 'label': x[1]} for x in choices]
 
         return Response({
-            'types': format_choices(Activity.Type_CHOICES),
-            'appointment_options': format_choices(Activity.Appointment_CHOICES),
+            'types': format_choices(Activity.TYPE_CHOICES),
             'region_groups': [
                 {'label': 'Hokkaido', 'prefectures': format_choices(
                     Activity.HOKKAIDO)},
@@ -98,3 +99,53 @@ class ActivityViewSet(viewsets.ReadOnlyModelViewSet):
 class BookingViewSet(viewsets.ModelViewSet):
     queryset = Booking.objects.all().order_by('-created_at')
     serializer_class = BookingSerializer
+
+
+# Collection
+class CollectionViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = Collection.objects.all().order_by('-created_at')
+    serializer_class = CollectionSerializer
+    pagination_class = StandardResultsSetPagination
+
+    @action(detail=False, methods=['get'])
+    def filters(self, request):
+        def format_choices(choices):
+            return [{'value': x[0], 'label': x[1]} for x in choices]
+
+        return Response({
+            'types': format_choices(Collection.TYPE_CHOICES),
+            'period_types': format_choices(Collection.PERIOD_CHOICES),
+        })
+
+    def get_queryset(self):
+        queryset = Collection.objects.all().order_by('-created_at')
+
+        q = self.request.query_params.get('q', None)
+        types = self.request.query_params.getlist('types')
+        price_min = self.request.query_params.get('price_min', None)
+        price_max = self.request.query_params.get('price_max', None)
+        period = self.request.query_params.get('period', None)
+        length_min = self.request.query_params.get('length_min', None)
+        length_max = self.request.query_params.get('length_max', None)
+
+        if q:
+            queryset = queryset.filter(Q(name_jp__icontains=q) | Q(name_en__icontains=q) | Q(provider__icontains=q))
+        if types:
+            queryset = queryset.filter(type__in=types)
+        if price_min:
+            queryset = queryset.filter(price__gte=price_min)
+        if price_max:
+            queryset = queryset.filter(price__lte=price_max)
+        if period:
+            queryset = queryset.filter(period__in=period)
+        if length_min:
+            queryset = queryset.filter(price__gte=length_min)
+        if length_max:
+            queryset = queryset.filter(price__lte=length_max)
+
+        return queryset
+
+
+class OrderViewSet(viewsets.ModelViewSet):
+    queryset = Order.objects.all().order_by('-created_at')
+    serializer_class = OrderSerializer

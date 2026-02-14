@@ -82,7 +82,7 @@ def activity(request):
         'event_ends': event_ends,
         'charge_min': charge_min,
         'charge_max': charge_max,
-        'type_choices': Activity.Type_CHOICES,
+        'type_choices': Activity.TYPE_CHOICES,
         'selected_prefectures': selected_prefectures,
         'region_groups': [
             {'value': 'hokkaido', 'label': 'Hokkaido', 'prefectures': Activity.HOKKAIDO},

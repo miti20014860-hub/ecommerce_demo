@@ -54,7 +54,7 @@ class ActivityAdmin(admin.ModelAdmin):
                 'price_included',
                 'provider',
                 'participants',
-                'participating_age',
+                'target_age',
                 'duration',
             )
         }),

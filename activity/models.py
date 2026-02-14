@@ -4,52 +4,53 @@ from django.db import models
 
 
 class Activity(models.Model):
-    Type_CHOICES = [
+    TYPE_CHOICES = [
+        ('lecture', 'Lecture'),
         ('hands_on', 'Hands-on'),
-        ('performance', 'Performance'),
-        ('exhibition', 'Exhibition'),
         ('workshop', 'Workshop'),
-        ('lecture', 'Lecture')
+        ('exhibition', 'Exhibition'),
+        ('performance', 'Performance')
     ]
     type = models.CharField(
-        max_length=20,
-        choices=Type_CHOICES,
-        verbose_name=_("activity type")
+        max_length=11,
+        choices=TYPE_CHOICES,
+        verbose_name=_("type")
     )
 
     title = models.TextField(verbose_name=_("title"))
 
-    Appointment_CHOICES = [
-        ('yes', 'Yes'), ('no', 'No')
-    ]
+    Appointment_CHOICES = [('yes', 'Yes'), ('no', 'No')]
     is_appointment = models.CharField(
-        max_length=10,
+        max_length=3,
         choices=Appointment_CHOICES,
         verbose_name=_("is appointment")
     )
 
-    fee_details = models.CharField(
-        max_length=100,
-        verbose_name=_("fee details")
-    )
-
-    CURRENCY_CHOICES = [('JPY', '¥ JPY'), ('USD', '$ USD'), ('EUR', '€ EUR'),]
+    CURRENCY_CHOICES = [
+        ('JPY', '¥ JPY'),
+        ('USD', '$ USD'),
+        ('EUR', '€ EUR')
+    ]
     currency = models.CharField(
-        max_length=10,
+        max_length=3,
         choices=CURRENCY_CHOICES,
         verbose_name=_("currency")
     )
-
     minimum_charge = models.DecimalField(
         max_digits=20,
         decimal_places=2,
         verbose_name=_("minimum charge")
     )
 
+    fee_details = models.CharField(
+        max_length=100,
+        verbose_name=_("fee details")
+    )
     price_included = models.TextField(
         default="－",
         verbose_name=_("price included")
     )
+
     provider = models.CharField(
         max_length=100,
         verbose_name=_("provider")
@@ -59,7 +60,7 @@ class Activity(models.Model):
         default="－",
         verbose_name=_("participants")
     )
-    participating_age = models.CharField(
+    target_age = models.CharField(
         max_length=50,
         default="－",
         verbose_name=_("participating Age")
@@ -72,14 +73,16 @@ class Activity(models.Model):
     description = models.TextField(
         verbose_name=_("description")
     )
+
     plan_1 = models.CharField(
         max_length=100,
         blank=True,
         verbose_name=_("plan 1")
     )
-    price_1 = models.CharField(
-        max_length=100,
-        blank=True,
+    price_1 = models.DecimalField(
+        max_digits=20,
+        decimal_places=2,
+        blank=True, null=True,
         verbose_name=_("price 1")
     )
     summary_1 = models.CharField(
@@ -92,9 +95,10 @@ class Activity(models.Model):
         blank=True,
         verbose_name=_("plan 2")
     )
-    price_2 = models.CharField(
-        max_length=100,
-        blank=True,
+    price_2 = models.DecimalField(
+        max_digits=20,
+        decimal_places=2,
+        blank=True, null=True,
         verbose_name=_("price 2")
     )
     summary_2 = models.CharField(
@@ -107,9 +111,10 @@ class Activity(models.Model):
         blank=True,
         verbose_name=_("plan 3")
     )
-    price_3 = models.CharField(
-        max_length=100,
-        blank=True,
+    price_3 = models.DecimalField(
+        max_digits=20,
+        decimal_places=2,
+        blank=True, null=True,
         verbose_name=_("price 3")
     )
     summary_3 = models.CharField(
@@ -117,6 +122,7 @@ class Activity(models.Model):
         blank=True,
         verbose_name=_("summary 3")
     )
+
     min_p = models.CharField(
         max_length=100,
         default="－",
@@ -194,9 +200,10 @@ class Activity(models.Model):
         ('kagoshima', 'Kagoshima'),
         ('okinawa', 'Okinawa')
     ]
-    PREFECTURE_CHOICES = (HOKKAIDO + TOHOKU + KANTO +
-                          CHUBU + KANSAI + CHUGOKU + SHIKOKU + KYUSHU_OKINAWA)
-
+    PREFECTURE_CHOICES = (
+        HOKKAIDO + TOHOKU + KANTO + CHUBU + KANSAI
+        + CHUGOKU + SHIKOKU + KYUSHU_OKINAWA
+    )
     prefecture = models.CharField(
         max_length=20,
         choices=PREFECTURE_CHOICES,
@@ -243,7 +250,7 @@ class ActivityImage(models.Model):
         verbose_name=_("image")
     )
     caption = models.CharField(
-        max_length=60,
+        max_length=100,
         blank=True,
         verbose_name=_("caption")
     )

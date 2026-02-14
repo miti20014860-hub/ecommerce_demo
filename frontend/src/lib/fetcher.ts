@@ -1,4 +1,4 @@
-import type { Banner, News, Notice, Quote, Activity, Booking } from '@/types/type';
+import type { Banner, News, Notice, Quote, Activity, Booking, Collection, Order } from '@/types/type';
 
 // Index
 export const fetchBanners = async (): Promise<Banner[]> => {
@@ -50,8 +50,39 @@ export const fetchActivityById = async (id: number): Promise<Activity> => {
   return res.json();
 };
 
-export const fetchBookings = async (): Promise<Booking[]> => {
-  const res = await fetch('/api/bookings/');
-  if (!res.ok) throw new Error(`Failed to fetch bookings: ${res.status} ${res.statusText}`);
+export const createBooking = async (data: Partial<Booking>): Promise<Booking> => {
+  const res = await fetch('/api/bookings/', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  });
+  if (!res.ok) throw new Error('Booking failed. Please check your information.');
+  return res.json();
+};
+
+// Collection
+export const fetchCollections = async (): Promise<Collection[]> => {
+  const res = await fetch('/api/collections/');
+  if (!res.ok) throw new Error(`Failed to fetch collections: ${res.status} ${res.statusText}`);
+  return res.json();
+};
+
+export const fetchCollectionById = async (id: number): Promise<Collection> => {
+  const res = await fetch(`/api/activities/${id}/`);
+  if (!res.ok) throw new Error(`Failed to fetch activity detail: ${res.status} ${res.statusText}`);
+  return res.json();
+};
+
+export const createOrder = async (data: Partial<Order>): Promise<Order> => {
+  const res = await fetch('/api/orders/', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  });
+  if (!res.ok) throw new Error('Order failed. Please check your information.');
   return res.json();
 };

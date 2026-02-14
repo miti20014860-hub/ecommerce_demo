@@ -75,7 +75,7 @@ export interface Activity {
   price_included: string;
   provider: string;
   participants: string;
-  participating_age: string;
+  target_age: string;
   duration: string;
   description: string;
   plan_1?: string | null;
@@ -109,6 +109,16 @@ export interface Activity {
   images: ActivityImage[];
 }
 
+export interface PrefectureOption {
+  value: string;
+  label: string;
+}
+
+export interface RegionGroup {
+  label: string;
+  prefectures: PrefectureOption[];
+}
+
 export interface Booking {
   id?: number;
   activity: string;
@@ -123,19 +133,59 @@ export interface Booking {
   user?: number | null;
 }
 
+// Collection
+export interface CollectionImage {
+  id: number;
+  image: string;
+  caption?: string | null;
+  order: number;
+}
+
+export interface Collection {
+  id: number;
+  type: 'tachi' | 'katana' | 'kodachi' | 'wakizashi' | 'tanto';
+  name_jp: string;
+  name_en: string;
+  provider: string;
+  signature: string;
+  currency: 'JPY' | 'USD' | 'EUR';
+  price: number;
+  blade_length: number;
+  curvature: number;
+  sword_weight: number;
+  motohaba: number;
+  sakihaba: number;
+  motogasane: number;
+  sakigasane: number;
+  period_type: 'koto' | 'chūkoto' | 'shinto' | 'gendaito';
+  period: string;
+  koshirae: string;
+  registration: string;
+  certificate: string;
+  remarks: string;
+  created_at: string;
+  updated_at: string;
+  images: CollectionImage[];
+}
+
+export interface Order {
+  id?: number;
+  activity: string;
+  first_name: string;
+  last_name: string;
+  email: string;
+  phone?: string | null;
+  prefer_date: string;
+  comment?: string | null;
+  created_at: string;
+  activity_obj?: number | null;
+  user?: number | null;
+}
+
+// Filters
 export interface FilterOption<T> {
   value: T;
   label: string;
-}
-
-export interface PrefectureOption {
-  value: string;
-  label: string;
-}
-
-export interface RegionGroup {
-  label: string;
-  prefectures: PrefectureOption[];
 }
 
 export interface ActivityFilterOptions {
@@ -155,6 +205,25 @@ export interface ActivityFilterState {
   page: number;
 }
 
+export interface CollectionFilterOptions {
+  types: FilterOption<Collection['type']>[];
+  price: FilterOption<Collection['price']>[];
+  period_types: FilterOption<Collection['period']>[];
+  blade_length: FilterOption<Collection['blade_length']>[];
+}
+
+export interface CollectionFilterState {
+  q: string;
+  types: string[];
+  price_min: string;
+  price_max: string;
+  period_types: string[];
+  length_min: string;
+  length_max: string;
+  page: number;
+}
+
+// Pagination
 export interface PaginatedResponse<T> {
   count: number;
   next: string | null;

@@ -15,16 +15,16 @@ export const News = () => {
   if (isError || !news) { return <div className='text-center py-20'>Loading failed: {error?.message}</div>; }
 
   return (
-    <main className='container mx-auto max-w-3xl'>
+    <main className='container mx-auto sm:px-8 md:px-16 lg:px-32 xl:px-64 2xl:px-96'>
       {/* Article */}
-      <article className='my-6 mx-4'>
+      <article className='mt-6 mx-4'>
         <h1 className='font-serif text-center text-4xl mb-4'>{news.title}</h1>
         <time className='text-gray-700 text-sm'>{formatDate(news.created_at)}</time>
         <p className='whitespace-pre-wrap mt-4'>{news.contents_main}</p>
       </article>
 
       {/* Lightbox */}
-      <figure className='mx-4'>
+      <figure className='mt-4 mx-4'>
         <input type='checkbox' id='lightbox' className='peer hidden' />
         <label htmlFor='lightbox'>
           <img

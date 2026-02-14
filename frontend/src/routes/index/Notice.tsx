@@ -22,9 +22,9 @@ export const Notice = () => {
   }
 
   return (
-    <main className='container mx-auto max-w-3xl'>
+    <main className='container mx-auto sm:px-8 md:px-16 lg:px-32 xl:px-64 2xl:px-96'>
       {/* Article */}
-      <article className='my-6 mx-4'>
+      <article className='mt-6 mx-4'>
         <h1 className='font-serif text-center text-4xl mb-4'>{notice.title}</h1>
         <time className='text-gray-700 text-sm'>{formatDate(notice.created_at)}</time>
         <p className='whitespace-pre-wrap my-5'>{notice.contents_main}</p>
@@ -36,7 +36,7 @@ export const Notice = () => {
 
       {/* Map */}
       {notice.lat && notice.lng && (
-        <section className='mx-3'>
+        <section className='mx-4'>
           <Map
             lat={notice.lat}
             lng={notice.lng}

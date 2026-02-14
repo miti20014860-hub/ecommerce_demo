@@ -45,7 +45,7 @@ export const Activity = () => {
   });
 
   return (
-    <main className='container mx-auto lg:px-8 xl:px-16 2xl:px-24 flex lg:flex-row'>
+    <main className='container mx-auto flex lg:flex-row'>
       {/* Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
@@ -58,9 +58,9 @@ export const Activity = () => {
       {/* Sidebar */}
       <aside
         className={`
-          w-[300px] flex-shrink-0 bg-white
+          w-80 flex-shrink-0 bg-white
           fixed inset-y-0 left-0 z-50 shadow-xl transition-transform duration-300 ease-in-out
-          lg:relative lg:translate-x-0 lg:shadow-none lg:z-auto
+          lg:sticky lg:h-[calc(100vh-10rem)] lg:translate-x-0 lg:shadow-none lg:z-auto
           ${isOpen ? 'translate-x-0' : '-translate-x-full'}
         `}
       >

@@ -6,8 +6,8 @@ export const Footer = () => {
   const isCurrent = (path: string) => pathname.startsWith(path);
 
   return (
-    <footer className='bg-gray-100 border-y-1 text-sm mt-5'>
-      <div className='container mx-auto lg:px-8 xl:px-16 2xl:px-24 my-6'>
+    <footer className='bg-gray-100 border-y-1 text-sm mt-4'>
+      <div className='container mx-auto my-7'>
         {/* Link */}
         <div className='nav-link text-center md:text-right my-4'>
           <Link to='/about/'

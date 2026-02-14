@@ -10,7 +10,7 @@ export const Pagination = ({ current, totalCount, pageSize, onPageChange }: Pagi
   if (totalPages <= 1) return null;
 
   return (
-    <div className="flex justify-center items-center my-8">
+    <div className="flex justify-center items-center mt-5 mb-1">
       <button
         disabled={current === 1}
         onClick={() => onPageChange(current - 1)}

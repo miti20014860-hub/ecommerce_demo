@@ -42,7 +42,7 @@ export const Index = () => {
   }
 
   return (
-    <main className='container mx-auto lg:px-8 xl:px-16 2xl:px-24'>
+    <main className='container mx-auto'>
       {/* Banner */}
       <figure className='mb-2'>
         {banners.map((banner) => (
@@ -58,7 +58,7 @@ export const Index = () => {
       </figure>
 
       {/* Featured News */}
-      <section className='grid lg:grid-cols-2 mb-2 '>
+      <section className='grid lg:grid-cols-2 mb-2'>
         {featuredNews.map((news) => (
           <div key={news.id} className='border border-gray-200 shadow-md rounded-s-lg mx-2 my-1'>
             <article className='relative grid grid-cols-5 w-full h-full'>
@@ -128,10 +128,11 @@ export const Index = () => {
               </Link>
               <div className='col-span-2 ms-1 mt-3 p-2'>
                 <Link to={`/news/${news.id}/`}
-                  className='line-clamp-3 italic hover:text-gray-700'
+                  className='line-clamp-1 font-serif hover:text-gray-700'
                   aria-current={isCurrent(`/news/${news.id}/`) ? 'page' : undefined}>
                   {news.title}
                 </Link>
+                <time className='text-sm text-gray-700'>{naturalTime(news.created_at)}</time>
                 <p className='line-clamp-2 text-sm mt-2'>{news.contents_main}</p>
               </div>
             </article>

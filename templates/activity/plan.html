@@ -101,7 +101,7 @@
                 <div class="col-4 border rounded d-flex flex-column mt-1">
                   <small class="mt-1">Participating age:</small>
                   <div class="mt-auto">
-                    <h6>{{ activity.participating_age }}</h6>
+                    <h6>{{ activity.target_age }}</h6>
                   </div>
                 </div>
                 <div class="col-4 border rounded d-flex flex-column mt-1">
@@ -120,22 +120,22 @@
                   <div class="mt-3">
                     <h5 class="d-inline">{{ activity.plan_1 }}</h5>
                     <h5 class="d-inline mx-1"></h5>
-                    <h5 class="d-inline">{{ activity.price_1 }}</h5>
-                    <h6 class="d-inline">JPY</h6>
+                    <h5 class="d-inline">{{ activity.price_1|floatformat:0|intcomma }}</h5>
+                    <h6 class="d-inline">{{ activity.currency }}</h6>
                     <p class="d-block text-muted">{{ activity.summary_1 }}</p>
                   </div>
                   <div class="mt-3">
                     <h5 class="d-inline">{{ activity.plan_2 }}</h5>
                     <h5 class="d-inline mx-1"></h5>
-                    <h5 class="d-inline">{{ activity.price_2 }}</h5>
-                    <h6 class="d-inline">JPY</h6>
+                    <h5 class="d-inline">{{ activity.price_2|floatformat:0|intcomma }}</h5>
+                    <h6 class="d-inline">{{ activity.currency }}</h6>
                     <p class="d-block text-muted">{{ activity.summary_2 }}</p>
                   </div>
                   <div class="mt-3">
                     <h5 class="d-inline">{{ activity.plan_3 }}</h5>
                     <h5 class="d-inline mx-1"></h5>
-                    <h5 class="d-inline">{{ activity.price_3 }}</h5>
-                    <h6 class="d-inline">JPY</h6>
+                    <h5 class="d-inline">{{ activity.price_3|floatformat:0|intcomma }}</h5>
+                    <h6 class="d-inline">{{ activity.currency }}</h6>
                     <p class="d-block text-muted">{{ activity.summary_3 }}</p>
                   </div>
                 {% endif %}
@@ -176,7 +176,7 @@
                     <h3 class="d-inline">Free</h3>
                   {% else %}
                     <h3 class="d-inline">{{ activity.minimum_charge|floatformat:0|intcomma }}</h3>
-                    <h6 class="d-inline text-right mx-auto my-1">{{ activity.get_currency_display }} ～ (with tax)</h6>
+                    <h5 class="d-inline text-right mx-auto my-1">{{ activity.get_currency_display }} ～ (with tax)</h5>
                   {% endif %}
                 </div>
                 <div class="bg-light rounded text-muted p-1">

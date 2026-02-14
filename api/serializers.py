@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from index.models import Banner, NewsImage, News, NoticeImage, Notice, Quote
 from activity.models import ActivityImage, Activity, Booking
+from collection.models import CollectionImage, Collection, Order
 
 
 # Index
@@ -64,4 +65,27 @@ class ActivitySerializer(serializers.ModelSerializer):
 class BookingSerializer(serializers.ModelSerializer):
     class Meta:
         model = Booking
+        fields = '__all__'
+
+
+# Collection
+class CollectionImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CollectionImage
+        fields = '__all__'
+
+
+class CollectionSerializer(serializers.ModelSerializer):
+    images = CollectionImageSerializer(many=True, read_only=True)
+    type_display = serializers.CharField(source='get_type_display', read_only=True)
+    prefecture_display = serializers.CharField(source='get_prefecture_display', read_only=True)
+
+    class Meta:
+        model = Collection
+        fields = '__all__'
+
+
+class OrderSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Order
         fields = '__all__'
