@@ -1,15 +1,15 @@
 import { Link, useLocation } from 'react-router-dom';
 import Pagination from '@/components/Pagination';
-import type { Activity, PaginatedResponse } from '@/types/type';
+import type { Collection, PaginatedResponse } from '@/types/type';
 
-interface ActivityListProps {
-  data?: PaginatedResponse<Activity>;
+interface CollectionListProps {
+  data?: PaginatedResponse<Collection>;
   isLoading: boolean;
   currentPage: number;
   onPageChange: (page: number) => void;
 }
 
-export const ActivityList = ({ data, isLoading, currentPage, onPageChange }: ActivityListProps) => {
+export const CollectionList = ({ data, isLoading, currentPage, onPageChange }: CollectionListProps) => {
   const location = useLocation();
   const pathname = location.pathname;
   const isCurrent = (path: string) => {
@@ -22,42 +22,24 @@ export const ActivityList = ({ data, isLoading, currentPage, onPageChange }: Act
   return (
     <div className="lg:ms-1">
       {/* List */}
-      {data.results.map((activity) => (
-        <div key={activity.id} className="border border-t-4 border-slate-200 px-3 mb-1 hover:shadow-lg transition-shadow duration-300 overflow-hidden">
-          {/* Title */}
-          <Link to={`/activity/${activity.id}/`}
-            aria-current={isCurrent(`/activity/${activity.id}/`) ? 'page' : undefined}>
-            <h3 className='text-2xl font-serif my-3'>
-              {activity.title}
-            </h3>
+      {data.results.map((collection) => (
+        <div key={collection.id} className="group border border-t-4 border-gray-400 hover:border-gray-500 hover:shadow-lg transition-shadow duration-300 overflow-hidden px-3 mb-3">
+          <Link to={`/collection/${collection.id}/`}
+            aria-current={isCurrent(`/collection/${collection.id}/`) ? 'page' : undefined}>
+            {/* Title */}
+            <h2 className='text-[23px] sm:text-[25px] xl:text-[28px] text-center mt-4 underline text-yellow-900 xl:p-1 group-hover:text-yellow-700'>
+              {collection.name_jp}
+            </h2>
+            {/* Image */}
+            <img
+              src={collection.images[0]?.image}
+              alt={collection.name_en || 'Thumbnail'}
+              className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-300 mt-1 overflow-hidden"
+            />
+            <h2 className='text-[22px] sm:text-2xl xl:text-[27px] font-medium text-center border-b-2 mb-4 p-1 xl:p-2 text-yellow-950 group-hover:text-yellow-800'>
+              {Number(collection.price).toLocaleString()} {collection.currency}
+            </h2>
           </Link>
-          {/* Content */}
-          <div className="group grid lg:grid-cols-12 border-t-2 border-slate-200 bg-white">
-            {/* Images */}
-            <div className="h-60 my-2 overflow-hidden lg:col-span-5">
-              <Link to={`/activity/${activity.id}/`}
-                aria-current={isCurrent(`/activity/${activity.id}/`) ? 'page' : undefined}>
-                <img
-                  src={activity.images[0]?.image}
-                  alt={activity.title || 'Thumbnail'}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-              </Link>
-            </div>
-            {/* Description */}
-            <div className="flex flex-col my-3 lg:ps-3 lg:col-span-7">
-              <div className="flex gap-2">
-                <span className="bg-cyan-400 rounded text-sm px-2 py-1">{activity.prefecture_display}</span>
-                <span className="bg-yellow-400 rounded text-sm px-2 py-1">{activity.type_display}</span>
-              </div>
-              <p className="text-sm text-slate-500 line-clamp-6 p-1 mt-2 mb-auto">{activity.description}</p>
-              <Link to={`/activity/${activity.id}/`}
-                aria-current={isCurrent(`/activity/${activity.id}/`) ? 'page' : undefined}
-                className="w-full rounded-md bg-rose-600 text-center text-white font-semibold py-1.5 mt-4 transition-color duration-300 hover:bg-rose-500">
-                {Number(activity.minimum_charge) === 0 ? "Free" : `${Number(activity.minimum_charge).toLocaleString()} ${activity.currency} ～`}
-              </Link>
-            </div>
-          </div>
         </div>
       ))}
 
@@ -72,4 +54,4 @@ export const ActivityList = ({ data, isLoading, currentPage, onPageChange }: Act
   );
 };
 
-export default ActivityList;
+export default CollectionList;

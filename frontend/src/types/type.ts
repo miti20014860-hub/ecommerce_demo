@@ -144,6 +144,7 @@ export interface CollectionImage {
 export interface Collection {
   id: number;
   type: 'tachi' | 'katana' | 'kodachi' | 'wakizashi' | 'tanto';
+  type_display: string;
   name_jp: string;
   name_en: string;
   provider: string;

@@ -23,7 +23,7 @@ export const ActivityList = ({ data, isLoading, currentPage, onPageChange }: Act
     <div className="lg:ms-1">
       {/* List */}
       {data.results.map((activity) => (
-        <div key={activity.id} className="border border-t-4 border-slate-200 px-3 mb-1 hover:shadow-lg transition-shadow duration-300 overflow-hidden">
+        <div key={activity.id} className="group border border-t-4 border-slate-400 hover:border-gray-500 hover:shadow-lg transition-shadow duration-300 overflow-hidden px-3 mb-3 ">
           {/* Title */}
           <Link to={`/activity/${activity.id}/`}
             aria-current={isCurrent(`/activity/${activity.id}/`) ? 'page' : undefined}>
@@ -32,15 +32,15 @@ export const ActivityList = ({ data, isLoading, currentPage, onPageChange }: Act
             </h3>
           </Link>
           {/* Content */}
-          <div className="group grid lg:grid-cols-12 border-t-2 border-slate-200 bg-white">
-            {/* Images */}
+          <div className="grid lg:grid-cols-12 border-t-2 border-slate-300 group-hover:border-gray-400 ">
+            {/* Image */}
             <div className="h-60 my-2 overflow-hidden lg:col-span-5">
               <Link to={`/activity/${activity.id}/`}
                 aria-current={isCurrent(`/activity/${activity.id}/`) ? 'page' : undefined}>
                 <img
                   src={activity.images[0]?.image}
                   alt={activity.title || 'Thumbnail'}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />
               </Link>
             </div>

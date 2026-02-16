@@ -70,8 +70,8 @@ export const fetchCollections = async (): Promise<Collection[]> => {
 };
 
 export const fetchCollectionById = async (id: number): Promise<Collection> => {
-  const res = await fetch(`/api/activities/${id}/`);
-  if (!res.ok) throw new Error(`Failed to fetch activity detail: ${res.status} ${res.statusText}`);
+  const res = await fetch(`/api/collections/${id}/`);
+  if (!res.ok) throw new Error(`Failed to fetch collection detail: ${res.status} ${res.statusText}`);
   return res.json();
 };
 

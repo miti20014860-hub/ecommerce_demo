@@ -16,7 +16,7 @@ const FilterSection = ({
 }: FilterSectionProps) => {
   const [isOpen, setIsOpen] = useState(defaultOpen);
   return (
-    <div className="border-b border-slate-400 py-4">
+    <div className="border-b border-slate-600 py-4">
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
@@ -27,7 +27,7 @@ const FilterSection = ({
       </button>
       <div className={`grid transition-all duration-300 ease-in-out ${isOpen ? 'grid-rows-[1fr] opacity-100 mt-2' : 'grid-rows-[0fr] opacity-0'}`}>
         <div className="overflow-hidden">
-          <div className="text-sm text-slate-600 mx-1">
+          <div className="text-sm text-slate-800 mx-1">
             {children}
           </div>
         </div>
@@ -70,20 +70,20 @@ export const CollectionFilters = ({
     }
   };
 
-  if (!options && isLoading) return <div className="animate-pulse text-slate-400 text-center py-20">Loading Filters...</div>;
+  if (!options && isLoading) return <div className="animate-pulse text-slate-600 text-center py-20">Loading Filters...</div>;
 
   return (
     <aside className="w-full h-full flex flex-col bg-white">
       {/* Search */}
-      <div className="relative border-b border-slate-400 bg-slate-50/50 p-4">
-        <Search className="absolute text-slate-400 left-7.5 top-6.5 w-4 h-4" />
+      <div className="relative border-b border-slate-600 bg-slate-50 p-4">
+        <Search className="absolute text-slate-600 left-7.5 top-6.5 w-4 h-4" />
         <input
           ref={inputRef}
           type="text"
           defaultValue={localSearch}
           onChange={(e) => setLocalSearch(e.target.value)}
           placeholder="Search activities..."
-          className="w-full pl-9 py-2 bg-white border border-slate-400 rounded-full text-sm focus:ring-1 focus:ring-blue-500 outline-none"
+          className="w-full pl-9 py-2 bg-white border border-slate-600 rounded-full text-sm focus:ring-1 focus:ring-blue-500 outline-none"
         />
       </div>
 
@@ -120,7 +120,7 @@ export const CollectionFilters = ({
                 value={filters.price_min}
                 onChange={(e) => setFilters({ ...filters, price_min: e.target.value, page: 1 })}
                 placeholder="Min"
-                className="w-full border border-slate-400 rounded-md text-sm p-2 focus:border-blue-600 outline-none"
+                className="w-full border border-slate-600 rounded-md text-sm p-2 focus:border-blue-600 outline-none"
               />
             </div>
             <div className="col-span-1">
@@ -129,7 +129,7 @@ export const CollectionFilters = ({
                 value={filters.price_max}
                 onChange={(e) => setFilters({ ...filters, price_max: e.target.value, page: 1 })}
                 placeholder="Max"
-                className="w-full border border-slate-400 rounded-md text-sm p-2 focus:border-blue-600 outline-none"
+                className="w-full border border-slate-600 rounded-md text-sm p-2 focus:border-blue-600 outline-none"
               />
             </div>
           </div>
@@ -166,7 +166,7 @@ export const CollectionFilters = ({
                 value={filters.length_min}
                 onChange={(e) => setFilters({ ...filters, length_min: e.target.value, page: 1 })}
                 placeholder="Min"
-                className="w-full border border-slate-400 rounded-md text-sm p-2 focus:border-blue-600 outline-none"
+                className="w-full border border-slate-600 rounded-md text-sm p-2 focus:border-blue-600 outline-none"
               />
             </div>
             <div className="col-span-1">
@@ -175,7 +175,7 @@ export const CollectionFilters = ({
                 value={filters.length_max}
                 onChange={(e) => setFilters({ ...filters, length_max: e.target.value, page: 1 })}
                 placeholder="Max"
-                className="w-full border border-slate-400 rounded-md text-sm p-2 focus:border-blue-600 outline-none"
+                className="w-full border border-slate-600 rounded-md text-sm p-2 focus:border-blue-600 outline-none"
               />
             </div>
           </div>
@@ -186,7 +186,7 @@ export const CollectionFilters = ({
           <button
             type="button"
             onClick={handleInternalClear}
-            className="w-full py-3 text-xs text-slate-500 font-bold tracking-wider uppercase border border-slate-400 rounded-xl hover:bg-slate-50 hover:text-slate-600"
+            className="w-full py-3 text-xs text-slate-500 font-bold tracking-wider uppercase border border-slate-600 rounded-xl hover:bg-slate-50 hover:text-slate-800"
           >
             Reset All Filters
           </button>

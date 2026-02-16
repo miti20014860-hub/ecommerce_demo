@@ -3,10 +3,9 @@ import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 import { fetchActivityById } from '@/lib/fetcher';
 import { ChevronLeft, ChevronRight, X, UserCheck, Users, Clock } from 'lucide-react';
-import type { Activity } from '@/types/type';
+import BookingModal from '@/components/ActivityBooking';
 import Map from '@/components/Map';
-import BookingModal from '@/components/BookingModal';
-
+import type { Activity } from '@/types/type';
 
 export const ActivityDetail = () => {
   const { id } = useParams<{ id: string }>();
@@ -22,7 +21,7 @@ export const ActivityDetail = () => {
 
   const images = (activity?.images && activity.images.length > 0)
     ? activity.images
-    : [{ image: '/img/cover21_9.jpg' }];
+    : [{ image: '/img/default.png' }];
 
   const nextImg = () => setCurrentImg((prev) => (prev + 1) % images.length);
   const prevImg = () => setCurrentImg((prev) => (prev - 1 + images.length) % images.length);
@@ -168,7 +167,7 @@ export const ActivityDetail = () => {
             {activity.is_appointment === 'yes' && (
               <button
                 onClick={() => setIsBookingModalOpen(true)}
-                className="w-full bg-rose-600 hover:bg-rose-500 text-white font-bold py-2 rounded-lg transition-colors"
+                className="w-full bg-rose-600 hover:bg-rose-500 text-white font-bold py-2 rounded-lg transition-colors cursor-pointer"
               >
                 Book
               </button>
@@ -177,7 +176,7 @@ export const ActivityDetail = () => {
         </div>
       </div>
 
-      {/* Lightbox Modal */}
+      {/* Lightbox */}
       {isLightboxOpen && (
         <div className="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center p-4">
           <button onClick={() => setIsLightboxOpen(false)} className="absolute top-6 right-6 text-white p-2 hover:bg-white/10 rounded-full">
@@ -187,7 +186,7 @@ export const ActivityDetail = () => {
         </div>
       )}
 
-      {/* Booking Modal */}
+      {/* Booking */}
       {isBookingModalOpen && (
         <BookingModal
           activity={activity}

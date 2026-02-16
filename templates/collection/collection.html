@@ -161,8 +161,9 @@
                      height="100%"
                      alt="Thumbnail" />
               </a>
-              <div class="mb-4">
-                <h4 class="text-center border-bottom border-black p-1">{{ collection.formatted_price }}</h4>
+              <div class="d-flex justify-content-center border-bottom border-black p-1 mb-4 text-center align-items-baseline">
+                <h4 class="m-0 me-1">{{ collection.price|floatformat:0|intcomma|default:"－" }}</h4>
+                <h4 class="m-0">{{ collection.currency }}</h4>
               </div>
             </div>
           {% empty %}

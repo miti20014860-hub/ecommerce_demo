@@ -78,7 +78,6 @@ class CollectionImageSerializer(serializers.ModelSerializer):
 class CollectionSerializer(serializers.ModelSerializer):
     images = CollectionImageSerializer(many=True, read_only=True)
     type_display = serializers.CharField(source='get_type_display', read_only=True)
-    prefecture_display = serializers.CharField(source='get_prefecture_display', read_only=True)
 
     class Meta:
         model = Collection

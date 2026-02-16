@@ -12,6 +12,7 @@ import Notice from '@/routes/index/Notice'
 import Activity from '@/routes/activity/Activity'
 import ActivityDetail from '@/routes/activity/ActivityDetail'
 import Collection from '@/routes/collection/Collection'
+import CollectionDetail from '@/routes/collection/CollectionDetail'
 import Kenshi from '@/routes/Kenshi'
 import Member from '@/routes/Member'
 import ErrorPage from '@/routes/ErrorPage'
@@ -33,6 +34,7 @@ const router = createBrowserRouter([
       { path: 'activity/*', element: <Activity />, },
       { path: 'activity/:id', element: <ActivityDetail />, },
       { path: 'collection/*', element: <Collection />, },
+      { path: 'collection/:id', element: <CollectionDetail />, },
       { path: 'kenshi/*', element: <Kenshi />, },
       { path: 'member/*', element: <Member />, },
       { path: 'about/*', element: <About />, },
