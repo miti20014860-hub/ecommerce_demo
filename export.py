@@ -25,7 +25,6 @@ EXPORT_MODELS = [
     'index.Notice',
     'index.NoticeImage',
     'kenshi.Kenshi',
-    'kenshi.KenshiImage',
     'others.About',
     'others.Contact',
     'others.Terms',

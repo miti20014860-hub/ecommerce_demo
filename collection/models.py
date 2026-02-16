@@ -168,23 +168,15 @@ class CollectionImage(models.Model):
 
 class Order(models.Model):
     User = get_user_model()
-    PAYMENT_CHOICES = [
-        ('wire_transfer', 'Wire Transfer'),
-        ('credit_card', 'Credit Card'),
-    ]
 
-    payment_method = models.CharField(max_length=20, choices=PAYMENT_CHOICES, default='wire_transfer')
-    item_order = models.CharField(max_length=200)
+    item_order = models.CharField(max_length=100)
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
-    country = models.CharField(max_length=100)
+    email_address = models.EmailField(max_length=100)
+    phone_number = models.CharField(max_length=20)
+    payment_method = models.CharField(max_length=100)
     delivery_address = models.TextField()
-    email_address = models.EmailField()
-    phone_number = models.CharField(max_length=20, blank=True)
     comment = models.TextField(blank=True)
-
-    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='orders')
-    created_at = models.DateTimeField(auto_now_add=True)
 
     item = models.ForeignKey(
         Collection,
@@ -193,7 +185,14 @@ class Order(models.Model):
         blank=True,
         related_name='orders'
     )
-    item_order = models.CharField(max_length=200, blank=True)
+
+    user = models.ForeignKey(
+        User, on_delete=models.SET_NULL,
+        null=True, blank=True,
+        related_name='orders'
+    )
+
+    created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         ordering = ['-created_at']
@@ -202,14 +201,6 @@ class Order(models.Model):
 
     def __str__(self):
         return f"Order #{self.id} - {self.first_name} {self.last_name}"
-
-    def full_name(self):
-        return f"{self.first_name} {self.last_name}"
-    full_name.short_description = "Customer"
-
-    def payment_display(self):
-        return dict(self.PAYMENT_CHOICES).get(self.payment_method, self.payment_method)
-    payment_display.short_description = "Payment Method"
 
     def save(self, *args, **kwargs):
         if self.item and not self.item_order:

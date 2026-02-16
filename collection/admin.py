@@ -22,7 +22,7 @@ class CollectionImageInline(admin.StackedInline):
 
 @admin.register(Collection)
 class CollectionAdmin(admin.ModelAdmin):
-    list_display = ('name_en', 'name_jp', 'type', 'formatted_price', 'provider', 'updated_at')
+    list_display = ('name_en', 'name_jp', 'type', 'provider', 'updated_at')
     list_filter = ('type', 'currency', 'provider', 'created_at')
     search_fields = ('name_en', 'name_jp', 'provider', 'signature', 'period', 'registration', 'certificate')
     readonly_fields = ('created_at', 'updated_at')
@@ -52,33 +52,26 @@ class CollectionAdmin(admin.ModelAdmin):
         }),
     )
 
-    def formatted_price(self, obj):
-        return obj.formatted_price()
-    formatted_price.short_description = "Price"
-    formatted_price.admin_order_field = 'price'
-
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
     list_display = [
         'id',
-        'full_name',
         'item_order',
-        'payment_display',
-        'country',
+        'payment_method',
         'email_address',
         'created_at',
         'user_link',
     ]
-    list_filter = ['payment_method', 'country', 'created_at']
+    list_filter = ['payment_method', 'created_at']
     search_fields = [
-        'first_name', 'last_name', 'email_address',
-        'item_order', 'delivery_address', 'phone_number'
+        'item_order', 'first_name', 'last_name',
+        'email_address', 'phone_number', 'delivery_address'
     ]
     readonly_fields = ['created_at', 'user', 'item_order']
     fieldsets = (
         ("Customer Info", {
-            'fields': ('user', 'first_name', 'last_name', 'email_address', 'phone_number', 'country')
+            'fields': ('user', 'first_name', 'last_name', 'email_address', 'phone_number')
         }),
         ("Order Details", {
             'fields': ('item_order', 'payment_method', 'delivery_address', 'comment')
@@ -92,7 +85,7 @@ class OrderAdmin(admin.ModelAdmin):
     def user_link(self, obj):
         if obj.user:
             url = f"/admin/auth/user/{obj.user.id}/change/"
-            return format_html('<a href="{}">{}</a>', url, obj.user.get_full_name() or obj.user.username)
+            return format_html('<a href="{}">{}</a>', url, obj.user.username)
         return "-"
     user_link.short_description = "User"
 

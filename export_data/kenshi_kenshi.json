@@ -1,16 +1,14 @@
 [
-{
-  "model": "kenshi.kenshi",
-  "pk": 1,
-  "fields": {
-    "title": "Takayuki Kanayama",
-    "date": "2025-11-30",
-    "contents_main": "Mr. Takayuki Kanayama, a swordsman who is attracting attention from all over the world, such as YouTube's batto technique video that has been played more than 1.8 million times, Teaching \"Reiwa no Bushido\" to survive the turmoil deepening without regrets. How do samurai face anxiety and fear? What is the first thing we should let go of in order to live strong and kindly? \r\n\r\nMr. Kanayama talks about the thoughts of the samurai, which are exactly needed in this time of deepening confusion at the mercy of the corona virus. About the author Born in 1975 in Kitakyushu City, Fukuoka Prefecture. Since high school, he has been aiming to become a professional boxer as Katsuya Onizuka's junior, but his encounter with film director Hideo Nakata led him to the path of an actor. \r\n\r\nAfter performing on stage, he took his first step into the world of swordsmanship in 2009. Since 2010, he has been studying under martial arts researcher Yoshinori Kono. He trained in ``battojutsu'', ``kenjutsu'', ``jojutsu'', and ``taijutsu'', and was appointed as a ``shoseikan technique researcher''. Currently, he presides over the Kanayama Kenjutsu Training Club and the Gold Castle Sword Fighting & Swordsmanship School. He is disseminating the essence of martial arts that advocates unity of mind and body.",
-    "subtitle_1": "",
-    "contents_1": "",
-    "video": "kenshi/videos/2025/11/02/かざあな抜刀術編_-_金山孝之の稽古_1080p_h264.mp4",
-    "created_at": "2025-11-01T16:38:48.488Z",
-    "updated_at": "2025-11-01T16:38:48.488Z"
+  {
+    "model": "kenshi.kenshi",
+    "pk": 1,
+    "fields": {
+      "title": "Takayuki Kanayama",
+      "content": "Mr. Takayuki Kanayama, a swordsman who is attracting attention from all over the world, such as YouTube's batto technique video that has been played more than 1.8 million times, Teaching \"Reiwa no Bushido\" to survive the turmoil deepening without regrets. How do samurai face anxiety and fear? What is the first thing we should let go of in order to live strong and kindly? \r\n\r\nMr. Kanayama talks about the thoughts of the samurai, which are exactly needed in this time of deepening confusion at the mercy of the corona virus. About the author Born in 1975 in Kitakyushu City, Fukuoka Prefecture. Since high school, he has been aiming to become a professional boxer as Katsuya Onizuka's junior, but his encounter with film director Hideo Nakata led him to the path of an actor. \r\n\r\nAfter performing on stage, he took his first step into the world of swordsmanship in 2009. Since 2010, he has been studying under martial arts researcher Yoshinori Kono. He trained in ``battojutsu'', ``kenjutsu'', ``jojutsu'', and ``taijutsu'', and was appointed as a ``shoseikan technique researcher''. Currently, he presides over the Kanayama Kenjutsu Training Club and the Gold Castle Sword Fighting & Swordsmanship School. He is disseminating the essence of martial arts that advocates unity of mind and body.",
+      "image": "kenjyutsuka/images/2025/11/02/Kenshi.jpg",
+      "video": "kenjyutsuka/videos/2025/11/02/かざあな抜刀術編_-_金山孝之の稽古_1080p_h264.mp4",
+      "created_at": "2025-11-01T16:38:48.488Z",
+      "updated_at": "2025-11-01T16:38:48.488Z"
+    }
   }
-}
 ]

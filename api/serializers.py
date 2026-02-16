@@ -2,6 +2,7 @@ from rest_framework import serializers
 from index.models import Banner, NewsImage, News, NoticeImage, Notice, Quote
 from activity.models import ActivityImage, Activity, Booking
 from collection.models import CollectionImage, Collection, Order
+from kenshi.models import Kenshi
 
 
 # Index
@@ -87,4 +88,11 @@ class CollectionSerializer(serializers.ModelSerializer):
 class OrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = Order
+        fields = '__all__'
+
+
+# Kenshi
+class KenshiSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Kenshi
         fields = '__all__'

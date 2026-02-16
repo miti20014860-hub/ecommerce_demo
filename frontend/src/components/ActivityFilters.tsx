@@ -16,18 +16,18 @@ const FilterSection = ({
 }: FilterSectionProps) => {
   const [isOpen, setIsOpen] = useState(defaultOpen);
   return (
-    <div className="border-b border-slate-600 py-4">
+    <div className='border-b border-slate-600 py-4'>
       <button
-        type="button"
+        type='button'
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full flex justify-between ms-1 cursor-pointer"
+        className='w-full flex justify-between ms-1 cursor-pointer'
       >
-        <span className="text-xs font-bold tracking-wider uppercase">{title}</span>
+        <span className='text-xs font-bold tracking-wider uppercase'>{title}</span>
         <ChevronDown className={`h-4 w-4 me-1 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} />
       </button>
       <div className={`grid transition-all duration-300 ease-in-out ${isOpen ? 'grid-rows-[1fr] opacity-100 mt-2' : 'grid-rows-[0fr] opacity-0'}`}>
-        <div className="overflow-hidden">
-          <div className="text-sm text-slate-800 mx-1">
+        <div className='overflow-hidden'>
+          <div className='text-sm text-slate-800 mx-1'>
             {children}
           </div>
         </div>
@@ -70,32 +70,32 @@ export const ActivityFilters = ({
     }
   };
 
-  if (!options && isLoading) return <div className="animate-pulse text-slate-600 text-center py-20">Loading Filters...</div>;
+  if (!options && isLoading) return <div className='animate-pulse text-slate-600 text-center py-20'>Loading Filters...</div>;
 
   return (
-    <aside className="w-full h-full flex flex-col bg-white">
+    <aside className='w-full h-full flex flex-col bg-white'>
       {/* Search */}
-      <div className="relative border-b border-slate-600 bg-slate-50 p-4">
-        <Search className="absolute text-slate-600 left-7.5 top-6.5 w-4 h-4" />
+      <div className='relative border-b border-slate-600 bg-slate-50 p-4'>
+        <Search className='absolute text-slate-600 left-7.5 top-6.5 w-4 h-4' />
         <input
           ref={inputRef}
-          type="text"
+          type='text'
           defaultValue={localSearch}
           onChange={(e) => setLocalSearch(e.target.value)}
-          placeholder="Search activities..."
-          className="w-full pl-9 py-2 bg-white border border-slate-600 rounded-full text-sm focus:ring-1 focus:ring-blue-500 outline-none"
+          placeholder='Search activities...'
+          className='w-full pl-9 py-2 bg-white border border-slate-600 rounded-full text-sm focus:ring-1 focus:ring-blue-500 outline-none'
         />
       </div>
 
       {/* Sections */}
-      <div className="overflow-y-auto px-4">
+      <div className='overflow-y-auto px-4'>
         {/* Type */}
-        <FilterSection title="Type">
-          <div className="flex flex-col gap-2">
+        <FilterSection title='Type'>
+          <div className='flex flex-col gap-2'>
             {options?.types.map((type) => (
-              <label key={type.value} className="group flex gap-3 items-center cursor-pointer">
+              <label key={type.value} className='group flex gap-3 items-center cursor-pointer'>
                 <input
-                  type="checkbox"
+                  type='checkbox'
                   checked={filters.types.includes(type.value)}
                   onChange={(e) => {
                     const next = e.target.checked
@@ -103,59 +103,59 @@ export const ActivityFilters = ({
                       : filters.types.filter((t) => t !== type.value);
                     setFilters({ ...filters, types: next, page: 1 });
                   }}
-                  className="w-4 h-4 cursor-pointer"
+                  className='w-4 h-4 cursor-pointer'
                 />
-                <span className="group-hover:text-blue-600 transition-colors">{type.label}</span>
+                <span className='group-hover:text-blue-600 transition-colors'>{type.label}</span>
               </label>
             ))}
           </div>
         </FilterSection>
 
         {/* Price */}
-        <FilterSection title="Price">
-          <div className="grid grid-cols-2 gap-3">
-            <div className="col-span-1">
+        <FilterSection title='Price'>
+          <div className='grid grid-cols-2 gap-3'>
+            <div className='col-span-1'>
               <input
-                type="number"
+                type='number'
                 value={filters.charge_min}
                 onChange={(e) => setFilters({ ...filters, charge_min: e.target.value, page: 1 })}
-                placeholder="Min"
-                className="w-full border border-slate-600 rounded-md text-sm p-2 focus:border-blue-600 outline-none"
+                placeholder='Min'
+                className='w-full border border-slate-600 rounded-md text-sm p-2 focus:border-blue-600 outline-none'
               />
             </div>
-            <div className="col-span-1">
+            <div className='col-span-1'>
               <input
-                type="number"
+                type='number'
                 value={filters.charge_max}
                 onChange={(e) => setFilters({ ...filters, charge_max: e.target.value, page: 1 })}
-                placeholder="Max"
-                className="w-full border border-slate-600 rounded-md text-sm p-2 focus:border-blue-600 outline-none"
+                placeholder='Max'
+                className='w-full border border-slate-600 rounded-md text-sm p-2 focus:border-blue-600 outline-none'
               />
             </div>
           </div>
         </FilterSection>
 
         {/* Until */}
-        <FilterSection title="Until">
+        <FilterSection title='Until'>
           <input
-            type="date"
+            type='date'
             value={filters.event_ends}
             onChange={(e) => setFilters({ ...filters, event_ends: e.target.value, page: 1 })}
-            className="w-full border border-slate-600 rounded-md text-sm p-2 focus:border-blue-600 outline-none"
+            className='w-full border border-slate-600 rounded-md text-sm p-2 focus:border-blue-600 outline-none'
           />
         </FilterSection>
 
         {/* Region */}
-        <FilterSection title="Region" defaultOpen={false}>
-          <div className="space-y-3 mt-1">
+        <FilterSection title='Region' defaultOpen={false}>
+          <div className='space-y-3 mt-1'>
             {options?.region_groups.map((region) => (
-              <div key={region.label} className="space-y-1">
-                <h4 className="text-xs text-slate-600 font-medium uppercase tracking-wide">{region.label}</h4>
-                <div className="flex flex-wrap gap-1.5">
+              <div key={region.label} className='space-y-1'>
+                <h4 className='text-xs text-slate-600 font-medium uppercase tracking-wide'>{region.label}</h4>
+                <div className='flex flex-wrap gap-1.5'>
                   {region.prefectures.map((pref) => (
                     <button
                       key={pref.value}
-                      type="button"
+                      type='button'
                       onClick={() => {
                         const isSelected = filters.prefectures.includes(pref.value);
                         const next = isSelected
@@ -178,11 +178,11 @@ export const ActivityFilters = ({
         </FilterSection>
 
         {/* Reset */}
-        <div className="p-4">
+        <div className='p-4'>
           <button
-            type="button"
+            type='button'
             onClick={handleInternalClear}
-            className="w-full py-3 text-xs text-slate-500 font-bold tracking-wider uppercase border border-slate-600 rounded-xl hover:bg-slate-50 hover:text-slate-800"
+            className='w-full py-3 text-xs text-slate-500 font-bold tracking-wider uppercase border border-slate-600 rounded-xl hover:bg-slate-50 hover:text-slate-800'
           >
             Reset All Filters
           </button>

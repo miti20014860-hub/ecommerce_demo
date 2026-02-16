@@ -2,95 +2,77 @@
 {% load static %}
 {% load humanize %}
 {% block body %}
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-11 col-xl-10 col-xxl-9 mx-auto">
-                <h6 class="my-2">Habaki Customer Policy.</h6>
-                <h6 class="mt-1">A: Business Terms and Conditions</h6>
-                <small class="d-block mt-1">
-                    (A-1) We guarantee the authenticity of every Japanese sword displayed in our online catalogue. Unless stated otherwise.*1
-                    *1 in case the sword is either an imitation or a copy from the original, will this be accommodated to the selling price and shown within the sword’s information.
-                </small>
-                <small class="d-block mt-1">- Swords with the characteristics stated below are excluded.</small>
-                <small class="d-block mt-1">- Swords which have been judged with an official certificate.</small>
-                <small class="d-block mt-1">- Swords with a full length less than 15cm.</small>
-                <small class="d-block mt-1">- Swords which indicate to have an inscription failure.</small>
-                <small class="d-block mt-1">- Sword accessories; such as ornaments, brims, scabbards and etc.</small>
-                <small class="d-block mt-1">
-                    (A-2) In a policy of this shop showing the best price from a beginning, and furthermore, we do not do a discount at all because we want to treat all customer fairly.
-                </small>
-                <small class="d-block mt-1">
-                    (A-3) “Habaki” policy maintains a fair treatment policy for every customer on an even basis. Therefore we do not give special prize offers, discounts or other deals. Our price is already “Best Price-Quality Offer” based.
-                </small>
-                <small class="d-block mt-1">
-                    (A-4) Once you have placed an order from our collection, until we have confirmed your payment, we will reserve the item 1 working week. (Weekends not included)
-                </small>
-                <small class="d-block mt-1">
-                    (A-5) As soon as your payment has been confirmed, we shall apply immediately at the J.A.C.A. In case of cancellation: We are unable to cancel the application process at the J.A.C.A., since we can only terminate your order, after returning the registration documents received from the J.A.C.A. We kindly ask for your understanding.*3
-                </small>
-                <small class="d-block mt-1">
-                    *3 we cannot be held responsible for any foreign laws, troubleshooting or unforeseen problems at your country’s customs, upon arrival. Doing business with us will be completely at your own choice and risk. Therefore, we strongly advise you to confirm with your country’s customs policy first, before placing an order.
-                </small>
-                <small class="d-block mt-1">
-                    (A-6) Upon exporting a “registered” sword from Japan, we will have to inform the “Japanese Agency for Cultural Affairs -(J.A.C.A.)” and apply for an “export permit for antiques”. Once the documents have been issued and attached to the sword it is usually shipped about 2 weeks later.
-                </small>
-                <small class="d-block mt-1">
-                    (A-7) We usually use “EMS” for standard shipping, upon sending the item abroad. Shipping expenses for items with a length of more than 150cm, or items which weigh more than a “standard sword” (i.e. a spear, armour, muskets and such), will be charged an extra ￥40,000,-(JPY). A similar case applies, if Fedex is preferred over EMS. Standard shipping + insurance is included in the item’s price. *4
-                </small>
-                <small class="d-block mt-1">
-                    *4 the amount of money written on the custom’s invoice also applies for the maximum insurance price in case of damage or loss. We ask for your understanding.
-                </small>
-                <small class="d-block mt-1">(A-8) Upon completion of delivery, we maintain a “No return or refund policy”.</small>
-                <h6 class="my-2">B: Paymen Methods</h6>
-                <p class="mb-0">(B-1) Wire transfer:</p>
-                <small class="d-block mt-1">
-                    We accept wire transfer to our Japanese bank or using an International postal money order. *1
-                </small>
-                <small class="d-block mt-1">
-                    *1 if wire transfer is chosen, we shall provide you with our banking details in our confirmation email.
-                </small>
-                <p class="mb-0">(B-2) Credit Card</p>
-                <small class="d-block mt-1">
-                    ※JCB,Visa,MasterCard,American Express,Diners Club and DISCOVER cards accepted.Currency is available only JPY.
-                </small>
-                <small class="d-block mt-1">
-                    ※Credit cards other than in your name are not accepted.Please make sure to use a credit card in your own name.
-                </small>
-                <form method="post"
-                      action="{% url 'collection:order_form' %}?id={{ item.id }}">
-                    {% csrf_token %}
-                    <!-- Payment method -->
-                    <div class="my-3">
-                        <div class="btn-group w-100" role="group" aria-label="Payment Method">
-                            {% for value, label in form.payment_method.field.choices %}
-                                <input type="radio"
-                                       class="btn-check"
-                                       name="payment_method"
-                                       id="id_payment_method_{{ forloop.counter }}"
-                                       value="{{ value }}"
-                                       {% if form.payment_method.value == value %}checked{% endif %}
-                                       autocomplete="off">
-                                <label class="btn btn-outline-secondary w-50 text-center"
-                                       for="id_payment_method_{{ forloop.counter }}">{{ label }}</label>
-                            {% endfor %}
-                        </div>
-                        {% if form.payment_method.errors %}
-                            <div class="text-danger small mt-1">{{ form.payment_method.errors }}</div>
-                        {% endif %}
-                    </div>
-                    <!-- form-control -->
-                    {% for field in form %}
-                        {% if field.name != 'payment_method' %}
-                            <div class="mb-3">
-                                {{ field.label_tag }}
-                                <div>{{ field }}</div>
-                                {% if field.errors %}<div class="text-danger small">{{ field.errors }}</div>{% endif %}
-                            </div>
-                        {% endif %}
-                    {% endfor %}
-                    <button type="submit" class="btn btn-dark w-100 rounded-0">Submit Order</button>
-                </form>
-            </div>
-        </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-11 col-xl-10 col-xxl-9 mx-auto">
+        <h6 class="my-2">Habaki Customer Policy.</h6>
+        <h6 class="mt-1">A: Business Terms and Conditions</h6>
+        <small class="d-block mt-1">
+          (A-1) We guarantee the authenticity of every Japanese sword displayed in our online catalogue. Unless stated otherwise.*1
+          *1 in case the sword is either an imitation or a copy from the original, will this be accommodated to the selling price and shown within the sword’s information.
+        </small>
+        <small class="d-block mt-1">- Swords with the characteristics stated below are excluded.</small>
+        <small class="d-block mt-1">- Swords which have been judged with an official certificate.</small>
+        <small class="d-block mt-1">- Swords with a full length less than 15cm.</small>
+        <small class="d-block mt-1">- Swords which indicate to have an inscription failure.</small>
+        <small class="d-block mt-1">- Sword accessories; such as ornaments, brims, scabbards and etc.</small>
+        <small class="d-block mt-1">
+          (A-2) In a policy of this shop showing the best price from a beginning, and furthermore, we do not do a discount at all because we want to treat all customer fairly.
+        </small>
+        <small class="d-block mt-1">
+          (A-3) “Habaki” policy maintains a fair treatment policy for every customer on an even basis. Therefore we do not give special prize offers, discounts or other deals. Our price is already “Best Price-Quality Offer” based.
+        </small>
+        <small class="d-block mt-1">
+          (A-4) Once you have placed an order from our collection, until we have confirmed your payment, we will reserve the item 1 working week. (Weekends not included)
+        </small>
+        <small class="d-block mt-1">
+          (A-5) As soon as your payment has been confirmed, we shall apply immediately at the J.A.C.A. In case of cancellation: We are unable to cancel the application process at the J.A.C.A., since we can only terminate your order, after returning the registration documents received from the J.A.C.A. We kindly ask for your understanding.*3
+        </small>
+        <small class="d-block mt-1">
+          *3 we cannot be held responsible for any foreign laws, troubleshooting or unforeseen problems at your country’s customs, upon arrival. Doing business with us will be completely at your own choice and risk. Therefore, we strongly advise you to confirm with your country’s customs policy first, before placing an order.
+        </small>
+        <small class="d-block mt-1">
+          (A-6) Upon exporting a “registered” sword from Japan, we will have to inform the “Japanese Agency for Cultural Affairs -(J.A.C.A.)” and apply for an “export permit for antiques”. Once the documents have been issued and attached to the sword it is usually shipped about 2 weeks later.
+        </small>
+        <small class="d-block mt-1">
+          (A-7) We usually use “EMS” for standard shipping, upon sending the item abroad. Shipping expenses for items with a length of more than 150cm, or items which weigh more than a “standard sword” (i.e. a spear, armour, muskets and such), will be charged an extra ￥40,000,-(JPY). A similar case applies, if Fedex is preferred over EMS. Standard shipping + insurance is included in the item’s price. *4
+        </small>
+        <small class="d-block mt-1">
+          *4 the amount of money written on the custom’s invoice also applies for the maximum insurance price in case of damage or loss. We ask for your understanding.
+        </small>
+        <small class="d-block mt-1">(A-8) Upon completion of delivery, we maintain a “No return or refund policy”.</small>
+        <h6 class="my-2">B: Paymen Methods</h6>
+        <p class="mb-0">(B-1) Wire transfer:</p>
+        <small class="d-block mt-1">
+          We accept wire transfer to our Japanese bank or using an International postal money order. *1
+        </small>
+        <small class="d-block mt-1">
+          *1 if wire transfer is chosen, we shall provide you with our banking details in our confirmation email.
+        </small>
+        <p class="mb-0">(B-2) Credit Card</p>
+        <small class="d-block mt-1">
+          ※JCB,Visa,MasterCard,American Express,Diners Club and DISCOVER cards accepted.Currency is available only JPY.
+        </small>
+        <small class="d-block mt-1">
+          ※Credit cards other than in your name are not accepted.Please make sure to use a credit card in your own name.
+        </small>
+        <form method="post"
+              action="{% url 'collection:order_form' %}?id={{ item.id }}"
+              class="my-3">
+          {% csrf_token %}
+          <!-- form-control -->
+          {% for field in form %}
+            {% if field %}
+              <div class="mb-3">
+                {{ field.label_tag }}
+                <div>{{ field }}</div>
+                {% if field.errors %}<div class="text-danger small">{{ field.errors }}</div>{% endif %}
+              </div>
+            {% endif %}
+          {% endfor %}
+          <button type="submit" class="btn btn-dark w-100 rounded-0">Submit Order</button>
+        </form>
+      </div>
     </div>
+  </div>
 {% endblock body %}

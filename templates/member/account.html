@@ -2,279 +2,277 @@
 {% load static %}
 {% load humanize %}
 {% block body %}
-    <div class="container">
-        {% if user.is_authenticated %}
-            <div class="row">
-                <div class="col-lg-11 col-xl-10 col-xxl-9 mx-auto">
-                    <div class="d-flex btn-group" role="group">
-                        <button type="button"
-                                class="flex-fill btn btn-lg btn-light rounded-0 active"
-                                data-target="#home"
-                                aria-controls="home">Home</button>
-                        <button type="button"
-                                class="flex-fill btn btn-lg btn-light rounded-0"
-                                data-target="#profile"
-                                aria-controls="profile">Profile</button>
-                        <button class="flex-fill btn btn-lg btn-light rounded-0"
-                                type="button"
-                                data-target="#bookings"
-                                aria-controls="bookings">Bookings</button>
-                        <button class="flex-fill btn btn-lg btn-light rounded-0"
-                                type="button"
-                                data-target="#orders"
-                                aria-controls="orders">Orders</button>
-                    </div>
-                    <div class="collapse show p-0" id="home">
-                        <div class="h-50vh d-flex align-items-center justify-content-center bg-body-secondary">
-                            <div class="text-center">
-                                <h3 class="my-4">{{ user.username }}</h3>
-                                <h3 class="my-4">Welcome Back</h3>
-                            </div>
-                        </div>
-                        <form method="post" action="{% url 'member:account_sign_out' %}">
-                            {% csrf_token %}
-                            <button type="submit" class="w-100 btn btn-lg btn-dark rounded-0">Sing out</button>
-                        </form>
-                    </div>
-                    <div class="collapse p-0" id="profile">
-                        <div class="h-50vh bg-light p-3">
-                            <table class="table table-md table-transparent border-white fw-normal mb-0">
-                                <form method="post">
-                                    {% csrf_token %}
-                                    <tr>
-                                        <th class="align-middle text-nowrap">
-                                            <label for="{{ profile_form.first_name.id_for_label }} ">First name</label>
-                                        </th>
-                                        <td class="p-1">
-                                            <div class="input-group input-group-md">{{ profile_form.first_name }}</div>
-                                            {% if profile_form.first_name.errors %}
-                                                <div class="text-danger small mt-1">{{ profile_form.first_name.errors|join:", " }}</div>
-                                            {% endif %}
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th class="align-middle text-nowrap">
-                                            <label for="{{ profile_form.last_name.id_for_label }}  ">Last name</label>
-                                        </th>
-                                        <td class="p-1">
-                                            <div class="input-group input-group-md">{{ profile_form.last_name }}</div>
-                                            {% if profile_form.last_name.errors %}
-                                                <div class="text-danger small mt-1">{{ profile_form.last_name.errors|join:", " }}</div>
-                                            {% endif %}
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th class="align-middle text-nowrap">
-                                            <label for="{{ profile_form.email.id_for_label }}">Email Addresses</label>
-                                        </th>
-                                        <td class="p-1">
-                                            <div class="input-group input-group-md">{{ profile_form.email }}</div>
-                                            {% if profile_form.email.errors %}
-                                                <div class="text-danger small mt-1">{{ profile_form.email.errors|join:", " }}</div>
-                                            {% endif %}
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th class="align-middle text-nowrap">
-                                            <label for="{{ profile_form.phone.id_for_label }}">Phone Number</label>
-                                        </th>
-                                        <td class="p-1">
-                                            <div class="input-group input-group-md">{{ profile_form.phone }}</div>
-                                            {% if profile_form.phone.errors %}
-                                                <div class="text-danger small mt-1">{{ profile_form.phone.errors|join:", " }}</div>
-                                            {% endif %}
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th class="align-middle text-nowrap">
-                                            <label for="{{ profile_form.country.id_for_label }}  ">Country</label>
-                                        </th>
-                                        <td class="p-1">
-                                            <div class="input-group input-group-md">{{ profile_form.country }}</div>
-                                            {% if profile_form.country.errors %}
-                                                <div class="text-danger small mt-1">{{ profile_form.country.errors|join:", " }}</div>
-                                            {% endif %}
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th class="align-middle text-nowrap">
-                                            <label for="{{ profile_form.address.id_for_label }}  ">Delivery Addresses</label>
-                                        </th>
-                                        <td class="p-1">
-                                            <div class="input-group input-group-md">{{ profile_form.address }}</div>
-                                            {% if profile_form.address.errors %}
-                                                <div class="text-danger small mt-1">{{ profile_form.address.errors|join:", " }}</div>
-                                            {% endif %}
-                                        </td>
-                                    </tr>
-                                    <div class="collapse show p-0" id="update_profile">
-                                        <div class="form-floating mb-3 mt-2">
-                                            {{ profile_form.current_password }}
-                                            <label for="{{ profile_form.current_password.id_for_label }}">Password</label>
-                                        </div>
-                                        {% if profile_form.current_password.errors %}
-                                            <div class="text-danger small mb-3">{{ profile_form.current_password.errors|join:", " }}</div>
-                                        {% endif %}
-                                        <input type="submit"
-                                               name="profile_submit"
-                                               value="Confirm Profile Changes"
-                                               class="w-100 btn btn-md btn-dark rounded-0 mb-3" />
-                                    </div>
-                                </form>
-                            </table>
-                        </div>
-                        <div class="col d-flex btn-group justify-content-between align-items-end"
-                             role="group">
-                            <button class="btn btn-md btn-info rounded-0 w-100"
-                                    type="button"
-                                    data-bs-toggle="collapse"
-                                    data-bs-target="#update_profile"
-                                    aria-controls="update_profile">Update Profile</button>
-                            <button class="btn btn-md btn-danger rounded-0 w-100"
-                                    type="button"
-                                    data-bs-toggle="collapse"
-                                    data-bs-target="#change_password"
-                                    aria-controls="change_password">Change Password</button>
-                        </div>
-                        <div class="collapse show p-0" id="change_password">
-                            <form method="post" action="{% url 'member:account' %}">
-                                {% csrf_token %}
-                                <div class="form-floating my-3">
-                                    {{ password_form.old_password }}
-                                    <label for="{{ password_form.old_password.id_for_label }}">{{ password_form.old_password.label }}</label>
-                                </div>
-                                {% if password_form.old_password.errors %}
-                                    <div class="text-danger small mb-2">{{ password_form.old_password.errors|join:", " }}</div>
-                                {% endif %}
-                                <div class="form-floating my-3">
-                                    {{ password_form.new_password1 }}
-                                    <label for="{{ password_form.new_password1.id_for_label }}">{{ password_form.new_password1.label }}</label>
-                                </div>
-                                {% if password_form.new_password1.errors %}
-                                    <div class="text-danger small mb-2">{{ password_form.new_password1.errors|join:", " }}</div>
-                                {% endif %}
-                                <div class="form-floating my-3">
-                                    {{ password_form.new_password2 }}
-                                    <label for="{{ password_form.new_password2.id_for_label }}">{{ password_form.new_password2.label }}</label>
-                                </div>
-                                {% if password_form.new_password2.errors %}
-                                    <div class="text-danger small mb-2">{{ password_form.new_password2.errors|join:", " }}</div>
-                                {% endif %}
-                                <input type="submit"
-                                       name="password_submit"
-                                       value="Confirm Password Change"
-                                       class="w-100 btn btn-md btn-dark rounded-0" />
-                            </form>
-                        </div>
-                    </div>
-                    <div class="collapse p-0" id="bookings">
-                        <div class="bg-body-secondary">
-                            {% if user.bookings.exists %}
-                                <table class="table table-striped table-hover">
-                                    <thead class="table-dark">
-                                        <tr>
-                                            <th>ID</th>
-                                            <th>Activity</th>
-                                            <th>Preferred Date</th>
-                                            <th>Submitted</th>
-                                            <th>Status</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {% for booking in user.bookings.all %}
-                                            <tr>
-                                                <td>
-                                                    <strong>#{{ booking.id }}</strong>
-                                                </td>
-                                                <td>
-                                                    {% if booking.activity_obj %}
-                                                        <a href="{% url 'activity:plan' pk=booking.activity_obj.id %}"
-                                                           class="text-decoration-none text-primary"
-                                                           title="{{ booking.activity }}">
-                                                            {{ booking.activity|truncatechars:40 }}
-                                                        </a>
-                                                    {% else %}
-                                                        <span title="{{ booking.activity }}">{{ booking.activity|truncatechars:40 }}</span>
-                                                    {% endif %}
-                                                </td>
-                                                <td>
-                                                    <strong>{{ booking.prefer_date|date:"M d, Y" }}</strong>
-                                                </td>
-                                                <td>{{ booking.created_at|naturaltime }}</td>
-                                                <td>
-                                                    <span class="badge bg-success">Submitted</span>
-                                                </td>
-                                            </tr>
-                                        {% endfor %}
-                                    </tbody>
-                                </table>
-                            {% else %}
-                                <div class="text-center h-50vh py-5">
-                                    <p class="text-muted">You haven't booked any activity yet.</p>
-                                    <a href="{% url 'activity:activity' %}"
-                                       class="btn btn-outline-secondary">Explore activity</a>
-                                </div>
-                            {% endif %}
-                        </div>
-                    </div>
-                    <div class="collapse p-0" id="orders">
-                        <div class="bg-body-secondary">
-                            {% if user.orders.exists %}
-                                <table class="table table-striped table-hover">
-                                    <thead class="table-dark">
-                                        <tr>
-                                            <th>ID</th>
-                                            <th>Item</th>
-                                            <th>Price</th>
-                                            <th>Submitted</th>
-                                            <th>Status</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {% for order in user.orders.all %}
-                                            <tr>
-                                                <td>
-                                                    <strong>#{{ order.id }}</strong>
-                                                </td>
-                                                <td>
-                                                    {% if order.item %}
-                                                        <a href="{% url 'collection:item' %}?id={{ order.item.id }}"
-                                                           class="text-decoration-none">{{ order.item_order }}</a>
-                                                    {% else %}
-                                                        {{ order.item_order }}
-                                                    {% endif %}
-                                                </td>
-                                                <td>
-                                                    {% if order.item %}
-                                                        <strong>{{ order.item.formatted_price }}</strong>
-                                                    {% else %}
-                                                        <span class="text-muted">-</span>
-                                                    {% endif %}
-                                                </td>
-                                                <td>{{ order.created_at|date:"M d, Y H:i" }}</td>
-                                                <td>
-                                                    <span class="badge bg-success">Submitted</span>
-                                                </td>
-                                            </tr>
-                                        {% endfor %}
-                                    </tbody>
-                                </table>
-                            {% else %}
-                                <div class="text-center h-50vh py-5">
-                                    <p class="text-muted">You haven't placed any orders yet.</p>
-                                    <a href="{% url 'collection:collection' %}"
-                                       class="btn btn-outline-secondary">Explore Collection</a>
-                                </div>
-                            {% endif %}
-                        </div>
-                    </div>
-                </div>
+  <div class="container">
+    {% if user.is_authenticated %}
+      <div class="row">
+        <div class="col-lg-11 col-xl-10 col-xxl-9 mx-auto">
+          <div class="d-flex btn-group" role="group">
+            <button type="button"
+                    class="flex-fill btn btn-lg btn-light rounded-0 active"
+                    data-target="#home"
+                    aria-controls="home">Home</button>
+            <button type="button"
+                    class="flex-fill btn btn-lg btn-light rounded-0"
+                    data-target="#profile"
+                    aria-controls="profile">Profile</button>
+            <button class="flex-fill btn btn-lg btn-light rounded-0"
+                    type="button"
+                    data-target="#bookings"
+                    aria-controls="bookings">Bookings</button>
+            <button class="flex-fill btn btn-lg btn-light rounded-0"
+                    type="button"
+                    data-target="#orders"
+                    aria-controls="orders">Orders</button>
+          </div>
+          <div class="collapse show p-0" id="home">
+            <div class="h-50vh d-flex align-items-center justify-content-center bg-body-secondary">
+              <div class="text-center">
+                <h3 class="my-4">{{ user.username }}</h3>
+                <h3 class="my-4">Welcome Back</h3>
+              </div>
             </div>
-        {% else %}
-            <div class="text-center py-5 text-muted">ERROR</div>
-        {% endif %}
-    </div>
-    <script>
+            <form method="post" action="{% url 'member:account_sign_out' %}">
+              {% csrf_token %}
+              <button type="submit" class="w-100 btn btn-lg btn-dark rounded-0">Sing out</button>
+            </form>
+          </div>
+          <div class="collapse p-0" id="profile">
+            <div class="h-50vh bg-light p-3">
+              <table class="table table-md table-transparent border-white fw-normal mb-0">
+                <form method="post">
+                  {% csrf_token %}
+                  <tr>
+                    <th class="align-middle text-nowrap">
+                      <label for="{{ profile_form.first_name.id_for_label }} ">First name</label>
+                    </th>
+                    <td class="p-1">
+                      <div class="input-group input-group-md">{{ profile_form.first_name }}</div>
+                      {% if profile_form.first_name.errors %}
+                        <div class="text-danger small mt-1">{{ profile_form.first_name.errors|join:", " }}</div>
+                      {% endif %}
+                    </td>
+                  </tr>
+                  <tr>
+                    <th class="align-middle text-nowrap">
+                      <label for="{{ profile_form.last_name.id_for_label }}  ">Last name</label>
+                    </th>
+                    <td class="p-1">
+                      <div class="input-group input-group-md">{{ profile_form.last_name }}</div>
+                      {% if profile_form.last_name.errors %}
+                        <div class="text-danger small mt-1">{{ profile_form.last_name.errors|join:", " }}</div>
+                      {% endif %}
+                    </td>
+                  </tr>
+                  <tr>
+                    <th class="align-middle text-nowrap">
+                      <label for="{{ profile_form.email.id_for_label }}">Email Addresses</label>
+                    </th>
+                    <td class="p-1">
+                      <div class="input-group input-group-md">{{ profile_form.email }}</div>
+                      {% if profile_form.email.errors %}
+                        <div class="text-danger small mt-1">{{ profile_form.email.errors|join:", " }}</div>
+                      {% endif %}
+                    </td>
+                  </tr>
+                  <tr>
+                    <th class="align-middle text-nowrap">
+                      <label for="{{ profile_form.phone.id_for_label }}">Phone Number</label>
+                    </th>
+                    <td class="p-1">
+                      <div class="input-group input-group-md">{{ profile_form.phone }}</div>
+                      {% if profile_form.phone.errors %}
+                        <div class="text-danger small mt-1">{{ profile_form.phone.errors|join:", " }}</div>
+                      {% endif %}
+                    </td>
+                  </tr>
+                  <tr>
+                    <th class="align-middle text-nowrap">
+                      <label for="{{ profile_form.payment.id_for_label }}">Paymen Method</label>
+                    </th>
+                    <td class="p-1">
+                      <div class="input-group input-group-md">{{ profile_form.payment }}</div>
+                      {% if profile_form.payment.errors %}
+                        <div class="text-danger small mt-1">{{ profile_form.payment.errors|join:", " }}</div>
+                      {% endif %}
+                    </td>
+                  </tr>
+                  <tr>
+                    <th class="align-middle text-nowrap">
+                      <label for="{{ profile_form.address.id_for_label }}  ">Delivery Addresses</label>
+                    </th>
+                    <td class="p-1">
+                      <div class="input-group input-group-md">{{ profile_form.address }}</div>
+                      {% if profile_form.address.errors %}
+                        <div class="text-danger small mt-1">{{ profile_form.address.errors|join:", " }}</div>
+                      {% endif %}
+                    </td>
+                  </tr>
+                  <div class="collapse show p-0" id="update_profile">
+                    <div class="form-floating mb-3 mt-2">
+                      {{ profile_form.current_password }}
+                      <label for="{{ profile_form.current_password.id_for_label }}">Password</label>
+                    </div>
+                    {% if profile_form.current_password.errors %}
+                      <div class="text-danger small mb-3">{{ profile_form.current_password.errors|join:", " }}</div>
+                    {% endif %}
+                    <input type="submit"
+                           name="profile_submit"
+                           value="Confirm Profile Changes"
+                           class="w-100 btn btn-md btn-dark rounded-0 mb-3" />
+                  </div>
+                </form>
+              </table>
+            </div>
+            <div class="col d-flex btn-group justify-content-between align-items-end"
+                 role="group">
+              <button class="btn btn-md btn-info rounded-0 w-100"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#update_profile"
+                      aria-controls="update_profile">Update Profile</button>
+              <button class="btn btn-md btn-danger rounded-0 w-100"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#change_password"
+                      aria-controls="change_password">Change Password</button>
+            </div>
+            <div class="collapse show p-0" id="change_password">
+              <form method="post" action="{% url 'member:account' %}">
+                {% csrf_token %}
+                <div class="form-floating my-3">
+                  {{ password_form.old_password }}
+                  <label for="{{ password_form.old_password.id_for_label }}">{{ password_form.old_password.label }}</label>
+                </div>
+                {% if password_form.old_password.errors %}
+                  <div class="text-danger small mb-2">{{ password_form.old_password.errors|join:", " }}</div>
+                {% endif %}
+                <div class="form-floating my-3">
+                  {{ password_form.new_password1 }}
+                  <label for="{{ password_form.new_password1.id_for_label }}">{{ password_form.new_password1.label }}</label>
+                </div>
+                {% if password_form.new_password1.errors %}
+                  <div class="text-danger small mb-2">{{ password_form.new_password1.errors|join:", " }}</div>
+                {% endif %}
+                <div class="form-floating my-3">
+                  {{ password_form.new_password2 }}
+                  <label for="{{ password_form.new_password2.id_for_label }}">{{ password_form.new_password2.label }}</label>
+                </div>
+                {% if password_form.new_password2.errors %}
+                  <div class="text-danger small mb-2">{{ password_form.new_password2.errors|join:", " }}</div>
+                {% endif %}
+                <input type="submit"
+                       name="password_submit"
+                       value="Confirm Password Change"
+                       class="w-100 btn btn-md btn-dark rounded-0" />
+              </form>
+            </div>
+          </div>
+          <div class="collapse p-0" id="bookings">
+            <div class="bg-body-secondary">
+              {% if user.bookings.exists %}
+                <table class="table table-striped table-hover">
+                  <thead class="table-dark">
+                    <tr>
+                      <th>ID</th>
+                      <th>Activity</th>
+                      <th>Preferred Date</th>
+                      <th>Submitted</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for booking in user.bookings.all %}
+                      <tr>
+                        <td>
+                          <strong>#{{ booking.id }}</strong>
+                        </td>
+                        <td>
+                          {% if booking.activity_obj %}
+                            <a href="{% url 'activity:plan' pk=booking.activity_obj.id %}"
+                               class="text-decoration-none text-primary"
+                               title="{{ booking.activity }}">{{ booking.activity|truncatechars:40 }}</a>
+                          {% else %}
+                            <span title="{{ booking.activity }}">{{ booking.activity|truncatechars:40 }}</span>
+                          {% endif %}
+                        </td>
+                        <td>
+                          <strong>{{ booking.prefer_date|date:"M d, Y" }}</strong>
+                        </td>
+                        <td>{{ booking.created_at|naturaltime }}</td>
+                        <td>
+                          <span class="badge bg-success">Submitted</span>
+                        </td>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              {% else %}
+                <div class="text-center h-50vh py-5">
+                  <p class="text-muted">You haven't booked any activity yet.</p>
+                  <a href="{% url 'activity:activity' %}"
+                     class="btn btn-outline-secondary">Explore activity</a>
+                </div>
+              {% endif %}
+            </div>
+          </div>
+          <div class="collapse p-0" id="orders">
+            <div class="bg-body-secondary">
+              {% if user.orders.exists %}
+                <table class="table table-striped table-hover">
+                  <thead class="table-dark">
+                    <tr>
+                      <th>ID</th>
+                      <th>Item</th>
+                      <th>Price</th>
+                      <th>Submitted</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for order in user.orders.all %}
+                      <tr>
+                        <td>
+                          <strong>#{{ order.id }}</strong>
+                        </td>
+                        <td>
+                          {% if order.item %}
+                            <a href="{% url 'collection:item' %}?id={{ order.item.id }}"
+                               class="text-decoration-none">{{ order.item_order }}</a>
+                          {% else %}
+                            {{ order.item_order }}
+                          {% endif %}
+                        </td>
+                        <td>
+                          {% if order.item %}
+                            <strong>{{ order.item.price }}</strong>
+                          {% else %}
+                            <span class="text-muted">-</span>
+                          {% endif %}
+                        </td>
+                        <td>{{ order.created_at|date:"M d, Y H:i" }}</td>
+                        <td>
+                          <span class="badge bg-success">Submitted</span>
+                        </td>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              {% else %}
+                <div class="text-center h-50vh py-5">
+                  <p class="text-muted">You haven't placed any orders yet.</p>
+                  <a href="{% url 'collection:collection' %}"
+                     class="btn btn-outline-secondary">Explore Collection</a>
+                </div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    {% else %}
+      <div class="text-center py-5 text-muted">ERROR</div>
+    {% endif %}
+  </div>
+  <script>
     document.querySelectorAll('.btn-group button').forEach(button => {
     button.addEventListener('click', function () {
     const targetId = this.getAttribute('data-target').substring(1);
@@ -294,5 +292,5 @@
     });
     });
     });
-    </script>
+  </script>
 {% endblock body %}

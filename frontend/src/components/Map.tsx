@@ -34,7 +34,7 @@ export const Map = ({
 
   if (isNaN(latitude) || isNaN(longitude)) {
     return (
-      <div className="w-full overflow-hidden rounded shadow-md" style={{ height }}>
+      <div className='w-full overflow-hidden rounded shadow-md' style={{ height }}>
         Invalid latitude and longitude data
       </div>
     );
@@ -43,17 +43,17 @@ export const Map = ({
   const position: [number, number] = [latitude, longitude];
 
   return (
-    <div className="w-full overflow-hidden rounded shadow-md" style={{ height }} id={mapId}>
+    <div className='w-full overflow-hidden rounded shadow-md' style={{ height }} id={mapId}>
       <MapContainer
         center={position}
         zoom={zoom}
         scrollWheelZoom={false}
-        className="h-full"
+        className='h-full'
         {...rest}
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
         />
         <Marker
           position={position}

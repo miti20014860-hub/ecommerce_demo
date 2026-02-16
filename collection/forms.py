@@ -3,32 +3,24 @@ from .models import Order
 
 
 class OrderForm(forms.ModelForm):
-    payment_method = forms.ChoiceField(
-        choices=Order.PAYMENT_CHOICES,
-        widget=forms.RadioSelect(attrs={'class': 'btn-check'}),
-        initial='wire_transfer',
-        label="Payment Method"
-    )
-
     class Meta:
         model = Order
         fields = [
-            'payment_method', 'item_order', 'first_name', 'last_name', 'email_address',
-            'phone_number', 'country', 'delivery_address', 'comment'
+            'item_order', 'first_name', 'last_name', 'email_address',
+            'phone_number', 'payment_method', 'delivery_address', 'comment'
         ]
         widgets = {
             'item_order': forms.TextInput(attrs={'readonly': 'readonly'}),
             'delivery_address': forms.Textarea(attrs={'rows': 2}),
-            'comment': forms.Textarea(attrs={'rows': 5, 'placeholder': 'Optional'}),
+            'comment': forms.Textarea(attrs={'rows': 4, 'placeholder': 'Optional'}),
         }
         labels = {
-            'payment_method': 'Payment Method',
             'item_order': 'Item Order',
             'first_name': 'First Name',
             'last_name': 'Last Name',
             'email_address': 'Email Address',
             'phone_number': 'Phone Number',
-            'country': 'Country',
+            'payment_method': 'Payment Method',
             'delivery_address': 'Delivery Address',
             'comment': 'Comment',
         }
@@ -41,7 +33,7 @@ class OrderForm(forms.ModelForm):
             self.fields['last_name'].initial = user.last_name or ''
             self.fields['email_address'].initial = user.email or ''
             self.fields['phone_number'].initial = getattr(user, 'phone', '') or ''
-            self.fields['country'].initial = getattr(user, 'country', '') or ''
+            self.fields['payment_method'].initial = getattr(user, 'payment', '') or ''
             self.fields['delivery_address'].initial = getattr(user, 'address', '') or ''
 
         if item:
@@ -49,11 +41,14 @@ class OrderForm(forms.ModelForm):
             self.instance.item = item
 
         for field_name, field in self.fields.items():
-            if field_name != 'payment_method':
-                field.widget.attrs['class'] = 'form-control'
-                if field_name == 'comment':
-                    field.widget.attrs.update({'rows': 5, 'placeholder': 'Optional'})
-                elif field_name == 'item_order':
-                    field.widget.attrs['readonly'] = 'readonly'
-                else:
-                    field.widget.attrs['placeholder'] = field.label
+            field.widget.attrs['class'] = 'form-control'
+            if field_name == 'item_order':
+                field.widget.attrs['readonly'] = 'readonly'
+            elif field_name == 'payment_method':
+                field.widget.attrs.update({'placeholder': 'Method and bank name'})
+            elif field_name == 'delivery_address':
+                field.widget.attrs.update({'rows': 2, 'placeholder': 'Country and delivery address'})
+            elif field_name == 'comment':
+                field.widget.attrs.update({'rows': 4, 'placeholder': 'Optional'})
+            else:
+                field.widget.attrs['placeholder'] = field.label

@@ -1,4 +1,4 @@
-import type { Banner, News, Notice, Quote, Activity, Booking, Collection, Order } from '@/types/type';
+import type { Banner, News, Notice, Quote, Activity, Booking, Collection, Order, Kenshi } from '@/types/type';
 
 // Index
 export const fetchBanners = async (): Promise<Banner[]> => {
@@ -84,5 +84,12 @@ export const createOrder = async (data: Partial<Order>): Promise<Order> => {
     body: JSON.stringify(data),
   });
   if (!res.ok) throw new Error('Order failed. Please check your information.');
+  return res.json();
+};
+
+// Kenshi
+export const fetchKenshi = async (): Promise<Kenshi[]> => {
+  const res = await fetch('/api/kenshi/');
+  if (!res.ok) throw new Error(`Failed to fetch kenshi: ${res.status} ${res.statusText}`);
   return res.json();
 };

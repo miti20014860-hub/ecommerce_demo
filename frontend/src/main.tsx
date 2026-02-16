@@ -13,14 +13,14 @@ import Activity from '@/routes/activity/Activity'
 import ActivityDetail from '@/routes/activity/ActivityDetail'
 import Collection from '@/routes/collection/Collection'
 import CollectionDetail from '@/routes/collection/CollectionDetail'
-import Kenshi from '@/routes/Kenshi'
-import Member from '@/routes/Member'
-import ErrorPage from '@/routes/ErrorPage'
+import Kenshi from '@/routes/kenshi/Kenshi'
+import Member from '@/routes/member/Member'
 import About from '@/routes/footer/About'
 import Contact from '@/routes/footer/Contact'
 import FAQ from '@/routes/footer/FAQ'
 import Privacy from '@/routes/footer/Privacy'
 import Terms from '@/routes/footer/Terms'
+import ErrorPage from '@/routes/ErrorPage'
 
 const router = createBrowserRouter([
   {

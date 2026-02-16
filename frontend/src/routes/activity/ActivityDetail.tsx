@@ -30,82 +30,82 @@ export const ActivityDetail = () => {
   if (isError || !activity) { return <div className='text-center py-20'>Loading failed: {error?.message}</div>; }
 
   return (
-    <main className='container mx-auto lg:px-16 xl:px-32 2xl:px-48'>
+    <main className='container mx-auto lg:px-16 xl:px-32 2xl:px-64 px-2'>
 
       {/* Carousel */}
-      <div className="relative aspect-[21/9] overflow-hidden bg-slate-100 group mx-2">
+      <div className='relative aspect-[21/9] overflow-hidden bg-slate-100 group'>
         <img
           src={images[currentImg].image}
           alt={activity.title}
-          className="w-full h-full object-cover cursor-zoom-in"
+          className='w-full h-full object-cover cursor-zoom-in'
           onClick={() => setIsLightboxOpen(true)}
         />
         {images.length > 1 && (
           <>
-            <button onClick={prevImg} className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+            <button onClick={prevImg} className='absolute left-4 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity'>
               <ChevronLeft />
             </button>
-            <button onClick={nextImg} className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+            <button onClick={nextImg} className='absolute right-4 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity'>
               <ChevronRight />
             </button>
           </>
         )}
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 mx-3">
+      <div className='grid grid-cols-1 lg:grid-cols-12 gap-5'>
         {/* Left */}
-        <div className="lg:col-span-8">
+        <div className='lg:col-span-8'>
           {/* Title */}
-          <div className="mt-3">
-            <h3 className="text-2xl xl:text-3xl font-serif">{activity.title}</h3>
-            <div className="flex gap-4 items-center text-slate-800 mt-2">
-              <span className="underline decoration-slate-800">{activity.provider}</span>
+          <div className='mt-3'>
+            <h3 className='text-2xl xl:text-3xl font-serif'>{activity.title}</h3>
+            <div className='flex gap-4 items-center text-slate-800 mt-2'>
+              <span className='underline decoration-slate-800'>{activity.provider}</span>
               <span>/</span>
-              <span className="underline decoration-slate-800">{activity.type_display}</span>
+              <span className='underline font-medium decoration-slate-800'>{activity.type_display}</span>
             </div>
           </div>
 
           {/* Card */}
-          <div className="grid grid-cols-3 mt-5">
-            <div className="border border-slate-200 p-2 rounded-lg flex flex-col items-center text-center">
-              <Users className="w-5 h-5 text-slate-700 mb-1" />
-              <span className="text-xs text-slate-700 uppercase">Participants</span>
-              <span className="font-medium text-sm">{activity.participants}</span>
+          <div className='grid grid-cols-3 mt-5'>
+            <div className='border border-slate-200 p-2 rounded-lg flex flex-col items-center text-center'>
+              <Users className='w-5 h-5 text-slate-700 mb-1' />
+              <span className='text-xs text-slate-700 uppercase'>Participants</span>
+              <span className='font-medium text-sm'>{activity.participants}</span>
             </div>
-            <div className="border border-slate-200 p-2 rounded-lg flex flex-col items-center text-center">
-              <UserCheck className="w-5 h-5 text-slate-700 mb-1" />
-              <span className="text-xs text-slate-700 uppercase">Target Age</span>
-              <span className="font-medium text-sm">{activity.target_age}</span>
+            <div className='border border-slate-200 p-2 rounded-lg flex flex-col items-center text-center'>
+              <UserCheck className='w-5 h-5 text-slate-700 mb-1' />
+              <span className='text-xs text-slate-700 uppercase'>Target Age</span>
+              <span className='font-medium text-sm'>{activity.target_age}</span>
             </div>
-            <div className="border border-slate-200 p-2 rounded-lg flex flex-col items-center text-center">
-              <Clock className="w-5 h-5 text-slate-700 mb-1" />
-              <span className="text-xs text-slate-700 uppercase">Duration</span>
-              <span className="font-medium text-sm">{activity.duration}</span>
+            <div className='border border-slate-200 p-2 rounded-lg flex flex-col items-center text-center'>
+              <Clock className='w-5 h-5 text-slate-700 mb-1' />
+              <span className='text-xs text-slate-700 uppercase'>Duration</span>
+              <span className='font-medium text-sm'>{activity.duration}</span>
             </div>
           </div>
 
           {/* Plan */}
-          <div className="mt-5">
-            <h2 className="text-2xl font-medium mb-3 underline">Plan Description</h2>
-            <div className="max-w-none text-slate-600 whitespace-pre-line">
+          <div className='mt-5'>
+            <h2 className='text-2xl font-medium mb-3 underline'>Plan Description</h2>
+            <div className='max-w-none text-slate-600 whitespace-pre-line'>
               {activity.description}
             </div>
 
             {/* 多個方案清單 */}
-            <div className="space-y-6 my-4">
+            <div className='space-y-6 my-4'>
               {[1, 2, 3].map((num) => {
                 const planTitle = activity[`plan_${num}` as keyof Activity];
                 if (!planTitle) return null;
                 return (
-                  <div key={num} className="">
-                    <div className="flex justify-between font-medium items-baseline">
-                      <h3 className="text-lg">{String(planTitle)}</h3>
+                  <div key={num} className=''>
+                    <div className='flex justify-between font-medium items-baseline'>
+                      <h3 className='text-lg'>{String(planTitle)}</h3>
                       <div>
-                        <span className="text-lg me-1">{Number(activity[`price_${num}` as keyof Activity]).toLocaleString()}</span>
+                        <span className='text-lg me-1'>{Number(activity[`price_${num}` as keyof Activity]).toLocaleString()}</span>
                         <span>{activity.currency}</span>
                       </div>
                     </div>
-                    <p className="text-slate-600 mt-1">
+                    <p className='text-slate-600 mt-1'>
                       {String(activity[`summary_${num}` as keyof Activity])}
                     </p>
                   </div>
@@ -115,19 +115,19 @@ export const ActivityDetail = () => {
           </div>
 
           {/* Information */}
-          <div className="mt-5 ">
-            <h3 className="text-2xl font-medium bg-slate-50 p-2 border-l-4 border-slate-500 mb-3">More Information</h3>
-            <h4 className="text-lg font-medium ms-1 mb-3">Reservation Instructions</h4>
-            <div className="grid gap-y-1 text-md">
-              <div className="flex"><span className="w-40 bg-slate-50 p-1">Participants</span><span className="p-1">{activity.min_p}</span></div>
-              <div className="flex"><span className="w-40 bg-slate-50 p-1">Min. participants</span><span className="p-1">{activity.participants}</span></div>
-              <div className="flex"><span className="w-40 bg-slate-50 p-1">Event Ends</span><span className="p-1">{activity.event_ends}</span></div>
-              <div className="flex"><span className="w-40 bg-slate-50 p-1">Reg. Deadline</span><span className="p-1">{activity.reg_deadline}</span></div>
+          <div className='mt-5 '>
+            <h3 className='text-2xl font-medium bg-slate-50 p-2 border-l-4 border-slate-500 mb-3'>More Information</h3>
+            <h4 className='text-lg font-medium ms-1 mb-3'>Reservation Instructions</h4>
+            <div className='grid gap-y-1 text-md'>
+              <div className='flex'><span className='w-40 bg-slate-50 p-1'>Participants</span><span className='p-1'>{activity.min_p}</span></div>
+              <div className='flex'><span className='w-40 bg-slate-50 p-1'>Min. participants</span><span className='p-1'>{activity.participants}</span></div>
+              <div className='flex'><span className='w-40 bg-slate-50 p-1'>Event Ends</span><span className='p-1'>{activity.event_ends}</span></div>
+              <div className='flex'><span className='w-40 bg-slate-50 p-1'>Reg. Deadline</span><span className='p-1'>{activity.reg_deadline}</span></div>
             </div>
           </div>
-          <div className="mt-4">
-            <h4 className="text-lg font-medium p-1">Address</h4>
-            <p className="bg-slate-50 mt-1 p-1">{activity.address}</p>
+          <div className='mt-4'>
+            <h4 className='text-lg font-medium p-1'>Address</h4>
+            <p className='bg-slate-50 mt-1 p-1'>{activity.address}</p>
           </div>
 
           {/* Map */}
@@ -145,29 +145,29 @@ export const ActivityDetail = () => {
         </div>
 
         {/* Right */}
-        <div className="lg:col-span-4">
-          <div className="sticky top-6 border border-slate-200 rounded-xl p-5 shadow-sm bg-white lg:mt-4">
-            <p className="text-slate-600 mb-2">{activity.fee_details}</p>
-            <div className="flex items-baseline gap-2 mb-4">
+        <div className='lg:col-span-4'>
+          <div className='sticky top-6 border border-slate-200 rounded-xl p-5 shadow-sm bg-white lg:mt-4'>
+            <p className='text-slate-600 mb-1'>{activity.fee_details}</p>
+            <div className='flex items-baseline mb-2'>
               {activity.minimum_charge === '0' ? (
-                <span className="text-3xl font-medium">Free</span>
+                <span className='text-3xl font-medium'>Free</span>
               ) : (
-                <div className="font-medium">
-                  <span className="text-3xl me-1">{Number(activity.minimum_charge).toLocaleString()}</span>
-                  <span className="text-xl">{activity.currency} ~ (with tax)</span>
+                <div className='font-medium'>
+                  <span className='text-3xl me-1'>{Number(activity.minimum_charge).toLocaleString()}</span>
+                  <span className='text-xl'>{activity.currency} ~ (with tax)</span>
                 </div>
               )}
             </div>
 
-            <div className="bg-slate-50 rounded-lg text-sm text-slate-500 mb-6">
-              <strong className="block text-slate-600 mb-1">Included in price:</strong>
-              {activity.price_included}
+            <div className='bg-slate-50/50 rounded-lg text-sm mb-6'>
+              <p className='text-slate-600 mb-1'>Included in price:</p>
+              <p className='text-slate-600'>{activity.price_included}</p>
             </div>
 
             {activity.is_appointment === 'yes' && (
               <button
                 onClick={() => setIsBookingModalOpen(true)}
-                className="w-full bg-rose-600 hover:bg-rose-500 text-white font-bold py-2 rounded-lg transition-colors cursor-pointer"
+                className='w-full bg-rose-600 hover:bg-rose-500 text-white font-bold py-2 rounded-lg transition-colors cursor-pointer'
               >
                 Book
               </button>
@@ -178,11 +178,11 @@ export const ActivityDetail = () => {
 
       {/* Lightbox */}
       {isLightboxOpen && (
-        <div className="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center p-4">
-          <button onClick={() => setIsLightboxOpen(false)} className="absolute top-6 right-6 text-white p-2 hover:bg-white/10 rounded-full">
+        <div className='fixed inset-0 z-[100] bg-black/95 flex items-center justify-center p-4'>
+          <button onClick={() => setIsLightboxOpen(false)} className='absolute top-6 right-6 text-white p-2 hover:bg-white/10 rounded-full'>
             <X size={32} />
           </button>
-          <img src={images[currentImg].image} className="max-w-full max-h-[90vh] object-contain" alt="Enlarged view" />
+          <img src={images[currentImg].image} className='max-w-full max-h-[90vh] object-contain' alt='Enlarged view' />
         </div>
       )}
 

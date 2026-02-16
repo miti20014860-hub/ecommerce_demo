@@ -42,7 +42,7 @@ export const Index = () => {
   }
 
   return (
-    <main className='container mx-auto'>
+    <main className='container mx-auto 2xl:px-24'>
       {/* Banner */}
       <figure className='mb-2'>
         {banners.map((banner) => (
@@ -60,7 +60,7 @@ export const Index = () => {
       {/* Featured News */}
       <section className='grid lg:grid-cols-2 mb-2'>
         {featuredNews.map((news) => (
-          <div key={news.id} className='border border-gray-200 shadow-md rounded-s-lg mx-2 my-1'>
+          <div key={news.id} className='lg:col-span-1 border border-gray-200 shadow-md rounded-s-lg mx-2 my-1'>
             <article className='relative grid grid-cols-5 w-full h-full'>
               <div className='col-span-3 p-5 mb-1'>
                 <h2 className='font-serif line-clamp-2 text-2xl'>{news.title}</h2>

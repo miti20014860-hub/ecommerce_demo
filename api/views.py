@@ -6,7 +6,8 @@ from rest_framework.pagination import PageNumberPagination
 from index.models import Banner, News, Notice, Quote
 from activity.models import Activity, Booking
 from collection.models import Collection, Order
-from .serializers import BannerSerializer, NewsSerializer, NoticeSerializer, QuoteSerializer, ActivitySerializer, BookingSerializer, CollectionSerializer, OrderSerializer
+from kenshi.models import Kenshi
+from .serializers import BannerSerializer, NewsSerializer, NoticeSerializer, QuoteSerializer, ActivitySerializer, BookingSerializer, CollectionSerializer, OrderSerializer, KenshiSerializer
 
 
 # Index
@@ -149,3 +150,9 @@ class CollectionViewSet(viewsets.ReadOnlyModelViewSet):
 class OrderViewSet(viewsets.ModelViewSet):
     queryset = Order.objects.all().order_by('-created_at')
     serializer_class = OrderSerializer
+
+
+# Kenshi
+class KenshiViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = Kenshi.objects.all().order_by('-created_at')
+    serializer_class = KenshiSerializer

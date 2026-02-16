@@ -7,7 +7,7 @@ export const Footer = () => {
 
   return (
     <footer className='bg-gray-100 border-y-1 text-sm mt-4'>
-      <div className='container mx-auto my-7'>
+      <div className='container mx-auto 2xl:px-24 my-7'>
         {/* Link */}
         <div className='nav-link text-center md:text-right my-4'>
           <Link to='/about/'

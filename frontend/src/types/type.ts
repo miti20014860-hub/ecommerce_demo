@@ -231,3 +231,14 @@ export interface PaginatedResponse<T> {
   previous: string | null;
   results: T[];
 }
+
+// Kenshi
+export interface Kenshi {
+  id: number;
+  title: string;
+  content: string;
+  image: string;
+  video: string;
+  created_at: string;
+  updated_at: string;
+}
