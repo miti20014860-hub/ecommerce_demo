@@ -1,8 +1,8 @@
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
-import { fetchCollectionById } from '@/lib/fetcher';
-import OrderModal from '@/components/CollectionOrder';
+import { fetchCollectionById, fetchMemberProfile } from '@/lib/fetcher';
+import OrderModal from '@/components/collection/CollectionOrder';
 
 export const CollectionDetail = () => {
   const { id } = useParams<{ id: string }>();
@@ -10,6 +10,13 @@ export const CollectionDetail = () => {
     queryKey: ['collection', id],
     queryFn: () => fetchCollectionById(Number(id)),
     enabled: !!id,
+  });
+
+  const token = localStorage.getItem('access_token');
+  const { data: user } = useQuery({
+    queryKey: ['profile'],
+    queryFn: fetchMemberProfile,
+    enabled: !!token
   });
 
   const [isOrderModalOpen, setIsOrderModalOpen] = useState(false);
@@ -25,7 +32,7 @@ export const CollectionDetail = () => {
 
         {/* Name Header */}
         <div className='bg-gray-500 p-2 text-center'>
-          <h2 className='text-2xl sm:text-[26px] tracking-wider mt-1'>{val(collection.name_jp)}</h2>
+          <h2 className='text-2xl sm:text-[26px] tracking-wide mt-1'>{val(collection.name_jp)}</h2>
           <h2 className='text-xl sm:text-2xl font-medium'>{val(collection.name_en)}</h2>
         </div>
 
@@ -42,7 +49,7 @@ export const CollectionDetail = () => {
             </div>
           </div>
           <div className='col-span-1 bg-gray-300/50 flex items-center justify-center'>
-            <h3 className='text-[26px] px-4 pb-1'>
+            <h3 className='text-[25px] tracking-wide font-medium px-4 pb-1'>
               {val(collection.type_display)}
             </h3>
           </div>
@@ -110,14 +117,14 @@ export const CollectionDetail = () => {
         {/* Remarks + Price */}
         <div className='grid md:grid-cols-3 border-b border-gray-300'>
           <div className='md:col-span-2 bg-gray-50/50 p-2'>
-            <span className='block mb-1 uppercase'>Remarks</span>
+            <span className='block mb-1 border-b border-gray-300 uppercase'>Remarks</span>
             <p className='whitespace-pre-wrap leading-relaxed'>
               {val(collection.remarks)}
             </p>
           </div>
           <div className='md:col-span-1 bg-gray-300/50 flex flex-col items-center justify-center p-2'>
             <div className='flex items-baseline gap-1'>
-              <span className='text-[27px] font-medium'>{Number(collection.price).toLocaleString()}</span>
+              <span className='text-[26px] font-medium'>{Number(collection.price).toLocaleString()}</span>
               <span className='text-xl font-medium'>{collection.currency}</span>
             </div>
             <span className='font-medium'>(Tax excluded)</span>
@@ -167,6 +174,7 @@ export const CollectionDetail = () => {
       {isOrderModalOpen && (
         <OrderModal
           collection={collection}
+          user={user}
           onClose={() => setIsOrderModalOpen(false)}
         />
       )}

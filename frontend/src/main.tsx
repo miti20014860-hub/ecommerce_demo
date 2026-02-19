@@ -1,5 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
+import { AuthProvider } from '@/components/partials/AuthProvider';
+import { ProtectedRoute } from '@/components/partials/ProtectedRoute';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import 'leaflet/dist/leaflet.css';
@@ -15,6 +17,7 @@ import Collection from '@/routes/collection/Collection'
 import CollectionDetail from '@/routes/collection/CollectionDetail'
 import Kenshi from '@/routes/kenshi/Kenshi'
 import Member from '@/routes/member/Member'
+import Account from '@/routes/member/Account'
 import About from '@/routes/footer/About'
 import Contact from '@/routes/footer/Contact'
 import FAQ from '@/routes/footer/FAQ'
@@ -28,20 +31,21 @@ const router = createBrowserRouter([
     element: <Root />,
     errorElement: <ErrorPage />,
     children: [
-      { index: true, element: <Index />, },
-      { path: 'news/:id', element: <News />, },
-      { path: 'notice/:id', element: <Notice />, },
-      { path: 'activity/*', element: <Activity />, },
-      { path: 'activity/:id', element: <ActivityDetail />, },
-      { path: 'collection/*', element: <Collection />, },
-      { path: 'collection/:id', element: <CollectionDetail />, },
-      { path: 'kenshi/*', element: <Kenshi />, },
-      { path: 'member/*', element: <Member />, },
-      { path: 'about/*', element: <About />, },
-      { path: 'contact/*', element: <Contact />, },
-      { path: 'faq/*', element: <FAQ />, },
-      { path: 'privacy/*', element: <Privacy />, },
-      { path: 'terms/*', element: <Terms />, },
+      { index: true, element: <Index /> },
+      { path: 'news/:id', element: <News /> },
+      { path: 'notice/:id', element: <Notice /> },
+      { path: 'activity/:id', element: <ActivityDetail /> },
+      { path: 'activity/*', element: <Activity /> },
+      { path: 'collection/:id', element: <CollectionDetail /> },
+      { path: 'collection/*', element: <Collection /> },
+      { path: 'kenshi/*', element: <Kenshi /> },
+      { path: 'member/account/*', element: <ProtectedRoute><Account /></ProtectedRoute> },
+      { path: 'member/*', element: <Member /> },
+      { path: 'about/*', element: <About /> },
+      { path: 'contact/*', element: <Contact /> },
+      { path: 'faq/*', element: <FAQ /> },
+      { path: 'privacy/*', element: <Privacy /> },
+      { path: 'terms/*', element: <Terms /> }
     ],
   },
 ])
@@ -58,7 +62,9 @@ const queryClient = new QueryClient({
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />
+      <AuthProvider>
+        <RouterProvider router={router} />
+      </AuthProvider>
     </QueryClientProvider>
   </React.StrictMode>,
 )

@@ -3,19 +3,29 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 
-class CustomUser(AbstractUser):
+class Member(AbstractUser):
+    first_name = models.CharField(
+        max_length=100,
+        null=True, blank=True,
+        verbose_name=_("first name")
+    )
+    last_name = models.CharField(
+        max_length=100,
+        null=True, blank=True,
+        verbose_name=_("last name")
+    )
     phone = models.CharField(
         max_length=20,
-        blank=True,
+        null=True, blank=True,
         verbose_name=_("phone")
     )
     payment = models.CharField(
         max_length=100,
-        blank=True,
+        null=True, blank=True,
         verbose_name=_("payment")
     )
     address = models.TextField(
-        blank=True,
+        null=True, blank=True,
         verbose_name=_("address")
     )
 

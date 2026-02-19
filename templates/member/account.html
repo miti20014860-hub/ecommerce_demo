@@ -189,10 +189,9 @@
                         <td>
                           {% if booking.activity_obj %}
                             <a href="{% url 'activity:plan' pk=booking.activity_obj.id %}"
-                               class="text-decoration-none text-primary"
-                               title="{{ booking.activity }}">{{ booking.activity|truncatechars:40 }}</a>
+                               class="text-decoration-none text-black">{{ booking.activity_obj.title|truncatechars:40 }}</a>
                           {% else %}
-                            <span title="{{ booking.activity }}">{{ booking.activity|truncatechars:40 }}</span>
+                            {{ booking.activity|truncatechars:40 }}
                           {% endif %}
                         </td>
                         <td>
@@ -235,16 +234,17 @@
                           <strong>#{{ order.id }}</strong>
                         </td>
                         <td>
-                          {% if order.item %}
-                            <a href="{% url 'collection:item' %}?id={{ order.item.id }}"
-                               class="text-decoration-none">{{ order.item_order }}</a>
+                          {% if order.collection_obj.id %}
+                            <a href="{% url 'collection:item' pk=order.collection_obj.id %}"
+                               class="text-decoration-none text-black">{{ order.collection_obj.name_jp|truncatechars:40 }}</a>
                           {% else %}
-                            {{ order.item_order }}
+                            {{ order.collection }}
                           {% endif %}
                         </td>
                         <td>
-                          {% if order.item %}
-                            <strong>{{ order.item.price }}</strong>
+                          {% if order.collection_obj.price %}
+                            <strong>{{ order.collection_obj.price|floatformat:0|intcomma }}</strong>
+                            <small class="fw-bold">{{ order.collection_obj.currency }}</small>
                           {% else %}
                             <span class="text-muted">-</span>
                           {% endif %}

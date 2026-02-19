@@ -1,10 +1,10 @@
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
-import { fetchActivityById } from '@/lib/fetcher';
+import { fetchActivityById, fetchMemberProfile } from '@/lib/fetcher';
 import { ChevronLeft, ChevronRight, X, UserCheck, Users, Clock } from 'lucide-react';
-import BookingModal from '@/components/ActivityBooking';
-import Map from '@/components/Map';
+import BookingModal from '@/components/activity/ActivityBooking';
+import Map from '@/components/partials/Map';
 import type { Activity } from '@/types/type';
 
 export const ActivityDetail = () => {
@@ -13,6 +13,13 @@ export const ActivityDetail = () => {
     queryKey: ['activity', id],
     queryFn: () => fetchActivityById(Number(id)),
     enabled: !!id,
+  });
+
+  const token = localStorage.getItem('access_token');
+  const { data: user } = useQuery({
+    queryKey: ['profile'],
+    queryFn: fetchMemberProfile,
+    enabled: !!token
   });
 
   const [currentImg, setCurrentImg] = useState(0);
@@ -190,6 +197,7 @@ export const ActivityDetail = () => {
       {isBookingModalOpen && (
         <BookingModal
           activity={activity}
+          user={user}
           onClose={() => setIsBookingModalOpen(false)}
         />
       )}

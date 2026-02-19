@@ -114,7 +114,7 @@ def plan(request, pk):
     return render(request, 'activity/plan.html', {'activity': activity})
 
 
-def booking_view(request, pk):
+def booking_form(request, pk):
     activity = get_object_or_404(Activity, pk=pk)
 
     if request.method == "POST":
@@ -128,6 +128,6 @@ def booking_view(request, pk):
             messages.success(request, "Your booking has been submitted successfully!")
             return redirect('activity:plan', pk=pk)
     else:
-        form = BookingForm(user=request.user)
+        form = BookingForm(user=request.user, activity=activity)
 
     return render(request, 'activity/plan.html', {'form': form, 'activity': activity, })

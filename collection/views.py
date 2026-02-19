@@ -96,34 +96,25 @@ def collection(request):
     return render(request, template, context)
 
 
-def item(request):
-    pk = request.GET.get('id')
-    if not pk:
-        return render(request, 'collection/item.html')
-
+def item(request, pk):
     collection = get_object_or_404(Collection, pk=pk)
-    return render(request, 'collection/item.html', {
-        'collection': collection
-    })
+    return render(request, 'collection/item.html', {'collection': collection})
 
 
-def order_form(request):
-    pk = request.GET.get('id')
-    if not pk:
-        return redirect('collection:item')
-
-    item = get_object_or_404(Collection, pk=pk)
+def order_form(request, pk):
+    collection = get_object_or_404(Collection, pk=pk)
 
     if request.method == "POST":
-        form = OrderForm(request.POST, user=request.user, item=item)
+        form = OrderForm(request.POST, user=request.user, collection=collection)
         if form.is_valid():
             order = form.save(commit=False)
+            order.name_jp = collection.name_jp
             order.user = request.user if request.user.is_authenticated else None
-            order.item = item
+            order.collection_obj = collection
             order.save()
             messages.success(request, "Your order has been submitted successfully!")
-            return redirect(f"{reverse('collection:item')}?id={pk}")
+            return redirect('collection:item', pk=pk)
     else:
-        form = OrderForm(user=request.user, item=item)
+        form = OrderForm(user=request.user, collection=collection)
 
-    return render(request, 'collection/form.html', {'form': form, 'item': item, })
+    return render(request, 'collection/form.html', {'form': form, 'collection': collection, })

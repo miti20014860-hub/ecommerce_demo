@@ -1,8 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 import axios from 'axios';
-import ActivityFilters from '@/components/ActivityFilters';
-import ActivityList from '@/components/ActivityList';
+import ActivityFilters from '@/components/activity/ActivityFilters';
+import ActivityList from '@/components/activity/ActivityList';
 import type { ActivityFilterOptions, ActivityFilterState } from '@/types/type';
 
 const INITIAL_FILTERS: ActivityFilterState = {

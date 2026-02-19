@@ -56,31 +56,30 @@ class CollectionAdmin(admin.ModelAdmin):
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
     list_display = [
-        'id',
-        'item_order',
-        'payment_method',
-        'email_address',
-        'created_at',
-        'user_link',
+        'name_jp', 'get_full_name', 'email',
+        'payment', 'created_at', 'user_link',
     ]
-    list_filter = ['payment_method', 'created_at']
+    list_filter = ['name_jp', 'payment', 'created_at']
     search_fields = [
-        'item_order', 'first_name', 'last_name',
-        'email_address', 'phone_number', 'delivery_address'
+        'name_jp', 'first_name', 'last_name',
+        'email', 'phone', 'address'
     ]
-    readonly_fields = ['created_at', 'user', 'item_order']
+    readonly_fields = ['created_at',]
     fieldsets = (
         ("Customer Info", {
-            'fields': ('user', 'first_name', 'last_name', 'email_address', 'phone_number')
+            'fields': ('user', 'first_name', 'last_name', 'email', 'phone')
         }),
         ("Order Details", {
-            'fields': ('item_order', 'payment_method', 'delivery_address', 'comment')
+            'fields': ('name_jp', 'payment', 'address', 'comment')
         }),
         ("Metadata", {
-            'fields': ('created_at',),
-            'classes': ('collapse',)
+            'fields': ('created_at',)
         }),
     )
+
+    def get_full_name(self, obj):
+        return f"{obj.first_name} {obj.last_name}".strip()
+    get_full_name.short_description = "Name"
 
     def user_link(self, obj):
         if obj.user:
@@ -89,11 +88,8 @@ class OrderAdmin(admin.ModelAdmin):
         return "-"
     user_link.short_description = "User"
 
-    def has_add_permission(self, request):
-        return False
-
-    def has_change_permission(self, request, obj=None):
-        return True
-
-    def has_delete_permission(self, request, obj=None):
-        return True
+    def get_queryset(self, request):
+        qs = super().get_queryset(request)
+        if request.user.is_superuser:
+            return qs
+        return qs.filter(user=request.user)

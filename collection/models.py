@@ -1,5 +1,5 @@
 from django.utils.translation import gettext_lazy as _
-from django.contrib.auth import get_user_model
+from django.conf import settings
 from django.db import models
 
 
@@ -149,7 +149,7 @@ class CollectionImage(models.Model):
     )
     caption = models.CharField(
         max_length=100,
-        blank=True,
+        null=True, blank=True,
         verbose_name=_("caption")
     )
     order = models.PositiveIntegerField(
@@ -167,42 +167,70 @@ class CollectionImage(models.Model):
 
 
 class Order(models.Model):
-    User = get_user_model()
-
-    item_order = models.CharField(max_length=100)
-    first_name = models.CharField(max_length=100)
-    last_name = models.CharField(max_length=100)
-    email_address = models.EmailField(max_length=100)
-    phone_number = models.CharField(max_length=20)
-    payment_method = models.CharField(max_length=100)
-    delivery_address = models.TextField()
-    comment = models.TextField(blank=True)
-
-    item = models.ForeignKey(
+    name_jp = models.CharField(
+        max_length=100,
+        verbose_name=_("name (JP)")
+    )
+    first_name = models.CharField(
+        max_length=100,
+        verbose_name=_("first name")
+    )
+    last_name = models.CharField(
+        max_length=100,
+        verbose_name=_("last name")
+    )
+    email = models.EmailField(
+        max_length=100,
+        verbose_name=_("email address")
+    )
+    phone = models.CharField(
+        max_length=20,
+        verbose_name=_("phone number")
+    )
+    payment = models.CharField(
+        max_length=100,
+        verbose_name=_("payment method")
+    )
+    address = models.TextField(
+        verbose_name=_("delivery address")
+    )
+    comment = models.TextField(
+        null=True, blank=True,
+        verbose_name=_("comment")
+    )
+    created_at = models.DateTimeField(
+        auto_now_add=True,
+        verbose_name=_("submitted at")
+    )
+    collection_id = models.CharField(
+        max_length=10,
+        verbose_name=_("collection id")
+    )
+    collection_obj = models.ForeignKey(
         Collection,
         on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        related_name='orders'
-    )
-
-    user = models.ForeignKey(
-        User, on_delete=models.SET_NULL,
         null=True, blank=True,
         related_name='orders'
     )
-
-    created_at = models.DateTimeField(auto_now_add=True)
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.SET_NULL,
+        null=True, blank=True,
+        related_name='orders',
+        verbose_name=_("user")
+    )
 
     class Meta:
         ordering = ['-created_at']
-        verbose_name = "Order"
-        verbose_name_plural = "Orders"
+        verbose_name = _("order")
+        verbose_name_plural = _("orders")
 
     def __str__(self):
-        return f"Order #{self.id} - {self.first_name} {self.last_name}"
+        return f"{self.created_at} - {self.first_name} - {self.name_jp}"
 
     def save(self, *args, **kwargs):
-        if self.item and not self.item_order:
-            self.item_order = self.item.name_en
+        if self.collection_obj and not self.name_jp:
+            self.name_jp = self.collection_obj.name_jp
+        elif self.collection_obj and not self.collection_id:
+            self.collection_id = self.collection_obj.pk
         super().save(*args, **kwargs)

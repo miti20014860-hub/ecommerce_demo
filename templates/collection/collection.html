@@ -149,11 +149,11 @@
         <ul class="list-unstyled">
           {% for collection in collections %}
             <div class="row border">
-              <a href="{% url 'collection:item' %}?id={{ collection.pk }}"
+              <a href="{% url 'collection:item' collection.pk %}"
                  class="link-body-emphasis text-decoration-none border-top border-4">
                 <h3 class="border-bottom border-black text-center text-warning-emphasis mt-4">{{ collection.name_jp }}</h3>
               </a>
-              <a href="{% url 'collection:item' %}?id={{ collection.pk }}"
+              <a href="{% url 'collection:item' collection.pk %}"
                  class="col-auto mt-2 mx-auto">
                 <img src="{{ collection.images.first.image.url }}"
                      class="object-fit-cover"

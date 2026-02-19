@@ -24,7 +24,7 @@ export const Kenshi = () => {
 
       {kenshi.map((kenjyutsuka) => (
         <article className='container mx-auto 2xl:px-24 p-2'>
-          <h2 className='bg-gray-50 border-b-5 text-3xl sm:text-[33px] lg:text-4xl font-medium text-center p-1 mb-3'>{kenjyutsuka.title}</h2>
+          <h2 className='bg-gray-50 border-b-5 text-3xl sm:text-[33px] lg:text-4xl 2xl:text-[40px] font-medium text-center p-1 mb-3'>{kenjyutsuka.title}</h2>
           <div className='grid lg:grid-cols-2'>
             <div className='lg:col-span-1'>
               <img

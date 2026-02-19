@@ -6,35 +6,34 @@ import type { Collection } from '@/types/type';
 
 interface OrderModalProps {
   collection: Collection;
+  user?: { first_name: string; last_name: string; email: string; phone?: string; payment?: string; address?: string };
   onClose: () => void;
-  user?: { first_name: string; last_name: string; email: string; phone?: string; payment_methods?: string; delivery_address?: string };
 }
 
-export const OrderModal = ({ collection, onClose, user }: OrderModalProps) => {
+export const OrderModal = ({ collection, user, onClose }: OrderModalProps) => {
   const queryClient = useQueryClient();
 
   const [formData, setFormData] = useState({
-    collection: collection.name_jp,
-    collection_obj: collection.id,
+    name_jp: collection.name_jp,
     first_name: user?.first_name || '',
     last_name: user?.last_name || '',
     email: user?.email || '',
     phone: user?.phone || '',
-    payment_methods: user?.payment_methods || '',
-    delivery_address: user?.delivery_address || '',
+    payment: user?.payment || '',
+    address: user?.address || '',
     comment: '',
+    collection_id: collection.id,
   });
 
   const mutation = useMutation({
     mutationFn: createOrder,
     onSuccess: () => {
-      alert('Order request sent successfully!');
+      queryClient.invalidateQueries({ queryKey: ['profile'] });
       queryClient.invalidateQueries({ queryKey: ['bookings'] });
+      alert('Order request sent successfully!');
       onClose();
     },
-    onError: (error: Error) => {
-      alert(error.message);
-    }
+    onError: (error) => { alert(error.message); }
   });
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -109,10 +108,10 @@ export const OrderModal = ({ collection, onClose, user }: OrderModalProps) => {
             </p>
             <h5 className='mt-2'>(B-2) Credit Card</h5>
             <p className='block mt-2'>
-              ※JCB,Visa,MasterCard,American Express,Diners Club and DISCOVER cards accepted.Currency is available only JPY.
+              ※JCB, Visa, MasterCard, American Express,Diners Club and DISCOVER cards accepted.Currency is available only JPY.
             </p>
             <p className='block mt-2 mb-6'>
-              ※Credit cards other than in your name are not accepted.Please make sure to use a credit card in your own name.
+              ※Credit cards other than in your name are not accepted. Please make sure to use a credit card in your own name.
             </p>
           </div>
 
@@ -168,10 +167,9 @@ export const OrderModal = ({ collection, onClose, user }: OrderModalProps) => {
             <div className='space-y-1'>
               <label className='text-xs font-medium text-slate-500 uppercase'>Phone Number</label>
               <input
-                required
-                type='text'
+                type='tel'
                 name='phone'
-                placeholder='Phone number'
+                placeholder='Phone number (Optional)'
                 value={formData.phone}
                 onChange={handleChange}
                 className='w-full border border-slate-300 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-blue-500 outline-none transition-all'
@@ -183,9 +181,9 @@ export const OrderModal = ({ collection, onClose, user }: OrderModalProps) => {
               <input
                 required
                 type='text'
-                name='payment_methods'
+                name='payment'
                 placeholder='Method and bank name'
-                value={formData.payment_methods}
+                value={formData.payment}
                 onChange={handleChange}
                 className='w-full border border-slate-300 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-blue-500 outline-none transition-all'
               />
@@ -195,10 +193,10 @@ export const OrderModal = ({ collection, onClose, user }: OrderModalProps) => {
               <label className='text-xs font-medium text-slate-500 uppercase'>Delivery Address</label>
               <textarea
                 required
-                name='delivery_address'
                 rows={2}
+                name='address'
                 placeholder='Country and delivery address'
-                value={formData.delivery_address}
+                value={formData.address}
                 onChange={handleChange}
                 className='w-full border border-slate-300 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-blue-500 outline-none transition-all'
               />
@@ -207,9 +205,9 @@ export const OrderModal = ({ collection, onClose, user }: OrderModalProps) => {
             <div className='mt-0 space-y-1'>
               <label className='text-xs font-medium text-slate-500 uppercase'>Comment</label>
               <textarea
-                name='comment'
                 rows={4}
-                placeholder='Optional'
+                name='comment'
+                placeholder='Comment (Optional)'
                 value={formData.comment}
                 onChange={handleChange}
                 className='w-full border border-slate-300 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-blue-500 outline-none transition-all'

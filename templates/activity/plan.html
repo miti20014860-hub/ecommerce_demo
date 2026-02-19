@@ -207,7 +207,7 @@
                           aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                  <form action="{% url 'activity:booking_view' activity.pk %}" method="post">
+                  <form action="{% url 'activity:booking_form' activity.pk %}" method="post">
                     {% csrf_token %}
                     <div class="mb-2 ms-1">
                       <label for="activity" class="form-label text-black">{{ activity.title }}</label>

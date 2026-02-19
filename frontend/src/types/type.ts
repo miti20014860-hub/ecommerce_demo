@@ -121,7 +121,7 @@ export interface RegionGroup {
 
 export interface Booking {
   id?: number;
-  activity: string;
+  title: string;
   first_name: string;
   last_name: string;
   email: string;
@@ -129,7 +129,8 @@ export interface Booking {
   prefer_date: string;
   comment?: string | null;
   created_at: string;
-  activity_obj?: number | null;
+  activity_id: number;
+  activity_obj: Activity;
   user?: number | null;
 }
 
@@ -171,15 +172,17 @@ export interface Collection {
 
 export interface Order {
   id?: number;
-  activity: string;
+  name_jp: string;
   first_name: string;
   last_name: string;
   email: string;
   phone?: string | null;
-  prefer_date: string;
+  payment: string;
+  address: string;
   comment?: string | null;
   created_at: string;
-  activity_obj?: number | null;
+  collection_id: number;
+  collection_obj: Collection;
   user?: number | null;
 }
 
@@ -241,4 +244,56 @@ export interface Kenshi {
   video: string;
   created_at: string;
   updated_at: string;
+}
+
+// Member
+export interface MemberProfile {
+  id: number;
+  username: string;
+  first_name: string;
+  last_name: string;
+  email: string;
+  phone: string;
+  payment: string;
+  address: string;
+  bookings: Booking[];
+  orders: Order[];
+}
+
+export interface SignIn {
+  username: string;
+  password: string;
+}
+
+export interface SignUp {
+  username: string;
+  email: string;
+  password1: string;
+  password2: string;
+}
+
+export interface AuthResponse {
+  access: string;
+  refresh: string;
+}
+
+export interface RegisterResponse {
+  id: number;
+  username: string;
+  email: string;
+}
+
+export interface UpdateProfileRequest {
+  first_name?: string;
+  last_name?: string;
+  email?: string;
+  phone?: string;
+  payment?: string;
+  address?: string;
+}
+
+export interface ChangePasswordRequest {
+  old_password: string;
+  new_password: string;
+  confirm_password: string;
 }

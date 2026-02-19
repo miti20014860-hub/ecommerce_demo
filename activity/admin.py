@@ -111,18 +111,40 @@ class ActivityAdmin(admin.ModelAdmin):
 
 @admin.register(Booking)
 class BookingAdmin(admin.ModelAdmin):
-    list_display = ('activity', 'get_full_name', 'email',
-                    'prefer_date', 'created_at', 'user')
-    list_filter = ('activity', 'prefer_date', 'created_at')
-    search_fields = ('first_name', 'last_name', 'email',
-                     'activity', 'user__username', 'user__email')
+    list_display = (
+        'title', 'get_full_name', 'email',
+        'prefer_date', 'created_at', 'user_link'
+    )
+    list_filter = (
+        'title', 'prefer_date', 'created_at'
+    )
+    search_fields = (
+        'title', 'first_name', 'last_name',
+        'email', 'phone'
+    )
     readonly_fields = ('created_at',)
-    date_hierarchy = 'created_at'
+    fieldsets = (
+        ("Customer Info", {
+            'fields': ('user', 'first_name', 'last_name', 'email', 'phone')
+        }),
+        ("Booking Details", {
+            'fields': ('title', 'prefer_date', 'comment')
+        }),
+        ("Metadata", {
+            'fields': ('created_at',)
+        }),
+    )
 
     def get_full_name(self, obj):
         return f"{obj.first_name} {obj.last_name}".strip()
     get_full_name.short_description = "Name"
-    get_full_name.admin_order_field = 'first_name'
+
+    def user_link(self, obj):
+        if obj.user:
+            url = f"/admin/auth/user/{obj.user.id}/change/"
+            return format_html('<a href="{}">{}</a>', url, obj.user.username)
+        return "-"
+    user_link.short_description = "User"
 
     def get_queryset(self, request):
         qs = super().get_queryset(request)

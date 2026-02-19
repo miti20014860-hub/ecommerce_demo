@@ -9,7 +9,7 @@ class Banner(models.Model):
     )
     caption = models.CharField(
         max_length=60,
-        blank=True,
+        null=True, blank=True,
         verbose_name=_("caption")
     )
     is_active = models.BooleanField(default=True)
@@ -31,7 +31,7 @@ class News(models.Model):
         verbose_name=_("title")
     )
     contents_main = models.TextField(
-        blank=True,
+        null=True, blank=True,
         verbose_name=_("contents main")
     )
 
@@ -60,7 +60,7 @@ class NewsImage(models.Model):
     )
     caption = models.CharField(
         max_length=60,
-        blank=True,
+        null=True, blank=True,
         verbose_name=_("caption")
     )
     order = models.PositiveIntegerField(
@@ -87,40 +87,40 @@ class Notice(models.Model):
     )
     subtitle_1 = models.CharField(
         max_length=40,
-        blank=True,
+        null=True, blank=True,
         verbose_name=_("subtitle 1")
     )
     contents_1 = models.TextField(
-        blank=True,
+        null=True, blank=True,
         verbose_name=_("contents 1")
     )
     subtitle_2 = models.CharField(
         max_length=40,
-        blank=True,
+        null=True, blank=True,
         verbose_name=_("subtitle 2")
     )
     contents_2 = models.TextField(
-        blank=True,
+        null=True, blank=True,
         verbose_name=_("contents 2")
     )
     lat = models.CharField(
         max_length=20,
-        blank=True,
+        null=True, blank=True,
         verbose_name=_("latitude")
     )
     lng = models.CharField(
         max_length=20,
-        blank=True,
+        null=True, blank=True,
         verbose_name=_("longitude")
     )
     address = models.CharField(
         max_length=100,
-        blank=True,
+        null=True, blank=True,
         verbose_name=_("address")
     )
     map_id = models.CharField(
         max_length=100,
-        blank=True,
+        null=True, blank=True,
         verbose_name=_("map id")
     )
     is_featured = models.BooleanField(default=False)
@@ -148,7 +148,7 @@ class NoticeImage(models.Model):
     )
     caption = models.CharField(
         max_length=60,
-        blank=True,
+        null=True, blank=True,
         verbose_name=_("caption")
     )
     order = models.PositiveIntegerField(

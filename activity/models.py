@@ -76,50 +76,50 @@ class Activity(models.Model):
 
     plan_1 = models.CharField(
         max_length=100,
-        blank=True,
+        null=True, blank=True,
         verbose_name=_("plan 1")
     )
     price_1 = models.DecimalField(
         max_digits=20,
         decimal_places=2,
-        blank=True, null=True,
+        null=True, blank=True,
         verbose_name=_("price 1")
     )
     summary_1 = models.CharField(
         max_length=100,
-        blank=True,
+        null=True, blank=True,
         verbose_name=_("summary 1")
     )
     plan_2 = models.CharField(
         max_length=100,
-        blank=True,
+        null=True, blank=True,
         verbose_name=_("plan 2")
     )
     price_2 = models.DecimalField(
         max_digits=20,
         decimal_places=2,
-        blank=True, null=True,
+        null=True, blank=True,
         verbose_name=_("price 2")
     )
     summary_2 = models.CharField(
         max_length=100,
-        blank=True,
+        null=True, blank=True,
         verbose_name=_("summary 2")
     )
     plan_3 = models.CharField(
         max_length=100,
-        blank=True,
+        null=True, blank=True,
         verbose_name=_("plan 3")
     )
     price_3 = models.DecimalField(
         max_digits=20,
         decimal_places=2,
-        blank=True, null=True,
+        null=True, blank=True,
         verbose_name=_("price 3")
     )
     summary_3 = models.CharField(
         max_length=100,
-        blank=True,
+        null=True, blank=True,
         verbose_name=_("summary 3")
     )
 
@@ -251,7 +251,7 @@ class ActivityImage(models.Model):
     )
     caption = models.CharField(
         max_length=100,
-        blank=True,
+        null=True, blank=True,
         verbose_name=_("caption")
     )
     order = models.PositiveIntegerField(
@@ -269,10 +269,8 @@ class ActivityImage(models.Model):
 
 
 class Booking(models.Model):
-    activity = models.CharField(
-        max_length=200,
-        verbose_name=_("activity")
-    )
+    title = models.TextField(verbose_name=_("title"))
+
     first_name = models.CharField(
         max_length=100,
         verbose_name=_("first name")
@@ -287,24 +285,26 @@ class Booking(models.Model):
     )
     phone = models.CharField(
         max_length=20,
-        blank=True,
-        null=True,
+        null=True, blank=True,
         verbose_name=_("phone number")
     )
     prefer_date = models.DateField(
         verbose_name=_("preferred date")
     )
     comment = models.TextField(
-        blank=True,
-        null=True,
+        null=True, blank=True,
         verbose_name=_("comment")
     )
     created_at = models.DateTimeField(
         auto_now_add=True,
         verbose_name=_("submitted at")
     )
+    activity_id = models.CharField(
+        max_length=10,
+        verbose_name=_("activity id")
+    )
     activity_obj = models.ForeignKey(
-        'Activity',
+        Activity,
         on_delete=models.SET_NULL,
         null=True, blank=True,
         related_name='bookings'
@@ -323,9 +323,11 @@ class Booking(models.Model):
         verbose_name_plural = _("bookings")
 
     def __str__(self):
-        return f"{self.first_name} {self.last_name} - {self.activity}"
+        return f"{self.created_at} - {self.first_name} - {self.title}"
 
     def save(self, *args, **kwargs):
-        if self.activity_obj and not self.activity:
-            self.activity = self.activity_obj.title
+        if self.activity_obj and not self.title:
+            self.title = self.activity_obj.title
+        elif self.activity_obj and not self.activity_id:
+            self.activity_id = self.activity_obj.pk
         super().save(*args, **kwargs)

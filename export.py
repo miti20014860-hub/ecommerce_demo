@@ -32,7 +32,7 @@ EXPORT_MODELS = [
     'others.Section',
     'others.Privacy',
     'others.Faq',
-    'member.CustomUser',
+    'member.Member',
 ]
 
 

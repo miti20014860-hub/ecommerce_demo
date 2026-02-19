@@ -2,7 +2,7 @@ import { useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { formatDate } from '@/utils/formatTime';
 import { fetchNoticeById } from '@/lib/fetcher';
-import Map from '@/components/Map';
+import Map from '@/components/partials/Map';
 
 export const Notice = () => {
 

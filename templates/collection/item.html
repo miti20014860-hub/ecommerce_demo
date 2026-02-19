@@ -149,7 +149,7 @@
           </div>
           <!-- Order button -->
           <div class="col-auto mx-auto my-2">
-            <a href="{% url 'collection:order_form' %}?id={{ collection.pk }}"
+            <a href="{% url 'collection:order_form' collection.pk %}"
                class="fw-medium text-warning-emphasis">[Open Order Form]</a>
           </div>
         </div>

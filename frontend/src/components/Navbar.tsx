@@ -1,12 +1,12 @@
 import { Link, useLocation } from 'react-router-dom';
+import { useAuth } from '@/lib/auth-context';
 
 export const Navbar = () => {
   const location = useLocation();
   const pathname = location.pathname;
   const isCurrent = (path: string) => pathname.startsWith(path);
-
-  const isAuthenticated = window.currentUser?.isAuthenticated || false;
-  const memberHref = isAuthenticated ? '/member/account/' : '/member/';
+  const { isAuthenticated, isLoading } = useAuth()
+  const memberHref = !isLoading && isAuthenticated ? '/member/account' : '/member';
 
   return (
     <nav className='container mx-auto 2xl:px-24 font-serif'>

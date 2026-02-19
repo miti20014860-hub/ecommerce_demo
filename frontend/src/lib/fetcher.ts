@@ -1,4 +1,6 @@
-import type { Banner, News, Notice, Quote, Activity, Booking, Collection, Order, Kenshi } from '@/types/type';
+import type { Banner, News, Notice, Quote, Activity, Booking, Collection, Order, Kenshi, MemberProfile, SignIn, SignUp, UpdateProfileRequest, ChangePasswordRequest } from '@/types/type';
+import api from './api';
+import axios from 'axios';
 
 // Index
 export const fetchBanners = async (): Promise<Banner[]> => {
@@ -51,15 +53,16 @@ export const fetchActivityById = async (id: number): Promise<Activity> => {
 };
 
 export const createBooking = async (data: Partial<Booking>): Promise<Booking> => {
-  const res = await fetch('/api/bookings/', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(data),
-  });
-  if (!res.ok) throw new Error('Booking failed. Please check your information.');
-  return res.json();
+  try {
+    const response = await api.post<Booking>('/bookings/', data);
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      const serverMessage = error.response?.data?.detail || 'Booking failed. Please check your information.';
+      throw new Error(serverMessage);
+    }
+    throw new Error('An unexpected error occurred');
+  }
 };
 
 // Collection
@@ -76,15 +79,16 @@ export const fetchCollectionById = async (id: number): Promise<Collection> => {
 };
 
 export const createOrder = async (data: Partial<Order>): Promise<Order> => {
-  const res = await fetch('/api/orders/', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(data),
-  });
-  if (!res.ok) throw new Error('Order failed. Please check your information.');
-  return res.json();
+  try {
+    const response = await api.post<Order>('/orders/', data);
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      const serverMessage = error.response?.data?.detail || 'Order failed. Please check your information.';
+      throw new Error(serverMessage);
+    }
+    throw new Error('An unexpected error occurred');
+  }
 };
 
 // Kenshi
@@ -92,4 +96,102 @@ export const fetchKenshi = async (): Promise<Kenshi[]> => {
   const res = await fetch('/api/kenshi/');
   if (!res.ok) throw new Error(`Failed to fetch kenshi: ${res.status} ${res.statusText}`);
   return res.json();
+};
+
+// Member
+export const fetchMemberProfile = async (): Promise<MemberProfile> => {
+  try {
+    const { data } = await api.get<MemberProfile>('/profile/');
+    return data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      if (error.response?.status === 401) {
+        throw new Error('Please log in to view your profile.');
+      }
+    }
+    throw new Error('Could not load profile. Please try again later.');
+  }
+};
+
+export const signIn = async (credentials: SignIn) => {
+  try {
+    const response = await api.post('/sign_in/', credentials);
+    const data = response.data;
+
+    if (data.access) {
+      localStorage.setItem('access_token', data.access);
+      localStorage.setItem('refresh_token', data.refresh);
+    }
+
+    return data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      const serverMessage = error.response?.data?.detail;
+      throw new Error(serverMessage || 'Invalid username or password');
+    }
+
+    if (error instanceof Error) {
+      throw new Error(error.message);
+    }
+
+    throw new Error('An unexpected error occurred');
+  }
+};
+
+export const signUp = async (formData: SignUp) => {
+  try {
+    const { data } = await api.post('/sign_up/', formData);
+    return data;
+  } catch (error) {
+    if (axios.isAxiosError(error) && error.response?.data) {
+      const serverErrors = error.response.data;
+
+      const firstKey = Object.keys(serverErrors)[0];
+      if (firstKey) {
+        const errorData = serverErrors[firstKey];
+        const message = Array.isArray(errorData) ? errorData[0] : errorData;
+
+        if (firstKey.startsWith('password')) {
+          throw new Error(message);
+        }
+        throw new Error(`${firstKey}: ${message}`);
+      }
+    }
+    throw new Error('Registration failed');
+  }
+};
+
+export const signOut = async () => {
+  localStorage.removeItem('access_token');
+  localStorage.removeItem('refresh_token');
+
+  window.location.href = '/member/';
+};
+
+export const updateProfile = async (data: UpdateProfileRequest) => {
+  try {
+    const response = await api.patch('/profile/update/', data);
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      throw new Error(error.response?.data?.detail || 'Update profile failed');
+    }
+    throw new Error('An unexpected error occurred');
+  }
+};
+
+export const changePassword = async (data: ChangePasswordRequest) => {
+  try {
+    const response = await api.put('/profile/change_password/', data);
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      const data = error.response?.data;
+      if (data?.old_password) {
+        throw new Error(data.old_password[0]);
+      }
+      throw new Error(data?.detail || 'The password is too simple.');
+    }
+    throw new Error('An unexpected error occurred');
+  }
 };

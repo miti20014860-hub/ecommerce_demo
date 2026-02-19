@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
-import Pagination from '@/components/Pagination';
+import Pagination from '@/components/partials/Pagination';
 import type { Activity, PaginatedResponse } from '@/types/type';
 
 interface ActivityListProps {

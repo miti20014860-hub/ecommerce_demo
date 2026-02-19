@@ -1,8 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 import axios from 'axios';
-import CollectionFilters from '@/components/CollectionFilters';
-import CollectionList from '@/components/CollectionList';
+import CollectionFilters from '@/components/collection/CollectionFilters';
+import CollectionList from '@/components/collection/CollectionList';
 import type { CollectionFilterOptions, CollectionFilterState } from '@/types/type';
 
 const INITIAL_FILTERS: CollectionFilterState = {

@@ -6,34 +6,33 @@ import type { Activity } from '@/types/type';
 
 interface BookingModalProps {
   activity: Activity;
-  onClose: () => void;
   user?: { first_name: string; last_name: string; email: string; phone?: string };
+  onClose: () => void;
 }
 
-export const BookingModal = ({ activity, onClose, user }: BookingModalProps) => {
+export const BookingModal = ({ activity, user, onClose }: BookingModalProps) => {
   const queryClient = useQueryClient();
 
   const [formData, setFormData] = useState({
-    activity: activity.title,
-    activity_obj: activity.id,
+    title: activity.title,
     first_name: user?.first_name || '',
     last_name: user?.last_name || '',
     email: user?.email || '',
     phone: user?.phone || '',
     prefer_date: '',
     comment: '',
+    activity_id: activity.id
   });
 
   const mutation = useMutation({
     mutationFn: createBooking,
     onSuccess: () => {
-      alert('Booking request sent successfully!');
+      queryClient.invalidateQueries({ queryKey: ['profile'] });
       queryClient.invalidateQueries({ queryKey: ['bookings'] });
+      alert('Booking request sent successfully!');
       onClose();
     },
-    onError: (error: Error) => {
-      alert(error.message);
-    }
+    onError: (error) => { alert(error.message); },
   });
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -72,7 +71,9 @@ export const BookingModal = ({ activity, onClose, user }: BookingModalProps) => 
               <label className='text-xs font-medium text-slate-500 uppercase'>First name</label>
               <input
                 required
+                type='text'
                 name='first_name'
+                placeholder='Fist name'
                 value={formData.first_name}
                 onChange={handleChange}
                 className='w-full border border-slate-300 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-blue-500 outline-none transition-all'
@@ -82,7 +83,9 @@ export const BookingModal = ({ activity, onClose, user }: BookingModalProps) => 
               <label className='text-xs font-medium text-slate-500 uppercase'>Last name</label>
               <input
                 required
+                type='text'
                 name='last_name'
+                placeholder='Last name'
                 value={formData.last_name}
                 onChange={handleChange}
                 className='w-full border border-slate-300 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-blue-500 outline-none transition-all'
@@ -96,6 +99,7 @@ export const BookingModal = ({ activity, onClose, user }: BookingModalProps) => 
               required
               type='email'
               name='email'
+              placeholder='Email address'
               value={formData.email}
               onChange={handleChange}
               className='w-full border border-slate-300 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-blue-500 outline-none transition-all'
@@ -105,9 +109,9 @@ export const BookingModal = ({ activity, onClose, user }: BookingModalProps) => 
           <div className='space-y-1'>
             <label className='text-xs font-medium text-slate-500 uppercase'>Phone Number</label>
             <input
-              type='text'
+              type='tel'
               name='phone'
-              placeholder='Optional'
+              placeholder='Phone number (Optional)'
               value={formData.phone}
               onChange={handleChange}
               className='w-full border border-slate-300 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-blue-500 outline-none transition-all'
@@ -131,7 +135,7 @@ export const BookingModal = ({ activity, onClose, user }: BookingModalProps) => 
             <textarea
               name='comment'
               rows={4}
-              placeholder='Optional'
+              placeholder='Comment (Optional)'
               value={formData.comment}
               onChange={handleChange}
               className='w-full border border-slate-300 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-blue-500 outline-none transition-all'

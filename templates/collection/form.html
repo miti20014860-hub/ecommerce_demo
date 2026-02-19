@@ -5,7 +5,7 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-11 col-xl-10 col-xxl-9 mx-auto">
-        <h6 class="my-2">Habaki Customer Policy.</h6>
+        <h6 class="my-2 pt-1">Habaki Customer Policy.</h6>
         <h6 class="mt-1">A: Business Terms and Conditions</h6>
         <small class="d-block mt-1">
           (A-1) We guarantee the authenticity of every Japanese sword displayed in our online catalogue. Unless stated otherwise.*1
@@ -57,7 +57,7 @@
           ※Credit cards other than in your name are not accepted.Please make sure to use a credit card in your own name.
         </small>
         <form method="post"
-              action="{% url 'collection:order_form' %}?id={{ item.id }}"
+              action="{% url 'collection:order_form' collection.pk %}"
               class="my-3">
           {% csrf_token %}
           <!-- form-control -->

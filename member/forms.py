@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, PasswordChangeForm as BasePasswordChangeForm
 from django.core.exceptions import ValidationError
-from .models import CustomUser
+from .models import Member
 
 
 class LoginForm(AuthenticationForm):
@@ -42,7 +42,7 @@ class RegisterForm(UserCreationForm):
     )
 
     class Meta:
-        model = CustomUser
+        model = Member
         fields = ('username', 'email', 'password1', 'password2')
 
     def __init__(self, *args, **kwargs):
@@ -78,7 +78,7 @@ class ProfileEditForm(forms.ModelForm):
     )
 
     class Meta:
-        model = CustomUser
+        model = Member
         fields = ('first_name', 'last_name', 'email', 'phone', 'payment', 'address')
 
     def __init__(self, *args, **kwargs):

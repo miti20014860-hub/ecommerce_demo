@@ -1,13 +1,16 @@
 from django.db.models import Q
-from rest_framework import viewsets
+from rest_framework import viewsets, generics, status
+from django.contrib.auth import update_session_auth_hash
 from rest_framework.response import Response
 from rest_framework.decorators import action
 from rest_framework.pagination import PageNumberPagination
+from rest_framework.permissions import AllowAny, IsAuthenticated, IsAuthenticatedOrReadOnly
 from index.models import Banner, News, Notice, Quote
 from activity.models import Activity, Booking
 from collection.models import Collection, Order
 from kenshi.models import Kenshi
-from .serializers import BannerSerializer, NewsSerializer, NoticeSerializer, QuoteSerializer, ActivitySerializer, BookingSerializer, CollectionSerializer, OrderSerializer, KenshiSerializer
+from member.models import Member
+from .serializers import BannerSerializer, NewsSerializer, NoticeSerializer, QuoteSerializer, ActivitySerializer, BookingSerializer, CollectionSerializer, OrderSerializer, KenshiSerializer, MemberProfileSerializer, RegisterSerializer, UpdateProfileSerializer, ChangePasswordSerializer
 
 
 # Index
@@ -98,8 +101,19 @@ class ActivityViewSet(viewsets.ReadOnlyModelViewSet):
 
 
 class BookingViewSet(viewsets.ModelViewSet):
-    queryset = Booking.objects.all().order_by('-created_at')
+    queryset = Booking.objects.all()
     serializer_class = BookingSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
+
+    def perform_create(self, serializer):
+        activity_id = self.request.data.get('activity_id')
+        activity = Activity.objects.get(id=activity_id)
+
+        serializer.save(
+            user=self.request.user if self.request.user.is_authenticated else None,
+            title=activity.title,
+            activity_obj=activity
+        )
 
 
 # Collection
@@ -148,11 +162,63 @@ class CollectionViewSet(viewsets.ReadOnlyModelViewSet):
 
 
 class OrderViewSet(viewsets.ModelViewSet):
-    queryset = Order.objects.all().order_by('-created_at')
+    queryset = Order.objects.all()
     serializer_class = OrderSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
+
+    def perform_create(self, serializer):
+        collection_id = self.request.data.get('collection_id')
+        collection = Collection.objects.get(id=collection_id)
+
+        serializer.save(
+            user=self.request.user if self.request.user.is_authenticated else None,
+            name_jp=collection.name_jp,
+            collection_obj=collection
+        )
 
 
 # Kenshi
 class KenshiViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Kenshi.objects.all().order_by('-created_at')
     serializer_class = KenshiSerializer
+
+
+# Member
+class MemberProfileView(generics.RetrieveAPIView):
+    permission_classes = [IsAuthenticated]
+    serializer_class = MemberProfileSerializer
+
+    def get_object(self):
+        user = self.request.user
+        from member.models import Member
+        return Member.objects.prefetch_related('bookings', 'orders').get(id=user.id)
+
+
+class RegisterView(generics.CreateAPIView):
+    queryset = Member.objects.all()
+    permission_classes = [AllowAny]
+    serializer_class = RegisterSerializer
+
+
+class UpdateProfileView(generics.UpdateAPIView):
+    permission_classes = [IsAuthenticated]
+    serializer_class = UpdateProfileSerializer
+
+    def get_object(self):
+        return self.request.user
+
+
+class ChangePasswordView(generics.UpdateAPIView):
+    permission_classes = [IsAuthenticated]
+    serializer_class = ChangePasswordSerializer
+
+    def get_object(self):
+        return self.request.user
+
+    def update(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+
+        self.request.user.set_password(serializer.validated_data['new_password'])
+        self.request.user.save()
+        return Response({"detail": "Password has been updated."}, status=status.HTTP_200_OK)
