@@ -25,3 +25,23 @@ def news(request, pk):
 def notice(request, pk):
     notice = get_object_or_404(Notice, pk=pk)
     return render(request, 'index/notice.html', {'notice': notice})
+
+
+def about(request):
+    return render(request, 'others/about.html')
+
+
+def contact(request):
+    return render(request, 'others/contact.html')
+
+
+def terms(request):
+    return render(request, 'others/terms.html')
+
+
+def privacy(request):
+    return render(request, 'others/privacy.html')
+
+
+def faq(request):
+    return render(request, 'others/faq.html')

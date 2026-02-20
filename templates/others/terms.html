@@ -1,64 +1,9 @@
 {% extends "base.html" %}
 {% load humanize %}
 {% block body %}
-    <div class="container">
-        <!-- Terms Title -->
-        <h2 class="mt-5 bg-body-secondary p-2">{{ terms.title }}</h2>
-        <!-- Refund Policy Heading -->
-        <h5 class="mt-4 p-2">
-            <u><b>{{ terms.subtitle_1 }}</b></u>
-        </h5>
-        <p class="justify p-2">{{ terms.description_1 }}</p>
-        <!-- Refund Policy Index -->
-        <div class="row">
-            <div class="col-auto mt-2 ms-2">
-                <table class="table table-sm table-compact">
-                    {% for part in parts %}
-                        <tr>
-                            <td>{{ part.part }}&nbsp;&nbsp;</td>
-                            <td>{{ part.partno }}&nbsp;&nbsp;</td>
-                            <td>{{ part.partname }}</td>
-                        </tr>
-                    {% endfor %}
-                </table>
-            </div>
-        </div>
-        <div class="mt-3">
-            {% for part in parts %}
-                <div class="justify p-2 mb-3">
-                    <b>{{ part.part }} {{ part.partno }} : {{ part.partname }}</b>
-                    <div>{{ part.partdesc }}</div>
-                </div>
-            {% endfor %}
-        </div>
-        <!-- Refund Policy Ending -->
-        <p class="justify p-2 mb-3">{{ terms.description_2 }}</p>
-        <!-- Contract Heading -->
-        <h5 class="mt-4 p-2">
-            <u><b>{{ terms.subtitle_2 }}</b></u>
-        </h5>
-        <!-- Contract Index -->
-        <div class="row">
-            <div class="col-auto mt-2 ms-2">
-                <table class="table table-sm table-compact">
-                    {% for section in sections %}
-                        <tr>
-                            <td>{{ section.sect }}&nbsp;&nbsp;</td>
-                            <td>{{ section.sectno }}&nbsp;&nbsp;</td>
-                            <td>{{ section.sectname }}</td>
-                        </tr>
-                    {% endfor %}
-                </table>
-            </div>
-        </div>
-        <div class="mt-3">
-            {% for section in sections %}
-                <div class="justify p-2 mb-3">
-                    <b>{{ section.sect }} {{ section.sectno }} : {{ section.sectname }}</b>
-                    <div>{{ section.sectdesc }}</div>
-                </div>
-            {% endfor %}
-        </div>
-        <div class="row mb-3"></div>
-    </div>
+  <div class="container">
+    <h2 class="min-vh-100 d-flex justify-content-center align-items-center">
+      This project designed for learning Django and React.
+    </h2>
+  </div>
 {% endblock body %}

@@ -2,7 +2,7 @@ import { useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 import { fetchActivityById, fetchMemberProfile } from '@/lib/fetcher';
-import { ChevronLeft, ChevronRight, X, UserCheck, Users, Clock } from 'lucide-react';
+import { ChevronLeft, ChevronRight, UserCheck, Users, Clock } from 'lucide-react';
 import BookingModal from '@/components/activity/ActivityBooking';
 import Map from '@/components/partials/Map';
 import type { Activity } from '@/types/type';
@@ -26,12 +26,11 @@ export const ActivityDetail = () => {
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
 
-  const images = (activity?.images && activity.images.length > 0)
-    ? activity.images
-    : [{ image: '/img/default.png' }];
+  const imagesLength = (activity?.images && activity.images.length > 0)
+    ? activity.images.length : 0;
 
-  const nextImg = () => setCurrentImg((prev) => (prev + 1) % images.length);
-  const prevImg = () => setCurrentImg((prev) => (prev - 1 + images.length) % images.length);
+  const nextImg = () => setCurrentImg((prev) => (prev + 1) % imagesLength);
+  const prevImg = () => setCurrentImg((prev) => (prev - 1 + imagesLength) % imagesLength);
 
   if (isLoading) { return <div className='text-center py-20'>Loading...</div>; }
   if (isError || !activity) { return <div className='text-center py-20'>Loading failed: {error?.message}</div>; }
@@ -42,12 +41,12 @@ export const ActivityDetail = () => {
       {/* Carousel */}
       <div className='relative aspect-[21/9] overflow-hidden bg-slate-100 group'>
         <img
-          src={images[currentImg].image}
-          alt={activity.title}
+          src={activity.images[currentImg].image}
+          alt={activity.images[currentImg]?.caption || 'Image'}
           className='w-full h-full object-cover cursor-zoom-in'
           onClick={() => setIsLightboxOpen(true)}
         />
-        {images.length > 1 && (
+        {imagesLength > 1 && (
           <>
             <button onClick={prevImg} className='absolute left-4 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity'>
               <ChevronLeft />
@@ -98,7 +97,6 @@ export const ActivityDetail = () => {
               {activity.description}
             </div>
 
-            {/* 多個方案清單 */}
             <div className='space-y-6 my-4'>
               {[1, 2, 3].map((num) => {
                 const planTitle = activity[`plan_${num}` as keyof Activity];
@@ -185,11 +183,28 @@ export const ActivityDetail = () => {
 
       {/* Lightbox */}
       {isLightboxOpen && (
-        <div className='fixed inset-0 z-[100] bg-black/95 flex items-center justify-center p-4'>
-          <button onClick={() => setIsLightboxOpen(false)} className='absolute top-6 right-6 text-white p-2 hover:bg-white/10 rounded-full'>
-            <X size={32} />
-          </button>
-          <img src={images[currentImg].image} className='max-w-full max-h-[90vh] object-contain' alt='Enlarged view' />
+        <div
+          onClick={() => setIsLightboxOpen(false)}
+          className="fixed inset-0 z-[1000] flex justify-center items-center bg-black/70"
+        >
+          <div onClick={(e) => e.stopPropagation()} className="relative group cursor-default">
+            <img
+              src={activity.images[currentImg].image}
+              alt={activity.images[currentImg]?.caption || 'Enlarged view'}
+              className="max-w-[90vw] max-h-[90vh] object-contain"
+            />
+
+            <button onClick={prevImg} className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/20 hover:bg-black/50 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+              <ChevronLeft />
+            </button>
+            <button onClick={nextImg} className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/20 hover:bg-black/50 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+              <ChevronRight />
+            </button>
+
+            <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 text-white/70 text-sm">
+              {currentImg + 1} / {imagesLength}
+            </div>
+          </div>
         </div>
       )}
 

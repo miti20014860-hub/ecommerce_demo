@@ -11,6 +11,5 @@ urlpatterns = [
     path('collection/', include('collection.urls', namespace='collection')),
     path('kenshi/', include('kenshi.urls', namespace='kenshi')),
     path('member/', include('member.urls', namespace='member')),
-    path('others/', include('others.urls', namespace='others')),
     path('admin/', admin.site.urls),
 ] + debug_toolbar_urls() + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,24 +1,9 @@
 {% extends "base.html" %}
 {% load humanize %}
 {% block body %}
-    <div class="container">
-        <!-- About Title -->
-        <h2 class="mt-5 bg-body-secondary p-2">{{ about.title }}</h2>
-        <!-- About Subtitle -->
-        <h5 class="mt-4 p-2">
-            <b>{{ about.subtitle|default_if_none:"" }}</b>
-        </h5>
-        <!-- About Description -->
-        {% if about.description %}
-            <div class="row p-2">
-                <p class="justify">{{ about.description|linebreaks }}</p>
-            </div>
-        {% endif %}
-        <!-- About Ending-->
-        {% if about.ending %}
-            <div class="row mb-3 p-2">
-                <p class="justify">{{ about.ending|linebreaks }}</p>
-            </div>
-        {% endif %}
-    </div>
+  <div class="container">
+    <h2 class="min-vh-100 d-flex justify-content-center align-items-center">
+      This project designed for learning Django and React.
+    </h2>
+  </div>
 {% endblock body %}

@@ -56,9 +56,6 @@ api.interceptors.response.use(
 const handleLogout = () => {
   localStorage.removeItem('access_token');
   localStorage.removeItem('refresh_token');
-  if (!window.location.pathname.startsWith('/member')) {
-    window.location.href = '/member';
-  }
 };
 
 export default api;

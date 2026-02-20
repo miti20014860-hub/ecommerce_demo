@@ -64,7 +64,7 @@ export const Menber = () => {
               onChange={(e) => setSignInData({ ...signInData, username: e.target.value })}
               className="w-full pb-2 pt-6 px-2 outline-none text-md placeholder-transparent peer"
             />
-            <label className="absolute left-0 top-1 px-2 text-sm text-slate-500 transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-md">
+            <label className="absolute left-0 top-4 px-2 text-sm text-slate-500 transition-all peer-focus:top-1 peer-not-placeholder-shown:top-1">
               Username
             </label>
           </div>
@@ -77,7 +77,7 @@ export const Menber = () => {
               onChange={(e) => setSignInData({ ...signInData, password: e.target.value })}
               className="w-full pb-2 pt-6 px-2 outline-none text-md placeholder-transparent peer"
             />
-            <label className="absolute left-0 top-1 px-2 text-sm text-slate-500 transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-md">
+            <label className="absolute left-0 top-4 px-2 text-sm text-slate-500 transition-all peer-focus:top-1 peer-not-placeholder-shown:top-1">
               Password
             </label>
           </div>
@@ -116,7 +116,7 @@ export const Menber = () => {
                   onChange={(e) => setSignUpData({ ...signUpData, username: e.target.value })}
                   className="w-full pb-2 pt-6 px-2 outline-none text-md placeholder-transparent peer"
                 />
-                <label className="absolute left-0 top-1 px-2 text-sm text-slate-500 transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-md">
+                <label className="absolute left-0 top-4 px-2 text-sm text-slate-500 transition-all peer-focus:top-1 peer-not-placeholder-shown:top-1">
                   Username
                 </label>
               </div>
@@ -129,7 +129,7 @@ export const Menber = () => {
                   onChange={(e) => setSignUpData({ ...signUpData, email: e.target.value })}
                   className="w-full pb-2 pt-6 px-2 outline-none text-md placeholder-transparent peer"
                 />
-                <label className="absolute left-0 top-1 px-2 text-sm text-slate-500 transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-md">
+                <label className="absolute left-0 top-4 px-2 text-sm text-slate-500 transition-all peer-focus:top-1 peer-not-placeholder-shown:top-1">
                   Email
                 </label>
               </div>
@@ -142,7 +142,7 @@ export const Menber = () => {
                   onChange={(e) => setSignUpData({ ...signUpData, password1: e.target.value })}
                   className="w-full pb-2 pt-6 px-2 outline-none text-md placeholder-transparent peer"
                 />
-                <label className="absolute left-0 top-1 px-2 text-sm text-slate-500 transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-md">
+                <label className="absolute left-0 top-4 px-2 text-sm text-slate-500 transition-all peer-focus:top-1 peer-not-placeholder-shown:top-1">
                   Create a Password
                 </label>
               </div>
@@ -155,7 +155,7 @@ export const Menber = () => {
                   onChange={(e) => setSignUpData({ ...signUpData, password2: e.target.value })}
                   className="w-full pb-2 pt-6 px-2 outline-none text-md placeholder-transparent peer"
                 />
-                <label className="absolute left-0 top-1 px-2 text-sm text-slate-500 transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-md">
+                <label className="absolute left-0 top-4 px-2 text-sm text-slate-500 transition-all peer-focus:top-1 peer-not-placeholder-shown:top-1">
                   Confirm Password
                 </label>
               </div>

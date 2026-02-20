@@ -39,7 +39,7 @@ export const News = () => {
             className='absolute inset-0' />
           <img
             src={news.images[0]?.image}
-            alt={news.images[0]?.caption || 'Image'}
+            alt={news.images[0]?.caption || 'Enlarged view'}
             className='relative max-w-[95vw] object-contain' />
         </div>
       </figure>

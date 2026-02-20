@@ -1,26 +1,9 @@
 {% extends "base.html" %}
 {% load humanize %}
 {% block body %}
-    <div class="container">
-        <!-- Contact Title -->
-        {% if contacts %}
-            <h2 class="mt-5 bg-body-secondary p-2">{{ contacts.0.title }}</h2>
-            <div class="mt-4 p-2">
-                {% for contact in contacts %}
-                    <!-- Contact Subtitle -->
-                    <div>
-                        <strong>{{ contact.subtitle|default_if_none:"" }}</strong>
-                    </div>
-                    <!-- Contact Description -->
-                    <div>{{ contact.person|default_if_none:"" }}</div>
-                    {{ contact.description|linebreaks }}
-                    <!-- Contact Ending -->
-                    {{ contact.ending|linebreaks }}
-                {% endfor %}
-            {% else %}
-                No contact information available.
-            {% endif %}
-            <div class="row mb-3 p-2"></div>
-        </div>
-    </div>
+  <div class="container">
+    <h2 class="min-vh-100 d-flex justify-content-center align-items-center">
+      This project designed for learning Django and React.
+    </h2>
+  </div>
 {% endblock body %}

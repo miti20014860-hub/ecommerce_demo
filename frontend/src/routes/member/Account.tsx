@@ -82,7 +82,7 @@ export const Account = () => {
                     <div key={booking.id} className='bg-slate-200 grid grid-cols-16 font-medium hover:bg-slate-50'>
                       <p className='col-span-1 py-3 font-medium'>#{booking.id}</p>
                       <div className='col-span-9 py-3'>
-                        <a href={`/activity/${booking.activity_obj.id}`} className='hover:underline line-clamp-1'>
+                        <a href={`/activity/${booking.activity_obj.id}`} className='hover:underline line-clamp-2'>
                           {booking.activity_obj.title}
                         </a>
                       </div>
@@ -117,12 +117,12 @@ export const Account = () => {
                     <div key={order.id} className='bg-slate-200 grid grid-cols-16 font-medium hover:bg-slate-50'>
                       <p className='col-span-1 py-3 font-medium'>#{order.id}</p>
                       <div className='col-span-9 py-3'>
-                        <a href={`/collection/${order.collection_obj.id}`} className='hover:underline line-clamp-1'>
+                        <a href={`/collection/${order.collection_obj.id}`} className='hover:underline'>
                           {order.collection_obj.name_jp}
 
                         </a>
                       </div>
-                      <p className='col-span-3 py-3 line-clamp-1 '>{Number(order.collection_obj.price).toLocaleString()} {order.collection_obj.currency}</p>
+                      <p className='col-span-3 py-3 line-clamp-2 '>{Number(order.collection_obj.price).toLocaleString()} {order.collection_obj.currency}</p>
                       <div className='col-span-3 py-3'>
                         <span className='bg-green-100 text-green-700 px-1 py-1 text-xs font-medium rounded-full'>
                           SUBMITTED

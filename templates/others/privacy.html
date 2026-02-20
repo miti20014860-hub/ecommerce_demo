@@ -1,17 +1,9 @@
 {% extends "base.html" %}
 {% load humanize %}
 {% block body %}
-    <div class="container">
-        <!-- Privacy Title -->
-        <h2 class="mt-5 bg-body-secondary p-2">{{ privacy.title }}</h2>
-        <!-- Privacy Description -->
-        {% if privacy.description %}<div class="mt-4 p-2">{{ privacy.description|linebreaks }}</div>{% endif %}
-        <!-- Privacy Ending -->
-        {% if privacy.ending %}
-            <div class="row mb-3 p-2">
-                <p>{{ privacy.ending|linebreaks }}</p>
-            </div>
-        {% endif %}
-        <div class="row mb-3"></div>
-    </div>
+  <div class="container">
+    <h2 class="min-vh-100 d-flex justify-content-center align-items-center">
+      This project designed for learning Django and React.
+    </h2>
+  </div>
 {% endblock body %}

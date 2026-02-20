@@ -57,7 +57,6 @@ CUSTOM_APP = [
     'collection.apps.CollectionConfig',
     'kenshi.apps.KenshiConfig',
     'member.apps.MemberConfig',
-    'others.apps.OthersConfig',
     'rest_framework',
     'corsheaders',
     'django_vite',

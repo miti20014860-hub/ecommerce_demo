@@ -1,45 +1,9 @@
 {% extends "base.html" %}
 {% load humanize %}
 {% block body %}
-    <div class="container">
-        <!-- FAQ Title -->
-        <h2 class="mt-5 p-2 bg-body-secondary">{{ faqs.0.title }}</h2>
-        {% for faq in faqs %}
-            <!-- FAQ Subtitle -->
-            <table class="table mt-4 p-2">
-                <tr>
-                    <td onmouseover="changeCellColor(this, true)"
-                        onmouseout="changeCellColor(this, false)">
-                        <b class="ms-1">{{ faq.subtitle }}</b>
-                    </td>
-                </tr>
-            </table>
-            <!-- FAQ Question -->
-            <button class="btn btn-link text-start"
-                    type="button"
-                    style="color: black"
-                    data-toggle="collapse"
-                    data-target="#faq{{ forloop.counter }}"
-                    aria-expanded="false"
-                    aria-controls="faq{{ forloop.counter }}">
-                <b>{{ faq.question }}</b>
-            </button>
-            <!-- FAQ Answer -->
-            <div id="faq{{ forloop.counter }}"
-                 class="collapse mt-4 bg-body-secondary p-2 ms-1">{{ faq.answer }}</div>
-        {% endfor %}
-        <div class="row mb-3 p-2"></div>
-    </div>
-    <script>
-        function changeCellColor(cell, add) {
-            if (add) {
-                cell.classList.add('bg-secondary', 'text-white');
-            } else {
-                cell.classList.remove('bg-secondary', 'text-white');
-            }
-        }
-    </script>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <div class="container">
+    <h2 class="min-vh-100 d-flex justify-content-center align-items-center">
+      This project designed for learning Django and React.
+    </h2>
+  </div>
 {% endblock body %}
