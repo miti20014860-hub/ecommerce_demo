@@ -28,7 +28,6 @@ export const BookingModal = ({ activity, user, onClose }: BookingModalProps) => 
     mutationFn: createBooking,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['profile'] });
-      queryClient.invalidateQueries({ queryKey: ['bookings'] });
       alert('Booking request sent successfully!');
       onClose();
     },
@@ -51,15 +50,15 @@ export const BookingModal = ({ activity, user, onClose }: BookingModalProps) => 
       <div className='absolute inset-0 bg-slate-900/60 backdrop-blur-sm' onClick={onClose} />
 
       {/* Modal */}
-      <div className='relative bg-white w-full max-w-xl rounded-2xl shadow-2xl overflow-hidden'>
-        <div className='flex items-center justify-between p-4 border-b'>
+      <div className='relative bg-white max-w-lg rounded-2xl shadow-2xl overflow-hidden'>
+        <div className='flex justify-between border-b p-4'>
           <h5 className='font-semibold text-lg'>Booking Form</h5>
-          <button onClick={onClose} className='p-1 hover:bg-slate-100 rounded-full transition-colors'>
+          <button onClick={onClose} className='hover:bg-slate-100 rounded-full transition-colors p-1'>
             <X className='w-5 h-5' />
           </button>
         </div>
 
-        <form onSubmit={handleSubmit} className='p-6 space-y-4 max-h-[80vh] overflow-y-auto'>
+        <form onSubmit={handleSubmit} className='space-y-4 max-h-[80vh] overflow-y-auto p-6'>
           {/* Title */}
           <div className='mb-4'>
             <label className='block font-semibold text-slate-900'>{activity.title}</label>
@@ -73,7 +72,7 @@ export const BookingModal = ({ activity, user, onClose }: BookingModalProps) => 
                 required
                 type='text'
                 name='first_name'
-                placeholder='Fist name'
+                placeholder='First name'
                 value={formData.first_name}
                 onChange={handleChange}
                 className='w-full border border-slate-300 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-blue-500 outline-none transition-all'
@@ -146,7 +145,7 @@ export const BookingModal = ({ activity, user, onClose }: BookingModalProps) => 
           <button
             type='submit'
             disabled={mutation.isPending}
-            className={`w-full py-3 rounded-xl font-semibold text-white transition-all shadow-lg
+            className={`w-full py-3 rounded-lg font-semibold text-white transition-all shadow-lg
               ${mutation.isPending ? 'bg-slate-400' : 'bg-black hover:bg-slate-800 active:scale-[0.98]'}
             `}
           >

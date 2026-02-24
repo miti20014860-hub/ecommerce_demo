@@ -1,47 +1,58 @@
 import { useQuery } from '@tanstack/react-query';
-import { useState } from 'react';
-import axios from 'axios';
+import { useSearchParams } from 'react-router-dom';
+import { useState, useMemo, useCallback } from 'react';
+import { fetchActivities, fetchActivityFilter } from '@/lib/fetcher';
 import ActivityFilters from '@/components/activity/ActivityFilters';
 import ActivityList from '@/components/activity/ActivityList';
 import type { ActivityFilterOptions, ActivityFilterState } from '@/types/type';
-
-const INITIAL_FILTERS: ActivityFilterState = {
-  q: '',
-  types: [],
-  charge_min: '',
-  charge_max: '',
-  event_ends: '',
-  prefectures: [],
-  page: 1,
-};
+import type { Dispatch, SetStateAction } from 'react';
 
 export const Activity = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [filters, setFilters] = useState<ActivityFilterState>(INITIAL_FILTERS);
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const { data: filterOptions, isLoading: isOptionsLoading } = useQuery<ActivityFilterOptions>({
     queryKey: ['activityFilters'],
-    queryFn: async () => {
-      const res = await axios.get('/api/activities/filters/');
-      return res.data;
-    },
+    queryFn: () => fetchActivityFilter(),
     staleTime: 1000 * 60 * 30,
   });
 
+  const filters = useMemo(() => {
+    return {
+      q: searchParams.get('q') || '',
+      types: searchParams.getAll('types'),
+      charge_min: searchParams.get('charge_min') || '',
+      charge_max: searchParams.get('charge_max') || '',
+      event_ends: searchParams.get('event_ends') || '',
+      prefectures: searchParams.getAll('prefectures'),
+      page: Number(searchParams.get('page')) || 1,
+    } as ActivityFilterState;
+  }, [searchParams]);
+
+  const updateFilters: Dispatch<SetStateAction<ActivityFilterState>> = useCallback((update) => {
+    const nextFilters = typeof update === 'function' ? update(filters) : update;
+
+    if (JSON.stringify(nextFilters) === JSON.stringify(filters)) {
+      return;
+    }
+
+    const params = new URLSearchParams();
+    Object.entries(nextFilters).forEach(([key, value]) => {
+      if (Array.isArray(value)) {
+        value.forEach(v => {
+          if (v) params.append(key, String(v));
+        });
+      } else if (value !== undefined && value !== null && value !== '') {
+        params.append(key, String(value));
+      }
+    });
+
+    setSearchParams(params, { replace: true });
+  }, [filters, setSearchParams]);
+
   const { data: activities, isLoading: isListLoading } = useQuery({
     queryKey: ['activities', filters],
-    queryFn: async () => {
-      const params = new URLSearchParams();
-      Object.entries(filters).forEach(([key, value]) => {
-        if (Array.isArray(value)) {
-          value.forEach(v => params.append(key, v));
-        } else if (value) {
-          params.append(key, String(value));
-        }
-      });
-      const res = await axios.get('/api/activities/', { params });
-      return res.data;
-    }
+    queryFn: () => fetchActivities(searchParams)
   });
 
   return (
@@ -67,8 +78,8 @@ export const Activity = () => {
         <ActivityFilters
           filters={filters}
           options={filterOptions}
-          setFilters={setFilters}
-          onClear={() => setFilters(INITIAL_FILTERS)}
+          setFilters={updateFilters}
+          onClear={() => setSearchParams({})}
           isLoading={isOptionsLoading}
         />
       </aside>
@@ -79,7 +90,7 @@ export const Activity = () => {
           data={activities}
           isLoading={isListLoading}
           currentPage={filters.page}
-          onPageChange={(newPage) => setFilters({ ...filters, page: newPage })}
+          onPageChange={(newPage) => updateFilters({ ...filters, page: newPage })}
         />
       </div>
 

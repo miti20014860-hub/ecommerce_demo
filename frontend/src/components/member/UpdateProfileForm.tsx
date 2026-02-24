@@ -47,6 +47,11 @@ export const UpdateProfileForm = ({ user }: { user: MemberProfile }) => {
     updateProfileMutation.mutate(formData);
   };
 
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
   return (
     <form className="min-h-[50vh] flex flex-col">
       <div className={`grid transition-all duration-500 ease-in-out ${isUpdateProfileOpen
@@ -61,7 +66,7 @@ export const UpdateProfileForm = ({ user }: { user: MemberProfile }) => {
             name='password'
             placeholder='Password'
             value={formData.password}
-            onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+            onChange={handleChange}
             className='bg-white border border-slate-300 p-2 mt-3 text-sm focus:ring-2 focus:ring-blue-500 outline-none transition-all'
           />
           <button
@@ -87,9 +92,9 @@ export const UpdateProfileForm = ({ user }: { user: MemberProfile }) => {
         <input
           type='text'
           name='first_name'
-          placeholder='Fist name'
+          placeholder='First name'
           value={formData.first_name}
-          onChange={(e) => setFormData({ ...formData, first_name: e.target.value })}
+          onChange={handleChange}
           className='col-span-2 bg-white border border-slate-300 rounded-lg p-2 mb-1 text-sm focus:ring-2 focus:ring-blue-500 outline-none transition-all'
         />
       </div>
@@ -100,7 +105,7 @@ export const UpdateProfileForm = ({ user }: { user: MemberProfile }) => {
           name='last_name'
           placeholder='Last name'
           value={formData.last_name}
-          onChange={(e) => setFormData({ ...formData, last_name: e.target.value })}
+          onChange={handleChange}
           className='col-span-2 bg-white border border-slate-300 rounded-lg p-2 mb-1 text-sm focus:ring-2 focus:ring-blue-500 outline-none transition-all'
         />
       </div>
@@ -112,7 +117,7 @@ export const UpdateProfileForm = ({ user }: { user: MemberProfile }) => {
           name='email'
           placeholder='Email address'
           value={formData.email}
-          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+          onChange={handleChange}
           className='col-span-2 bg-white border border-slate-300 rounded-lg p-2 mb-1 text-sm focus:ring-2 focus:ring-blue-500 outline-none transition-all'
         />
       </div>
@@ -123,7 +128,7 @@ export const UpdateProfileForm = ({ user }: { user: MemberProfile }) => {
           name='phone'
           placeholder='Phone number'
           value={formData.phone}
-          onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+          onChange={handleChange}
           className='col-span-2 bg-white border border-slate-300 rounded-lg p-2 mb-1 text-sm focus:ring-2 focus:ring-blue-500 outline-none transition-all'
         />
       </div>
@@ -134,7 +139,7 @@ export const UpdateProfileForm = ({ user }: { user: MemberProfile }) => {
           name='payment'
           placeholder='Method and bank name'
           value={formData.payment}
-          onChange={(e) => setFormData({ ...formData, payment: e.target.value })}
+          onChange={handleChange}
           className='col-span-2 bg-white border border-slate-300 rounded-lg p-2 mb-1 text-sm focus:ring-2 focus:ring-blue-500 outline-none transition-all'
         />
       </div>
@@ -146,7 +151,7 @@ export const UpdateProfileForm = ({ user }: { user: MemberProfile }) => {
           name='address'
           placeholder='Country and delivery address'
           value={formData.address}
-          onChange={(e) => setFormData({ ...formData, address: e.target.value })}
+          onChange={handleChange}
           className='col-span-2 bg-white border border-slate-300 rounded-lg p-2 mb-1 text-sm focus:ring-2 focus:ring-blue-500 outline-none transition-all'
         />
       </div>

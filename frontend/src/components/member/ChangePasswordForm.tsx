@@ -33,6 +33,11 @@ export const ChangePasswordForm = () => {
     });
   };
 
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setPasswordData(prev => ({ ...prev, [name]: value }));
+  };
+
   return (
     <form className='flex flex-col px-4'>
       <p className='mt-3 ms-1 text-lg font-semibold'>Enter password to confirm identity</p>
@@ -42,7 +47,7 @@ export const ChangePasswordForm = () => {
         name='old_password'
         placeholder='Current Password'
         value={passwordData.old_password}
-        onChange={(e) => setPasswordData({ ...passwordData, old_password: e.target.value })}
+        onChange={handleChange}
         className='bg-white border border-slate-300 p-2 mt-3 text-sm focus:ring-2 focus:ring-blue-500 outline-none transition-all'
       />
       <input
@@ -51,7 +56,7 @@ export const ChangePasswordForm = () => {
         name='new_password'
         placeholder='New Password'
         value={passwordData.new_password}
-        onChange={(e) => setPasswordData({ ...passwordData, new_password: e.target.value })}
+        onChange={handleChange}
         className='bg-white border border-slate-300 p-2 mt-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none transition-all'
       />
       <input
@@ -60,7 +65,7 @@ export const ChangePasswordForm = () => {
         name='confirm_password'
         placeholder='Confirm New Password'
         value={passwordData.confirm_password}
-        onChange={(e) => setPasswordData({ ...passwordData, confirm_password: e.target.value })}
+        onChange={handleChange}
         className='bg-white border border-slate-300 p-2 mt-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none transition-all'
       />
       <button
@@ -70,7 +75,6 @@ export const ChangePasswordForm = () => {
       >
         {changePasswordMutation.isPending ? 'Changing...' : 'Confirm Password Change'}
       </button>
-
     </form>
   );
 };

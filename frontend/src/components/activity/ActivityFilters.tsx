@@ -117,18 +117,20 @@ export const ActivityFilters = ({
             <div className='col-span-1'>
               <input
                 type='number'
+                name='charge_min'
+                placeholder='Min'
                 value={filters.charge_min}
                 onChange={(e) => setFilters({ ...filters, charge_min: e.target.value, page: 1 })}
-                placeholder='Min'
                 className='w-full border border-slate-600 rounded-md text-sm p-2 focus:border-blue-600 outline-none'
               />
             </div>
             <div className='col-span-1'>
               <input
                 type='number'
+                name='charge_max'
+                placeholder='Max'
                 value={filters.charge_max}
                 onChange={(e) => setFilters({ ...filters, charge_max: e.target.value, page: 1 })}
-                placeholder='Max'
                 className='w-full border border-slate-600 rounded-md text-sm p-2 focus:border-blue-600 outline-none'
               />
             </div>
@@ -139,6 +141,7 @@ export const ActivityFilters = ({
         <FilterSection title='Until'>
           <input
             type='date'
+            name='charge_max'
             value={filters.event_ends}
             onChange={(e) => setFilters({ ...filters, event_ends: e.target.value, page: 1 })}
             className='w-full border border-slate-600 rounded-md text-sm p-2 focus:border-blue-600 outline-none'

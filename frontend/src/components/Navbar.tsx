@@ -21,8 +21,8 @@ export const Navbar = () => {
       <div className='nav-link border-b-1 text-lg p-1 mb-1'>
         <div className='flex justify-between px-2 py-1'>
           <Link to='/'
-            className={`px-2 ${pathname === '/' ? 'border-b-2' : 'hover:border-b-2'}`}
-            aria-current={pathname === '/' ? 'page' : undefined}>News</Link>
+            className={`px-2 ${pathname === '/' || isCurrent('/news/') || isCurrent('/notice/') ? 'border-b-2' : 'hover:border-b-2'}`}
+            aria-current={pathname === '/' || isCurrent('/news/') || isCurrent('/notice/') ? 'page' : undefined}>News</Link>
           <Link to='/activity/'
             className={`px-2 ${isCurrent('/activity/') ? 'border-b-2' : 'hover:border-b-2'}`}
             aria-current={isCurrent('/activity/') ? 'page' : undefined}>Activity</Link>
@@ -33,8 +33,8 @@ export const Navbar = () => {
             className={`px-2 ${isCurrent('/kenshi/') ? 'border-b-2' : 'hover:border-b-2'}`}
             aria-current={isCurrent('/kenshi/') ? 'page' : undefined}>Kenshi</Link>
           <Link to={memberHref}
-            className={`px-2 ${isCurrent('/member/') ? 'border-b-2' : 'hover:border-b-2'}`}
-            aria-current={isCurrent('/member/') ? 'page' : undefined}>Member</Link>
+            className={`px-2 ${isCurrent('/member') ? 'border-b-2' : 'hover:border-b-2'}`}
+            aria-current={isCurrent('/member') ? 'page' : undefined}>Member</Link>
         </div>
       </div>
     </nav>

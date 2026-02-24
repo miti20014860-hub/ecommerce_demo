@@ -1,48 +1,59 @@
 import { useQuery } from '@tanstack/react-query';
-import { useState } from 'react';
-import axios from 'axios';
+import { useSearchParams } from 'react-router-dom';
+import { useState, useMemo, useCallback } from 'react';
+import { fetchCollections, fetchCollectionFilter } from '@/lib/fetcher';
 import CollectionFilters from '@/components/collection/CollectionFilters';
 import CollectionList from '@/components/collection/CollectionList';
 import type { CollectionFilterOptions, CollectionFilterState } from '@/types/type';
-
-const INITIAL_FILTERS: CollectionFilterState = {
-  q: '',
-  types: [],
-  price_min: '',
-  price_max: '',
-  period_types: [],
-  length_min: '',
-  length_max: '',
-  page: 1,
-};
+import type { Dispatch, SetStateAction } from 'react';
 
 export const Collection = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [filters, setFilters] = useState<CollectionFilterState>(INITIAL_FILTERS);
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const { data: filterOptions, isLoading: isOptionsLoading } = useQuery<CollectionFilterOptions>({
     queryKey: ['collectionFilters'],
-    queryFn: async () => {
-      const res = await axios.get('/api/collections/filters/');
-      return res.data;
-    },
+    queryFn: () => fetchCollectionFilter(),
     staleTime: 1000 * 60 * 30,
   });
 
+  const filters = useMemo(() => {
+    return {
+      q: searchParams.get('q') || '',
+      types: searchParams.getAll('types'),
+      price_min: searchParams.get('price_min') || '',
+      price_max: searchParams.get('price_max') || '',
+      period_types: searchParams.getAll('period_types') || '',
+      length_min: searchParams.get('length_min'),
+      length_max: searchParams.get('length_max'),
+      page: Number(searchParams.get('page')) || 1,
+    } as CollectionFilterState;
+  }, [searchParams]);
+
+  const updateFilters: Dispatch<SetStateAction<CollectionFilterState>> = useCallback((update) => {
+    const nextFilters = typeof update === 'function' ? update(filters) : update;
+
+    if (JSON.stringify(nextFilters) === JSON.stringify(filters)) {
+      return;
+    }
+
+    const params = new URLSearchParams();
+    Object.entries(nextFilters).forEach(([key, value]) => {
+      if (Array.isArray(value)) {
+        value.forEach(v => {
+          if (v) params.append(key, String(v));
+        });
+      } else if (value !== undefined && value !== null && value !== '') {
+        params.append(key, String(value));
+      }
+    });
+
+    setSearchParams(params, { replace: true });
+  }, [filters, setSearchParams]);
+
   const { data: collections, isLoading: isListLoading } = useQuery({
     queryKey: ['collections', filters],
-    queryFn: async () => {
-      const params = new URLSearchParams();
-      Object.entries(filters).forEach(([key, value]) => {
-        if (Array.isArray(value)) {
-          value.forEach(v => params.append(key, v));
-        } else if (value) {
-          params.append(key, String(value));
-        }
-      });
-      const res = await axios.get('/api/collections/', { params });
-      return res.data;
-    }
+    queryFn: () => fetchCollections(searchParams)
   });
 
   return (
@@ -68,8 +79,8 @@ export const Collection = () => {
         <CollectionFilters
           filters={filters}
           options={filterOptions}
-          setFilters={setFilters}
-          onClear={() => setFilters(INITIAL_FILTERS)}
+          setFilters={updateFilters}
+          onClear={() => setSearchParams({})}
           isLoading={isOptionsLoading}
         />
       </aside>
@@ -80,7 +91,7 @@ export const Collection = () => {
           data={collections}
           isLoading={isListLoading}
           currentPage={filters.page}
-          onPageChange={(newPage) => setFilters({ ...filters, page: newPage })}
+          onPageChange={(newPage) => updateFilters({ ...filters, page: newPage })}
         />
       </div>
 

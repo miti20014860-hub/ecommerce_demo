@@ -29,7 +29,6 @@ export const OrderModal = ({ collection, user, onClose }: OrderModalProps) => {
     mutationFn: createOrder,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['profile'] });
-      queryClient.invalidateQueries({ queryKey: ['bookings'] });
       alert('Order request sent successfully!');
       onClose();
     },
@@ -52,8 +51,8 @@ export const OrderModal = ({ collection, user, onClose }: OrderModalProps) => {
       <div className='absolute inset-0 bg-slate-900/60 backdrop-blur-sm' onClick={onClose} />
 
       {/* Modal */}
-      <div className='relative bg-white w-full max-w-4xl rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[95vh]'>
-        <div className='flex items-center justify-between p-4 border-b'>
+      <div className='relative bg-white max-w-4xl rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[95vh]'>
+        <div className='flex justify-between border-b p-4'>
           <h5 className='font-semibold text-lg'>Order Form</h5>
           <button onClick={onClose} className='p-1 hover:bg-slate-100 rounded-full transition-colors'>
             <X className='w-5 h-5' />
@@ -130,7 +129,7 @@ export const OrderModal = ({ collection, user, onClose }: OrderModalProps) => {
                   required
                   type='text'
                   name='first_name'
-                  placeholder='Fist name'
+                  placeholder='First name'
                   value={formData.first_name}
                   onChange={handleChange}
                   className='w-full border border-slate-300 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-blue-500 outline-none transition-all'
@@ -218,7 +217,7 @@ export const OrderModal = ({ collection, user, onClose }: OrderModalProps) => {
             <button
               type='submit'
               disabled={mutation.isPending}
-              className={`w-full py-3 rounded-xl font-semibold text-white transition-all shadow-lg
+              className={`w-full py-3 rounded-lg font-semibold text-white transition-all shadow-lg
               ${mutation.isPending ? 'bg-slate-400' : 'bg-black hover:bg-slate-800 active:scale-[0.98]'}`}
             >
               {mutation.isPending ? 'Submitting...' : 'Submit'}

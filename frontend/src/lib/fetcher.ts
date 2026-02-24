@@ -1,4 +1,4 @@
-import type { Banner, News, Notice, Quote, Activity, Booking, Collection, Order, Kenshi, MemberProfile, SignIn, SignUp, UpdateProfileRequest, ChangePasswordRequest } from '@/types/type';
+import type { Banner, News, Notice, Quote, Activity, Booking, Collection, Order, ActivityFilterOptions, CollectionFilterOptions, PaginatedResponse, Kenshi, MemberProfile, SignIn, SignUp, UpdateProfileRequest, ChangePasswordRequest } from '@/types/type';
 import api from './api';
 import axios from 'axios';
 
@@ -40,10 +40,14 @@ export const fetchQuotes = async (): Promise<Quote[]> => {
 };
 
 // Activity
-export const fetchActivities = async (): Promise<Activity[]> => {
-  const res = await fetch('/api/activities/');
-  if (!res.ok) throw new Error(`Failed to fetch activities: ${res.status} ${res.statusText}`);
-  return res.json();
+export const fetchActivities = async (params?: URLSearchParams): Promise<PaginatedResponse<Activity>> => {
+  const res = await api.get('/activities/', { params });
+  return res.data;
+};
+
+export const fetchActivityFilter = async (): Promise<ActivityFilterOptions> => {
+  const res = await axios.get('/api/activities/filters/');
+  return res.data;
 };
 
 export const fetchActivityById = async (id: number): Promise<Activity> => {
@@ -66,10 +70,14 @@ export const createBooking = async (data: Partial<Booking>): Promise<Booking> =>
 };
 
 // Collection
-export const fetchCollections = async (): Promise<Collection[]> => {
-  const res = await fetch('/api/collections/');
-  if (!res.ok) throw new Error(`Failed to fetch collections: ${res.status} ${res.statusText}`);
-  return res.json();
+export const fetchCollections = async (params?: URLSearchParams): Promise<PaginatedResponse<Collection>> => {
+  const res = await api.get('/collections/', { params });
+  return res.data;
+};
+
+export const fetchCollectionFilter = async (): Promise<CollectionFilterOptions> => {
+  const res = await axios.get('/api/collections/filters/');
+  return res.data;
 };
 
 export const fetchCollectionById = async (id: number): Promise<Collection> => {

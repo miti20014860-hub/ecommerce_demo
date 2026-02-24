@@ -26,11 +26,9 @@ export const ActivityDetail = () => {
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
 
-  const imagesLength = (activity?.images && activity.images.length > 0)
-    ? activity.images.length : 0;
-
-  const nextImg = () => setCurrentImg((prev) => (prev + 1) % imagesLength);
-  const prevImg = () => setCurrentImg((prev) => (prev - 1 + imagesLength) % imagesLength);
+  const imagesLength = activity?.images.length ?? 0;
+  const nextImg = () => { if (imagesLength === 0) return; setCurrentImg((prev) => (prev + 1) % imagesLength); }
+  const prevImg = () => { if (imagesLength === 0) return; setCurrentImg((prev) => (prev - 1 + imagesLength) % imagesLength); }
 
   if (isLoading) { return <div className='text-center py-20'>Loading...</div>; }
   if (isError || !activity) { return <div className='text-center py-20'>Loading failed: {error?.message}</div>; }
@@ -47,14 +45,14 @@ export const ActivityDetail = () => {
           onClick={() => setIsLightboxOpen(true)}
         />
         {imagesLength > 1 && (
-          <>
-            <button onClick={prevImg} className='absolute left-4 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity'>
+          <div className='text-white'>
+            <button onClick={prevImg} className='absolute left-4 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/50 p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity'>
               <ChevronLeft />
             </button>
-            <button onClick={nextImg} className='absolute right-4 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity'>
+            <button onClick={nextImg} className='absolute right-4 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/50 p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity'>
               <ChevronRight />
             </button>
-          </>
+          </div>
         )}
       </div>
 
@@ -194,16 +192,20 @@ export const ActivityDetail = () => {
               className="max-w-[90vw] max-h-[90vh] object-contain"
             />
 
-            <button onClick={prevImg} className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/20 hover:bg-black/50 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
-              <ChevronLeft />
-            </button>
-            <button onClick={nextImg} className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/20 hover:bg-black/50 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
-              <ChevronRight />
-            </button>
-
             <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 text-white/70 text-sm">
               {currentImg + 1} / {imagesLength}
             </div>
+
+            {imagesLength > 1 && (
+              <div className="text-white">
+                <button onClick={prevImg} className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/20 hover:bg-black/50 p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+                  <ChevronLeft />
+                </button>
+                <button onClick={nextImg} className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/20 hover:bg-black/50 p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+                  <ChevronRight />
+                </button>
+              </div>
+            )}
           </div>
         </div>
       )}
