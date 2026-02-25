@@ -28,26 +28,3 @@
     </script>
   </body>
 </html>
-{% comment %} <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="description" content="null" />
-    <meta name="keywords" content="null, null" />
-    <meta name="viewport" content="width=device-width, i nitial-scale=1.0">
-    <title>Habaki</title>
-    {% load django_vite %}
-    {% vite_hmr_client %}
-  </head>
-  <body class="bg-gray-50">
-    <script>
-      window.currentUser = {
-        isAuthenticated: {{ user.is_authenticated|yesno:"true,false" }},
-        username: {{ user.username|escapejs }},
-      };
-      window.csrfToken = "{{ csrf_token }}";
-</script>
-    {% vite_asset 'src/main.tsx' %}
-    <div id="root"></div>
-  </body>
-</html> {% endcomment %}

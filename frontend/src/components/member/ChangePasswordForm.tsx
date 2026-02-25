@@ -33,13 +33,13 @@ export const ChangePasswordForm = () => {
     });
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setPasswordData(prev => ({ ...prev, [name]: value }));
   };
 
   return (
-    <form className='flex flex-col px-4'>
+    <form onSubmit={handleSubmit} className='flex flex-col px-4'>
       <p className='mt-3 ms-1 text-lg font-semibold'>Enter password to confirm identity</p>
       <input
         required
@@ -69,7 +69,7 @@ export const ChangePasswordForm = () => {
         className='bg-white border border-slate-300 p-2 mt-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none transition-all'
       />
       <button
-        onClick={handleSubmit}
+        type='submit'
         disabled={changePasswordMutation.isPending}
         className='bg-black text-white py-3 hover:bg-gray-800 disabled:bg-gray-400 mt-3'
       >

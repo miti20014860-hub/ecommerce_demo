@@ -47,6 +47,7 @@ export const Index = () => {
       <figure className='mb-2'>
         {banners.map((banner) => (
           <Link to='/kenshi/'
+            key={banner.id}
             aria-current={isCurrent('/kenshi/') ? 'page' : undefined}>
             <img
               key={banner.id}

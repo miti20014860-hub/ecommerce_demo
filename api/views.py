@@ -139,7 +139,7 @@ class CollectionViewSet(viewsets.ReadOnlyModelViewSet):
         types = self.request.query_params.getlist('types')
         price_min = self.request.query_params.get('price_min', None)
         price_max = self.request.query_params.get('price_max', None)
-        period = self.request.query_params.get('period', None)
+        period_types = self.request.query_params.getlist('period_types')
         length_min = self.request.query_params.get('length_min', None)
         length_max = self.request.query_params.get('length_max', None)
 
@@ -151,12 +151,12 @@ class CollectionViewSet(viewsets.ReadOnlyModelViewSet):
             queryset = queryset.filter(price__gte=price_min)
         if price_max:
             queryset = queryset.filter(price__lte=price_max)
-        if period:
-            queryset = queryset.filter(period__in=period)
+        if period_types:
+            queryset = queryset.filter(period_type__in=period_types)
         if length_min:
-            queryset = queryset.filter(price__gte=length_min)
+            queryset = queryset.filter(blade_length__gte=length_min)
         if length_max:
-            queryset = queryset.filter(price__lte=length_max)
+            queryset = queryset.filter(blade_length__lte=length_max)
 
         return queryset
 

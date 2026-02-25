@@ -6,7 +6,7 @@ export const Navbar = () => {
   const pathname = location.pathname;
   const isCurrent = (path: string) => pathname.startsWith(path);
   const { isAuthenticated, isLoading } = useAuth()
-  const memberHref = !isLoading && isAuthenticated ? '/member/account' : '/member';
+  const memberHref = isAuthenticated && !isLoading ? '/member/account' : '/member';
 
   return (
     <nav className='container mx-auto 2xl:px-24 font-serif'>

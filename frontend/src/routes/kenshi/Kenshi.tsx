@@ -13,9 +13,10 @@ export const Kenshi = () => {
   return (
     <main className='bg-white'>
       {kenshi.map((kenjyutsuka) => (
-        <section className='aspect-video overflow-hidden'>
+        <section
+          key={kenjyutsuka.id}
+          className='aspect-video overflow-hidden'>
           <video loop muted autoPlay playsInline
-            key={kenjyutsuka.id}
             src={kenjyutsuka.video}
             className='w-full h-full object-cover'
           />
@@ -23,12 +24,13 @@ export const Kenshi = () => {
       ))}
 
       {kenshi.map((kenjyutsuka) => (
-        <article className='container mx-auto 2xl:px-24 p-2'>
+        <article
+          key={kenjyutsuka.id}
+          className='container mx-auto 2xl:px-24 p-2'>
           <h2 className='bg-gray-50 border-b-5 text-3xl sm:text-[33px] lg:text-4xl 2xl:text-[40px] font-medium text-center p-1 mb-3'>{kenjyutsuka.title}</h2>
           <div className='grid lg:grid-cols-2'>
             <div className='lg:col-span-1'>
               <img
-                key={kenjyutsuka.id}
                 src={kenjyutsuka.image}
                 alt={kenjyutsuka.title || 'Poster'}
                 className='w-full'

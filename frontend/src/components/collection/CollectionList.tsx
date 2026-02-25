@@ -15,10 +15,12 @@ export const CollectionList = ({ data, isLoading, currentPage, onPageChange }: C
   const isCurrent = (path: string) => {
     return pathname.startsWith(path);
   };
+
   if (isLoading) return <div className='animate-pulse text-slate-400 text-center py-20'>Loading List...</div>;
   if (!data || data.results.length === 0) {
     return <div className='text-center text-slate-500 py-20'>No activities found.</div>;
   }
+
   return (
     <div className='lg:ms-1'>
       {/* List */}

@@ -24,8 +24,8 @@ export const Collection = () => {
       price_min: searchParams.get('price_min') || '',
       price_max: searchParams.get('price_max') || '',
       period_types: searchParams.getAll('period_types') || '',
-      length_min: searchParams.get('length_min'),
-      length_max: searchParams.get('length_max'),
+      length_min: searchParams.get('length_min') || '',
+      length_max: searchParams.get('length_max') || '',
       page: Number(searchParams.get('page')) || 1,
     } as CollectionFilterState;
   }, [searchParams]);

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { fetchMemberProfile, signOut } from '@/lib/fetcher';
 import { UpdateProfileForm } from '@/components/member/UpdateProfileForm';
@@ -6,6 +7,11 @@ import { UpdateProfileForm } from '@/components/member/UpdateProfileForm';
 type TabType = 'home' | 'profile' | 'bookings' | 'orders';
 
 export const Account = () => {
+  const location = useLocation();
+  const pathname = location.pathname;
+  const isCurrent = (path: string) => {
+    return pathname.startsWith(path);
+  };
   const [activeTab, setActiveTab] = useState<TabType>('home');
 
   const { data: user, isLoading } = useQuery({
@@ -13,14 +19,12 @@ export const Account = () => {
     queryFn: fetchMemberProfile,
   });
 
-
   if (isLoading) return <div className='text-center py-20'>Loading...</div>;
   if (!user) return <div className='text-center py-20 text-slate-500'>Please sign in to view this page.</div>;
 
   return (
     <div className='container mx-auto md:px-16 lg:px-32 xl:px-64 2xl:px-96'>
-      <div className='bg-slate-100'>
-
+      <div className='bg-slate-100 p-2'>
         {/* Tab Navigation */}
         <div className='flex sm:text-lg'>
           {(['home', 'profile', 'bookings', 'orders'] as TabType[]).map((tab) => (
@@ -82,9 +86,10 @@ export const Account = () => {
                     <div key={booking.id} className='bg-slate-200 grid grid-cols-16 font-medium hover:bg-slate-50'>
                       <p className='col-span-1 py-3 font-medium'>#{booking.id}</p>
                       <div className='col-span-9 py-3'>
-                        <a href={`/activity/${booking.activity_obj.id}`} className='hover:underline line-clamp-2'>
+                        <Link to={`/activity/${booking.activity_obj.id}`} className='hover:underline line-clamp-2'
+                          aria-current={isCurrent(`/activity/${booking.activity_obj.id}`) ? 'page' : undefined}>
                           {booking.activity_obj.title}
-                        </a>
+                        </Link>
                       </div>
                       <p className='col-span-3 py-3'>{new Date(booking.prefer_date).toLocaleDateString()}</p>
                       <div className='col-span-3 py-3'>
@@ -117,10 +122,10 @@ export const Account = () => {
                     <div key={order.id} className='bg-slate-200 grid grid-cols-16 font-medium hover:bg-slate-50'>
                       <p className='col-span-1 py-3 font-medium'>#{order.id}</p>
                       <div className='col-span-9 py-3'>
-                        <a href={`/collection/${order.collection_obj.id}`} className='hover:underline'>
+                        <Link to={`/collection/${order.collection_obj.id}`} className='hover:underline'
+                          aria-current={isCurrent(`/collection/${order.collection_obj.id}`) ? 'page' : undefined}>
                           {order.collection_obj.name_jp}
-
-                        </a>
+                        </Link>
                       </div>
                       <p className='col-span-3 py-3 line-clamp-2 '>{Number(order.collection_obj.price).toLocaleString()} {order.collection_obj.currency}</p>
                       <div className='col-span-3 py-3'>
@@ -146,9 +151,9 @@ export const Account = () => {
 const EmptyState = ({ message, link, linkText }: { message: string, link: string, linkText: string }) => (
   <div className='text-center py-20 bg-slate-100'>
     <p className='text-slate-500 mb-4'>{message}</p>
-    <a href={link} className='inline-block border border-slate-400 px-6 py-2 text-slate-600 hover:bg-white transition-colors'>
+    <Link to={link} className='inline-block border border-slate-400 px-6 py-2 text-slate-600 hover:bg-white transition-colors'>
       {linkText}
-    </a>
+    </Link>
   </div>
 );
 
